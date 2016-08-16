@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour {
         this.rigidbody = this.GetComponent<Rigidbody>();
         this.ropeRenderer = this.GetComponent<LineRenderer>();
         this.animator = this.GetComponent<Animator>();
-        this.facingRight = true;
+        this.facingRight = true;  
         //Initializing grappling vars.
         this.ropeLength = 7;
         this.isGrappling = false;
@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour {
     {
         if(Input.GetAxis("Fire 1") > 0)
         {
-            Debug.Log("Firing");
             Vector3 mousePosition = Input.mousePosition;
             mousePosition.z = 10f;
             Vector3 mouseLocationInWorldCoords = playerCamera.ScreenToWorldPoint(mousePosition);
@@ -183,6 +182,7 @@ public class PlayerController : MonoBehaviour {
             this.grappleJoint.autoConfigureConnectedAnchor = false;
             this.grappleJoint.xMotion = ConfigurableJointMotion.Limited;
             this.grappleJoint.yMotion = ConfigurableJointMotion.Limited;
+            this.grappleJoint.axis = new Vector3(0, 0, 1);
             //Creating a joint to act as a rope at the point of impact.
             grappleJoint.connectedBody = raycastHitData.rigidbody;
             grappleJoint.connectedAnchor = raycastHitData.rigidbody.gameObject.transform.InverseTransformPoint(raycastHitData.point);
@@ -215,11 +215,11 @@ public class PlayerController : MonoBehaviour {
         //If the user if moving apply movement force to player.
         if (horizontalMove != 0)
         {
+
             if (this.rigidbody.velocity.magnitude < PlayerController.MAX_GRAPPLING_SPEED)
             {
                 rigidbody.AddForce(new Vector3(horizontalMove * grappleForce, this.rigidbody.velocity.y, 0));
                 Mathf.Clamp(this.rigidbody.velocity.magnitude, 0f, PlayerController.MAX_GRAPPLING_SPEED);
-                Debug.Log(this.rigidbody.velocity.magnitude);
             }
         }
         float verticalMove = Input.GetAxis("Vertical");
@@ -230,7 +230,6 @@ public class PlayerController : MonoBehaviour {
             this.ropeLength = this.ropeLength - (verticalMove * PlayerController.ROPE_CHANGE_SPEED_MODIFIER);
             this.ropeLength = Mathf.Clamp(this.ropeLength, 0f, 7f);
             grappleJointLimit.limit = ropeLength;
-            Debug.Log(this.ropeLength);
             grappleJoint.linearLimit = grappleJointLimit;
             this.rigidbody.AddForce(new Vector3(0, verticalMove, 0));
         }
