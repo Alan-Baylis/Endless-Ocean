@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
     #region Jumping Variables
     //VARIABLES USED FOR JUMPING
     //Bool that indicates whether or not the gameobject is touching the ground.
-    bool onGround = false;
+    bool onGround = true;
     //An array that contains the collision objects that the circle collides with when jumping.
     Collider[] groundCollisions;
     //The radius of the cirle to check for objects in the ground layer when jumping.
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour {
         //Retrieving components from the game objects this script is attatched to.
         this.rigidbody = this.GetComponent<Rigidbody>();
         this.ropeRenderer = this.GetComponent<LineRenderer>();
-        //this.animator = this.GetComponent<Animator>();
+        this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
         //Initializing grappling vars.
         this.ropeLength = 7;
@@ -121,15 +121,15 @@ public class PlayerController : MonoBehaviour {
             if (onGround && (Input.GetAxis("Jump") > 0))
             {
                 this.onGround = false;
-                // this.animator.SetBool("grounded", this.onGround);
+                this.animator.SetBool("grounded", this.onGround);
                 this.rigidbody.AddForce(new Vector3(0, jumpHeight, 0));
             }
             checkIfOnGround();
-            //this.animator.SetBool("grounded", this.onGround);
+            this.animator.SetBool("grounded", this.onGround);
 
             //CODE FOR MOVING.
             float move = Input.GetAxis("Horizontal");
-            //animator.SetFloat("speed",  Mathf.Abs(move));
+            animator.SetFloat("Speed",  Mathf.Abs(move));
             //If the user if moving apply movement force to player.
             if (move != 0)
             {
@@ -139,26 +139,26 @@ public class PlayerController : MonoBehaviour {
             //If the game object starts moving left and is facing right turn the object around.
             if (move > 0 && !facingRight)
             {
-                //this.turnAround();
+                this.turnAround();
             }
             //If the game object starts moving right and is facing left turn the object around.
             if (move < 0 && facingRight)
             {
-                //this.turnAround();
+                this.turnAround();
             }
         }
     }
 
-    /// <summary>
-    /// This function flips the game object when the user turns it around my moving it.
-    /// </summary>
-    //void turnAround()
-    //{
-    //    this.facingright = !facingright;
-    //    vector3 reversescale = transform.localscale;
-    //    reversescale.z *= -1;
-    //    transform.localscale = reversescale;
-    //}
+    // <summary>
+    // This function flips the game object when the user turns it around my moving it.
+    // </summary>
+    void turnAround()
+    {
+        this.facingRight = !facingRight;
+        Vector3 reversescale = transform.localScale;
+        reversescale.z *= -1;
+        transform.localScale = reversescale;
+    }
 
 
     #region Grappling Functions
