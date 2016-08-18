@@ -1,21 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
-    
-
-
-
-    //Movement Variables 
-    public float movementSpeed;
-    bool facingRight;
-
-    //Player Components.
-    Rigidbody rigidbody;
-    Animator animator;
+public class PlayerController : CharacterSuper
+{
     //Other game objects.
     public Camera playerCamera;
-    public GameObject weaponObject;
 
 
     #region Equiped Items
@@ -47,44 +36,18 @@ public class PlayerController : MonoBehaviour {
     private const float MAX_GRAPPLING_SPEED = 3f;
     #endregion
 
-    #region Jumping Variables
-    //VARIABLES USED FOR JUMPING
-    //Bool that indicates whether or not the gameobject is touching the ground.
-    bool onGround = true;
-    //An array that contains the collision objects that the circle collides with when jumping.
-    Collider[] groundCollisions;
-    //The radius of the cirle to check for objects in the ground layer when jumping.
-    float groundCheckRadius = 0.2f;
-    //A layer mask that filters out game objects that are not in the ground layer.
-    public LayerMask groundLayerMask;
-    //The transform of a gameobject used to position the cicle used to determine if the game object is on the ground when jumping.
-    public Transform groundCheck;
-    //The height the player will jump when the user makes them jump.
-    public float jumpHeight;
-    #endregion
-
-    #region Attacking Variables
-    //VARIABLES USED FOR ATTACKING
-    private float attack;
-    public IWeapon weapon;
-
-    #endregion
-
     // Use this for initialization
-    void Start () {
-        this.weapon = this.weaponObject.GetComponent<IWeapon>();
-        //Retrieving components from the game objects this script is attatched to.
-        this.rigidbody = this.GetComponent<Rigidbody>();
-        this.ropeRenderer = this.GetComponent<LineRenderer>();
-        this.animator = this.GetComponent<Animator>();
-        this.facingRight = true;  
+    new void Start () {
+        base.Start();
+
         //Initializing grappling vars.
         this.ropeLength = 7;
         this.isGrappling = false;
+        this.ropeRenderer = this.GetComponent<LineRenderer>();
     }
     
     // Update is called once per frame
-    void Update ()
+    new void Update ()
     {
 	    
 	}
@@ -128,23 +91,7 @@ public class PlayerController : MonoBehaviour {
 
             //CODE FOR MOVING.
             float move = Input.GetAxis("Horizontal");
-            animator.SetFloat("Speed",  Mathf.Abs(move));
-            //If the user if moving apply movement force to player.
-            if (move != 0)
-            {
-                rigidbody.velocity = new Vector3(move * movementSpeed, this.rigidbody.velocity.y, 0);
-            }
-
-            //If the game object starts moving left and is facing right turn the object around.
-            if (move > 0 && !facingRight)
-            {
-                this.turnAround();
-            }
-            //If the game object starts moving right and is facing left turn the object around.
-            if (move < 0 && facingRight)
-            {
-                this.turnAround();
-            }
+            moveCharacter(move);
         }
     }
 
@@ -158,7 +105,6 @@ public class PlayerController : MonoBehaviour {
         reversescale.z *= -1;
         transform.localScale = reversescale;
     }
-
 
     #region Grappling Functions
     /// <summary>
@@ -247,22 +193,4 @@ public class PlayerController : MonoBehaviour {
         this.ropeRenderer.enabled = false;
     } 
     #endregion
-
-
-    /// <summary>
-    /// Function that updates the onGround variable.
-    /// </summary>
-    private void checkIfOnGround()
-    {
-        groundCollisions = Physics.OverlapSphere(this.groundCheck.position, this.groundCheckRadius, this.groundLayerMask);
-        if (groundCollisions.Length > 0)
-        {
-            this.onGround = true;
-        }
-        else
-        {
-            this.onGround = false;
-        }
-    }
-
 }
