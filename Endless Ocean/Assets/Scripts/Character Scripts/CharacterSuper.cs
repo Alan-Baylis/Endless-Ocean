@@ -30,14 +30,14 @@ public class CharacterSuper : MonoBehaviour {
     #region Attacking Variables
     //VARIABLES USED FOR ATTACKING
     protected float attack;
-    public IWeapon weapon;
+    public Weapon weapon;
 
     public GameObject weaponObject;
     #endregion
 
     // Use this for initialization
     protected void Start () {
-        this.weapon = this.weaponObject.GetComponent<IWeapon>();
+        this.weapon = this.weaponObject.GetComponent<Weapon>();
         //Retrieving components from the game objects this script is attatched to.
         this.rigidbody = this.GetComponent<Rigidbody>();
         this.animator = this.GetComponent<Animator>();
