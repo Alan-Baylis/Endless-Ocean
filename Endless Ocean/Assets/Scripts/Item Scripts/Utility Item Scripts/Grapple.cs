@@ -52,7 +52,6 @@ public class Grapple : UtilityItem
 
     }
 
-    #region Grappling Functions
     /// <summary>
     /// This function fires the players grapple at the land and starts the player grappling if they hit a grapple-able surface.
     /// </summary>
@@ -68,6 +67,7 @@ public class Grapple : UtilityItem
         {
             //If the user can grapple creaing the joint they can grapple with.
             this.grappleJoint = this.createConfigurableJoint(playerRigidbody, raycastHitData.rigidbody, raycastHitData.point);
+            Debug.Log(raycastHitData.point);
             this.addRopeEffect(playerRigidbody.position, raycastHitData.point);
             this.otherObject = raycastHitData.rigidbody;
             this.isGrappling = true;
@@ -108,9 +108,13 @@ public class Grapple : UtilityItem
         Debug.Log("GOING");
         if (this.isGrappling)
         {
-            this.moveWithItem(horizontalMove,  verticalMove,  onGround,  playerRigidbody);
+            this.moveWithItem(horizontalMove, verticalMove, onGround, playerRigidbody);
+            this.ropeLineRenderer.SetPosition(0, playerRigidbody.position);
         }
-        this.addRopeEffect(playerRigidbody.position, otherObject.position);
+        else
+        {
+            this.addRopeEffect(playerRigidbody.position, otherObject.position);
+        }
         return true;
     }
 
@@ -158,7 +162,6 @@ public class Grapple : UtilityItem
         this.ropeLineRenderer.enabled = false;
         return false;
     }
-    #endregion
 
 
 
