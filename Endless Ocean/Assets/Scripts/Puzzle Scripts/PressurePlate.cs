@@ -8,14 +8,16 @@ public class PressurePlate : MonoBehaviour {
     // Animation controller
     Animator animator;
     // Door reference
-    public GameObject Door;
+    public GameObject triggeredObject;
+    // Parent reference
+    public GameObject parent;
     // Door Animator
     Animator doorAnimator;
 
     // Use this for initialization
     void Start () {
-        this.animator = this.GetComponent<Animator>();
-        this.doorAnimator = this.Door.GetComponent<Animator>();
+        this.animator = this.parent.GetComponent<Animator>();
+        this.doorAnimator = this.triggeredObject.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
