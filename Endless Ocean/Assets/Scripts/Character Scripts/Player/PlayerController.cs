@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     //Objects used for getting interface references.
     public GameObject weaponObject;
 
-    //Interfaces that separate the playe controller from weapons and utility items (eg: grapple)
+    //Interfaces that separate the player controller from weapons and utility items (eg: grapple)
     public Weapon weapon;
     public UtilityItem utilityItem;
 
@@ -100,12 +100,10 @@ public class PlayerController : MonoBehaviour
         //IF NOT USING ITEM
         if ((this.utilityItem.affectsPlayerMovement == false) || (this.usingItem == false))
         {
-            Debug.Log(rigidbody.velocity);
             if (Input.GetAxis("Use Utility Item") > 0)
             {
                 //Set using item to true if successsfully able to use it.
                 this.usingItem = this.utilityItem.useItem(mouseLocationInWorldCoordinates, this.rigidbody);
-                Debug.Log(usingItem);
             }
             //CODE FOR JUMPING.
             if (onGround && (Input.GetAxis("Jump") > 0))

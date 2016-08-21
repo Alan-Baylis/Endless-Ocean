@@ -11,7 +11,15 @@ using System.Collections;
 /// </summary>
 public abstract class Weapon: ItemSuper{
 
+
+    public LayerMask enemyLayerMask;
     
+    protected float damage;
+    protected float qualityModifier;
+
+    //Firerate of the gun.
+    protected float weaponAttackSpeed;
+    protected float weaponNextAttack;
 
     /// <summary>
     /// This function will be called when the player left clicks with a weapon. It handles animation the attack and instianting the bullets for each weapon.
@@ -21,8 +29,7 @@ public abstract class Weapon: ItemSuper{
     abstract public void attack(float playerDamage, Vector3 mousePositionInWorldCoords);
 
 
-    //May not be necessary.
-    abstract public void reload();
+    
 
     /// <summary>
     /// Returns a bullet prefab.
@@ -30,7 +37,7 @@ public abstract class Weapon: ItemSuper{
     /// <returns>A bullet prefab at the specified position.</returns>
     protected GameObject getBulletPrefab()
     {
-        GameObject bullet = Instantiate(Resources.Load("Bullet"), this.transform.position, this.transform.rotation) as GameObject;
+        GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet"), this.transform.position, this.transform.rotation) as GameObject;
         return bullet;
     }  
 }
