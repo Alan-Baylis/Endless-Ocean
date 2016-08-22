@@ -37,7 +37,7 @@ public abstract class Weapon: ItemSuper{
     /// <returns>A bullet prefab at the specified position.</returns>
     protected GameObject getBulletPrefab()
     {
-        GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet"), this.transform.position, this.transform.rotation) as GameObject;
+        GameObject bullet = Instantiate(Resources.Load("Prefabs/Weapons/Bullet"), this.transform.position, this.transform.rotation) as GameObject;
         return bullet;
     }  
 }

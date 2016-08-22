@@ -20,4 +20,17 @@ public class CameraController : MonoBehaviour {
 
         this.transform.position = Vector3.Lerp(transform.position, targetCameraPosition, smoothing * Time.deltaTime);
 	}
+
+    //HELPER FUNCTIONS
+    /// <summary>
+    /// This function calculates the mouses location in the games world coordinates system.
+    /// </summary>
+    /// <returns>The mouses location in world coordinates.</returns>
+    public Vector3 getMouseLocationInWorldCoordinates()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = 10f;
+        Vector3 mouseLocationInWorldCoords = this.gameObject.GetComponent<Camera>().ScreenToWorldPoint(mousePosition);
+        return mouseLocationInWorldCoords;
+    }
 }

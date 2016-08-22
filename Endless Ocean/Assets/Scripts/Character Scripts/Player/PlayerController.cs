@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidbody;
     Animator animator;
     //Other game objects.
-    public Camera playerCamera;
+    public CameraController playerCameraController;
 
     //OTHER ITEMS THE PLAYER PICKS UP COULD BE GAME OBJECTS WITH THE ATTATCHED SCRIPTS.
     //Objects used for getting interface references.
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     //Interfaces that separate the player controller from weapons and utility items (eg: grapple)
     public Weapon weapon;
-    public UtilityItem utilityItem;
+    public Grapple grapple;
 
     //A boolean indicating if the player is using an item that effects their movement.
     bool usingItem;
@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        this.weapon = this.weaponObject.GetComponent<Weapon>();
-        this.utilityItem = this.utilityItem.GetComponent<UtilityItem>();
+
+        this.weapon = this.weaponObject.GetComponentInChildren<Weapon>();
         //this.playerGrapple = this.AddComponent<Grapple>();
         //Retrieving components from the game objects this script is attatched to.
         this.rigidbody = this.GetComponent<Rigidbody>();
@@ -64,47 +64,21 @@ public class PlayerController : MonoBehaviour
         this.usingItem = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// Runs before every frame. Performs physics calculates for game objects to be displayed when the next frame is rendered and updates the animator.
     /// </summary>
     void FixedUpdate()
     {
-        float horizontalMove = Input.GetAxis("Horizontal");
-        float verticalMove = Input.GetAxis("Vertical");
-        Vector3 mouseLocationInWorldCoordinates = this.getMouseLocationInWorldCoordinates();
+        if (!grapple.ropeExists || (grapple.ropeExists && onGround))
+        {
+            float horizontalMove = Input.GetAxis("Horizontal");
+            float verticalMove = Input.GetAxis("Vertical");
 
-        if (Input.GetAxis("Fire 1") > 0)
-        {
-            this.weapon.attack(this.attack, this.getMouseLocationInWorldCoordinates());
-        }
-        //CODE FOR USING UTILITY ITEM
-        if (this.usingItem)
-        {
-            if (Input.GetAxis("Stop Using Utility Item") > 0)
+            if (Input.GetAxis("Fire 1") > 0)
             {
-                //Set utility item to false if successfully able to stop.
-                this.usingItem = this.utilityItem.stopUsingItem();
+                this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
             }
-            if (this.usingItem)
-            {
-                //If utility item modifies the way player moves.
-                this.utilityItem.whileUsingItem(horizontalMove, verticalMove, this.onGround, this.rigidbody);
-            }
-        }
-        //IF NOT USING ITEM
-        if ((this.utilityItem.affectsPlayerMovement == false) || (this.usingItem == false))
-        {
-            if (Input.GetAxis("Use Utility Item") > 0)
-            {
-                //Set using item to true if successsfully able to use it.
-                this.usingItem = this.utilityItem.useItem(mouseLocationInWorldCoordinates, this.rigidbody);
-            }
+            //IF NOT USING ITEM
             //CODE FOR JUMPING.
             if (onGround && (Input.GetAxis("Jump") > 0))
             {
@@ -136,9 +110,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // <summary>
-    // This function flips the game object when the user turns it around my moving it.
-    // </summary>
+    /// <summary>
+    /// This function flips the game object when the user turns it around my moving it.
+    /// </summary>
     void turnAround()
     {
         this.facingRight = !facingRight;
@@ -147,27 +121,12 @@ public class PlayerController : MonoBehaviour
         transform.localScale = reversescale;
     }
 
-
-
-    //HELPER FUNCTIONS
-    /// <summary>
-    /// This function calculates the mouses location in the games world coordinates system.
-    /// </summary>
-    /// <returns>The mouses location in world coordinates.</returns>
-    private Vector3 getMouseLocationInWorldCoordinates()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = 10f;
-        Vector3 mouseLocationInWorldCoords = playerCamera.ScreenToWorldPoint(mousePosition);
-        return mouseLocationInWorldCoords;
-    }
-
     /// <summary>
     /// Function that updates the onGround variable.
     /// </summary>
     private void checkIfOnGround()
     {
-        groundCollisions = Physics.OverlapSphere(this.groundCheck.position, this.groundCheckRadius, this.groundLayerMask);
+        groundCollisions = Physics.OverlapSphere(this.groundCheck.position, this.groundCheckRadius);
         if (groundCollisions.Length > 0)
         {
             this.onGround = true;

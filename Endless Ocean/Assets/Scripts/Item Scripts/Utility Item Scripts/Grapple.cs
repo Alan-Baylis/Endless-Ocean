@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /// <summary>
 /// This is the class for the grapple . It is a utility item that has two modes. (Two modes is not typical of utility items.)
@@ -8,7 +9,7 @@ using System.Collections;
 /// 
 /// 2. it cam be used to pull objects towards the player. This does not affect the players movement all.
 /// </summary>
-public class Grapple : UtilityItem
+public class Grapple: MonoBehaviour
 {
 
     #region Grappling Variables
@@ -16,28 +17,19 @@ public class Grapple : UtilityItem
     //A layermask that filters out terrain the player cannot grapple to when check to see if they are able to grapple.
     public LayerMask grappleMask;
     //A layerMask that filters out all object that cant be pulled.
-    public LayerMask pullableObjectsMask;
-    //The force the player can grapple with.
-    public float grappleForce;
-    //Bool used to tell if the user isGrappling
-    public bool isGrappling = false;
-    public bool isPullingObject = false;
-    Rigidbody otherObject;
-    //Configurable joint used to act as a rope.
-    private ConfigurableJoint grappleJoint;
-    //Length of the rope used as the linear limit for the grappling joint.
-    private float ropeLength = 7;
-    //CONSTANTS USED FOR GRAPPLING
-    //Controls forces while grappling.
-    private const float LINEAR_LIMIT_SPRING = 100;
-    private const float LINEAR_LIMIT_DAMPER = 100;
-    //A line renderer for rendering the rope the player swings on.
+    private int segmentCount;
+    private const int JOINTS_PER_UNIT = 1;
+    private const float SWING_FORCE = 10f;
+    private Vector3[] segmentPositions;
+    private GameObject[] joints;
+    private static Vector3 Z_ONLY_AXIS = new Vector3(0, 0, 1);
+    public bool ropeExists = false;
     private LineRenderer ropeLineRenderer;
-    //A constant modifying the speed at which the player grapples up and down the rope.
-    private const float ROPE_CHANGE_SPEED_MODIFIER = .02f;
-    //A constant that is the max speed the player can move on the rope.
-    private const float MAX_GRAPPLING_SPEED = 3f;
+    private GameObject otherObject;
     #endregion
+
+    public Rigidbody playerRigidbody;
+    public CameraController playerCameraController;
 
     // Use this for initialization
     void Start()
@@ -49,165 +41,153 @@ public class Grapple : UtilityItem
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetAxis("UseUtilityItem") > 0)
+        {
+            if (!ropeExists)
+            {
+                this.buildRope(playerCameraController.getMouseLocationInWorldCoordinates());
+            }
+        }
+        else if(Input.GetAxis("StopUsingUtilityItem") > 0)
+        {
+            this.destroyRope();
+        }
     }
 
-    /// <summary>
-    /// This function fires the players grapple at the land and starts the player grappling if they hit a grapple-able surface.
-    /// </summary>
-    /// <param name="mouseLocationInWorldCoords">The location of the mouse in 'in-game' co-ordinates.</param>
-    /// <returns>Retusn true if the playersuccesfully stop grappling, returns false otherwise.</returns>
-    override public bool useItem(Vector3 mouseLocationInWorldCoords, Rigidbody playerRigidbody)
+    void FixedUpdate()
     {
-        Debug.Log("Firing");
+        //Overriding player movement if rope is active.
+        if (ropeExists)
+        {
+            float horizontalMove = Input.GetAxis("Horizontal");
+            playerRigidbody.AddForce(new Vector3(horizontalMove * Grapple.SWING_FORCE, 0, 0));
+            float verticalMove = Input.GetAxis("Vertical");
+        }
+    }
+
+    void LateUpdate()
+    {
+        this.drawRope();
+    }
+
+    //HERLPER FUNCTIONS
+
+    /// <summary>
+    /// This functions builds the rope between the player and the opbject they are attatched to.
+    /// </summary>
+    /// <param name="mouseLocationInWorldCoords"></param>
+    /// <param name="playerRigidbody"></param>
+    public void buildRope(Vector3 mouseLocationInWorldCoords)
+    {
         RaycastHit raycastHitData = new RaycastHit();
         //Firing a raycast to see if the user can grapple on anything.
-        bool canGrapple = Physics.Raycast(playerRigidbody.gameObject.transform.position, mouseLocationInWorldCoords - playerRigidbody.gameObject.transform.position, out raycastHitData, 7f, grappleMask);
-        if (canGrapple && !isGrappling)
+        bool canGrapple = Physics.Raycast(playerRigidbody.position, mouseLocationInWorldCoords - playerRigidbody.gameObject.transform.position, out raycastHitData, 7f, grappleMask);
+        if (canGrapple)
         {
-            //If the user can grapple creaing the joint they can grapple with.
-            this.grappleJoint = this.createConfigurableJoint(playerRigidbody, raycastHitData.rigidbody, raycastHitData.point);
-            Debug.Log(raycastHitData.point);
-            this.addRopeEffect(playerRigidbody.position, raycastHitData.point);
-            this.otherObject = raycastHitData.rigidbody;
-            this.isGrappling = true;
-            this.affectsPlayerMovement = true;
+            //Getting number of segments in rope.
+            segmentCount = Mathf.FloorToInt(Vector3.Distance(playerRigidbody.position, raycastHitData.point) * Grapple.JOINTS_PER_UNIT);
+            //Splitting line renderer to display each segment.
+            ropeLineRenderer.SetVertexCount(segmentCount);
+            //Initalizing arrays at correct length.
+            segmentPositions = new Vector3[segmentCount];
+            joints = new GameObject[segmentCount];
+            //Setting first and last segment position at the players body and the raycast hit point.
+            segmentPositions[0] = playerRigidbody.position;
+            segmentPositions[0] = raycastHitData.point;
+            //Claculating the distnace separating the segments.
+            Vector3 segmentSeparation = ((raycastHitData.point - playerRigidbody.position) / (segmentCount - 1));
+            //Positiong segments.
+            for (int i = 1; i < segmentCount; i++)
+            {
+                Vector3 position = (segmentSeparation * i) + playerRigidbody.position;
+                position.z = 0;
+                segmentPositions[i] = position;
+                ropeLineRenderer.SetPosition(i, position);
+                this.addPhysicsToJoint(i);
+            }
+
+            //Attaching joint to body hit by raycast.
+            HingeJoint endJoint = raycastHitData.rigidbody.gameObject.AddComponent<HingeJoint>();
+            endJoint.connectedBody = joints[joints.Length - 1].transform.GetComponent<Rigidbody>();
+            this.otherObject = raycastHitData.rigidbody.gameObject;
+            endJoint.axis = Grapple.Z_ONLY_AXIS;
+            ropeExists = true;
         }
-        bool canPullObject = Physics.Raycast(playerRigidbody.gameObject.transform.position, mouseLocationInWorldCoords - playerRigidbody.gameObject.transform.position, out raycastHitData, 7f, pullableObjectsMask);
-        if (canPullObject && !isPullingObject)
-        {
-            Debug.Log("IN here");
-            this.grappleJoint = this.createConfigurableJoint(playerRigidbody, raycastHitData.rigidbody, raycastHitData.point);
-            this.grappleJoint.zMotion = ConfigurableJointMotion.Limited;
-            //Limiting the distance between the objects on the joint.
-            SoftJointLimit grappleJointLimit = new SoftJointLimit();
-            grappleJointLimit.limit = 4;
-            grappleJoint.linearLimit = grappleJointLimit;
-            this.addRopeEffect(playerRigidbody.position, raycastHitData.point);
-            this.otherObject = raycastHitData.rigidbody;
-            this.isPullingObject = true;
-            this.affectsPlayerMovement = false;
-        }
-        if(this.isGrappling || this.isPullingObject)
-        {
-            return true;
-        }
-        return false;
     }
 
     /// <summary>
-    /// This function renders the players grapple rope and calls the movement function if necessary.
+    /// Creates the joint game objects and configures the mto be 'rope-like'
     /// </summary>
-    /// <param name="horizontalMove">The horizontal input axis value.</param>
-    /// <param name="verticalMove">The vertical input axis value.</param>
-    /// <param name="onGround">A boolean indicating whether or no the player is on the ground.</param>
-    /// <param name="playerRigidbody">The rigidbody of the player that the item might effect.</param>
-    /// <returns>Always returns true as the grapple always does something every frame the player is using it.</returns>
-    override public bool whileUsingItem(float horizontalMove, float verticalMove, bool onGround, Rigidbody playerRigidbody)
+    /// <param name="index">The index of the joint to configure.</param>
+    private void addPhysicsToJoint(int index)
     {
-        Debug.Log("GOING");
-        if (this.isGrappling)
+        joints[index] = new GameObject("RopeJoint_" + index);
+        joints[index].layer = LayerMask.NameToLayer("DoesNotCollideWithPlayer");
+        joints[index].transform.position = segmentPositions[index];
+        Rigidbody rigidbody = joints[index].AddComponent<Rigidbody>();
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+        SphereCollider collider = joints[index].AddComponent<SphereCollider>();
+        collider.radius = .2f;
+        HingeJoint joint = joints[index].AddComponent<HingeJoint>();
+        joint.axis = Grapple.Z_ONLY_AXIS;
+        if(index == 1)
         {
-            this.moveWithItem(horizontalMove, verticalMove, onGround, playerRigidbody);
-            this.ropeLineRenderer.SetPosition(0, playerRigidbody.position);
+            joint.connectedBody = playerRigidbody;
         }
         else
         {
-            this.addRopeEffect(playerRigidbody.position, otherObject.position);
+            joint.connectedBody = joints[index - 1].GetComponent<Rigidbody>();
         }
-        return true;
+
     }
-
+    
     /// <summary>
-    /// Moves the player on the grapple if the user provides movement input.
+    /// This function draws all the joints in the rope using a line renderer.
     /// </summary>
-    /// <param name="horizontalMove">The horizontal input axis value.</param>
-    /// <param name="verticalMove">The vertical input axis value.</param>
-    /// <param name="onGround">A boolean indicating whether or no the player is on the ground.</param>
-    /// <param name="playerRigidbody">The rigidbody of the player that the item might effect.</param>
-    override protected void moveWithItem(float horizontalMove, float verticalMove, bool onGround, Rigidbody playerRigidbody)
+    public void drawRope()
     {
-        Debug.Log("In move");
-        if (horizontalMove != 0)
+        if (ropeExists)
         {
-
-            if (playerRigidbody.velocity.magnitude < Grapple.MAX_GRAPPLING_SPEED)
+            for(int i = 0; i < segmentCount; i++)
             {
-                playerRigidbody.AddForce(new Vector3(horizontalMove * grappleForce, playerRigidbody.velocity.y, 0));
-                Mathf.Clamp(playerRigidbody.velocity.magnitude, 0f, Grapple.MAX_GRAPPLING_SPEED);
+                if (i == 0)
+                {
+                    ropeLineRenderer.SetPosition(i, this.transform.position);
+                }
+                else if (i == segmentCount)
+                {
+                    ropeLineRenderer.SetPosition(i, this.otherObject.transform.position);
+                }
+                else
+                {
+                    ropeLineRenderer.SetPosition(i, joints[i].transform.position);
+                }
             }
+            ropeLineRenderer.enabled = true;
         }
-        if (verticalMove > 0 || (verticalMove < 0 && !onGround))
+        else
         {
-
-            SoftJointLimit grappleJointLimit = new SoftJointLimit();
-            this.ropeLength = this.ropeLength - (verticalMove * Grapple.ROPE_CHANGE_SPEED_MODIFIER);
-            this.ropeLength = Mathf.Clamp(this.ropeLength, 0f, 7f);
-            grappleJointLimit.limit = ropeLength;
-            grappleJoint.linearLimit = grappleJointLimit;
-            playerRigidbody.AddForce(new Vector3(0, verticalMove, 0));
+            ropeLineRenderer.enabled = false;
         }
     }
 
-
     /// <summary>
-    /// This function stops the player grappling.
+    /// This function destroys all the rope game objects and rests key variables.
     /// </summary>
-    /// <returns>Always returns true as the player can always stop using the grapple.</returns>
-    override public bool stopUsingItem()
+    public void destroyRope()
     {
-        Object.Destroy(this.grappleJoint);
-        this.isGrappling = false;
-        this.isPullingObject = false;
-        this.ropeLineRenderer.enabled = false;
-        return false;
-    }
+        if (ropeExists)
+        {
+            for (int i = 0; i < joints.Length; i++)
+            {
+                Destroy(joints[i]);
+            }
 
-
-
-    //HERLPER FUNCTIONS
-    /// <summary>
-    /// Creates a configurable joint on the specified rigidbody with the shared attributes between the to uses of the grapple.
-    /// </summary>
-    /// <param name="firstRigidbody">The rigidbody to create the joint on.</param>
-    /// <param name="secondRigidbody">The rigidbody that will be the connected anchor for the joint.</param>
-    /// <param name="point">The point on the second rigibody to create the confiurable joint on.</param>
-    public ConfigurableJoint createConfigurableJoint(Rigidbody firstRigidbody, Rigidbody secondRigidbody, Vector3 point)
-    {
-        ConfigurableJoint grappleJoint = firstRigidbody.gameObject.AddComponent<ConfigurableJoint>();
-        //Setting movement restrictions on joint.
-        grappleJoint.autoConfigureConnectedAnchor = false;
-        grappleJoint.xMotion = ConfigurableJointMotion.Limited;
-        grappleJoint.yMotion = ConfigurableJointMotion.Limited;
-        //Adding second body.
-        grappleJoint.connectedBody = secondRigidbody;
-        grappleJoint.connectedAnchor = secondRigidbody.gameObject.transform.InverseTransformPoint(point);
-        //Allow the two objects attatched to each other to collide - prevents them from passing through eachother.
-        grappleJoint.enableCollision = true;
-        //Limiting the distance between the objects on the joint.
-        SoftJointLimit grappleJointLimit = new SoftJointLimit();
-        this.ropeLength = (point - firstRigidbody.position).magnitude;
-        grappleJointLimit.limit = ropeLength;
-        grappleJoint.linearLimit = grappleJointLimit;
-        //Adding forces that make the rope look natural when pulling the player back into the bounds.
-        SoftJointLimitSpring grappleJointLimitSpring = new SoftJointLimitSpring();
-        grappleJointLimitSpring.spring = Grapple.LINEAR_LIMIT_SPRING;
-        grappleJointLimitSpring.damper = Grapple.LINEAR_LIMIT_DAMPER;
-        grappleJoint.linearLimitSpring = grappleJointLimitSpring;
-        //Setting axis for joint.
-        grappleJoint.axis = new Vector3(0, 0, 1);
-        return grappleJoint;
-    }
-
-    /// <summary>
-    /// Adds a line renderer that looks like a rope between two points.
-    /// </summary>
-    /// <param name="firstPoint">The first point for the rope.</param>
-    /// <param name="secondPoint">The second point for the rope.</param>
-    public void addRopeEffect(Vector3 firstPoint, Vector3 secondPoint)
-    {
-        this.ropeLineRenderer.SetPositions(new Vector3[] { firstPoint, secondPoint });
-        this.ropeLineRenderer.enabled = true;
-    }
+            segmentPositions = new Vector3[0];
+            segmentCount = 0;
+            joints = new GameObject[0];
+            ropeExists = false;
+        }
+    } 
 
 }
