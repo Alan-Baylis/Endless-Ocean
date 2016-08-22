@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         this.weapon = this.weaponObject.GetComponentInChildren<Weapon>();
         //this.playerGrapple = this.AddComponent<Grapple>();
         //Retrieving components from the game objects this script is attatched to.
@@ -69,13 +68,14 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        if (!grapple.ropeExists || (grapple.ropeExists && onGround))
+        if (!grapple.grappling || (grapple.grappling && onGround))
         {
             float horizontalMove = Input.GetAxis("Horizontal");
             float verticalMove = Input.GetAxis("Vertical");
 
             if (Input.GetAxis("Fire 1") > 0)
             {
+                this.animator.SetTrigger("Melee Attack Trigger");
                 this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
             }
             //IF NOT USING ITEM
