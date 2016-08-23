@@ -32,6 +32,12 @@ public class CharacterSuper : MonoBehaviour {
     protected float attack;
     public Weapon weapon;
 
+    // Stat variables
+    protected int health;
+    protected int attackSpeed;
+    protected int energy;
+
+    //Objects used for getting interface references.
     public GameObject weaponObject;
     #endregion
 

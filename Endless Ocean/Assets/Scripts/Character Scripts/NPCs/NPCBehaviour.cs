@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class NPCBehaviour : CharacterSuper
 {
@@ -26,5 +27,18 @@ public class NPCBehaviour : CharacterSuper
     protected void attackTarget(Transform target)
     {
         weapon.attack(attack, target.position);
+    }
+
+    /// <summary>
+    /// What happens when enemy collides with certain objects
+    /// </summary>
+    /// <param name="col">GameObject involved in collision</param>
+    void OnTriggerEnter(Collider col)
+    {
+        // When enemy collides DeathFromfalling gameObject (fall down hole)
+        if (col.gameObject.name == "DeathFromFalling")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

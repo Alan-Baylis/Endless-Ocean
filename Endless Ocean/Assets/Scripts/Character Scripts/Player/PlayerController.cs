@@ -1,25 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterSuper
 {
-
-
-
-
-    //Movement Variables 
-    public float movementSpeed;
-    bool facingRight;
-
-    //Player Components.
-    Rigidbody rigidbody;
-    Animator animator;
     //Other game objects.
     public CameraController playerCameraController;
-
-    //OTHER ITEMS THE PLAYER PICKS UP COULD BE GAME OBJECTS WITH THE ATTATCHED SCRIPTS.
-    //Objects used for getting interface references.
-    public GameObject weaponObject;
 
     //Interfaces that separate the player controller from weapons and utility items (eg: grapple)
     public Weapon weapon;
@@ -28,6 +13,8 @@ public class PlayerController : MonoBehaviour
     //A boolean indicating if the player is using an item that effects their movement.
     bool usingItem;
 
+    //Character collider
+    public Collider col;
 
     #region Jumping Variables
     //VARIABLES USED FOR JUMPING
@@ -41,8 +28,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayerMask;
     //The transform of a gameobject used to position the cicle used to determine if the game object is on the ground when jumping.
     public Transform groundCheck;
-    //The height the player will jump when the user makes them jump.
-    public float jumpHeight;
     #endregion
 
     #region Attacking Variables
@@ -134,6 +119,19 @@ public class PlayerController : MonoBehaviour
         else
         {
             this.onGround = false;
+        }
+    }
+
+    /// <summary>
+    /// What happens when player collides with certain objects
+    /// </summary>
+    /// <param name="col">GameObject involved in collision</param>
+    void OnTriggerEnter(Collider col)
+    {
+        // When player collides DeathFromfalling gameObject (fall down hole)
+        if (col.gameObject.name == "DeathFromFalling")
+        {
+            Application.LoadLevel(Application.loadedLevel);
         }
     }
 
