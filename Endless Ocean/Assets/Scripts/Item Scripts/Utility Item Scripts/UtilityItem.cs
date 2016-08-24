@@ -14,7 +14,7 @@ using System.Collections;
 /// prevent the playergame object from getting cluttered with too many componenets and helps separate the components by purpose. 
 /// 
 /// </summary>
-public abstract class UtilityItem: ItemSuper {
+public abstract class UtilityItem: Item {
 
     //A boolean indicating whether or not the item effects the players movement.
     public bool affectsPlayerMovement;

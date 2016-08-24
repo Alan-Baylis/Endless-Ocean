@@ -9,7 +9,7 @@ using System.Collections;
 /// 
 /// It also cointains a method for getting a bullet prefab which the child classes may use.
 /// </summary>
-public abstract class Weapon: ItemSuper{
+public abstract class Weapon: Item{
 
 
     public LayerMask enemyLayerMask;
