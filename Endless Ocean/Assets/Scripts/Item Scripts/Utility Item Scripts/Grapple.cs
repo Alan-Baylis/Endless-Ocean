@@ -8,6 +8,9 @@ using System;
 /// 1. It can be used to swing from certain platforms. This mode does override the players movement.
 /// 
 /// 2. it cam be used to pull objects towards the player. This does not affect the players movement all.
+/// 
+/// 
+/// The idea for a rope that uses a series of hinge joints came from this http://wiki.unity3d.com/index.php?title=LineRenderer_Rope
 /// </summary>
 public class Grapple: MonoBehaviour
 {
@@ -20,7 +23,7 @@ public class Grapple: MonoBehaviour
     public LayerMask pullMask;
     //Vars for creating the grappling rope.
     private int segmentCount;
-    private const int JOINTS_PER_UNIT = 1;
+    private const int JOINTS_PER_UNIT = 2;
     private const float SWING_FORCE = 10f;
     private Vector3[] segmentPositions;
     private GameObject[] joints;
@@ -29,7 +32,7 @@ public class Grapple: MonoBehaviour
     public bool grappling = false;
     public bool pulling = false;
     //The line rendere that draws the grapples rope.
-    private LineRenderer ropeLineRenderer;
+    private static LineRenderer ropeLineRenderer;
     //A reference to the other object the grapple is attatched to.
     private Rigidbody otherObject;
     //Vars and const for creating the pulling rope.
@@ -37,6 +40,8 @@ public class Grapple: MonoBehaviour
     private const float LINEAR_LIMIT_SPRING = 100f;
     private const float LINEAR_LIMIT_DAMPER = 100f;
 
+    private const float OBJECT_PULL_SPEED = .1f;
+    MoveTowardsObject otherObjectMover;
 
     public Rigidbody playerRigidbody;
     public CameraController playerCameraController;
@@ -44,8 +49,8 @@ public class Grapple: MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        this.ropeLineRenderer = this.gameObject.AddComponent<LineRenderer>();
-        this.ropeLineRenderer.SetWidth(.02f, .02f);
+        Grapple.ropeLineRenderer = this.gameObject.AddComponent<LineRenderer>();
+        Grapple.ropeLineRenderer.SetWidth(.02f, .02f);
     }
 
     // Update is called once per frame
@@ -57,7 +62,6 @@ public class Grapple: MonoBehaviour
             {
                 RaycastHit raycastHitData;
                 bool canGrapple = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out raycastHitData, 7f, grappleMask);
-                Debug.DrawLine(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates());
                 if (canGrapple) {
                     this.createGrapplingRope(playerCameraController.getMouseLocationInWorldCoordinates(), raycastHitData);
                 }
@@ -203,33 +207,35 @@ public class Grapple: MonoBehaviour
     /// <param name="firstRigidbody">The rigidbody to create the joint on.</param>
     /// <param name="secondRigidbody">The rigidbody that will be the connected anchor for the joint.</param>
     /// <param name="point">The point on the second rigibody to create the confiurable joint on.</param>
-    public ConfigurableJoint creatingPullingRope(Rigidbody firstRigidbody, Rigidbody secondRigidbody, Vector3 point)
+    public void creatingPullingRope(Rigidbody firstRigidbody, Rigidbody secondRigidbody, Vector3 point)
     {
-        ConfigurableJoint grappleJoint = firstRigidbody.gameObject.AddComponent<ConfigurableJoint>();
-        //Setting movement restrictions on joint.
-        grappleJoint.autoConfigureConnectedAnchor = false;
-        grappleJoint.xMotion = ConfigurableJointMotion.Limited;
-        grappleJoint.yMotion = ConfigurableJointMotion.Limited;
-        //Adding second body.
-        grappleJoint.connectedBody = secondRigidbody;
+        this.otherObjectMover = secondRigidbody.gameObject.AddComponent<MoveTowardsObject>();
+        otherObjectMover.init(firstRigidbody.gameObject, Grapple.OBJECT_PULL_SPEED, this);
+        //ConfigurableJoint grappleJoint = firstRigidbody.gameObject.AddComponent<ConfigurableJoint>();
+        ////Setting movement restrictions on joint.
+        //grappleJoint.autoConfigureConnectedAnchor = false;
+        //grappleJoint.xMotion = ConfigurableJointMotion.Limited;
+        //grappleJoint.yMotion = ConfigurableJointMotion.Limited;
+        ////Adding second body.
+        //grappleJoint.connectedBody = secondRigidbody;
         this.otherObject = secondRigidbody;
-        grappleJoint.connectedAnchor = secondRigidbody.gameObject.transform.InverseTransformPoint(point);
-        //Allow the two objects attatched to each other to collide - prevents them from passing through eachother.
-        grappleJoint.enableCollision = true;
-        //Limiting the distance between the objects on the joint.
-        SoftJointLimit grappleJointLimit = new SoftJointLimit();
-        this.ropeLength = (point - firstRigidbody.position).magnitude;
-        grappleJointLimit.limit = ropeLength;
-        grappleJoint.linearLimit = grappleJointLimit;
-        //Adding forces that make the rope look natural when pulling the player back into the bounds.
-        SoftJointLimitSpring grappleJointLimitSpring = new SoftJointLimitSpring();
-        grappleJointLimitSpring.spring = Grapple.LINEAR_LIMIT_SPRING;
-        grappleJointLimitSpring.damper = Grapple.LINEAR_LIMIT_DAMPER;
-        grappleJoint.linearLimitSpring = grappleJointLimitSpring;
-        //Setting axis for joint.
-        grappleJoint.axis = new Vector3(0, 0, 1);
+        //grappleJoint.connectedAnchor = secondRigidbody.gameObject.transform.InverseTransformPoint(point);
+        ////Allow the two objects attatched to each other to collide - prevents them from passing through eachother.
+        //grappleJoint.enableCollision = true;
+        ////Limiting the distance between the objects on the joint.
+        //SoftJointLimit grappleJointLimit = new SoftJointLimit();
+        //this.ropeLength = (point - firstRigidbody.position).magnitude;
+        //grappleJointLimit.limit = ropeLength;
+        //grappleJoint.linearLimit = grappleJointLimit;
+        ////Adding forces that make the rope look natural when pulling the player back into the bounds.
+        //SoftJointLimitSpring grappleJointLimitSpring = new SoftJointLimitSpring();
+        //grappleJointLimitSpring.spring = Grapple.LINEAR_LIMIT_SPRING;
+        //grappleJointLimitSpring.damper = Grapple.LINEAR_LIMIT_DAMPER;
+        //grappleJoint.linearLimitSpring = grappleJointLimitSpring;
+        ////Setting axis for joint.
+        //grappleJoint.axis = new Vector3(0, 0, 1);
         this.pulling = true;
-        return grappleJoint;
+        //return grappleJoint;
     }
 
     /// <summary>
@@ -239,9 +245,9 @@ public class Grapple: MonoBehaviour
     /// <param name="secondPoint">The second point for the rope.</param>
     public void drawPullingRope(Vector3 firstPoint, Vector3 secondPoint)
     {
-        this.ropeLineRenderer.SetVertexCount(2);
-        this.ropeLineRenderer.SetPositions(new Vector3[] { firstPoint, secondPoint });
-        this.ropeLineRenderer.enabled = true;
+        Grapple.ropeLineRenderer.SetVertexCount(2);
+        Grapple.ropeLineRenderer.SetPositions(new Vector3[] { firstPoint, secondPoint });
+        Grapple.ropeLineRenderer.enabled = true;
     }
     #endregion
 
@@ -264,7 +270,7 @@ public class Grapple: MonoBehaviour
         }
         if (pulling)
         {
-            Destroy(playerRigidbody.gameObject.GetComponent<ConfigurableJoint>());
+            Destroy(this.otherObjectMover);
         }
         ropeLineRenderer.enabled = false;
         grappling = false;
