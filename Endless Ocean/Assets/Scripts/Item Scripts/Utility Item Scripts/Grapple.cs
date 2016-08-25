@@ -56,7 +56,7 @@ public class Grapple: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("UseUtilityItem") > 0)
+        if (Input.GetButtonDown("UseUtilityItem"))
         {
             if (!grappling)
             {
@@ -76,7 +76,7 @@ public class Grapple: MonoBehaviour
                 }
             }
         }
-        else if(Input.GetAxis("StopUsingUtilityItem") > 0)
+        else if(Input.GetButtonDown("StopUsingUtilityItem"))
         {
             this.destroyRope();
         }
