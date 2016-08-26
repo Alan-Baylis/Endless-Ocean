@@ -34,7 +34,10 @@ public class MoveTowardsObject : MonoBehaviour {
             Vector3 direction = (objectToMoveTowards.transform.position - this.transform.position);
             direction.y = 0;
             this.GetComponent<Rigidbody>().velocity += Vector3.ClampMagnitude((direction * velocity), .4f);
-            this.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(this.GetComponent<Rigidbody>().velocity, 3f);
+            Vector3 tempVelocity = new Vector3();
+            tempVelocity = this.GetComponent<Rigidbody>().velocity;
+            Mathf.Clamp(tempVelocity.x, 0f, 3f);
+            this.GetComponent<Rigidbody>().velocity = tempVelocity;
             Debug.Log(this.GetComponent<Rigidbody>().velocity);
         }
 	}
