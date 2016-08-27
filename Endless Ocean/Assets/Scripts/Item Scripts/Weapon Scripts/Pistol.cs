@@ -7,6 +7,7 @@ public class Pistol : RangedWeapon  {
 
     public void Start()
     {
+        Debug.Log("Started");
         base.damage = 3;
         base.weaponAttackSpeed = 3f;
         base.projectileSpeed = 20f;
@@ -33,4 +34,5 @@ public class Pistol : RangedWeapon  {
     {
 
     }
+
 }

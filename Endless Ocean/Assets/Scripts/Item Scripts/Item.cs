@@ -10,6 +10,4 @@ public class Item : MonoBehaviour {
     public string description;
 
     public Sprite itemIcon;
-
-    
 }

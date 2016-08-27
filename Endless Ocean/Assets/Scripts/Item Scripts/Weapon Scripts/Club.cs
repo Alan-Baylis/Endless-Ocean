@@ -4,8 +4,6 @@ using System;
 
 public class Club : MeleeWeapon {
 
-
-
     public override void attack(float playerDamage, Vector3 mousePositionInWorldCoords)
     {
        bool facingRight = (gameObject.GetComponentInParent<Transform>().lossyScale.z > 0);
@@ -17,4 +15,5 @@ public class Club : MeleeWeapon {
           
        }
     }
+
 }
