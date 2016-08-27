@@ -12,6 +12,7 @@ public class EnemyAI : NPCBehaviour
 
 	// Use this for initialization
 	new void Start () {
+        this.health = 100;
         base.Start();
 	}
 	

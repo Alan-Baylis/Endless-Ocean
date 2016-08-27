@@ -14,7 +14,7 @@ public abstract class Weapon: Item{
 
     public LayerMask enemyLayerMask;
     
-    protected float damage;
+    public int damage;
     protected float qualityModifier;
 
     //Firerate of the gun.
@@ -40,4 +40,9 @@ public abstract class Weapon: Item{
         GameObject bullet = Instantiate(Resources.Load("Prefabs/Weapons/Bullet"), this.transform.position, this.transform.rotation) as GameObject;
         return bullet;
     }  
+
+    public int getDamage()
+    {
+        return damage;
+    }
 }

@@ -168,19 +168,19 @@ ModelImporter:
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L/Thumb01_L/Thumb02_L
         weight: 1
       - path: Armature/Root/Torso/Chest/Upper_Arm_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Fingers01_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Fingers01_R/Fingers02_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R/Thumb02_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Upper_Leg_L
         weight: 1
       - path: Armature/Root/Torso/Upper_Leg_L/Lower_Leg_L
@@ -262,19 +262,19 @@ ModelImporter:
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L/Thumb01_L/Thumb02_L
         weight: 1
       - path: Armature/Root/Torso/Chest/Upper_Arm_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Fingers01_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Fingers01_R/Fingers02_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R/Thumb02_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Upper_Leg_L
         weight: 1
       - path: Armature/Root/Torso/Upper_Leg_L/Lower_Leg_L
@@ -356,19 +356,19 @@ ModelImporter:
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L/Thumb01_L/Thumb02_L
         weight: 1
       - path: Armature/Root/Torso/Chest/Upper_Arm_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Fingers01_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Fingers01_R/Fingers02_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R/Thumb02_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Upper_Leg_L
         weight: 1
       - path: Armature/Root/Torso/Upper_Leg_L/Lower_Leg_L
@@ -450,19 +450,19 @@ ModelImporter:
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L/Thumb01_L/Thumb02_L
         weight: 1
       - path: Armature/Root/Torso/Chest/Upper_Arm_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Fingers01_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Fingers01_R/Fingers02_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R/Thumb02_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Upper_Leg_L
         weight: 1
       - path: Armature/Root/Torso/Upper_Leg_L/Lower_Leg_L
@@ -480,13 +480,13 @@ ModelImporter:
       name: Melee Attack
       takeName: Default Take
       firstFrame: 35
-      lastFrame: 38
+      lastFrame: 41
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
+      hasAdditiveReferencePose: 1
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
@@ -504,45 +504,45 @@ ModelImporter:
       - path: 
         weight: 1
       - path: Armature
-        weight: 1
+        weight: 0
       - path: Armature/Hat
-        weight: 1
+        weight: 0
       - path: Armature/Root
-        weight: 1
+        weight: 0
       - path: Armature/Root/Leg_Control_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Leg_Control_L/Foot_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Leg_Control_L/Foot_L/Toes_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Leg_Control_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Leg_Control_R/Foot_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Leg_Control_R/Foot_R/Toes_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Neck
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Neck/Head
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L/Fingers01_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L/Fingers01_L/Fingers02_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L/Thumb01_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_L/Lower_Arm_L/Hand_L/Thumb01_L/Thumb02_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Chest/Upper_Arm_R
         weight: 1
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R
@@ -558,13 +558,13 @@ ModelImporter:
       - path: Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/Thumb01_R/Thumb02_R
         weight: 1
       - path: Armature/Root/Torso/Upper_Leg_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Upper_Leg_L/Lower_Leg_L
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Upper_Leg_R
-        weight: 1
+        weight: 0
       - path: Armature/Root/Torso/Upper_Leg_R/Lower_Leg_R
-        weight: 1
+        weight: 0
       - path: Character
         weight: 1
       maskType: 0

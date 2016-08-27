@@ -40,5 +40,19 @@ public class NPCBehaviour : CharacterSuper
         {
             Destroy(this.gameObject);
         }
+        // When player collides DeathFromfalling gameObject (fall down hole)
+        if (col.gameObject.tag == "PlayerWeapon")
+        {
+            int damage = col.gameObject.GetComponent<Weapon>().getDamage();
+            Debug.Log("My health is now " + this.health + "and I took " + damage + "damage");
+            
+            this.takeDamage(damage);
+            
+            if(health <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
     }
 }

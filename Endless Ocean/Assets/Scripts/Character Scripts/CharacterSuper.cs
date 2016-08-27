@@ -36,6 +36,7 @@ public class CharacterSuper : MonoBehaviour {
     protected int health;
     protected int attackSpeed;
     protected int energy;
+    protected bool alive;
 
     //Objects used for getting interface references.
     public GameObject weaponObject;
@@ -46,8 +47,9 @@ public class CharacterSuper : MonoBehaviour {
         this.weapon = this.weaponObject.GetComponent<Weapon>();
         //Retrieving components from the game objects this script is attatched to.
         this.rigidbody = this.GetComponent<Rigidbody>();
-        this.animator = this.GetComponent<Animator>();
+        //this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
+        this.alive = true;
     }
 	
 	// Update is called once per frame
@@ -68,7 +70,7 @@ public class CharacterSuper : MonoBehaviour {
 
     protected void moveCharacter(float move)
     {
-        animator.SetFloat("Speed", Mathf.Abs(move));
+        //animator.SetFloat("Speed", Mathf.Abs(move));
         //If the user if moving apply movement force to player.
         if (move != 0)
         {
@@ -101,6 +103,25 @@ public class CharacterSuper : MonoBehaviour {
         else
         {
             this.onGround = false;
+        }
+    }
+
+    /// <summary>
+    /// What happens when player collides with certain objects
+    /// </summary>
+    /// <param name="col">GameObject involved in collision</param>
+    void OnTriggerEnter(Collider col)
+    {
+
+    }
+
+    protected void takeDamage(int damage)
+    {
+        this.health -= damage;
+
+        if(this.health <= 0)
+        {
+            alive = false;
         }
     }
 }

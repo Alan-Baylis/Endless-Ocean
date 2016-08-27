@@ -5,4 +5,5 @@ public abstract class MeleeWeapon : Weapon {
 
     protected float reach;
 
+
 }

@@ -33,19 +33,25 @@ public class PlayerController : CharacterSuper
     #region Attacking Variables
     //VARIABLES USED FOR ATTACKING
     private float attack;
+    private float attackSpeed;
+
+    private float nextMelee;
 
     #endregion
 
     // Use this for initialization
     void Start()
     {
-        this.weapon = this.weaponObject.GetComponentInChildren<Weapon>();
+        this.weapon = this.weaponObject.GetComponentInChildren<Club>();
         //this.playerGrapple = this.AddComponent<Grapple>();
         //Retrieving components from the game objects this script is attatched to.
         this.rigidbody = this.GetComponent<Rigidbody>();
         this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
         this.usingItem = false;
+        this.energy = 100;
+        this.nextMelee = 0.0f;
+        this.attackSpeed = 0.2f;
     }
 
     /// <summary>
@@ -53,16 +59,27 @@ public class PlayerController : CharacterSuper
     /// </summary>
     void FixedUpdate()
     {
+        if(this.energy < 100)
+        {
+            this.energy += 1;
+        }
+
+        if (Input.GetAxis("Fire 1") > 0 && nextMelee < Time.time)
+        {
+            nextMelee = Time.time + attackSpeed;
+            if (this.energy > 0)
+            {
+                this.energy -= 1;
+                this.animator.SetTrigger("MeleeAttackTrigger");
+                //this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
+            }
+        }
+
         if (!grapple.grappling || (grapple.grappling && onGround))
         {
             float horizontalMove = Input.GetAxis("Horizontal");
             float verticalMove = Input.GetAxis("Vertical");
 
-            if (Input.GetAxis("Fire 1") > 0)
-            {
-                this.animator.SetTrigger("Melee Attack Trigger");
-                this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
-            }
             //IF NOT USING ITEM
             //CODE FOR JUMPING.
             if (onGround && (Input.GetAxis("Jump") > 0))
@@ -134,5 +151,4 @@ public class PlayerController : CharacterSuper
             Application.LoadLevel(Application.loadedLevel);
         }
     }
-
 }
