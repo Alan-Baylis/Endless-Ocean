@@ -1,6 +1,7 @@
-5.3.5f1:2.1.0.0
-WebPlayer
-D:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll
-D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
-D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
-D:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll
+5.4.0f3:2.3.0.0
+StandaloneWindows
+E:/Unity/Editor/Data/Managed/UnityEngine.dll
+E:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
+E:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
+E:/Unity/Editor/Data/Managed/UnityEditor.dll
+E:/Unity/Editor/Data\Managed/Mono.Cecil.dll

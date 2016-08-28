@@ -11,6 +11,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerClickH
     public int slotNumber;
     public Inventory inventory;
 
+    private Text itemCount;
+
     /// <summary>
     /// This function runs when the user clicks on the slot.
     /// </summary>
@@ -54,9 +56,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerClickH
     /// <param name="eventData">The data from the drag.</param>
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        Debug.Log("ASDSADASDA");
         if (!this.isSlotEmpty())
         {
+            this.itemCount.enabled = false;
             this.inventory.startDraggingItem(inventory.items[slotNumber]);
             this.inventory.items[slotNumber] = new Item();
         }
@@ -90,17 +92,25 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerClickH
     /// </summary>
     void Start()
     {
+        this.itemCount = this.gameObject.transform.GetChild(1).GetComponent<Text>();
         this.itemImage = this.GetComponentsInChildren<Image>()[1];
     }
 
     // Update is called once per frame
     void Update()
     {
+        this.itemCount.enabled = false;
         //If this slot is holdin an item - show it.
         if (!this.isSlotEmpty())
         {
             this.itemImage.enabled = true;
             this.itemImage.sprite = this.inventory.items[this.slotNumber].itemIcon;
+            if (this.inventory.items[this.slotNumber].stackable)
+            {
+                
+                this.itemCount.enabled = true;
+                this.itemCount.text = "" + this.inventory.items[this.slotNumber].itemCount;
+            }
         }
         else
         {

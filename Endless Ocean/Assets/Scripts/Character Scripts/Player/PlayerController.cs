@@ -16,6 +16,9 @@ public class PlayerController : CharacterSuper
     //Character collider
     public Collider col;
 
+    //Reference to the items menu UI element.
+    private GameObject itemsMenu;
+
     #region Jumping Variables
     //VARIABLES USED FOR JUMPING
     //Bool that indicates whether or not the gameobject is touching the ground.
@@ -42,6 +45,9 @@ public class PlayerController : CharacterSuper
     // Use this for initialization
     void Start()
     {
+        this.itemsMenu = GameObject.FindGameObjectWithTag("ItemsMenu");
+        //Hide Menu at start.
+        this.itemsMenu.SetActive(false);
         this.weapon = this.weaponObject.GetComponentInChildren<Club>();
         //this.playerGrapple = this.AddComponent<Grapple>();
         //Retrieving components from the game objects this script is attatched to.
@@ -63,7 +69,10 @@ public class PlayerController : CharacterSuper
         {
             this.energy += 1;
         }
-
+        if (Input.GetButtonDown("OpenItemsMenu"))
+        {
+            itemsMenu.SetActive(!itemsMenu.activeInHierarchy);
+        }
         if (Input.GetAxis("Fire 1") > 0 && nextMelee < Time.time)
         {
             nextMelee = Time.time + attackSpeed;
@@ -74,7 +83,6 @@ public class PlayerController : CharacterSuper
                 //this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
             }
         }
-
         if (!grapple.grappling || (grapple.grappling && onGround))
         {
             float horizontalMove = Input.GetAxis("Horizontal");

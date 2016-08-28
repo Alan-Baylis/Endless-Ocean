@@ -5,6 +5,14 @@ using UnityEngine.UI;
 [System.Serializable()]
 public class Item : MonoBehaviour {
 
+    //Used to stack consumables.
+    public int itemCount = 1;
+
+    public virtual bool stackable
+    {
+        get { return false; }
+    }
+
     public string itemName;
 
     public string description;

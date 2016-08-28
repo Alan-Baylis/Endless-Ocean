@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour {
     public List<Item> items = new List<Item>();
     //Vars for positioning boxes in the inventory.
     private float currentXlocation = -125;
-    private float currentYLocation = 160;
+    private float currentYLocation = 130;
     private static int INCREMENT = 62;
     private const int INVENTORY_BOX_SIZE = 20;
     private int slotsX, slotsY;
@@ -65,6 +65,12 @@ public class Inventory : MonoBehaviour {
         this.addItem(pistolTemp.GetComponent<Pistol>());
         GameObject clubTemp = Instantiate(Resources.Load("Prefabs/Weapons/Club")) as GameObject;
         this.addItem(clubTemp.GetComponent<Club>());
+        GameObject tp1 = Instantiate(Resources.Load("Prefabs/Consumables/TestPotion")) as GameObject;
+        this.addItem(tp1.GetComponent<Item>());
+        GameObject tp2 = Instantiate(Resources.Load("Prefabs/Consumables/TestPotion")) as GameObject;
+        this.addItem(tp2.GetComponent<Item>());
+        GameObject tp3 = Instantiate(Resources.Load("Prefabs/Consumables/TestPotion")) as GameObject;
+        this.addItem(tp3.GetComponent<Item>());
     }
 
     void Update()
@@ -81,21 +87,47 @@ public class Inventory : MonoBehaviour {
             //Toggle showing the inventory.
             this.showInventory = !showInventory;
         }
-    }   
+    }
 
     /// <summary>
-    /// This function adds the specified item inthe soonest open slot in the inventory.
+    /// This function adds an item to the users inventory and stacks it if possible.
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <returns>A boolean indicating whether or not the item was added successfully.</returns>
     bool addItem(Item item)
     {
-        Debug.Log("Added");
+        if (item.stackable)
+        {
+            Debug.Log("Stackable");
+            for(int i = 0; i < this.items.Count; i++)
+            {
+                if(item.itemName == (this.items[i].itemName))
+                {
+                    Debug.Log("Match");
+                    this.items[i].itemCount++;
+                    return true;
+                }
+            }
+            return this.addItemInEmptySlot(item);
+        }
+        else
+        {
+            return this.addItemInEmptySlot(item);
+        }
+    }
+
+
+    /// <summary>
+    /// This function adds the specified item in the soonest open slot in the inventory.
+    /// </summary>
+    /// <param name="item">The item to add.</param>
+    /// <returns>A boolean indicating whether or not the item was added successfully.</returns>
+    bool addItemInEmptySlot(Item item)
+    {
         for (int i = 0; i < this.items.Count; i++)
         {
             if(this.items[i].itemName == null)
             {
-                Debug.Log("Added");
                 this.items[i] = item;
                 this.slots[i].GetComponent<InventorySlot>().item = item;
                 item.enabled = false;
