@@ -29,15 +29,15 @@ public class MoveTowardsObject : MonoBehaviour {
     /// Runs once each frame and moves the object towards the player.
     /// </summary>
 	void Update () {
-        Debug.Log(this.GetComponent<Rigidbody>().velocity);
         if (Vector3.Distance(objectToMoveTowards.transform.position, this.transform.position) > 2) {
             Vector3 direction = (objectToMoveTowards.transform.position - this.transform.position);
             direction.y = 0;
             this.GetComponent<Rigidbody>().velocity += Vector3.ClampMagnitude((direction * velocity), .4f);
             Vector3 tempVelocity = new Vector3();
             tempVelocity = this.GetComponent<Rigidbody>().velocity;
-            Mathf.Clamp(tempVelocity.x, 0f, 3f);
+            tempVelocity.x = Mathf.Clamp(tempVelocity.x, -3f, 3f);
             this.GetComponent<Rigidbody>().velocity = tempVelocity;
+            Debug.Log(tempVelocity);
             Debug.Log(this.GetComponent<Rigidbody>().velocity);
         }
 	}
