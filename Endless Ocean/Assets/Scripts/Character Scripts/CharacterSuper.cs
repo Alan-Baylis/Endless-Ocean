@@ -33,6 +33,7 @@ public class CharacterSuper : MonoBehaviour {
     public Weapon weapon;
 
     // Stat variables
+    protected int maxHealth;
     protected int health;
     protected int attackSpeed;
     protected int energy;

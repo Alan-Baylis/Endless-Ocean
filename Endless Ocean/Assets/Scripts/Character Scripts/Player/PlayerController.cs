@@ -47,7 +47,8 @@ public class PlayerController : CharacterSuper
     {
         this.itemsMenu = GameObject.FindGameObjectWithTag("ItemsMenu");
         //Hide Menu at start.
-        this.itemsMenu.SetActive(false);
+        //COMMENTED THIS OUT FOR NOW, WAS BREAKING GAME
+        //this.itemsMenu.SetActive(false);
         this.weapon = this.weaponObject.GetComponentInChildren<Club>();
         //this.playerGrapple = this.AddComponent<Grapple>();
         //Retrieving components from the game objects this script is attatched to.

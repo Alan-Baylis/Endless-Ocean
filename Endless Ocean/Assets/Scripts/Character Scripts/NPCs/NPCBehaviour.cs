@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class NPCBehaviour : CharacterSuper
 {
 
-	// Use this for initialization
-	new void Start () {
+
+    //float healthbar above enemy
+    public Image healthBar;
+
+    // Use this for initialization
+    new void Start () {
+        // healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("HealthFG").GetComponent<Image>();
+
         base.Start();
     }
 	
@@ -44,11 +51,15 @@ public class NPCBehaviour : CharacterSuper
         if (col.gameObject.tag == "PlayerWeapon")
         {
             int damage = col.gameObject.GetComponent<Weapon>().getDamage();
-            Debug.Log("My health is now " + this.health + "and I took " + damage + "damage");
+            
             
             this.takeDamage(damage);
-            
-            if(health <= 0)
+            // Update health bar with new health
+            healthBar.fillAmount = (float)this.health / (float)this.maxHealth;
+
+            Debug.Log("My health is now " + this.health + "and I took " + damage + "damage");
+
+            if (health <= 0)
             {
                 Destroy(this.gameObject);
             }

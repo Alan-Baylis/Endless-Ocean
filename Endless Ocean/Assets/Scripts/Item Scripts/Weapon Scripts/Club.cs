@@ -12,7 +12,7 @@ public class Club : MeleeWeapon {
     void Start()
     {
         Debug.Log("Started");
-        base.damage = 5;
+        base.damage = 25;
         base.weaponAttackSpeed = 3f;
     }
 
