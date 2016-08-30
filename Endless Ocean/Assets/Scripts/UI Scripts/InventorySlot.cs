@@ -3,21 +3,18 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler, IDragHandler, IPointerDownHandler
+public class InventorySlot : Slot
 {
 
-    public Item item;
-    private Image itemImage;
     public int slotNumber;
-    public Inventory inventory;
+    Text itemCount;
 
-    private Text itemCount;
 
     /// <summary>
     /// This function runs when the user clicks on the slot.
     /// </summary>
     /// <param name="eventData">The event data from the click.</param>
-    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    public override void OnPointerClick(PointerEventData eventData)
     {
     }
 
@@ -27,12 +24,12 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerClickH
     /// It shows the tooltip for the item.
     /// </summary>
     /// <param name="eventData">The data from the mouse over.</param>
-    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+    public override void OnPointerEnter(PointerEventData eventData)
     {
         if(!this.isSlotEmpty())
         {
 
-            this.inventory.showToolTip(inventory.items[slotNumber]);
+            this.inventory.showToolTip(inventory.items[this.slotNumber]);
         }
     }
 
@@ -42,7 +39,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerClickH
     /// It hides the tooltip for the item.
     /// </summary>
     /// <param name="eventData">The data from the mouse over.</param>
-    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+    public override void OnPointerExit(PointerEventData eventData)
     {
         if (!this.isSlotEmpty())
         {
@@ -52,9 +49,11 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerClickH
 
     /// <summary>
     /// This function runs when an item is dragged.
+    /// 
+    /// Starts dragging the item from the slot.
     /// </summary>
     /// <param name="eventData">The data from the drag.</param>
-    void IDragHandler.OnDrag(PointerEventData eventData)
+    public override void OnDrag(PointerEventData eventData)
     {
         if (!this.isSlotEmpty())
         {
@@ -66,9 +65,11 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerClickH
 
     /// <summary>
     /// Runs when the player clicks on a slot.
+    /// 
+    /// Places an item in the slot if the player was dragging one.
     /// </summary>
     /// <param name="eventData">The data from the click.</param>
-    void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+    public override void OnPointerDown(PointerEventData eventData)
     {
         if (this.inventory.draggingItem)
         {

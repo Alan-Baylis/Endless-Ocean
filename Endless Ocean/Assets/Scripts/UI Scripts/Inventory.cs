@@ -71,6 +71,8 @@ public class Inventory : MonoBehaviour {
         this.addItem(tp2.GetComponent<Item>());
         GameObject tp3 = Instantiate(Resources.Load("Prefabs/Consumables/TestPotion")) as GameObject;
         this.addItem(tp3.GetComponent<Item>());
+        GameObject testHelmet = Instantiate(Resources.Load("Prefabs/Equipment/TestHelmet")) as GameObject;
+        this.addItem(testHelmet.GetComponent<Item>());
     }
 
     void Update()
@@ -82,7 +84,7 @@ public class Inventory : MonoBehaviour {
             //Offsetting mouse position so user is still able to click on inventory slots.
             draggedItemIcon.GetComponent<RectTransform>().position = new Vector3(position.x + 15, position.y - 15, position.z);
         }
-        if (Input.GetButtonDown("OpenInventory"))
+        if (Input.GetButtonDown("OpenItemsMenu"))
         {
             //Toggle showing the inventory.
             this.showInventory = !showInventory;
@@ -98,12 +100,10 @@ public class Inventory : MonoBehaviour {
     {
         if (item.stackable)
         {
-            Debug.Log("Stackable");
             for(int i = 0; i < this.items.Count; i++)
             {
                 if(item.itemName == (this.items[i].itemName))
                 {
-                    Debug.Log("Match");
                     this.items[i].itemCount++;
                     return true;
                 }

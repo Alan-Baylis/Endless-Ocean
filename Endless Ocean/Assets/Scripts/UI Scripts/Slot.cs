@@ -6,7 +6,7 @@ using System.Collections;
 public abstract class Slot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler, IDragHandler, IPointerDownHandler
 {
     public Item item;
-    private Image itemImage;
+    protected Image itemImage;
     public Inventory inventory;
 
     public abstract void OnDrag(PointerEventData eventData);
