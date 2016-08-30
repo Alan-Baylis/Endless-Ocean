@@ -155,7 +155,7 @@ public class PlayerController : CharacterSuper
     void OnTriggerEnter(Collider col)
     {
         // When player collides DeathFromfalling gameObject (fall down hole)
-        if (col.gameObject.name == "DeathFromFalling")
+        if (col.gameObject.tag == "DeathCollider")
         {
             Application.LoadLevel(Application.loadedLevel);
         }

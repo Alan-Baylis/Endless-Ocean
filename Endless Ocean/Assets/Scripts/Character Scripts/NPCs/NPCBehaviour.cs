@@ -43,7 +43,7 @@ public class NPCBehaviour : CharacterSuper
     void OnTriggerEnter(Collider col)
     {
         // When enemy collides DeathFromfalling gameObject (fall down hole)
-        if (col.gameObject.name == "DeathFromFalling")
+        if (col.gameObject.tag == "DeathCollider")
         {
             Destroy(this.gameObject);
         }

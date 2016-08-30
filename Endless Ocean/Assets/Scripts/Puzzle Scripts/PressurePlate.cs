@@ -37,7 +37,7 @@ public class PressurePlate : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.name == "Box" || col.gameObject.name == "Character")
+        if (col.gameObject.tag == "WeightCube" || col.gameObject.tag == "Player")
         {
             pressurePlateDown = true;
         }
