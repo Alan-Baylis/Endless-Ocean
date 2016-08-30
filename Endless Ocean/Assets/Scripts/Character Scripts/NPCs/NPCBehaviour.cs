@@ -51,12 +51,13 @@ public class NPCBehaviour : CharacterSuper
         if (col.gameObject.tag == "PlayerWeapon")
         {
             int damage = col.gameObject.GetComponent<Weapon>().getDamage();
+            int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
             
             
-            this.takeDamage(damage);
+            this.takeDamage(damage,col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
             // Update health bar with new health
             healthBar.fillAmount = (float)this.health / (float)this.maxHealth;
-
+            
             Debug.Log("My health is now " + this.health + "and I took " + damage + "damage");
 
             if (health <= 0)

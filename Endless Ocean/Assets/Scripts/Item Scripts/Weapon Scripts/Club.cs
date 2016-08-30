@@ -14,6 +14,7 @@ public class Club : MeleeWeapon {
         Debug.Log("Started");
         base.damage = 25;
         base.weaponAttackSpeed = 3f;
+        base.knockBack = 250;
     }
 
     void FixedUpdate()

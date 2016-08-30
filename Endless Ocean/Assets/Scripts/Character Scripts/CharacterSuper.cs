@@ -8,7 +8,7 @@ public class CharacterSuper : MonoBehaviour {
     protected bool facingRight;
 
     //Character Mesh Components.
-    protected Rigidbody rigidbody;
+    public Rigidbody rigidbody;
     protected Animator animator;
 
     #region Jumping Variables
@@ -116,9 +116,14 @@ public class CharacterSuper : MonoBehaviour {
 
     }
 
-    protected void takeDamage(int damage)
+    protected void takeDamage(int damage, Vector3 source, int knockBack)
     {
         this.health -= damage;
+
+        Vector3 direction = transform.position - source;
+        direction.Normalize();
+
+        this.rigidbody.AddForce(direction * knockBack);
 
         if(this.health <= 0)
         {

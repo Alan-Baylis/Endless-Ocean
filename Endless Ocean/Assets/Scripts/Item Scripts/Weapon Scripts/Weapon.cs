@@ -15,6 +15,7 @@ public abstract class Weapon: Item{
     public LayerMask enemyLayerMask;
     
     public int damage;
+    public int knockBack;
     protected float qualityModifier;
 
     //Firerate of the gun.
@@ -44,5 +45,10 @@ public abstract class Weapon: Item{
     public int getDamage()
     {
         return damage;
+    }
+
+    public int getKnockBack()
+    {
+        return knockBack;
     }
 }
