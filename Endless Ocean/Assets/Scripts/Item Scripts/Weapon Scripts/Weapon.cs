@@ -16,6 +16,8 @@ public abstract class Weapon: Item{
     
     public int damage;
     public int knockBack;
+    public int energyCost;
+
     protected float qualityModifier;
 
     //Firerate of the gun.

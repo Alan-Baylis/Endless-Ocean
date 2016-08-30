@@ -36,7 +36,6 @@ public class CharacterSuper : MonoBehaviour {
     protected int maxHealth;
     protected int health;
     protected int attackSpeed;
-    protected int energy;
     protected bool alive;
 
     //Objects used for getting interface references.

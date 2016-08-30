@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : CharacterSuper
 {
+    // Player HUD elements
+    public Image playerHealthBar;
+    public Image playerEnergyBar;
+
     //Other game objects.
     public CameraController playerCameraController;
 
@@ -37,14 +42,32 @@ public class PlayerController : CharacterSuper
     //VARIABLES USED FOR ATTACKING
     private float attack;
     private float attackSpeed;
-
     private float nextMelee;
+
+    // ENERGY RELATED VARIABLES
+    private int energy;
+    private int maxEnergy;
+    // How often energy regens
+    private float energyRegenSpeed = 0.1f;
+    // How much energy regens each tick
+    private int regenAmount = 2;
+    // Pentalty timer for when energy reaches 0
+    private int penaltyTimer = 0;
+    // When pentaltyTimer reaches this value, penalty period is over
+    private int pentaltyLength = 25;
 
     #endregion
 
     // Use this for initialization
     void Start()
     {
+        // Set health
+        this.health = 100;
+        this.maxHealth = 100;
+        // Set energy
+        this.energy = 100;
+        this.maxEnergy = 100;
+
         this.itemsMenu = GameObject.FindGameObjectWithTag("ItemsMenu");
         //Hide Menu at start.
         //COMMENTED THIS OUT FOR NOW, WAS BREAKING GAME
@@ -59,17 +82,39 @@ public class PlayerController : CharacterSuper
         this.energy = 100;
         this.nextMelee = 0.0f;
         this.attackSpeed = 0.2f;
+
+        // Energy regeneration, invoke repeating method
+        InvokeRepeating("RegenEnergy", energyRegenSpeed, energyRegenSpeed);
     }
 
+    /// <summary>
+    /// Used to regenerate the player's energy reserves over time
+    /// </summary>
+    private void RegenEnergy()
+    {
+        if(this.energy == 0 && penaltyTimer < pentaltyLength)
+        {
+            penaltyTimer += 1;
+        }
+        else if (this.energy < 100)
+        {
+            penaltyTimer = 0;
+            this.energy += regenAmount;
+            this.playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
+
+        }
+    }
     /// <summary>
     /// Runs before every frame. Performs physics calculates for game objects to be displayed when the next frame is rendered and updates the animator.
     /// </summary>
     void FixedUpdate()
     {
-        if(this.energy < 100)
+        if(this.health <= 0)
         {
-            this.energy += 1;
+            Application.LoadLevel(Application.loadedLevel);
         }
+
+
         if (Input.GetButtonDown("OpenItemsMenu"))
         {
             itemsMenu.SetActive(!itemsMenu.activeInHierarchy);
@@ -79,7 +124,16 @@ public class PlayerController : CharacterSuper
             nextMelee = Time.time + attackSpeed;
             if (this.energy > 0)
             {
-                this.energy -= 1;
+                if ( this.energy - weapon.energyCost < 0)
+                {
+                    this.energy = 0;
+                }
+                else
+                {
+                    this.energy -= weapon.energyCost;
+                }
+
+                this.playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
                 this.animator.SetTrigger("MeleeAttackTrigger");
                 //this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
             }
@@ -157,7 +211,21 @@ public class PlayerController : CharacterSuper
         // When player collides DeathFromfalling gameObject (fall down hole)
         if (col.gameObject.tag == "DeathCollider")
         {
-            Application.LoadLevel(Application.loadedLevel);
+            health = 0;
+        }
+        // When player is hit with an enemy weapon
+        if (col.gameObject.tag == "EnemyWeapon")
+        {
+            // Temporary. Enemies should use weapons just like player (similar to how this is done in the enemy onTriggerEnter method
+            int damage = 35;
+            int knockBack = 5;
+            Vector3 test = new Vector3(1, 1, 1);
+
+            this.takeDamage(damage, test, knockBack);
+            // Update health bar with new health
+            playerHealthBar.fillAmount = (float)this.health / (float)this.maxHealth;
+
+            Debug.Log("Player: My health is now " + this.health + "and I took " + damage + "damage");
         }
     }
 }
