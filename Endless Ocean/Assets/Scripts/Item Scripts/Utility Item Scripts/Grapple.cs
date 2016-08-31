@@ -41,7 +41,7 @@ public class Grapple: MonoBehaviour
     private const float LINEAR_LIMIT_DAMPER = 100f;
 
     private const float OBJECT_PULL_SPEED = .1f;
-    MoveTowardsObject otherObjectMover;
+    MoveTowardsObjectGradually otherObjectMover;
 
     public Rigidbody playerRigidbody;
     public CameraController playerCameraController;
@@ -209,8 +209,8 @@ public class Grapple: MonoBehaviour
     /// <param name="point">The point on the second rigibody to create the confiurable joint on.</param>
     public void creatingPullingRope(Rigidbody firstRigidbody, Rigidbody secondRigidbody, Vector3 point)
     {
-        this.otherObjectMover = secondRigidbody.gameObject.AddComponent<MoveTowardsObject>();
-        otherObjectMover.init(firstRigidbody.gameObject, Grapple.OBJECT_PULL_SPEED, this);
+        this.otherObjectMover = secondRigidbody.gameObject.AddComponent<MoveTowardsObjectGradually>();
+        otherObjectMover.init(firstRigidbody.gameObject, Grapple.OBJECT_PULL_SPEED, false, 3);
         //ConfigurableJoint grappleJoint = firstRigidbody.gameObject.AddComponent<ConfigurableJoint>();
         ////Setting movement restrictions on joint.
         //grappleJoint.autoConfigureConnectedAnchor = false;

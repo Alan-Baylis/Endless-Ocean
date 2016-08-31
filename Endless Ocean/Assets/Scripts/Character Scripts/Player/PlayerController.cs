@@ -15,6 +15,9 @@ public class PlayerController : CharacterSuper
     public Weapon weapon;
     public Grapple grapple;
 
+    public int totalExperience;
+    public int totalTreasure;
+
     //A boolean indicating if the player is using an item that effects their movement.
     bool usingItem;
 

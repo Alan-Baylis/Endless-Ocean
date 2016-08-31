@@ -62,9 +62,30 @@ public class NPCBehaviour : CharacterSuper
 
             if (health <= 0)
             {
-                Destroy(this.gameObject);
+                this.die();
             }
         }
 
+    }
+
+    /// <summary>
+    /// Kills the NPC and makes them drop exp, treasure and equipment.
+    /// </summary>
+    public void die()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject expShere = Instantiate(Resources.Load("Prefabs/Environment/ExpSphere"), this.transform.position, this.transform.rotation) as GameObject;
+            expShere.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
+        }
+        System.Random treasureRandomizer = new System.Random();
+        int treasureMax = treasureRandomizer.Next(1, 10);
+        for(int i = 0; i < treasureMax; i++)
+        {
+            GameObject treasureObject = Instantiate(Resources.Load("Prefabs/Environment/Treasure"), this.transform.position, this.transform.rotation) as GameObject;
+            treasureObject.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
+        }
+
+        Destroy(this.gameObject);
     }
 }
