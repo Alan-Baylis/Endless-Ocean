@@ -27,11 +27,6 @@ public class EquipmentSlot: Slot
     /// <param name="eventData">The data from the mouse over.</param>
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        if (!this.isSlotEmpty())
-        {
-
-            this.equipment.showToolTip(this.equipment.equippedItems[bodypart]);
-        }
     }
 
     /// <summary>
@@ -42,10 +37,6 @@ public class EquipmentSlot: Slot
     /// <param name="eventData">The data from the mouse over.</param>
     public override void OnPointerExit(PointerEventData eventData)
     {
-        if (!this.isSlotEmpty())
-        {
-            this.equipment.hideToolTip();
-        }
     }
 
     /// <summary>

@@ -25,13 +25,4 @@ public class CharacterEquipment : MonoBehaviour {
 	
 	}
 
-    public void showToolTip(Item item)
-    {
-
-    }
-
-    public void hideToolTip()
-    {
-
-    }
 }

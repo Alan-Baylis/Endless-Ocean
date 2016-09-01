@@ -72,6 +72,7 @@ public class PlayerController : CharacterSuper
         this.maxEnergy = 100;
 
         this.itemsMenu = GameObject.FindGameObjectWithTag("ItemsMenu");
+        this.itemsMenu.SetActive(false);
         //Hide Menu at start.
         //COMMENTED THIS OUT FOR NOW, WAS BREAKING GAME
         //this.itemsMenu.SetActive(false);
