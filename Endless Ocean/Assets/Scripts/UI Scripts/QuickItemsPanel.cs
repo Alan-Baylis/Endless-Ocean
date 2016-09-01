@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class QuickItems : MonoBehaviour {
+public class QuickItemsPanel : MonoBehaviour {
 
     public Inventory inventory;
 
@@ -11,10 +11,11 @@ public class QuickItems : MonoBehaviour {
     private int numberOfQuickItems = 4;
 
     private static int INCREMENT = 62;
-    private static int X_STARTING_POSITION = -125;
+    private static int X_STARTING_POSITION = -93;
 
     // Use this for initialization
     void Start () {
+        this.inventory = GameObject.FindWithTag("Inventory").GetComponent<Inventory>();
 	    for(int i = 0; i < this.numberOfQuickItems; i++)
         {
             quickItems.Add(new Consumable());
@@ -23,10 +24,10 @@ public class QuickItems : MonoBehaviour {
             //Giving slot a name and number.
             instantiatedSlot.name = "Quick Item Slot " + i;
             instantiatedSlot.GetComponent<QuickItemSlot>().slotNumber = i;
-            instantiatedSlot.GetComponent<QuickItemSlot>().quickItems = this;
+            instantiatedSlot.GetComponent<QuickItemSlot>().quickItemsPanel = this;
             //Making slot child of parent canvas.
             instantiatedSlot.transform.parent = this.gameObject.transform;
-            instantiatedSlot.GetComponent<RectTransform>().localPosition = new Vector3(QuickItems.X_STARTING_POSITION + (i * QuickItems.INCREMENT), 0, 0);
+            instantiatedSlot.GetComponent<RectTransform>().localPosition = new Vector3(QuickItemsPanel.X_STARTING_POSITION + (i * QuickItemsPanel.INCREMENT), 0, 0);
         }
 	}
 	

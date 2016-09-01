@@ -56,8 +56,7 @@ public class Inventory : MonoBehaviour {
                 this.currentXlocation += Inventory.INCREMENT;
                 //Adding slot to inventory array.
                 this.slots.Add(instantiatedSlot);
-                slotCount++;
-            }
+                slotCount++;            }
             this.currentYLocation -= Inventory.INCREMENT;
             this.currentXlocation -= (Inventory.INCREMENT * 5);
         }

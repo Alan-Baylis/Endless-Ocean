@@ -100,18 +100,13 @@ public class InventorySlot : Slot
     // Update is called once per frame
     void Update()
     {
-        this.itemCount.enabled = false;
         //If this slot is holdin an item - show it.
         if (!this.isSlotEmpty())
         {
             this.itemImage.enabled = true;
             this.itemImage.sprite = this.inventory.items[this.slotNumber].itemIcon;
-            if (this.inventory.items[this.slotNumber].stackable)
-            {
-                
-                this.itemCount.enabled = true;
-                this.itemCount.text = "" + this.inventory.items[this.slotNumber].itemCount;
-            }
+            this.itemCount.enabled = true;
+            this.itemCount.text = "" + this.inventory.items[this.slotNumber].itemCount;
         }
         else
         {
