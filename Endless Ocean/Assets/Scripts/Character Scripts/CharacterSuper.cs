@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterSuper : MonoBehaviour {
+public abstract class CharacterSuper : MonoBehaviour {
 
     //Movement Variables 
     public float movementSpeed;
     protected bool facingRight;
 
     //Character Mesh Components.
-    public Rigidbody rigidbody;
+    new public Rigidbody rigidbody;
     protected Animator animator;
 
     #region Jumping Variables
@@ -35,12 +35,38 @@ public class CharacterSuper : MonoBehaviour {
     // Stat variables
     protected int maxHealth;
     protected int health;
-    protected int attackSpeed;
+    protected float attackSpeed;
     protected bool alive;
 
     //Objects used for getting interface references.
     public GameObject weaponObject;
+    
+    protected float nextMelee;
+
+    // ENERGY RELATED VARIABLES
+    protected int energy;
+    protected int maxEnergy;
+    // How often energy regens
+    protected float energyRegenSpeed = 0.1f;
+    // How much energy regens each tick
+    protected int regenAmount = 2;
+    // Pentalty timer for when energy reaches 0
+    protected int penaltyTimer = 0;
+    // When pentaltyTimer reaches this value, penalty period is over
+    protected int pentaltyLength = 25;
+    
     #endregion
+
+    #region Tools
+
+    #endregion
+
+
+    //A boolean indicating if the player is using an item that effects their movement.
+    protected bool usingItem;
+
+    //Character collider
+    public Collider col;
 
     // Use this for initialization
     protected void Start () {
@@ -110,10 +136,27 @@ public class CharacterSuper : MonoBehaviour {
     /// What happens when player collides with certain objects
     /// </summary>
     /// <param name="col">GameObject involved in collision</param>
-    void OnTriggerEnter(Collider col)
+    protected void OnTriggerEnter(Collider col)
     {
+        // When player collides DeathFromfalling gameObject (fall down hole)
+        if (col.gameObject.tag == "DeathCollider")
+        {
+            health = 0;
+        }
+        // When player is hit with an enemy weapon
+        if (col.gameObject.tag == "EnemyWeapon")
+        {
+            // Temporary. Enemies should use weapons just like player (similar to how this is done in the enemy onTriggerEnter method
+            int damage = 35;
+            int knockBack = 5;
+            Vector3 test = new Vector3(1, 1, 1);
 
+            this.takeDamage(damage, test, knockBack);
+        }
     }
+
+    protected abstract void updateHealthBar();
+    public abstract void die();
 
     protected void takeDamage(int damage, Vector3 source, int knockBack)
     {
@@ -126,7 +169,7 @@ public class CharacterSuper : MonoBehaviour {
 
         if(this.health <= 0)
         {
-            alive = false;
+            die();
         }
     }
 }
