@@ -43,7 +43,7 @@ public class PlayerController : CharacterSuper
         this.attackSpeed = 0.2f;
 
         this.itemsMenu = GameObject.FindGameObjectWithTag("ItemsMenu");
-        this.itemsMenu.SetActive(false);
+        ///this.itemsMenu.SetActive(false);
         //Hide Menu at start.
         //COMMENTED THIS OUT FOR NOW, WAS BREAKING GAME
         //this.itemsMenu.SetActive(false);
