@@ -15,8 +15,10 @@ public class EnemyAI : NPCBehaviour
 	new void Start () {
         this.health = 100;
         this.maxHealth = 100;
+
         base.Start();
 
+        base.fears = "PlayerWeapon";
 
         this.weapon = this.weaponObject.GetComponentInChildren<Pistol>();
     }
@@ -48,6 +50,6 @@ public class EnemyAI : NPCBehaviour
 
     protected override void updateHealthBar()
     {
-        
+        healthBar.fillAmount = (float)this.health / (float)this.maxHealth;
     }
 }

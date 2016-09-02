@@ -11,6 +11,8 @@ public abstract class CharacterSuper : MonoBehaviour {
     new public Rigidbody rigidbody;
     protected Animator animator;
 
+    protected string fears = "Nothing";
+
     #region Jumping Variables
     //VARIABLES USED FOR JUMPING
     //Bool that indicates whether or not the gameobject is touching the ground.
@@ -133,26 +135,31 @@ public abstract class CharacterSuper : MonoBehaviour {
     }
 
     /// <summary>
-    /// What happens when player collides with certain objects
+    /// What happens when character collides with certain objects
     /// </summary>
     /// <param name="col">GameObject involved in collision</param>
     protected void OnTriggerEnter(Collider col)
     {
-        // When player collides DeathFromfalling gameObject (fall down hole)
+        // When character collides DeathFromfalling gameObject (fall down hole)
         if (col.gameObject.tag == "DeathCollider")
         {
             health = 0;
         }
-        // When player is hit with an enemy weapon
-        if (col.gameObject.tag == "EnemyWeapon")
+        // When character is hit with an enemy weapon
+        if (col.gameObject.tag == fears)
         {
-            // Temporary. Enemies should use weapons just like player (similar to how this is done in the enemy onTriggerEnter method
-            int damage = 35;
-            int knockBack = 5;
+            int damage = col.gameObject.GetComponent<Weapon>().getDamage();
+            int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack(); ;
             Vector3 test = new Vector3(1, 1, 1);
 
             this.takeDamage(damage, test, knockBack);
+
+            if (health <= 0)
+            {
+                die();
+            }
         }
+        updateHealthBar();
     }
 
     protected abstract void updateHealthBar();

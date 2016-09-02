@@ -28,6 +28,8 @@ public class PlayerController : CharacterSuper
     {
         base.Start();
 
+        base.fears = "EnemyWeapon";
+
         // Set health
         this.health = 100;
         this.maxHealth = 100;
