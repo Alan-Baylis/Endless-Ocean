@@ -46,6 +46,6 @@ public class PressurePlate : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-            pressurePlateDown = false;
+         pressurePlateDown = false;
     }
 }

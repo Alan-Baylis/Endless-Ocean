@@ -15,7 +15,7 @@ public class QuickItemsPanel : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        this.inventory = GameObject.FindWithTag("Inventory").GetComponent<Inventory>();
+        //this.inventory = GameObject.FindWithTag("Inventory").GetComponent<Inventory>();
 	    for(int i = 0; i < this.numberOfQuickItems; i++)
         {
             quickItems.Add(new Consumable());
