@@ -1,0 +1,53 @@
+# Blender MTL File: 'cryochamberBroken.blend'
+# Material Count: 5
+
+newmtl Glass
+Ns 96.078431
+Ka 0.100000 0.100000 0.100000
+Kd 0.723055 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 1.446110 2.000000 2.000000
+Ni 1.300000
+d 0.903030
+illum 6
+
+newmtl Metal
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\lance_000\\Desktop\\shiny-grey-metal-seamless-texture-light-steel-chrome-material-hard-smooth-design-surface-256x256.jpg
+
+newmtl None
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+
+newmtl Pipe
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\lance_000\\Desktop\\pipeseamless.png
+
+newmtl Terminal
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\lance_000\\Desktop\\terminal texture.png
