@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class EnemyAI : NPCBehaviour
 {
@@ -15,7 +16,10 @@ public class EnemyAI : NPCBehaviour
         this.health = 100;
         this.maxHealth = 100;
         base.Start();
-	}
+
+
+        this.weapon = this.weaponObject.GetComponentInChildren<Pistol>();
+    }
 	
 	// Update is called once per frame
 	new void Update () {
@@ -30,7 +34,7 @@ public class EnemyAI : NPCBehaviour
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
         {
             
-            if (Vector3.Distance(transform.position, target.position) >= attackRange)
+            if (Vector3.Distance(transform.position, target.position) <= attackRange)
             {
                 //move towards player   
                 pathToLocation(target.position);
@@ -40,5 +44,10 @@ public class EnemyAI : NPCBehaviour
             }
 
         }
+    }
+
+    protected override void updateHealthBar()
+    {
+        
     }
 }

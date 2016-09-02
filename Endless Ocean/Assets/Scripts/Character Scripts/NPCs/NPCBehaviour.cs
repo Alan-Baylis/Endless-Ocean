@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 
-public class NPCBehaviour : CharacterSuper
+public abstract class NPCBehaviour : CharacterSuper
 {
 
 
@@ -37,41 +37,9 @@ public class NPCBehaviour : CharacterSuper
     }
 
     /// <summary>
-    /// What happens when enemy collides with certain objects
-    /// </summary>
-    /// <param name="col">GameObject involved in collision</param>
-    void OnTriggerEnter(Collider col)
-    {
-        // When enemy collides DeathFromfalling gameObject (fall down hole)
-        if (col.gameObject.tag == "DeathCollider")
-        {
-            Destroy(this.gameObject);
-        }
-        // When enemy is hit with a player weapon
-        if (col.gameObject.tag == "PlayerWeapon")
-        {
-            int damage = col.gameObject.GetComponent<Weapon>().getDamage();
-            int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
-            
-            
-            this.takeDamage(damage,col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
-            // Update health bar with new health
-            healthBar.fillAmount = (float)this.health / (float)this.maxHealth;
-            
-            Debug.Log("My health is now " + this.health + "and I took " + damage + "damage");
-
-            if (health <= 0)
-            {
-                this.die();
-            }
-        }
-
-    }
-
-    /// <summary>
     /// Kills the NPC and makes them drop exp, treasure and equipment.
     /// </summary>
-    public void die()
+    public override void die()
     {
         for (int i = 0; i < 3; i++)
         {
