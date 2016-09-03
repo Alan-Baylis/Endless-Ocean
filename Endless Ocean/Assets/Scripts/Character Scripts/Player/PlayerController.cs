@@ -5,6 +5,9 @@ using System;
 
 public class PlayerController : CharacterSuper
 {
+    // Player's second weapon
+    public Weapon weaponSecond;
+
     // Player HUD elements
     public Image playerHealthBar;
     public Image playerEnergyBar;
@@ -21,26 +24,34 @@ public class PlayerController : CharacterSuper
     //Reference to the items menu UI element.
     private GameObject itemsMenu;
 
-
+    // ENERGY RELATED VARIABLES
+    protected int energy;
+    protected int maxEnergy;
+    // How often energy regens
+    protected float energyRegenSpeed = 0.1f;
+    // How much energy regens each tick
+    protected int regenAmount = 2;
+    // Pentalty timer for when energy reaches 0
+    protected int penaltyTimer = 0;
+    // When pentaltyTimer reaches this value, penalty period is over
+    protected int pentaltyLength = 25;
 
     // Use this for initialization
     new void Start()
     {
         base.Start();
 
+        // Assign objects that damage this character upon collision
         base.fears = "EnemyWeapon";
 
         // Set health
         this.health = 100;
         this.maxHealth = 100;
 
-        // Set energy
+        // Set energy and attack variables
         this.energy = 100;
         this.maxEnergy = 100;
-
-
         this.nextMelee = 0.0f;
-        this.attackSpeed = 0.2f;
 
         this.itemsMenu = GameObject.FindGameObjectWithTag("ItemsMenu");
         ///this.itemsMenu.SetActive(false);
@@ -50,12 +61,20 @@ public class PlayerController : CharacterSuper
 
         //this.utilityItem = this.utilityItem.GetComponent<UtilityItem>();
 
-        this.weapon = this.weaponObject.GetComponentInChildren<Club>();
+        // Get weapon mount location
+        weaponMount = GameObject.Find("Player/Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/WeaponMount");
+
+        this.weapon = this.weaponObject.GetComponentInChildren<Pistol>();
+        // TODO: Having trouble added the string path below in the load to each weapon, like club or pistol. This is a refernece to the mesh model
+        // The problem is if you put a shared variable in the super class weapon, that can only be assigned AFTER the object is instantiated
+        // The line below needs the path to the model to instantiate it. Will look into this later, but if you guys have ideas, feel free
+
+        // This is the code that will go in the method where we drag/drop our weapons in, btw, Fraser.
+        GameObject weapon = Instantiate(Resources.Load("Prefabs/Weapons/Medieval Sward"),weaponMount.transform.position,weaponMount.transform.rotation) as GameObject;
+        weapon.transform.parent = weaponMount.transform;
+
 
         //this.playerGrapple = this.AddComponent<Grapple>();
-        //Retrieving components from the game objects this script is attatched to.
-        this.rigidbody = this.GetComponent<Rigidbody>();
-        this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
         this.usingItem = false;
 
@@ -68,18 +87,19 @@ public class PlayerController : CharacterSuper
     /// </summary>
     private void RegenEnergy()
     {
-        if(base.energy == 0 && base.penaltyTimer < base.pentaltyLength)
+        if(this.energy == 0 && this.penaltyTimer < this.pentaltyLength)
         {
-            base.penaltyTimer += 1;
+            this.penaltyTimer += 1;
         }
-        else if (base.energy < 100)
+        else if (this.energy < 100)
         {
-            base.penaltyTimer = 0;
+            this.penaltyTimer = 0;
             energy += regenAmount;
             playerEnergyBar.fillAmount = (float)energy / (float)maxEnergy;
 
         }
     }
+
     /// <summary>
     /// Runs before every frame. Performs physics calculates for game objects to be displayed when the next frame is rendered and updates the animator.
     /// </summary>
@@ -90,14 +110,15 @@ public class PlayerController : CharacterSuper
             die();
         }
 
-
+        // Button events
         if (Input.GetButtonDown("OpenItemsMenu"))
         {
             itemsMenu.SetActive(!itemsMenu.activeInHierarchy);
         }
+        // Weapon event
         if (Input.GetAxis("Fire 1") > 0 && nextMelee < Time.time)
         {
-            nextMelee = Time.time + attackSpeed;
+            nextMelee = Time.time + weapon.getAttackSpeed();
             if (energy > 0)
             {
                 if ( energy - weapon.energyCost < 0)

@@ -6,18 +6,35 @@ using System.Collections;
 /// </summary>
 public class Bullet : MonoBehaviour { 
 
-    public float damage;
+    public int damage;
     public float speed;
+    public int knockBack;
 
 
 	// Use this for initialization
 	void Start () {
         this.GetComponent<Rigidbody>().velocity = transform.forward * speed;
-        Destroy(this.gameObject, 8f);
+        Destroy(this.gameObject, 25f);
     }
 	
 	// Update is called once per frame
 	void Update () {
 	    
 	}
-}
+
+    public int getDamage()
+    {
+        return damage;
+    }
+
+    public int getKnockBack()
+    {
+        return knockBack;
+    }
+
+    protected void OnTriggerEnter(Collider col)
+    {
+        Destroy(this.gameObject);
+    }
+
+    }

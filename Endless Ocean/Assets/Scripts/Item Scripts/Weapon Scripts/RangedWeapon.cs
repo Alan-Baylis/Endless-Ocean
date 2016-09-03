@@ -11,6 +11,4 @@ public abstract class RangedWeapon : Weapon {
 
     //May not be necessary.
     abstract public void reload();
-
-
 }

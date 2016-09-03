@@ -7,9 +7,9 @@ public class Pistol : RangedWeapon  {
 
     public void Start()
     {
-        base.damage = 3;
-        base.weaponAttackSpeed = 3f;
-        base.projectileSpeed = 20f;
+        base.weaponAttackSpeed = 0.5f;
+        base.projectileSpeed = 30f;
+        this.knockBack = 300;
     }
 
     /// <summary>
@@ -19,14 +19,11 @@ public class Pistol : RangedWeapon  {
     /// <param name="mousePositionInWorldCoords">The mouse position in the game which is the direction the bullet will travel.</param>
     override public void attack(float playerDamage, Vector3 mousePositionInWorldCoords)
     {
-        if (Time.time > base.weaponNextAttack)
-        {
-            base.weaponNextAttack = Time.time + base.weaponAttackSpeed;
-            GameObject bullet = base.getBulletPrefab();
-            bullet.GetComponent<Bullet>().damage = base.damage + playerDamage;
-            bullet.GetComponent<Bullet>().speed = base.projectileSpeed;
-            bullet.transform.LookAt(mousePositionInWorldCoords);
-        }
+        GameObject bullet = base.getBulletPrefab();
+        bullet.GetComponent<Bullet>().speed = base.projectileSpeed;
+        bullet.GetComponent<Bullet>().damage = base.damage;
+        bullet.GetComponent<Bullet>().knockBack = this.knockBack;
+        bullet.transform.LookAt(mousePositionInWorldCoords);
     }
 
     override public void reload()

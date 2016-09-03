@@ -11,9 +11,10 @@ using System.Collections;
 /// </summary>
 public abstract class Weapon: Item{
 
+    // Path to weapon model
+    public string modelPath;
 
-    public LayerMask enemyLayerMask;
-    
+    // Attack variables
     public int damage;
     public int knockBack;
     public int energyCost;
@@ -21,8 +22,7 @@ public abstract class Weapon: Item{
     protected float qualityModifier;
 
     //Firerate of the gun.
-    protected float weaponAttackSpeed;
-    protected float weaponNextAttack;
+    public float weaponAttackSpeed;
 
     /// <summary>
     /// This function will be called when the player left clicks with a weapon. It handles animation the attack and instianting the bullets for each weapon.
@@ -40,7 +40,7 @@ public abstract class Weapon: Item{
     /// <returns>A bullet prefab at the specified position.</returns>
     protected GameObject getBulletPrefab()
     {
-        GameObject bullet = Instantiate(Resources.Load("Prefabs/Weapons/Bullet"), this.transform.position, this.transform.rotation) as GameObject;
+        GameObject bullet = Instantiate(Resources.Load("Prefabs/Weapons/PlayerBullet"), this.transform.position, this.transform.rotation) as GameObject;
         return bullet;
     }  
 
@@ -52,5 +52,10 @@ public abstract class Weapon: Item{
     public int getKnockBack()
     {
         return knockBack;
+    }
+
+    public float getAttackSpeed()
+    {
+        return weaponAttackSpeed;
     }
 }

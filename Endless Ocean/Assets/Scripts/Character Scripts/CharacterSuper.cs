@@ -3,6 +3,9 @@ using System.Collections;
 
 public abstract class CharacterSuper : MonoBehaviour {
 
+    // Mount where weapon is attached to
+    public GameObject weaponMount;
+
     //Movement Variables 
     public float movementSpeed;
     protected bool facingRight;
@@ -11,6 +14,7 @@ public abstract class CharacterSuper : MonoBehaviour {
     new public Rigidbody rigidbody;
     protected Animator animator;
 
+    // Those objects which, upon collision, can damage this instance of character
     protected string fears = "Nothing";
 
     #region Jumping Variables
@@ -37,25 +41,11 @@ public abstract class CharacterSuper : MonoBehaviour {
     // Stat variables
     protected int maxHealth;
     protected int health;
-    protected float attackSpeed;
-    protected bool alive;
 
     //Objects used for getting interface references.
     public GameObject weaponObject;
     
     protected float nextMelee;
-
-    // ENERGY RELATED VARIABLES
-    protected int energy;
-    protected int maxEnergy;
-    // How often energy regens
-    protected float energyRegenSpeed = 0.1f;
-    // How much energy regens each tick
-    protected int regenAmount = 2;
-    // Pentalty timer for when energy reaches 0
-    protected int penaltyTimer = 0;
-    // When pentaltyTimer reaches this value, penalty period is over
-    protected int pentaltyLength = 25;
     
     #endregion
 
@@ -75,9 +65,8 @@ public abstract class CharacterSuper : MonoBehaviour {
         this.weapon = this.weaponObject.GetComponent<Weapon>();
         //Retrieving components from the game objects this script is attatched to.
         this.rigidbody = this.GetComponent<Rigidbody>();
-        //this.animator = this.GetComponent<Animator>();
+        this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
-        this.alive = true;
     }
 	
 	// Update is called once per frame
@@ -145,19 +134,21 @@ public abstract class CharacterSuper : MonoBehaviour {
         {
             health = 0;
         }
+        // If the thing hitting the character is a projectile
+        else if(col.gameObject.tag == "PlayerProjectile")
+        {
+            int damage = col.gameObject.GetComponent<Bullet>().getDamage();
+            int knockBack = col.gameObject.GetComponent<Bullet>().getKnockBack();
+
+            this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+        }
         // When character is hit with an enemy weapon
-        if (col.gameObject.tag == fears)
+        else if (col.gameObject.tag == fears)
         {
             int damage = col.gameObject.GetComponent<Weapon>().getDamage();
-            int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack(); ;
-            Vector3 test = new Vector3(1, 1, 1);
+            int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
 
-            this.takeDamage(damage, test, knockBack);
-
-            if (health <= 0)
-            {
-                die();
-            }
+            this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
         }
         updateHealthBar();
     }
@@ -168,6 +159,8 @@ public abstract class CharacterSuper : MonoBehaviour {
     protected void takeDamage(int damage, Vector3 source, int knockBack)
     {
         this.health -= damage;
+
+        //Debug.Log("I took "+damage+" damage, now my health is "+this.health +"out of a possible "+maxHealth);
 
         Vector3 direction = transform.position - source;
         direction.Normalize();

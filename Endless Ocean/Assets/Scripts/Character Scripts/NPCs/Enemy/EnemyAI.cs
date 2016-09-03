@@ -18,6 +18,7 @@ public class EnemyAI : NPCBehaviour
 
         base.Start();
 
+        // Assign objects that damage this character upon collision
         base.fears = "PlayerWeapon";
 
         this.weapon = this.weaponObject.GetComponentInChildren<Pistol>();
