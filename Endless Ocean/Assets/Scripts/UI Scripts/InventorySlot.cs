@@ -26,7 +26,7 @@ public class InventorySlot : Slot
     /// <param name="eventData">The data from the mouse over.</param>
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        if(!this.isSlotEmpty())
+        if (!this.isSlotEmpty())
         {
 
             this.inventory.showToolTip(inventory.items[this.slotNumber]);
@@ -55,6 +55,10 @@ public class InventorySlot : Slot
     /// <param name="eventData">The data from the drag.</param>
     public override void OnDrag(PointerEventData eventData)
     {
+        if (this.inventory.draggingItem)
+        {
+            return;
+        }
         if (!this.isSlotEmpty())
         {
             this.itemCount.enabled = false;
@@ -100,13 +104,17 @@ public class InventorySlot : Slot
     // Update is called once per frame
     void Update()
     {
+        this.itemCount.enabled = false;
         //If this slot is holdin an item - show it.
         if (!this.isSlotEmpty())
         {
             this.itemImage.enabled = true;
             this.itemImage.sprite = this.inventory.items[this.slotNumber].itemIcon;
-            this.itemCount.enabled = true;
-            this.itemCount.text = "" + this.inventory.items[this.slotNumber].itemCount;
+            if (this.inventory.items[slotNumber].stackable)
+            {
+                this.itemCount.enabled = true;
+                this.itemCount.text = "" + this.inventory.items[this.slotNumber].itemCount;
+            }
         }
         else
         {

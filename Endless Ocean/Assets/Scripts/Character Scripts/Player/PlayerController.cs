@@ -22,7 +22,7 @@ public class PlayerController : CharacterSuper
     public int totalTreasure;
 
     //Reference to the items menu UI element.
-    private GameObject itemsMenu;
+    public GameObject itemsMenu;
 
     // ENERGY RELATED VARIABLES
     protected int energy;
@@ -35,6 +35,7 @@ public class PlayerController : CharacterSuper
     protected int penaltyTimer = 0;
     // When pentaltyTimer reaches this value, penalty period is over
     protected int pentaltyLength = 25;
+
 
     // Use this for initialization
     new void Start()
@@ -52,9 +53,7 @@ public class PlayerController : CharacterSuper
         this.energy = 100;
         this.maxEnergy = 100;
         this.nextMelee = 0.0f;
-
-        this.itemsMenu = GameObject.FindGameObjectWithTag("ItemsMenu");
-        ///this.itemsMenu.SetActive(false);
+        this.itemsMenu.SetActive(false);
         //Hide Menu at start.
         //COMMENTED THIS OUT FOR NOW, WAS BREAKING GAME
         //this.itemsMenu.SetActive(false);

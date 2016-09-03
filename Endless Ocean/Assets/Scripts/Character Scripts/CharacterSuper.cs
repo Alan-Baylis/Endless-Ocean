@@ -20,7 +20,7 @@ public abstract class CharacterSuper : MonoBehaviour {
     #region Jumping Variables
     //VARIABLES USED FOR JUMPING
     //Bool that indicates whether or not the gameobject is touching the ground.
-    protected bool onGround = true;
+    public bool onGround = true;
     //An array that contains the collision objects that the circle collides with when jumping.
     protected Collider[] groundCollisions;
     //The radius of the cirle to check for objects in the ground layer when jumping.
