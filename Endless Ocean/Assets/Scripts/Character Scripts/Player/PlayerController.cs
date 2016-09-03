@@ -63,7 +63,7 @@ public class PlayerController : CharacterSuper
         // Get weapon mount location
         weaponMount = GameObject.Find("Player/Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/WeaponMount");
 
-        this.weapon = this.weaponObject.GetComponentInChildren<Pistol>();
+        this.weapon = this.weaponObject.GetComponentInChildren<Club>();
         // TODO: Having trouble added the string path below in the load to each weapon, like club or pistol. This is a refernece to the mesh model
         // The problem is if you put a shared variable in the super class weapon, that can only be assigned AFTER the object is instantiated
         // The line below needs the path to the model to instantiate it. Will look into this later, but if you guys have ideas, feel free

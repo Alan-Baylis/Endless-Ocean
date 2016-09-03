@@ -129,6 +129,9 @@ public abstract class CharacterSuper : MonoBehaviour {
     /// <param name="col">GameObject involved in collision</param>
     protected void OnTriggerEnter(Collider col)
     {
+        Animator animController = col.transform.root.GetComponent<Animator>();
+        int attackState = Animator.StringToHash("Attack Layer.Melee Attack");
+
         // When character collides DeathFromfalling gameObject (fall down hole)
         if (col.gameObject.tag == "DeathCollider")
         {
@@ -148,7 +151,12 @@ public abstract class CharacterSuper : MonoBehaviour {
             int damage = col.gameObject.GetComponent<Weapon>().getDamage();
             int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
 
-            this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+
+            if (animController.GetCurrentAnimatorStateInfo(1).IsName("Melee Attack"))
+            {
+                this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+            }
+            
         }
         updateHealthBar();
     }
