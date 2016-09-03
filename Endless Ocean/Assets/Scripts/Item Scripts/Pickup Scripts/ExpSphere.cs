@@ -16,7 +16,7 @@ public class ExpSphere : MonoBehaviour {
     /// <summary>
     /// Runs when the exp shere collides. If it collides with player it gives him exp.
     /// </summary>
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

@@ -41,8 +41,9 @@ public class Grapple: MonoBehaviour
     private const float MAX_GRAPPLING_SPEED = 5f;
     //The force the player can grapple with.
     private const float GRAPPLE_FORCE = 3f;
-    //Contant indicating max length of the rope.
+    //Contants restraining the length of the rope.
     private const float MAX_ROPE_LENGTH = 13f;
+    private const float MIN_ROPE_LENGTH = 4f;
 
     //Vars for drawing rope.
 
@@ -105,10 +106,13 @@ public class Grapple: MonoBehaviour
 
     void LateUpdate()
     {
-        if(this.grappling || this.pulling)
+        if (this.grappling)
         {
             this.drawRope(playerRigidbody.position, this.otherEnd);
-
+        }
+        else if (this.pulling)
+        {
+            this.drawRope(playerRigidbody.position, this.otherObject.position);
         }
     }
 
@@ -170,24 +174,34 @@ public class Grapple: MonoBehaviour
     /// <param name="playerRigidbody">The rigidbody of the player that the item might effect.</param>
     private void moveWhileGrappling(float horizontalMove, float verticalMove, bool onGround, Rigidbody playerRigidbody)
     {
-        if (horizontalMove != 0)
+        if (this.grappling)
         {
-
-            if (playerRigidbody.velocity.magnitude < Grapple.MAX_GRAPPLING_SPEED)
+            if (horizontalMove != 0)
             {
-                playerRigidbody.AddForce(new Vector3(horizontalMove * Grapple.GRAPPLE_FORCE, playerRigidbody.velocity.y, 0));
-                Mathf.Clamp(playerRigidbody.velocity.magnitude, 0f, Grapple.MAX_GRAPPLING_SPEED);
+
+                if (playerRigidbody.velocity.magnitude < Grapple.MAX_GRAPPLING_SPEED)
+                {
+                    playerRigidbody.AddForce(new Vector3(horizontalMove * Grapple.GRAPPLE_FORCE, playerRigidbody.velocity.y, 0));
+                    Mathf.Clamp(playerRigidbody.velocity.magnitude, 0f, Grapple.MAX_GRAPPLING_SPEED);
+                }
+            }
+            if (verticalMove > 0 || (verticalMove < 0 && !onGround))
+            {
+
+                SoftJointLimit grappleJointLimit = new SoftJointLimit();
+                this.ropeLength = this.ropeLength - (verticalMove * Grapple.ROPE_CHANGE_SPEED_MODIFIER);
+                this.ropeLength = Mathf.Clamp(this.ropeLength, Grapple.MIN_ROPE_LENGTH, Grapple.MAX_ROPE_LENGTH);
+                grappleJointLimit.limit = ropeLength;
+                grappleJoint.linearLimit = grappleJointLimit;
+                playerRigidbody.AddForce(new Vector3(0, verticalMove, 0));
             }
         }
-        if (verticalMove > 0 || (verticalMove < 0 && !onGround))
+        else if (this.pulling)
         {
+            if (Vector3.Distance(this.otherObject.position, this.playerRigidbody.position) < 5)
+            {
 
-            SoftJointLimit grappleJointLimit = new SoftJointLimit();
-            this.ropeLength = this.ropeLength - (verticalMove * Grapple.ROPE_CHANGE_SPEED_MODIFIER);
-            this.ropeLength = Mathf.Clamp(this.ropeLength, 0f, Grapple.MAX_ROPE_LENGTH);
-            grappleJointLimit.limit = ropeLength;
-            grappleJoint.linearLimit = grappleJointLimit;
-            playerRigidbody.AddForce(new Vector3(0, verticalMove, 0));
+            }
         }
     }
     #endregion
@@ -202,7 +216,7 @@ public class Grapple: MonoBehaviour
     public void creatingPullingRope(Rigidbody firstRigidbody, Rigidbody secondRigidbody, Vector3 point)
     {
         this.otherObjectMover = secondRigidbody.gameObject.AddComponent<MoveTowardsObjectGradually>();
-        otherObjectMover.init(firstRigidbody.gameObject, Grapple.OBJECT_PULL_SPEED, false, 3);
+        otherObjectMover.init(firstRigidbody.gameObject, Grapple.OBJECT_PULL_SPEED, false, 6);
         //ConfigurableJoint grappleJoint = firstRigidbody.gameObject.AddComponent<ConfigurableJoint>();
         ////Setting movement restrictions on joint.
         //grappleJoint.autoConfigureConnectedAnchor = false;

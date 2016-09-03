@@ -5,21 +5,17 @@ public class Treasure : MonoBehaviour {
 
     private PlayerController player;
     
-
+    /// <summary>
+    /// Initalizes key variables.
+    /// </summary>
     void Start()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
-	void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            player.totalTreasure += 100;
-            Destroy(this.gameObject);
-        }
-    }
-
+    /// <summary>
+    /// Moves the object towards the player if it is close enough.
+    /// </summary>
     void Update()
     {
         if(Vector3.Distance(player.gameObject.transform.position, this.transform.position) < 6)
