@@ -18,4 +18,9 @@ public class Item : MonoBehaviour {
     public string description;
 
     public Sprite itemIcon;
+
+    public virtual bool quickItemEquipable
+    {
+        get { return false; }
+    }
 }

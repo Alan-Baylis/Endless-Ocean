@@ -8,6 +8,11 @@ public class Consumable : Item {
         get { return true; }
     }
 
+    public override bool quickItemEquipable
+    {
+        get { return true; }
+    }
+
     // Use this for initialization
     void Start () {
 	

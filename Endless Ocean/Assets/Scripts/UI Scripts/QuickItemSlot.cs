@@ -12,20 +12,18 @@ public class QuickItemSlot : Slot {
 
     public override void OnDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        this.quickItemsPanel = GameObject.FindWithTag("QuickItemsPanel").GetComponent<QuickItemsPanel>();
         if (this.inventory.draggingItem)
         {
-            if (this.inventory.draggedItem.GetType().ToString() == "Consumable") {
+            if (this.inventory.draggedItem.quickItemEquipable) {
                 Consumable tempConsumable = (Consumable)this.inventory.draggedItem;
                 if (!this.isSlotEmpty())
                 {
@@ -48,12 +46,10 @@ public class QuickItemSlot : Slot {
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        throw new NotImplementedException();
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        throw new NotImplementedException();
     }
 
     void Update()
@@ -63,12 +59,12 @@ public class QuickItemSlot : Slot {
         if (!this.isSlotEmpty())
         {
             this.itemImage.enabled = true;
-            this.itemImage.sprite = this.inventory.items[this.slotNumber].itemIcon;
-            if (this.inventory.items[this.slotNumber].stackable)
+            this.itemImage.sprite = this.quickItemsPanel.quickItems[this.slotNumber].itemIcon;
+            if (this.quickItemsPanel.quickItems[this.slotNumber].stackable)
             {
 
                 this.itemCount.enabled = true;
-                this.itemCount.text = "" + this.inventory.items[this.slotNumber].itemCount;
+                this.itemCount.text = "" + this.quickItemsPanel.quickItems[this.slotNumber].itemCount;
             }
         }
         else
@@ -79,6 +75,7 @@ public class QuickItemSlot : Slot {
 
     // Use this for initialization
     void Start () {
+        this.quickItemsPanel = GameObject.FindWithTag("QuickItemsPanel").GetComponent<QuickItemsPanel>();
         this.itemCount = this.gameObject.transform.GetChild(1).GetComponent<Text>();
         this.itemImage = this.GetComponentsInChildren<Image>()[1];
     }

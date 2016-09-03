@@ -24,7 +24,8 @@ public class QuickItemsPanel : MonoBehaviour {
             //Giving slot a name and number.
             instantiatedSlot.name = "Quick Item Slot " + i;
             instantiatedSlot.GetComponent<QuickItemSlot>().slotNumber = i;
-            instantiatedSlot.GetComponent<QuickItemSlot>().quickItemsPanel = this;
+            instantiatedSlot.GetComponent<QuickItemSlot>().inventory = inventory;
+
             //Making slot child of parent canvas.
             instantiatedSlot.transform.parent = this.gameObject.transform;
             instantiatedSlot.GetComponent<RectTransform>().localPosition = new Vector3(QuickItemsPanel.X_STARTING_POSITION + (i * QuickItemsPanel.INCREMENT), 0, 0);
