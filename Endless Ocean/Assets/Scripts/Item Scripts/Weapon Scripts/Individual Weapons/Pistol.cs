@@ -5,6 +5,8 @@ using System.Collections;
 /// </summary>
 public class Pistol : RangedWeapon  {
 
+    static public string modelPathLocal = "Prefabs/Weapons/Pistol";
+
     public void Start()
     {
         base.weaponAttackSpeed = 0.5f;
@@ -31,4 +33,8 @@ public class Pistol : RangedWeapon  {
 
     }
 
+    public string getModelPath()
+    {
+        return modelPathLocal;
+    }
 }
