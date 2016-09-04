@@ -8,9 +8,13 @@ public class TestPotion : Consumable
 	void Start () {
         
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    /// <summary>
+    /// Restores all the players energy.
+    /// </summary>
+    /// <param name="player">The player.</param>
+    public override void use(PlayerController player)
+    {
+        player.energy = player.maxEnergy;
+    }
 }

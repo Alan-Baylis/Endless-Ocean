@@ -23,10 +23,12 @@ public class PlayerController : CharacterSuper
 
     //Reference to the items menu UI element.
     public GameObject itemsMenu;
+    //Reference to the quickItemsPanel.
+    public QuickItemsPanel quickItemsPanel;
 
     // ENERGY RELATED VARIABLES
-    protected int energy;
-    protected int maxEnergy;
+    public int energy;
+    public int maxEnergy;
     // How often energy regens
     protected float energyRegenSpeed = 0.1f;
     // How much energy regens each tick
@@ -134,6 +136,25 @@ public class PlayerController : CharacterSuper
                 this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
             }
         }
+        //If statements for using quick items.
+        #region
+        if (Input.GetButtonDown("UseQuickItem1"))
+        {
+            this.quickItemsPanel.useQuickItem(0);
+        }
+        else if (Input.GetButtonDown("UseQuickItem2"))
+        {
+            this.quickItemsPanel.useQuickItem(1);
+        }
+        else if (Input.GetButtonDown("UseQuickItem3"))
+        {
+            this.quickItemsPanel.useQuickItem(2);
+        }
+        else if (Input.GetButtonDown("UseQuickItem4"))
+        {
+            this.quickItemsPanel.useQuickItem(3);
+        }
+        #endregion
         if (!grapple.grappling || (grapple.grappling && onGround))
         {
             float horizontalMove = Input.GetAxis("Horizontal");

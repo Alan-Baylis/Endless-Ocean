@@ -104,6 +104,7 @@ public class Inventory : MonoBehaviour {
                 if(item.itemName == (this.items[i].itemName))
                 {
                     this.items[i].itemCount++;
+                    Destroy(item.gameObject);
                     return true;
                 }
             }

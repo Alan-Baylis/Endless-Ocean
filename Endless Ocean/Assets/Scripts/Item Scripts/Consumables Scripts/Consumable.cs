@@ -17,9 +17,19 @@ public class Consumable : Item {
     void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    protected virtual void Update()
+    { 
+        if (this.itemCount < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public virtual void use(PlayerController player)
+    {
+        return;
+    }
+
+    
 }

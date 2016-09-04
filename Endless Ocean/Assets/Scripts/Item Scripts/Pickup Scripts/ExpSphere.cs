@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This is the class for the exp spheres that enemeies drop which travel towards teh player and when colliding with the player grant exp.
+/// </summary>
 public class ExpSphere : MonoBehaviour {
 
     private PlayerController player;
