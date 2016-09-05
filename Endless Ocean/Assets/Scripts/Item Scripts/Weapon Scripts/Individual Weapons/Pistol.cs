@@ -12,6 +12,7 @@ public class Pistol : RangedWeapon  {
         base.weaponAttackSpeed = 0.5f;
         base.projectileSpeed = 30f;
         this.knockBack = 300;
+        this.original = Resources.Load(Pistol.modelPathLocal);
     }
 
     /// <summary>

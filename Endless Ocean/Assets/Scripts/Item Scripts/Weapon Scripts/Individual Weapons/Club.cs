@@ -17,6 +17,8 @@ public class Club : MeleeWeapon {
         this.weaponAttackSpeed = 0.5f;
         this.knockBack = 250;
         this.energyCost = 25;
+
+        this.original = Resources.Load(Club.modelPathLocal);
     }
 
     void FixedUpdate()

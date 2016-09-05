@@ -5,12 +5,6 @@ using System;
 
 public class PlayerController : CharacterSuper
 {
-    // Equiped weapons array (up to 2)
-    public Weapon[] equipWeps = new Weapon[2];
-    public int activeWepIndex = 0;
-    // Player weapon mounts
-    public GameObject weaponMountSlotFirst;
-    public GameObject weaponMountSlotSecond;
 
     // Player HUD elements
     public Image playerHealthBar;
@@ -69,29 +63,18 @@ public class PlayerController : CharacterSuper
         //this.utilityItem = this.utilityItem.GetComponent<UtilityItem>();
 
         // Get weapon mount location so that we can easily attach weapons to them
-        weaponMountSlotFirst = GameObject.Find("Player/Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/WeaponMount/Slot1");
-        weaponMountSlotSecond = GameObject.Find("Player/Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/WeaponMount/Slot2");
+        meeleMount.MountPoint = GameObject.Find("Player/Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/WeaponMount/Slot1");
+        rangedMount.MountPoint = GameObject.Find("Player/Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/WeaponMount/Slot2");
 
         // TEMPORARY WEAPON EQUIPMENT/SWAPPING IMPLEMENTATION (Fraser, we'll need to get together and coordinate to get this working with inventory/drop/drag)
 
-        // Find the Club and add it to a GameObject
-        GameObject wepFirst = Instantiate(Resources.Load(Club.modelPathLocal),weaponMount.transform.position,weaponMount.transform.rotation) as GameObject;
-        // Add the Club GameObject to a weapon mount on the Player aramature
-        wepFirst.transform.parent = weaponMountSlotFirst.transform;
-        // Add a reference to the Club script to a equipWeps array for easy switching
-        equipWeps[0] = wepFirst.GetComponent<Club>();
-
-        // Find the Pistol and add it to a GameObject
-        GameObject wepSec = Instantiate(Resources.Load(Pistol.modelPathLocal), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
-        // Add the Pistol GameObject to a weapon mount on the Player aramature
-        wepSec.transform.parent = weaponMountSlotSecond.transform;
-        // Add a reference to the Pistol script to a equipWeps array for easy switching
-        equipWeps[1] = wepSec.GetComponent<Pistol>();
+        equipWeapon(new Club(), weaponMounts.Meele);
+        equipWeapon(new Pistol(), weaponMounts.Ranged);
 
         // Set primary/active player weapon as the one stored in the first slot
-        weapon = equipWeps[0];
+        weapon = meeleMount.Weapon;
         // Hide the second slot weapon so only first slot is visible
-        weaponMountSlotSecond.gameObject.SetActive(false);
+        rangedMount.MountPoint.gameObject.SetActive(false);
 
 
 
@@ -121,38 +104,6 @@ public class PlayerController : CharacterSuper
         }
     }
 
-    /// <summary>
-    /// Swaps player's weapons from the two possible slots
-    /// </summary>
-    void swapWeapons()
-    {
-        // Hide all weapons
-        weaponMountSlotFirst.gameObject.SetActive(false);
-        weaponMountSlotSecond.gameObject.SetActive(false);
-        // Check for empty slots
-        if (activeWepIndex == 0 && equipWeps[1] == null)
-        {
-            //do not switch
-        }
-        else if(activeWepIndex == 1 && equipWeps[0] == null)
-        {
-            //do not switch
-        }
-        // No empty slots and active weapon is the first one, switch to second wep
-        else if(activeWepIndex == 0)
-        {
-            weapon = equipWeps[1]; // set as new active weapon
-            activeWepIndex = 1;
-            weaponMountSlotSecond.gameObject.SetActive(true); // show weapon
-        }
-        // No empty slots and active weapon is the second one, switch to first wep
-        else if (activeWepIndex == 1)
-        {
-            weapon = equipWeps[0]; // set as new active weapon
-            activeWepIndex = 0;
-            weaponMountSlotFirst.gameObject.SetActive(true); // show weapon
-        }
-    }
     /// <summary>
     /// Runs before every frame. Performs physics calculates for game objects to be displayed when the next frame is rendered and updates the animator.
     /// </summary>

@@ -1,21 +1,71 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class CharacterSuper : MonoBehaviour {
 
-    // Mount where weapon is attached to
-    public GameObject weaponMount;
+public struct weaponMount
+{
+    GameObject mountPoint;
+    Weapon weapon;
 
+    public GameObject MountPoint
+    {
+        get
+        {
+            return mountPoint;
+        }
+        set
+        {
+            mountPoint = value;
+        }
+    }
+    public Weapon Weapon
+    {
+        get
+        {
+            return weapon;
+        }
+        set
+        {
+            weapon = value;
+        }
+    }
+    public GameObject WeaponFromGameObject
+    {
+        set
+        {
+            value.transform.parent = mountPoint.transform;
+            weapon = value.GetComponent<Weapon>();
+        }
+    }
+    public bool weaponLoaded()
+    {
+        if (weapon == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+}
+
+public abstract class CharacterSuper : MonoBehaviour
+{
+
+
+
+    #region movement variables
     //Movement Variables 
     public float movementSpeed;
     protected bool facingRight;
+    #endregion
 
+    #region mesh component variables
     //Character Mesh Components.
     new public Rigidbody rigidbody;
     protected Animator animator;
-
-    // Those objects which, upon collision, can damage this instance of character
-    protected string fears = "Nothing";
+    #endregion
 
     #region Jumping Variables
     //VARIABLES USED FOR JUMPING
@@ -34,9 +84,27 @@ public abstract class CharacterSuper : MonoBehaviour {
     #endregion
 
     #region Attacking Variables
+
+    #region weapon mounts and equiping
+
+    public Weapon weapon;
+
+    // Mount where weapon is attached to
+    public GameObject weaponMount;
+
+    public weaponMount rangedMount;
+    public weaponMount meeleMount;
+
+    public enum weaponMounts
+    {
+        Meele, Ranged
+    };
+
+    public weaponMounts activeWeponType = weaponMounts.Meele;
+    #endregion
+
     //VARIABLES USED FOR ATTACKING
     public float attack;
-    public Weapon weapon;
 
     // Stat variables
     public int maxHealth;
@@ -44,15 +112,18 @@ public abstract class CharacterSuper : MonoBehaviour {
 
     //Objects used for getting interface references.
     public GameObject weaponObject;
-    
+
     protected float nextMelee;
-    
+
     #endregion
 
     #region Tools
 
     #endregion
 
+
+    // Those objects which, upon collision, can damage this instance of character
+    protected string fears = "Nothing";
 
     //A boolean indicating if the player is using an item that effects their movement.
     protected bool usingItem;
@@ -61,16 +132,18 @@ public abstract class CharacterSuper : MonoBehaviour {
     public Collider col;
 
     // Use this for initialization
-    protected void Start () {
+    protected void Start()
+    {
         this.weapon = this.weaponObject.GetComponent<Weapon>();
         //Retrieving components from the game objects this script is attatched to.
         this.rigidbody = this.GetComponent<Rigidbody>();
         this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
     }
-	
-	// Update is called once per frame
-	protected void Update () {
+
+    // Update is called once per frame
+    protected void Update()
+    {
 
     }
 
@@ -138,7 +211,7 @@ public abstract class CharacterSuper : MonoBehaviour {
             health = 0;
         }
         // If the thing hitting the character is a projectile
-        else if(col.gameObject.tag == "PlayerProjectile")
+        else if (col.gameObject.tag == "PlayerProjectile")
         {
             int damage = col.gameObject.GetComponent<Bullet>().getDamage();
             int knockBack = col.gameObject.GetComponent<Bullet>().getKnockBack();
@@ -156,7 +229,7 @@ public abstract class CharacterSuper : MonoBehaviour {
             {
                 this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
             }
-            
+
         }
         updateHealthBar();
     }
@@ -175,9 +248,55 @@ public abstract class CharacterSuper : MonoBehaviour {
 
         this.rigidbody.AddForce(direction * knockBack);
 
-        if(this.health <= 0)
+        if (this.health <= 0)
         {
             die();
+        }
+    }
+
+    protected void equipWeapon(Weapon wep, weaponMounts mount)
+    {
+        switch (mount)
+        {
+            case weaponMounts.Meele:
+                meeleMount.WeaponFromGameObject = Instantiate(wep.original, weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+
+                break;
+            case weaponMounts.Ranged:
+                rangedMount.WeaponFromGameObject = Instantiate(wep.original, weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Swaps the character's currently held weapon from the two possible slots
+    /// </summary>
+    public void swapWeapons()
+    {
+        // Check for empty slots
+        if (activeWeponType == weaponMounts.Meele && rangedMount.weaponLoaded())
+        {
+            //do not switch
+        }
+        else if (activeWeponType == weaponMounts.Ranged && meeleMount.weaponLoaded())
+        {
+            //do not switch
+        }
+        // No empty slots and active weapon is the first one, switch to second wep
+        else if (activeWeponType == weaponMounts.Meele)
+        {
+            weapon = rangedMount.Weapon; // set as new active weapon
+            activeWeponType = weaponMounts.Ranged;
+            rangedMount.MountPoint.gameObject.SetActive(true); // show weapon
+            meeleMount.MountPoint.gameObject.SetActive(false); // hide weapon
+        }
+        // No empty slots and active weapon is the second one, switch to first wep
+        else if (activeWeponType == weaponMounts.Ranged)
+        {
+            weapon = meeleMount.Weapon; // set as new active weapon
+            activeWeponType = weaponMounts.Meele;
+            meeleMount.MountPoint.gameObject.SetActive(true); // show weapon
+            rangedMount.MountPoint.gameObject.SetActive(false); // hide weapon
         }
     }
 }

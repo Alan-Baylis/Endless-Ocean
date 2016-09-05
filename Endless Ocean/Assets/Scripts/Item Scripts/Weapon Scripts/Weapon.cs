@@ -14,6 +14,9 @@ public abstract class Weapon: Item{
     // Path to weapon model
     public string modelPath;
 
+    // The "original" of the object - this can then be cloned and instantiated in the world
+    public Object original;
+
     // Attack variables
     public int damage;
     public int knockBack;
