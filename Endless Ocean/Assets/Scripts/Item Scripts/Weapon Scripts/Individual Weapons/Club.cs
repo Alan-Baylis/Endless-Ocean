@@ -7,7 +7,7 @@ public class Club : MeleeWeapon {
     Animator myAnimator;
     PlayerController character;
 
-    static public string modelPathLocal = "Prefabs/Weapons/Club";
+    new static public string modelPathLocal = "Prefabs/Weapons/Club";
     // Use this for initialization
     void Start()
     {
@@ -17,8 +17,6 @@ public class Club : MeleeWeapon {
         this.weaponAttackSpeed = 0.5f;
         this.knockBack = 250;
         this.energyCost = 25;
-
-        this.original = Resources.Load(Club.modelPathLocal);
     }
 
     void FixedUpdate()
@@ -30,9 +28,8 @@ public class Club : MeleeWeapon {
 
     }
 
-    public string getModelPath()
+    public override string getModelPath()
     {
         return modelPathLocal;
     }
-
 }

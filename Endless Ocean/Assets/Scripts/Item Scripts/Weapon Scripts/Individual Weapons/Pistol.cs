@@ -5,14 +5,13 @@ using System.Collections;
 /// </summary>
 public class Pistol : RangedWeapon  {
 
-    static public string modelPathLocal = "Prefabs/Weapons/Pistol";
+    new static public string modelPathLocal = "Prefabs/Weapons/Pistol";
 
     public void Start()
     {
         base.weaponAttackSpeed = 0.5f;
         base.projectileSpeed = 30f;
         this.knockBack = 300;
-        this.original = Resources.Load(Pistol.modelPathLocal);
     }
 
     /// <summary>
@@ -34,7 +33,7 @@ public class Pistol : RangedWeapon  {
 
     }
 
-    public string getModelPath()
+    public override string getModelPath()
     {
         return modelPathLocal;
     }

@@ -13,14 +13,13 @@ public abstract class Weapon: Item{
 
     // Path to weapon model
     public string modelPath;
-
-    // The "original" of the object - this can then be cloned and instantiated in the world
-    public Object original;
+    public static string modelPathLocal; //don't know if this is called different for a reason
 
     // Attack variables
     public int damage;
     public int knockBack;
     public int energyCost;
+
 
     protected float qualityModifier;
 
@@ -61,4 +60,6 @@ public abstract class Weapon: Item{
     {
         return weaponAttackSpeed;
     }
+
+    public abstract string getModelPath();
 }

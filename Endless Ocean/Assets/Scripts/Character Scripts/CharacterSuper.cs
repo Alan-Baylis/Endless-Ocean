@@ -259,11 +259,11 @@ public abstract class CharacterSuper : MonoBehaviour
         switch (mount)
         {
             case weaponMounts.Meele:
-                meeleMount.WeaponFromGameObject = Instantiate(wep.original, weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                meeleMount.WeaponFromGameObject = Instantiate(Resources.Load(wep.getModelPath()), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
 
                 break;
             case weaponMounts.Ranged:
-                rangedMount.WeaponFromGameObject = Instantiate(wep.original, weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                rangedMount.WeaponFromGameObject = Instantiate(Resources.Load(wep.getModelPath()), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
                 break;
         }
     }
