@@ -11,10 +11,6 @@ using System.Collections;
 /// </summary>
 public abstract class Weapon: Item{
 
-    // Path to weapon model
-    public string modelPath;
-    public static string modelPathLocal; //don't know if this is called different for a reason
-
     // Attack variables
     public int damage;
     public int knockBack;

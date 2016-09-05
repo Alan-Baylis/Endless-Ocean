@@ -254,16 +254,17 @@ public abstract class CharacterSuper : MonoBehaviour
         }
     }
 
-    protected void equipWeapon(Weapon wep, weaponMounts mount)
+    protected void equipWeapon(string modelPath, weaponMounts mount)
     {
         switch (mount)
         {
             case weaponMounts.Meele:
-                meeleMount.WeaponFromGameObject = Instantiate(Resources.Load(wep.getModelPath()), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                meeleMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                Debug.Log("MELEE WEP");
 
                 break;
             case weaponMounts.Ranged:
-                rangedMount.WeaponFromGameObject = Instantiate(Resources.Load(wep.getModelPath()), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                rangedMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
                 break;
         }
     }
@@ -273,12 +274,10 @@ public abstract class CharacterSuper : MonoBehaviour
     /// </summary>
     public void swapWeapons()
     {
+        meeleMount.MountPoint.gameObject.SetActive(false); // hide weapon
+        rangedMount.MountPoint.gameObject.SetActive(false); // hide weapon
         // Check for empty slots
-        if (activeWeponType == weaponMounts.Meele && rangedMount.weaponLoaded())
-        {
-            //do not switch
-        }
-        else if (activeWeponType == weaponMounts.Ranged && meeleMount.weaponLoaded())
+        if (!rangedMount.weaponLoaded() || !meeleMount.weaponLoaded())
         {
             //do not switch
         }
@@ -288,7 +287,7 @@ public abstract class CharacterSuper : MonoBehaviour
             weapon = rangedMount.Weapon; // set as new active weapon
             activeWeponType = weaponMounts.Ranged;
             rangedMount.MountPoint.gameObject.SetActive(true); // show weapon
-            meeleMount.MountPoint.gameObject.SetActive(false); // hide weapon
+            
         }
         // No empty slots and active weapon is the second one, switch to first wep
         else if (activeWeponType == weaponMounts.Ranged)
@@ -296,7 +295,7 @@ public abstract class CharacterSuper : MonoBehaviour
             weapon = meeleMount.Weapon; // set as new active weapon
             activeWeponType = weaponMounts.Meele;
             meeleMount.MountPoint.gameObject.SetActive(true); // show weapon
-            rangedMount.MountPoint.gameObject.SetActive(false); // hide weapon
+            
         }
     }
 }

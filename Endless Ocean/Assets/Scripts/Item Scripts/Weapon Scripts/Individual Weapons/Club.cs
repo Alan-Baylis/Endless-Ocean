@@ -7,7 +7,7 @@ public class Club : MeleeWeapon {
     Animator myAnimator;
     PlayerController character;
 
-    new static public string modelPathLocal = "Prefabs/Weapons/Club";
+    static public string modelPathLocal = "Prefabs/Weapons/Club";
     // Use this for initialization
     void Start()
     {

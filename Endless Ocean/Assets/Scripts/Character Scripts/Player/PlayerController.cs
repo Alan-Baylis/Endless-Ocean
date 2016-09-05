@@ -68,8 +68,8 @@ public class PlayerController : CharacterSuper
 
         // TEMPORARY WEAPON EQUIPMENT/SWAPPING IMPLEMENTATION (Fraser, we'll need to get together and coordinate to get this working with inventory/drop/drag)
 
-        equipWeapon(new Club(), weaponMounts.Meele);
-        equipWeapon(new Pistol(), weaponMounts.Ranged);
+        equipWeapon(Club.modelPathLocal, weaponMounts.Meele);
+        equipWeapon(Pistol.modelPathLocal, weaponMounts.Ranged);
 
         // Set primary/active player weapon as the one stored in the first slot
         weapon = meeleMount.Weapon;
@@ -95,7 +95,7 @@ public class PlayerController : CharacterSuper
         {
             this.penaltyTimer += 1;
         }
-        else if (this.energy < 100)
+        else if (this.energy < maxEnergy)
         {
             this.penaltyTimer = 0;
             energy += regenAmount;
@@ -118,7 +118,7 @@ public class PlayerController : CharacterSuper
         // Swap weapons
         if (Input.GetButtonDown("SwapWeapons")) // Button to activate: Q
         {
-            swapWeapons();
+            this.swapWeapons();
         }
         if (Input.GetButtonDown("OpenItemsMenu")) // Button to activate: I
         {
