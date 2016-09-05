@@ -39,7 +39,7 @@ public class GrapplePullObject : MonoBehaviour {
             this.GetComponent<Rigidbody>().velocity += Vector3.ClampMagnitude((direction * velocity), .4f);
             Vector3 tempVelocity = new Vector3();
             tempVelocity = this.GetComponent<Rigidbody>().velocity;
-            tempVelocity.x = Mathf.Clamp(tempVelocity.x, -12, 12);
+            tempVelocity.x = Mathf.Clamp(tempVelocity.x, -(playerRigidbody.gameObject.GetComponent<PlayerController>().movementSpeed), playerRigidbody.gameObject.GetComponent<PlayerController>().movementSpeed);
             this.GetComponent<Rigidbody>().velocity = tempVelocity;
         }
 	}

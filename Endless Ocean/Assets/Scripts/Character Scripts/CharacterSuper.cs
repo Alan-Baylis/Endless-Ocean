@@ -35,12 +35,12 @@ public abstract class CharacterSuper : MonoBehaviour {
 
     #region Attacking Variables
     //VARIABLES USED FOR ATTACKING
-    protected float attack;
+    public float attack;
     public Weapon weapon;
 
     // Stat variables
-    protected int maxHealth;
-    protected int health;
+    public int maxHealth;
+    public int health;
 
     //Objects used for getting interface references.
     public GameObject weaponObject;

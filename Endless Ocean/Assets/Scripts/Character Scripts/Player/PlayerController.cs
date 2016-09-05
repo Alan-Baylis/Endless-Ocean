@@ -27,6 +27,8 @@ public class PlayerController : CharacterSuper
 
     //Reference to the items menu UI element.
     public GameObject itemsMenu;
+    //Reference to the status screen UI element.
+    public GameObject statusScreen;
     //Reference to the quickItemsPanel.
     public QuickItemsPanel quickItemsPanel;
 
@@ -171,13 +173,17 @@ public class PlayerController : CharacterSuper
         {
             itemsMenu.SetActive(!itemsMenu.activeInHierarchy);
         }
+        if (Input.GetButtonDown("OpenStatusScreen")) // Button to activate: C
+        {
+            statusScreen.SetActive(!statusScreen.activeInHierarchy);
+        }
         // Weapon event
         if (Input.GetAxis("Fire 1") > 0 && nextMelee < Time.time) // Button to activate: Left Mouse Click
         {
             nextMelee = Time.time + weapon.getAttackSpeed();
             if (energy > 0)
             {
-                if ( energy - weapon.energyCost < 0)
+                if (energy - weapon.energyCost < 0)
                 {
                     energy = 0;
                 }
@@ -271,5 +277,14 @@ public class PlayerController : CharacterSuper
     public override void die()
     {
         Application.LoadLevel(Application.loadedLevel);
+    }
+
+    /// <summary>
+    /// This functions closes all the open UI windows.
+    /// </summary>
+    public void closeAllUIWindows()
+    {
+        itemsMenu.SetActive(false);
+        statusScreen.SetActive(false);
     }
 }

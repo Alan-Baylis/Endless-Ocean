@@ -63,25 +63,32 @@ public class Grapple: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("UseUtilityItem"))
-        {
-            RaycastHit grappleRaycastHitData;
-            bool canGrapple = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 300f, grappleMask);
-            if (canGrapple)
+        
+            if (Input.GetMouseButtonDown(1))
             {
-                this.createGrapplingRope(grappleRaycastHitData);
+            if (this.grappling || this.pulling)
+            {
+                this.destroyRope();
             }
-            else
-            {
-                RaycastHit pullingRaycastHitData = new RaycastHit();
-                bool canPull = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out pullingRaycastHitData, 7f, pullMask);
-                if (canPull)
+            else { 
+                RaycastHit grappleRaycastHitData;
+                bool canGrapple = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 300f, grappleMask);
+                if (canGrapple)
                 {
-                    this.creatingPullingRope(playerRigidbody, pullingRaycastHitData.rigidbody, pullingRaycastHitData.point);
+                    this.createGrapplingRope(grappleRaycastHitData);
+                }
+                else
+                {
+                    RaycastHit pullingRaycastHitData = new RaycastHit();
+                    bool canPull = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out pullingRaycastHitData, 7f, pullMask);
+                    if (canPull)
+                    {
+                        this.creatingPullingRope(playerRigidbody, pullingRaycastHitData.rigidbody, pullingRaycastHitData.point);
+                    }
                 }
             }
         }
-        else if(Input.GetButtonDown("StopUsingUtilityItem"))
+        else if (Input.GetButtonDown("StopUsingUtilityItem"))
         {
             this.destroyRope();
         }
