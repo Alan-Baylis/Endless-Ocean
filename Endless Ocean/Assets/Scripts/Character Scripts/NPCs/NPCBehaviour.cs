@@ -9,7 +9,6 @@ public abstract class NPCBehaviour : CharacterSuper
 
     //float healthbar above enemy
     public Image healthBar;
-    protected MoveTowardsObjectGradually npcMover;
     protected bool tracking = false;
 
     // Use this for initialization
@@ -25,12 +24,6 @@ public abstract class NPCBehaviour : CharacterSuper
 	    
 	}
 
-    protected void stopPathing()
-    {
-        tracking = false;
-        Destroy(this.npcMover);
-    }
-
     protected void pathToLocation(Vector3 destination)
     {
         float direction = 0;
@@ -45,13 +38,6 @@ public abstract class NPCBehaviour : CharacterSuper
 
         moveCharacter(direction);
         tracking = false;
-    }
-
-    protected void pathToObject(Rigidbody target)
-    {
-        npcMover = rigidbody.gameObject.AddComponent<MoveTowardsObjectGradually>();
-        npcMover.init(target.gameObject, movementSpeed, false, (int)movementSpeed);
-        tracking = true;
     }
 
     protected void attackTarget(Transform target)

@@ -44,7 +44,6 @@ public class EnemyAI : NPCBehaviour
             }else
             {
                 attackTarget(target);
-                stopPathing();
             }
 
         }
