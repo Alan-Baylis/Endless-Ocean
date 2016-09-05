@@ -29,21 +29,22 @@ public class EnemyAI : NPCBehaviour
 	
 	}
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
-        transform.LookAt(target);
+        base.FixedUpdate();
+        //transform.LookAt(target);
 
         //check if player is in range
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
         {
             
-            if (Vector3.Distance(transform.position, target.position) <= attackRange)
+            if (Vector3.Distance(transform.position, target.position) >= attackRange)
             {
-                //move towards player   
                 pathToLocation(target.position);
             }else
             {
                 attackTarget(target);
+                stopPathing();
             }
 
         }

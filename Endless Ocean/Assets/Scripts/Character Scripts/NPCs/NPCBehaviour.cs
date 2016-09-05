@@ -9,26 +9,49 @@ public abstract class NPCBehaviour : CharacterSuper
 
     //float healthbar above enemy
     public Image healthBar;
+    protected MoveTowardsObjectGradually npcMover;
+    protected bool tracking = false;
 
     // Use this for initialization
     new void Start () {
         // healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("HealthFG").GetComponent<Image>();
 
         base.Start();
+        tracking = false;
     }
 	
 	// Update is called once per frame
-	new void Update () {
-	
+	protected void FixedUpdate() {
+	    
 	}
+
+    protected void stopPathing()
+    {
+        tracking = false;
+        Destroy(this.npcMover);
+    }
 
     protected void pathToLocation(Vector3 destination)
     {
-        Vector3 direction = rigidbody.position - destination;
-        float distance = direction.magnitude;
-        direction = direction.normalized;
+        float direction = 0;
+        if (rigidbody.position.x > destination.x)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
 
-        moveCharacter(direction.y);
+        moveCharacter(direction);
+        tracking = false;
+    }
+
+    protected void pathToObject(Rigidbody target)
+    {
+        npcMover = rigidbody.gameObject.AddComponent<MoveTowardsObjectGradually>();
+        npcMover.init(target.gameObject, movementSpeed, false, (int)movementSpeed);
+        tracking = true;
     }
 
     protected void attackTarget(Transform target)
