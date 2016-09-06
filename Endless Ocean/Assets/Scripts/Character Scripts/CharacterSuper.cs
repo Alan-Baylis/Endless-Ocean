@@ -59,6 +59,7 @@ public abstract class CharacterSuper : MonoBehaviour
     //Movement Variables 
     public float movementSpeed;
     protected bool facingRight;
+    bool enableMove;
     #endregion
 
     #region mesh component variables
@@ -139,6 +140,7 @@ public abstract class CharacterSuper : MonoBehaviour
         this.rigidbody = this.GetComponent<Rigidbody>();
         this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
+        this.enableMove = true;
     }
 
     // Update is called once per frame
@@ -162,7 +164,7 @@ public abstract class CharacterSuper : MonoBehaviour
     {
         //animator.SetFloat("Speed", Mathf.Abs(move));
         //If the user if moving apply movement force to player.
-        if (move != 0)
+        if (move != 0 && this.enableMove)
         {
             rigidbody.velocity = new Vector3(move * movementSpeed, this.rigidbody.velocity.y, 0);
         }
@@ -244,7 +246,9 @@ public abstract class CharacterSuper : MonoBehaviour
         //Debug.Log("I took "+damage+" damage, now my health is "+this.health +"out of a possible "+maxHealth);
 
         Vector3 direction = transform.position - source;
+        
         direction.Normalize();
+        direction.y += 0.4f;
 
         this.rigidbody.AddForce(direction * knockBack);
 
