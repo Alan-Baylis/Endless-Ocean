@@ -80,7 +80,10 @@
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\TestHelmet.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\ExpSphere.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\ExpSphereSpawner.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\ItemSpawner.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\Treasure.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\TreasureSpawner.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\TreasureTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\Grapple.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\GrapplePullObject.cs" />

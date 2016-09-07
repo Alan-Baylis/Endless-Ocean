@@ -50,18 +50,9 @@ public abstract class NPCBehaviour : CharacterSuper
     /// </summary>
     public override void die()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject expShere = Instantiate(Resources.Load("Prefabs/Environment/ExpSphere"), this.transform.position, this.transform.rotation) as GameObject;
-            expShere.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
-        }
-        System.Random treasureRandomizer = new System.Random();
-        int treasureMax = treasureRandomizer.Next(1, 10);
-        for(int i = 0; i < treasureMax; i++)
-        {
-            GameObject treasureObject = Instantiate(Resources.Load("Prefabs/Environment/Treasure"), this.transform.position, this.transform.rotation) as GameObject;
-            treasureObject.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
-        }
+        System.Random random = new System.Random();
+        ExpSphereSpawner.spawnExpOrbs(random.Next(0, 51), this.transform);
+        TreasureSpawner.spawnTreasure(random.Next(0, 51), this.transform);
 
         Destroy(this.gameObject);
     }
