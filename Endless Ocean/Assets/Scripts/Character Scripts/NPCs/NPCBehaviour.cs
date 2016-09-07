@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public abstract class NPCBehaviour : CharacterSuper
 {
+    public String[] itemDrops = { };
 
+    public int[] itemPossibilites = { };
 
     //float healthbar above enemy
     public Image healthBar;
@@ -53,7 +55,7 @@ public abstract class NPCBehaviour : CharacterSuper
         System.Random random = new System.Random();
         ExpSphereSpawner.spawnExpOrbs(random.Next(0, 51), this.transform);
         TreasureSpawner.spawnTreasure(random.Next(0, 51), this.transform);
-
+        ItemSpawner.spawnSpecificItems(itemDrops, itemPossibilites, this.transform);
         Destroy(this.gameObject);
     }
 }

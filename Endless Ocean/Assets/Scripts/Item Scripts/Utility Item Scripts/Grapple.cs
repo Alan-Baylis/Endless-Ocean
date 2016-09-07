@@ -72,7 +72,7 @@ public class Grapple: MonoBehaviour
             }
             else { 
                 RaycastHit grappleRaycastHitData;
-                bool canGrapple = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 300f, grappleMask);
+                bool canGrapple = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 15f, grappleMask);
                 if (canGrapple)
                 {
                     this.createGrapplingRope(grappleRaycastHitData);
