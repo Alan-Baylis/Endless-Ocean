@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour {
     public Vector3 getMouseLocationInWorldCoordinates()
     {
         Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = 10f;
+        mousePosition.z = 50f;
         Vector3 mouseLocationInWorldCoords = this.gameObject.GetComponent<Camera>().ScreenToWorldPoint(mousePosition);
         mouseLocationInWorldCoords.z = 0;
         return mouseLocationInWorldCoords;

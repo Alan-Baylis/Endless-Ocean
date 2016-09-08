@@ -110,7 +110,6 @@ public abstract class CharacterSuper : MonoBehaviour
 
     //VARIABLES USED FOR ATTACKING
     public float attack;
-
     // Stat variables
     public int maxHealth;
     public int health;
@@ -248,6 +247,12 @@ public abstract class CharacterSuper : MonoBehaviour
     protected abstract void updateHealthBar();
     public abstract void die();
 
+    /// <summary>
+    /// Cause character to take damage and apply knockback
+    /// </summary>
+    /// <param name="damage">Amount of damage taken</param>
+    /// <param name="source">Position/direction of the damage source</param>
+    /// <param name="knockBack">Amount of knock back stored within damage gameObject</param>
     protected void takeDamage(int damage, Vector3 source, int knockBack)
     {
         this.health -= damage;
@@ -267,6 +272,12 @@ public abstract class CharacterSuper : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used to equip enemies and player with weapons
+    /// </summary>
+    /// <param name="modelPath">Model path to gameObject weapon prefab</param>
+    /// <param name="mount">Mount point for weapon to be attached (slot1 or slot2)</param>
+    /// <param name="tag">Tag for weapon, determines whether enemy or player is equiping</param>
     protected void equipWeapon(string modelPath, weaponMounts mount, string tag)
     {
         switch (mount)

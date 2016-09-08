@@ -52,6 +52,7 @@ public class PlayerController : CharacterSuper
         this.maxHealth = 100;
 
         // Set energy and attack variables
+        this.attack = 20f;
         this.energy = 100;
         this.maxEnergy = 100;
         this.nextMelee = 0.0f;
