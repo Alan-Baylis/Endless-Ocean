@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TreasureChest : MonoBehaviour {
 
@@ -18,13 +19,18 @@ public class TreasureChest : MonoBehaviour {
             {
                 this.animator.SetBool("opened", true);
 
-                // Tressure drop code goes here
-                /*
-                System.Random treasureRandomizer = new System.Random();
-                int treasureMax = treasureRandomizer.Next(1, 10);
-
-                GameObject treasureObject = Instantiate(Resources.Load("Prefabs/Environment/Treasure"), this.transform.position, this.transform.rotation) as GameObject;
-                treasureObject.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");*/
+                List<GameObject> spawnedObjects = ItemSpawner.spawnAnyItems(this.transform, 2);
+                for(int i = 0; i < spawnedObjects.Count; i++)
+                {
+                    if((i % 2) == 0)
+                    {
+                        spawnedObjects[i].GetComponent<Rigidbody>().AddForce(new Vector3(-3, 10, 0));
+                    }
+                    else
+                    {
+                        spawnedObjects[i].GetComponent<Rigidbody>().AddForce(new Vector3(3, 10, 0));
+                    }
+                }
             }
         }
     }

@@ -23,7 +23,7 @@ public class ExpSphere : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            player.totalExperience += 100;
+            player.totalExperience += 10;
             Destroy(this.gameObject);
         }
     }

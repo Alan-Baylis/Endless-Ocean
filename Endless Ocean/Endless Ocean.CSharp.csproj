@@ -61,6 +61,9 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraController.cs" />
@@ -77,7 +80,10 @@
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\TestHelmet.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\ExpSphere.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\ExpSphereSpawner.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\ItemSpawner.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\Treasure.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\TreasureSpawner.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\TreasureTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\Grapple.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\GrapplePullObject.cs" />
@@ -100,7 +106,6 @@
     <Compile Include="Assets\Scripts\UI Scripts\QuickItems\QuickItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\QuickItems\QuickItemsPanel.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Slot.cs" />
-    <Compile Include="Assets\Scripts\UI Scripts\Status Screen\StatusScreen.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\WeaponSwap Scripts\WeaponSwapSlot.cs" />
     <Compile Include="Assets\TreasureChest.cs" />
   </ItemGroup>
