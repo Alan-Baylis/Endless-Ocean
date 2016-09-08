@@ -66,6 +66,10 @@ public abstract class CharacterSuper : MonoBehaviour
     //Character Mesh Components.
     new public Rigidbody rigidbody;
     protected Animator animator;
+
+    public GameObject primaryWeaponSlot;
+    public GameObject secondaryWeaponSlot;
+
     #endregion
 
     #region Jumping Variables
@@ -98,10 +102,10 @@ public abstract class CharacterSuper : MonoBehaviour
 
     public enum weaponMounts
     {
-        Meele, Ranged
+        Primary, Secondary
     };
 
-    public weaponMounts activeWeponType = weaponMounts.Meele;
+    public weaponMounts activeWeponType = weaponMounts.Primary;
     #endregion
 
     //VARIABLES USED FOR ATTACKING
@@ -141,6 +145,11 @@ public abstract class CharacterSuper : MonoBehaviour
         this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
         this.enableMove = true;
+
+
+        // Get weapon mount location so that we can easily attach weapons to them
+        meeleMount.MountPoint = primaryWeaponSlot;
+        rangedMount.MountPoint = secondaryWeaponSlot;
     }
 
     // Update is called once per frame
@@ -162,7 +171,6 @@ public abstract class CharacterSuper : MonoBehaviour
 
     protected void moveCharacter(float move)
     {
-        //animator.SetFloat("Speed", Mathf.Abs(move));
         //If the user if moving apply movement force to player.
         if (move != 0 && this.enableMove)
         {
@@ -179,6 +187,7 @@ public abstract class CharacterSuper : MonoBehaviour
         {
             this.turnAround();
         }
+        animator.SetFloat("Speed", Mathf.Abs(move));
     }
 
 
@@ -213,7 +222,7 @@ public abstract class CharacterSuper : MonoBehaviour
             health = 0;
         }
         // If the thing hitting the character is a projectile
-        else if (col.gameObject.tag == "PlayerProjectile")
+        else if (col.gameObject.tag == fears+"Projectile")
         {
             int damage = col.gameObject.GetComponent<Bullet>().getDamage();
             int knockBack = col.gameObject.GetComponent<Bullet>().getKnockBack();
@@ -221,7 +230,7 @@ public abstract class CharacterSuper : MonoBehaviour
             this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
         }
         // When character is hit with an enemy weapon
-        else if (col.gameObject.tag == fears)
+        else if (col.gameObject.tag == fears+"Weapon")
         {
             int damage = col.gameObject.GetComponent<Weapon>().getDamage();
             int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
@@ -258,17 +267,21 @@ public abstract class CharacterSuper : MonoBehaviour
         }
     }
 
-    protected void equipWeapon(string modelPath, weaponMounts mount)
+    protected void equipWeapon(string modelPath, weaponMounts mount, string tag)
     {
         switch (mount)
         {
-            case weaponMounts.Meele:
+            case weaponMounts.Primary:
                 meeleMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                meeleMount.Weapon.WeaponTag = tag;
+                meeleMount.Weapon.tag = tag;
                 Debug.Log("MELEE WEP");
 
                 break;
-            case weaponMounts.Ranged:
+            case weaponMounts.Secondary:
                 rangedMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                rangedMount.Weapon.weaponTag = tag;
+                rangedMount.Weapon.tag = tag;
                 break;
         }
     }
@@ -286,18 +299,18 @@ public abstract class CharacterSuper : MonoBehaviour
             //do not switch
         }
         // No empty slots and active weapon is the first one, switch to second wep
-        else if (activeWeponType == weaponMounts.Meele)
+        else if (activeWeponType == weaponMounts.Primary)
         {
-            weapon = rangedMount.Weapon; // set as new active weapon
-            activeWeponType = weaponMounts.Ranged;
+            weapon = rangedMount.Weapon; // set as new active weapons
+            activeWeponType = weaponMounts.Secondary;
             rangedMount.MountPoint.gameObject.SetActive(true); // show weapon
             
         }
         // No empty slots and active weapon is the second one, switch to first wep
-        else if (activeWeponType == weaponMounts.Ranged)
+        else if (activeWeponType == weaponMounts.Secondary)
         {
             weapon = meeleMount.Weapon; // set as new active weapon
-            activeWeponType = weaponMounts.Meele;
+            activeWeponType = weaponMounts.Primary;
             meeleMount.MountPoint.gameObject.SetActive(true); // show weapon
             
         }

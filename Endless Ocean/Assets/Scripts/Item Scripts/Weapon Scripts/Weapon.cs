@@ -15,6 +15,18 @@ public abstract class Weapon: Item{
     public int damage;
     public int knockBack;
     public int energyCost;
+    public string weaponTag;
+    public string WeaponTag
+    {
+        get
+        {
+            return weaponTag;
+        }
+        set
+        {
+            weaponTag = value;
+        }
+    }
 
 
     protected float qualityModifier;
@@ -38,7 +50,19 @@ public abstract class Weapon: Item{
     /// <returns>A bullet prefab at the specified position.</returns>
     protected GameObject getBulletPrefab()
     {
-        GameObject bullet = Instantiate(Resources.Load("Prefabs/Weapons/PlayerBullet"), this.transform.position, this.transform.rotation) as GameObject;
+        GameObject bullet = Instantiate(Resources.Load("Prefabs/Weapons/Bullet"), this.transform.position, this.transform.rotation) as GameObject;
+
+        switch (tag)
+        {
+            case "PlayerWeapon":
+                bullet.tag = "PlayerProjectile";
+                break;
+            case "EnemyWeapon":
+                bullet.tag = "EnemyProjectile";
+                break;
+            default:
+                break;
+        }
         return bullet;
     }  
 

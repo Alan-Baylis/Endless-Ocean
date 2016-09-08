@@ -19,9 +19,14 @@ public class EnemyAI : NPCBehaviour
         base.Start();
 
         // Assign objects that damage this character upon collision
-        base.fears = "PlayerWeapon";
+        base.fears = "Player";
 
-        this.weapon = this.weaponObject.GetComponentInChildren<Pistol>();
+
+        equipWeapon(Club.modelPathLocal, weaponMounts.Primary, "EnemyWeapon");
+        equipWeapon(Pistol.modelPathLocal, weaponMounts.Secondary, "EnemyWeapon");
+
+        // Set primary/active player weapon as the one stored in the first slot
+        weapon = meeleMount.Weapon;
     }
 	
 	// Update is called once per frame
@@ -43,7 +48,7 @@ public class EnemyAI : NPCBehaviour
                 pathToLocation(target.position);
             }else
             {
-                attackTarget(target);
+                //attackTarget(target);
             }
 
         }

@@ -45,7 +45,7 @@ public class PlayerController : CharacterSuper
         base.Start();
 
         // Assign objects that damage this character upon collision
-        base.fears = "EnemyWeapon";
+        base.fears = "Enemy";
 
         // Set health
         this.health = 100;
@@ -62,17 +62,14 @@ public class PlayerController : CharacterSuper
 
         //this.utilityItem = this.utilityItem.GetComponent<UtilityItem>();
 
-        // Get weapon mount location so that we can easily attach weapons to them
-        meeleMount.MountPoint = GameObject.Find("Player/Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/WeaponMount/Slot1");
-        rangedMount.MountPoint = GameObject.Find("Player/Armature/Root/Torso/Chest/Upper_Arm_R/Lower_Arm_R/Hand_R/WeaponMount/Slot2");
-
         // TEMPORARY WEAPON EQUIPMENT/SWAPPING IMPLEMENTATION (Fraser, we'll need to get together and coordinate to get this working with inventory/drop/drag)
-
-        equipWeapon(Club.modelPathLocal, weaponMounts.Meele);
-        equipWeapon(Pistol.modelPathLocal, weaponMounts.Ranged);
+        
+        equipWeapon(Club.modelPathLocal, weaponMounts.Primary, "PlayerWeapon");
+        equipWeapon(Pistol.modelPathLocal, weaponMounts.Secondary, "PlayerWeapon");
 
         // Set primary/active player weapon as the one stored in the first slot
         weapon = meeleMount.Weapon;
+
         // Hide the second slot weapon so only first slot is visible
         rangedMount.MountPoint.gameObject.SetActive(false);
 
@@ -184,23 +181,7 @@ public class PlayerController : CharacterSuper
             this.animator.SetBool("grounded", this.onGround);
 
             //CODE FOR MOVING.
-            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-            //If the user if moving apply movement force to player.
-            if (horizontalMove != 0)
-            {
-                rigidbody.velocity = new Vector3(horizontalMove * movementSpeed, this.rigidbody.velocity.y, 0);
-            }
-
-            //If the game object starts moving left and is facing right turn the object around.
-            if (horizontalMove > 0 && !facingRight)
-            {
-                this.turnAround();
-            }
-            //If the game object starts moving right and is facing left turn the object around.
-            if (horizontalMove < 0 && facingRight)
-            {
-                this.turnAround();
-            }
+            moveCharacter(horizontalMove);
         }
     }
 
