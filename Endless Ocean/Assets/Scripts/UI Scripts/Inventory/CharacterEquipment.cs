@@ -12,8 +12,7 @@ public class CharacterEquipment : MonoBehaviour {
 
     private PlayerController player;
 
-    public Text totalExperienceLabel;
-    public Text nextExperienceLabel;
+    public Text levelLabel;
     public Text healthLabel;
     public Text damageLabel;
     public Text movementSpeedLabel;
@@ -34,11 +33,11 @@ public class CharacterEquipment : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //this.totalExperienceLabel.text = player.totalExperience.ToString();
-        //this.damageLabel.text = player.attack.ToString();
-        //this.healthLabel.text = player.maxHealth.ToString();
-        //this.energyLabel.text = player.maxEnergy.ToString();
-        //this.movementSpeedLabel.text = player.movementSpeed.ToString();
+        this.levelLabel.text = player.totalExperience.ToString();
+        this.damageLabel.text = player.attack.ToString();
+        this.healthLabel.text = player.maxHealth.ToString();
+        this.energyLabel.text = player.maxEnergy.ToString();
+        this.movementSpeedLabel.text = player.movementSpeed.ToString();
     }
 
 }

@@ -19,7 +19,8 @@ public class Consumable : Item {
 	}
 
     protected virtual void Update()
-    { 
+    {
+        base.Update();
         if (this.itemCount < 1)
         {
             Destroy(this.gameObject);

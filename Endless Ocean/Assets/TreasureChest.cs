@@ -24,11 +24,13 @@ public class TreasureChest : MonoBehaviour {
                 {
                     if((i % 2) == 0)
                     {
-                        spawnedObjects[i].GetComponent<Rigidbody>().AddForce(new Vector3(-3, 10, 0));
+                        Vector3 targetPosition = new Vector3(spawnedObjects[i].transform.position.x + 2, spawnedObjects[i].transform.position.y + 2, 0);
+                        spawnedObjects[i].GetComponent<Item>().startFlyingOutOfChest(spawnedObjects[i].transform.position, targetPosition);
                     }
                     else
                     {
-                        spawnedObjects[i].GetComponent<Rigidbody>().AddForce(new Vector3(3, 10, 0));
+                        Vector3 targetPosition = new Vector3(spawnedObjects[i].transform.position.x - 2, spawnedObjects[i].transform.position.y + 2, 0);
+                        spawnedObjects[i].GetComponent<Item>().startFlyingOutOfChest(spawnedObjects[i].transform.position, targetPosition);
                     }
                 }
             }
