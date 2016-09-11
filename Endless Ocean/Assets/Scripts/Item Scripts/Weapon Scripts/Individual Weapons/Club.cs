@@ -11,6 +11,7 @@ public class Club : MeleeWeapon {
     // Use this for initialization
     void Start()
     {
+        base.Start();
         Debug.Log("Started");
 
         this.damage = 25;

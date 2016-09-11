@@ -9,6 +9,7 @@ public class Pistol : RangedWeapon  {
 
     public void Start()
     {
+        base.Start();
         base.weaponAttackSpeed = 0.5f;
         base.projectileSpeed = 30f;
         this.knockBack = 300;

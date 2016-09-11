@@ -21,6 +21,8 @@ public class PlayerController : CharacterSuper
 
     //Reference to the items menu UI element.
     public GameObject itemsMenu;
+    //Reference to the inventory script.
+    public Inventory inventory;
     //Reference to the quickItemsPanel.
     public QuickItemsPanel quickItemsPanel;
 
@@ -35,6 +37,9 @@ public class PlayerController : CharacterSuper
     protected int penaltyTimer = 0;
     // When pentaltyTimer reaches this value, penalty period is over
     protected int pentaltyLength = 25;
+
+    //items layer mask.
+    public LayerMask itemsLayerMask;
 
 
     // Use this for initialization
@@ -54,6 +59,7 @@ public class PlayerController : CharacterSuper
         this.energy = 100;
         this.maxEnergy = 100;
         this.nextMelee = 0.0f;
+        this.inventory.initializeInventory();
         this.itemsMenu.SetActive(false);
         //Hide Menu at start.
         //COMMENTED THIS OUT FOR NOW, WAS BREAKING GAME
@@ -109,7 +115,6 @@ public class PlayerController : CharacterSuper
         {
             die();
         }
-
         // Button events
         // Swap weapons
         if (Input.GetButtonDown("SwapWeapons")) // Button to activate: Q
@@ -121,23 +126,32 @@ public class PlayerController : CharacterSuper
             itemsMenu.SetActive(!itemsMenu.activeInHierarchy);
         }
         // Weapon event
-        if (Input.GetAxis("Fire 1") > 0 && nextMelee < Time.time) // Button to activate: Left Mouse Click
-        {
-            nextMelee = Time.time + weapon.getAttackSpeed();
-            if (energy > 0)
+        if (Input.GetButtonDown("Fire 1"))
+        { // Button to activate: Left Mouse Click
+            if (Physics.CheckSphere(playerCameraController.getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask))
             {
-                if (energy - weapon.energyCost < 0)
-                {
-                    energy = 0;
-                }
-                else
-                {
-                    energy -= weapon.energyCost;
-                }
+                Collider[] clickedItems = Physics.OverlapSphere(playerCameraController.getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask);
+                inventory.addItem(clickedItems[0].gameObject.GetComponent<Item>());
 
-                this.playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
-                this.animator.SetTrigger("MeleeAttackTrigger");
-                this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
+            }
+            else if (nextMelee < Time.time)
+            {
+                nextMelee = Time.time + weapon.getAttackSpeed();
+                if (energy > 0)
+                {
+                    if (energy - weapon.energyCost < 0)
+                    {
+                        energy = 0;
+                    }
+                    else
+                    {
+                        energy -= weapon.energyCost;
+                    }
+
+                    this.playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
+                    this.animator.SetTrigger("MeleeAttackTrigger");
+                    this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
+                }
             }
         }
         //If statements for using quick items.

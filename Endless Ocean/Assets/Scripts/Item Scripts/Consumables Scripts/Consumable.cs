@@ -13,11 +13,6 @@ public class Consumable : Item {
         get { return true; }
     }
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-
     protected virtual void Update()
     {
         base.Update();
