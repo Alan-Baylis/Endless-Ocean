@@ -63,7 +63,6 @@ public class EquipmentSlot: Slot
     /// <param name="eventData">The data from the click.</param>
     public override void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Logged");
         this.equipment.validationPrompt.text = "";
         if (this.inventory.draggingItem)
         {

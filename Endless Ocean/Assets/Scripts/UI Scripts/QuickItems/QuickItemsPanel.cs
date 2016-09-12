@@ -14,7 +14,7 @@ public class QuickItemsPanel : MonoBehaviour {
     //Reference for the player that the consumables may affect.
     public PlayerController player;
 
-    public List<Consumable> quickItems = new List<Consumable>();
+    public List<Consumable> quickItems = new List<Consumable>() {new Consumable(), new Consumable(), new Consumable(), new Consumable()};
     public List<QuickItemSlot> slots = new List<QuickItemSlot>();
 
     private int numberOfQuickItems = 4;
