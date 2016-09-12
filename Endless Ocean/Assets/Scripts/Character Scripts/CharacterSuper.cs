@@ -52,12 +52,29 @@ public struct weaponMount
 
 public abstract class CharacterSuper : MonoBehaviour
 {
+    // Character variables involved in leveling
+    public float movementSpeed;
+    // Additional damage player does ontop of weapon damage
+    public int attack;
+    // Determines how much health the player has
+    public int stamina;
+    //The height the player will jump when the user makes them jump.
+    public float jumpHeight;
+    // Determines energy
+    public int vigor;
+
+    // Current level
+    public int currentLevel;
 
 
+    // Highest possible health
+    public int maxHealth;
+    // current health
+    public int health;
 
     #region movement variables
     //Movement Variables 
-    public float movementSpeed;
+
     protected bool facingRight;
     bool enableMove;
     #endregion
@@ -84,8 +101,7 @@ public abstract class CharacterSuper : MonoBehaviour
     public LayerMask groundLayerMask;
     //The transform of a gameobject used to position the cicle used to determine if the game object is on the ground when jumping.
     public Transform groundCheck;
-    //The height the player will jump when the user makes them jump.
-    public float jumpHeight;
+
     #endregion
 
     #region Attacking Variables
@@ -96,7 +112,6 @@ public abstract class CharacterSuper : MonoBehaviour
 
     // Mount where weapon is attached to
     public GameObject weaponMount;
-
     public weaponMount rangedMount;
     public weaponMount meeleMount;
 
@@ -108,11 +123,7 @@ public abstract class CharacterSuper : MonoBehaviour
     public weaponMounts activeWeponType = weaponMounts.Primary;
     #endregion
 
-    //VARIABLES USED FOR ATTACKING
-    public float attack;
-    // Stat variables
-    public int maxHealth;
-    public int health;
+
 
     //Objects used for getting interface references.
     public GameObject weaponObject;

@@ -30,7 +30,7 @@ public class Item : MonoBehaviour{
         this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);
-        this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     protected void Update()

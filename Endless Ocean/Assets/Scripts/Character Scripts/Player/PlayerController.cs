@@ -17,7 +17,9 @@ public class PlayerController : CharacterSuper
     //Interfaces that separate the player controller from weapons and utility items (eg: grapple)
     public Grapple grapple;
 
-    public int totalExperience;
+    public int experienceToLevel;
+    public int currentExperience;
+
     public int totalTreasure;
 
     //Reference to the items menu UI element.
@@ -45,6 +47,8 @@ public class PlayerController : CharacterSuper
     //Array of nearby item's.
     List<Item> nearbyItems = new List<Item>();
 
+    // For leveling
+    public int statPointsToAllocate;
 
     // Use this for initialization
     new void Start()
@@ -54,14 +58,24 @@ public class PlayerController : CharacterSuper
         // Assign objects that damage this character upon collision
         base.fears = "Enemy";
 
-        // Set health
-        this.health = 100;
-        this.maxHealth = 100;
-
         // Set energy and attack variables
-        this.attack = 20f;
-        this.energy = 100;
-        this.maxEnergy = 100;
+        this.attack = 5;
+        this.stamina = 5;
+        this.vigor = 5;
+
+        this.currentLevel = 4;
+
+        // Set health
+        this.health = this.stamina * 10;
+        this.maxHealth = this.health;
+
+        this.maxEnergy = this.vigor * 10;
+        this.energy = this.maxEnergy;
+
+        // Set experience values
+        currentExperience = 70;
+        experienceToLevel = currentLevel * 20;
+
         this.nextMelee = 0.0f;
         this.inventory.initializeInventory();
         this.itemsMenu.SetActive(false);
@@ -204,6 +218,42 @@ public class PlayerController : CharacterSuper
             //CODE FOR MOVING.
             moveCharacter(horizontalMove);
         }
+        // Check for level up
+        if(currentExperience >= experienceToLevel)
+        {
+            levelUp();
+        }
+    }
+
+    public void levelUp()
+    {
+        // Level up
+        statPointsToAllocate += 5;
+        int leftOverExperience = currentExperience - experienceToLevel;
+        currentExperience = leftOverExperience;
+        currentLevel += 1;
+        calculateExperienceToLevel();
+    }
+
+    /// <summary>
+    /// Used to update health with new stamina on levelup
+    /// </summary>
+    public void updateHealth()
+    {
+        this.maxHealth = this.stamina * 10;
+    }
+
+    /// <summary>
+    /// Used to update energy with new vigor on levelup
+    /// </summary>
+    public void updateEnergy()
+    {
+        this.maxEnergy = this.vigor * 10;
+    }
+
+    public void calculateExperienceToLevel()
+    {
+        experienceToLevel = currentLevel * 20;
     }
 
     /// <summary>
