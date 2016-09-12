@@ -14,7 +14,7 @@ public class Item : MonoBehaviour{
     private Vector3 startPosition;
     private Vector3 targetPosition;
 
-    private GameObject tooltip;
+    public GameObject tooltip;
 
     //Used to stack consumables.
     public int itemCount = 1;
@@ -30,6 +30,7 @@ public class Item : MonoBehaviour{
         this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);
+        this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     protected void Update()
@@ -40,12 +41,16 @@ public class Item : MonoBehaviour{
             {
                 flyingOutOfChest = false;
                 this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
-                this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
+                this.GetComponent<Rigidbody>().constraints = (RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ);
 
             }
             this.gameObject.transform.position = Vector3.MoveTowards(this.transform.position, targetPosition, .4f);
             Debug.Log(Time.deltaTime);
         }
+    }
+
+    protected void LateUpdate()
+    {
         this.repositionTooltip();
     }
 
@@ -78,6 +83,7 @@ public class Item : MonoBehaviour{
         if (this.tooltip.activeSelf)
         {
             this.tooltip.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z);
+            this.tooltip.transform.rotation = Quaternion.identity;
         }
     }
 

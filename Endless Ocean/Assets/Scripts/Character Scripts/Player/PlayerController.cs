@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class PlayerController : CharacterSuper
 {
@@ -40,6 +41,9 @@ public class PlayerController : CharacterSuper
 
     //items layer mask.
     public LayerMask itemsLayerMask;
+
+    //Array of nearby item's.
+    List<Item> nearbyItems = new List<Item>();
 
 
     // Use this for initialization
@@ -124,6 +128,14 @@ public class PlayerController : CharacterSuper
         if (Input.GetButtonDown("OpenItemsMenu")) // Button to activate: I
         {
             itemsMenu.SetActive(!itemsMenu.activeInHierarchy);
+        }
+        if (Input.GetButtonDown("ShowNearbyItemTooltips"))
+        {
+            this.showNearbyItemTooltips();
+        }
+        if (Input.GetButtonUp("ShowNearbyItemTooltips"))
+        {
+            this.hideNearbyItemTooltips();
         }
         // Weapon event
         if (Input.GetButtonDown("Fire 1"))
@@ -226,5 +238,30 @@ public class PlayerController : CharacterSuper
     public void closeAllUIWindows()
     {
         itemsMenu.SetActive(false);
+    }
+
+    /// <summary>
+    /// This functions enables the tool tips of all the nearby items.
+    /// </summary>
+    public void showNearbyItemTooltips()
+    {
+        this.nearbyItems.Clear();
+        Collider[] nearbyColliders = Physics.OverlapSphere(playerCameraController.getMouseLocationInWorldCoordinates(), 15f, itemsLayerMask);
+        for(int i = 0; i < nearbyColliders.Length; i++)
+        {
+            nearbyColliders[i].gameObject.GetComponent<Item>().tooltip.SetActive(true);
+            nearbyItems.Add(nearbyColliders[i].gameObject.GetComponent<Item>());
+        }
+    }
+
+    /// <summary>
+    /// This function hides all nearby item tool tips.
+    /// </summary>
+    public void hideNearbyItemTooltips()
+    {
+        for (int i = 0; i < nearbyItems.Count; i++)
+        {
+            nearbyItems[i].gameObject.GetComponent<Item>().tooltip.SetActive(false);
+        }
     }
 }
