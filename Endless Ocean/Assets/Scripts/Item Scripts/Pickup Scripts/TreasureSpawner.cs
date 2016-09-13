@@ -10,7 +10,7 @@ public class TreasureSpawner : MonoBehaviour {
     /// This method spawns treasure. One sphere for each 10 points of exp the player gets.
     /// </summary>
     /// <param name="amountOfTreasure">The amount of trasure the player gets.</param>
-    /// <param name="positionToSpawnAt">The position to spawn the exp spheres at.</param>
+    /// <param name="positionToSpawnAt">The position to spawn the treasure at.</param>
     public static void spawnTreasure(int amountOfTreasure, Transform positionToSpawnAt)
     {
         for (int i = 0; i < amountOfTreasure / 10; i++)

@@ -30,14 +30,15 @@ public class Item : MonoBehaviour{
         this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);
-        //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
     }
 
     protected void Update()
     {
         if (flyingOutOfChest)
         {
-            if(this.transform.position.y >= targetPosition.y)
+            this.GetComponent<Rigidbody>().constraints = (RigidbodyConstraints.FreezeRotation);
+            if (this.transform.position.y >= targetPosition.y)
             {
                 flyingOutOfChest = false;
                 this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);

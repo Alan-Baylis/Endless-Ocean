@@ -22,6 +22,10 @@ public class Pistol : RangedWeapon  {
     /// <param name="mousePositionInWorldCoords">The mouse position in the game which is the direction the bullet will travel.</param>
     override public void attack(float playerDamage, Vector3 mousePositionInWorldCoords)
     {
+        if (!base.useAmmo())
+        {
+            return;
+        }
         GameObject bullet = base.getBulletPrefab();
         bullet.GetComponent<Bullet>().speed = base.projectileSpeed;
         bullet.GetComponent<Bullet>().damage = base.damage;

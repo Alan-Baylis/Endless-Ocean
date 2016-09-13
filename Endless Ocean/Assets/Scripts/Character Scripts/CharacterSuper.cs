@@ -126,7 +126,6 @@ public abstract class CharacterSuper : MonoBehaviour
 
 
     //Objects used for getting interface references.
-    public GameObject weaponObject;
 
     protected float nextMelee;
 
@@ -149,7 +148,6 @@ public abstract class CharacterSuper : MonoBehaviour
     // Use this for initialization
     protected void Start()
     {
-        this.weapon = this.weaponObject.GetComponent<Weapon>();
         //Retrieving components from the game objects this script is attatched to.
         this.rigidbody = this.GetComponent<Rigidbody>();
         this.animator = this.GetComponent<Animator>();

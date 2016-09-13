@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public abstract class NPCBehaviour : CharacterSuper
 {
-    public String[] itemDrops = { };
+    public String[] itemDrops = {"Prefabs/Consumables/TestPotion"};
 
-    public int[] itemPossibilites = { };
+    public int[] itemPossibilites = {100};
+
+    private int maxAmountOfTreasure = 51;
+    private int maxAmountOfExp = 51;
+    private int maxAmountOfAmmo = 3;
 
     //float healthbar above enemy
     public Image healthBar;
@@ -59,8 +63,9 @@ public abstract class NPCBehaviour : CharacterSuper
     public override void die()
     {
         System.Random random = new System.Random();
-        ExpSphereSpawner.spawnExpOrbs(random.Next(0, 51), this.transform);
-        TreasureSpawner.spawnTreasure(random.Next(0, 51), this.transform);
+        ExpSphereSpawner.spawnExpOrbs(random.Next(0, maxAmountOfExp), this.transform);
+        TreasureSpawner.spawnTreasure(random.Next(0, maxAmountOfTreasure), this.transform);
+        AmmoSpawner.spawnAmmo(random.Next(2, maxAmountOfAmmo), this.transform);
         ItemSpawner.spawnSpecificItems(itemDrops, itemPossibilites, this.transform);
         Destroy(this.gameObject);
     }
