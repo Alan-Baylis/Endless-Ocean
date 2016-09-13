@@ -7,9 +7,12 @@ using System.Collections.Generic;
 public class PlayerController : CharacterSuper
 {
 
-    // Player HUD elements
+    // Player HUD elements FG
     public Image playerHealthBar;
     public Image playerEnergyBar;
+    // Player HUD elements BG
+    public Image playerHealthBarBG;
+    public Image playerEnergyBarBG;
 
     //Other game objects.
     public CameraController playerCameraController;
@@ -34,8 +37,8 @@ public class PlayerController : CharacterSuper
     public int maxEnergy;
     // How often energy regens
     protected float energyRegenSpeed = 0.1f;
-    // How much energy regens each tick
-    protected int regenAmount = 2;
+    // Used to calculate how to to rengerate
+    protected int regenAmount = 25;
     // Pentalty timer for when energy reaches 0
     protected int penaltyTimer = 0;
     // When pentaltyTimer reaches this value, penalty period is over
@@ -50,6 +53,8 @@ public class PlayerController : CharacterSuper
     // For leveling
     public int statPointsToAllocate;
 
+    public int healthBarHeight = 100;
+
     public int ammo;
 
     // Use this for initialization
@@ -63,15 +68,16 @@ public class PlayerController : CharacterSuper
         // Set energy and attack variables
         this.attack = 5;
         this.stamina = 5;
-        this.vigor = 5;
+        this.vigor = 10;
 
-        this.currentLevel = 4;
+        this.currentLevel = 5;
 
         // Set health
+        this.maxHealth = this.stamina * 10;
         this.health = this.stamina * 10;
-        this.maxHealth = this.health;
 
-        this.maxEnergy = this.vigor * 10;
+
+        this.maxEnergy = this.vigor * 5;
         this.energy = this.maxEnergy;
 
         // Set experience values
@@ -120,9 +126,8 @@ public class PlayerController : CharacterSuper
         else if (this.energy < maxEnergy)
         {
             this.penaltyTimer = 0;
-            energy += regenAmount;
+            energy += this.maxEnergy/regenAmount;
             playerEnergyBar.fillAmount = (float)energy / (float)maxEnergy;
-
         }
     }
 
@@ -243,6 +248,9 @@ public class PlayerController : CharacterSuper
     public void updateHealth()
     {
         this.maxHealth = this.stamina * 10;
+        //playerHealthBar.transform.localScale = new Vector3(2, 1, 0);
+        //playerHealthBarBG.transform.localScale = new Vector3(2, 1, 0);
+        this.updateHealthBar();
     }
 
     /// <summary>
@@ -250,7 +258,10 @@ public class PlayerController : CharacterSuper
     /// </summary>
     public void updateEnergy()
     {
-        this.maxEnergy = this.vigor * 10;
+        this.maxEnergy = this.vigor * 5;
+        //playerEnergyBar.rectTransform.sizeDelta = new Vector2(healthBarHeight, this.maxEnergy);
+        //playerEnergyBarBG.rectTransform.sizeDelta = new Vector2(healthBarHeight, this.maxEnergy);
+        this.updateEnergyBar();
     }
 
     public void calculateExperienceToLevel()
@@ -277,6 +288,12 @@ public class PlayerController : CharacterSuper
     {
         // Update health bar with new health
         playerHealthBar.fillAmount = (float)this.health / (float)this.maxHealth;
+    }
+
+    protected void updateEnergyBar()
+    {
+        // Update health bar with new health
+        playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
     }
 
     public override void die()

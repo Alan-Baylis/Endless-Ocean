@@ -240,7 +240,7 @@ public abstract class CharacterSuper : MonoBehaviour
         // When character is hit with an enemy weapon
         else if (col.gameObject.tag == fears+"Weapon")
         {
-            int damage = col.gameObject.GetComponent<Weapon>().getDamage();
+            int damage = col.gameObject.GetComponent<Weapon>().getDamage() + col.transform.root.GetComponent<CharacterSuper>().attack;
             int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
 
 

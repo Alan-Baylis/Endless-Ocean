@@ -81,11 +81,11 @@ public class Item : MonoBehaviour{
     /// </summary>
     public void repositionTooltip()
     {
-        if (this.tooltip.activeSelf)
+        /*if (this.tooltip.activeSelf)
         {
             this.tooltip.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z);
             this.tooltip.transform.rotation = Quaternion.identity;
-        }
+        }*/
     }
 
     /// <summary>
