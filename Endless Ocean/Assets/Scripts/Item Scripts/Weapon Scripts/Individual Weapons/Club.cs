@@ -9,7 +9,7 @@ public class Club : MeleeWeapon {
 
     static public string modelPathLocal = "Prefabs/Weapons/Club";
     // Use this for initialization
-    void Start()
+    new void Start()
     {
         base.Start();
         Debug.Log("Started");

@@ -98,13 +98,16 @@ public class PlayerController : CharacterSuper
         equipWeapon(Club.modelPathLocal, weaponMounts.Primary, "PlayerWeapon");
         equipWeapon(Pistol.modelPathLocal, weaponMounts.Secondary, "PlayerWeapon");
 
-        // Set primary/active player weapon as the one stored in the first slot
-        weapon = meeleMount.Weapon;
-
-        // Hide the second slot weapon so only first slot is visible
-        rangedMount.MountPoint.gameObject.SetActive(false);
-
-
+        //set the starter weapon to set weapon
+        switch (activeWeaponType)
+        {
+            case weaponMounts.Primary:
+                weapon = primaryMount.Weapon;
+                break;
+            case weaponMounts.Secondary:
+                weapon = secondaryMount.Weapon;
+                break;
+        }
 
         //this.playerGrapple = this.AddComponent<Grapple>();
         this.facingRight = true;

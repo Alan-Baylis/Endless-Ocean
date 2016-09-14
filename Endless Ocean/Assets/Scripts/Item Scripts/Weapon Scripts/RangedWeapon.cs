@@ -22,9 +22,12 @@ public abstract class RangedWeapon : Weapon {
     /// Checks if the player has ammo to fire their weapon.
     /// </summary>
     /// <returns>A bool inidicating if the player has ammo to fire.</returns>
-    protected virtual bool useAmmo()
+    new protected virtual bool useAmmo()
     {
-        if(this.player.ammo > 0)
+        if (!base.useAmmo)
+        {
+            return true;
+        }else if(this.player.ammo > 0 )
         {
             this.player.ammo--;
             return true;
@@ -34,4 +37,26 @@ public abstract class RangedWeapon : Weapon {
             return false;
         }
     }
+
+    /// <summary>
+    /// Returns a bullet prefab.
+    /// </summary>
+    /// <returns>A bullet prefab at the specified position.</returns>
+    protected GameObject getBulletPrefab()
+    {
+        GameObject bullet = Instantiate(Resources.Load("Prefabs/Weapons/Bullet"), this.transform.position, this.transform.rotation) as GameObject;
+
+        switch (tag)
+        {
+            case "PlayerWeapon":
+                bullet.tag = "PlayerProjectile";
+                break;
+            case "EnemyWeapon":
+                bullet.tag = "EnemyProjectile";
+                break;
+            default:
+                break;
+        }
+        return bullet;
+    }   
 }

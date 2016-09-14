@@ -66,6 +66,8 @@ public abstract class CharacterSuper : MonoBehaviour
     // Current level
     public int currentLevel;
 
+    //modifier for how likely a character is to get good weapons - increase for reforger, decrease for lowly mobs
+    public float luck = 1;
 
     // Highest possible health
     public int maxHealth;
@@ -112,15 +114,15 @@ public abstract class CharacterSuper : MonoBehaviour
 
     // Mount where weapon is attached to
     public GameObject weaponMount;
-    public weaponMount rangedMount;
-    public weaponMount meeleMount;
+    public weaponMount primaryMount;
+    public weaponMount secondaryMount;
 
     public enum weaponMounts
     {
         Primary, Secondary
     };
 
-    public weaponMounts activeWeponType = weaponMounts.Primary;
+    public weaponMounts activeWeaponType = weaponMounts.Primary;
     #endregion
 
 
@@ -156,8 +158,8 @@ public abstract class CharacterSuper : MonoBehaviour
 
 
         // Get weapon mount location so that we can easily attach weapons to them
-        meeleMount.MountPoint = primaryWeaponSlot;
-        rangedMount.MountPoint = secondaryWeaponSlot;
+        secondaryMount.MountPoint = primaryWeaponSlot;
+        primaryMount.MountPoint = secondaryWeaponSlot;
     }
 
     // Update is called once per frame
@@ -292,16 +294,15 @@ public abstract class CharacterSuper : MonoBehaviour
         switch (mount)
         {
             case weaponMounts.Primary:
-                meeleMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
-                meeleMount.Weapon.WeaponTag = tag;
-                meeleMount.Weapon.tag = tag;
-                Debug.Log("MELEE WEP");
+                primaryMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                primaryMount.Weapon.weaponTag = tag;
+                primaryMount.Weapon.tag = tag;
 
                 break;
             case weaponMounts.Secondary:
-                rangedMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
-                rangedMount.Weapon.weaponTag = tag;
-                rangedMount.Weapon.tag = tag;
+                secondaryMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
+                secondaryMount.Weapon.WeaponTag = tag;
+                secondaryMount.Weapon.tag = tag;
                 break;
         }
     }
@@ -311,27 +312,27 @@ public abstract class CharacterSuper : MonoBehaviour
     /// </summary>
     public void swapWeapons()
     {
-        meeleMount.MountPoint.gameObject.SetActive(false); // hide weapon
-        rangedMount.MountPoint.gameObject.SetActive(false); // hide weapon
+        secondaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
+        primaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
         // Check for empty slots
-        if (!rangedMount.weaponLoaded() || !meeleMount.weaponLoaded())
+        if (!primaryMount.weaponLoaded() || !secondaryMount.weaponLoaded())
         {
             //do not switch
         }
         // No empty slots and active weapon is the first one, switch to second wep
-        else if (activeWeponType == weaponMounts.Primary)
+        else if (activeWeaponType == weaponMounts.Primary)
         {
-            weapon = rangedMount.Weapon; // set as new active weapons
-            activeWeponType = weaponMounts.Secondary;
-            rangedMount.MountPoint.gameObject.SetActive(true); // show weapon
+            weapon = primaryMount.Weapon; // set as new active weapons
+            activeWeaponType = weaponMounts.Secondary;
+            primaryMount.MountPoint.gameObject.SetActive(true); // show weapon
             
         }
         // No empty slots and active weapon is the second one, switch to first wep
-        else if (activeWeponType == weaponMounts.Secondary)
+        else if (activeWeaponType == weaponMounts.Secondary)
         {
-            weapon = meeleMount.Weapon; // set as new active weapon
-            activeWeponType = weaponMounts.Primary;
-            meeleMount.MountPoint.gameObject.SetActive(true); // show weapon
+            weapon = secondaryMount.Weapon; // set as new active weapon
+            activeWeaponType = weaponMounts.Primary;
+            secondaryMount.MountPoint.gameObject.SetActive(true); // show weapon
             
         }
     }

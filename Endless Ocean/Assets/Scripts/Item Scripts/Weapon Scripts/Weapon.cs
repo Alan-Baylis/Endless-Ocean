@@ -11,6 +11,8 @@ using System.Collections;
 /// </summary>
 public abstract class Weapon: Item{
 
+    public bool useAmmo = true;
+
     // Attack variables
     public int damage;
     public int knockBack;
@@ -28,8 +30,7 @@ public abstract class Weapon: Item{
         }
     }
 
-
-    protected float qualityModifier;
+    protected float qualityModifier = 1;
 
     //Firerate of the gun.
     public float weaponAttackSpeed;
@@ -41,34 +42,52 @@ public abstract class Weapon: Item{
     /// </summary>
     abstract public void attack(float playerDamage, Vector3 mousePositionInWorldCoords);
 
-
-    
-
-    /// <summary>
-    /// Returns a bullet prefab.
-    /// </summary>
-    /// <returns>A bullet prefab at the specified position.</returns>
-    protected GameObject getBulletPrefab()
+    new void Start()
     {
-        GameObject bullet = Instantiate(Resources.Load("Prefabs/Weapons/Bullet"), this.transform.position, this.transform.rotation) as GameObject;
+        base.Start();
 
-        switch (tag)
+    }
+    
+    public void setQuality(float luck)
+    {
+        int qualityInt = Random.Range(1, 100);
+        qualityInt = (int) (qualityInt * luck);
+        if (quality != ItemQuality.NULL)
         {
-            case "PlayerWeapon":
-                bullet.tag = "PlayerProjectile";
-                break;
-            case "EnemyWeapon":
-                bullet.tag = "EnemyProjectile";
-                break;
-            default:
-                break;
+            qualityInt = (int)quality;
         }
-        return bullet;
+
+
+        if (qualityInt <= (int)ItemQuality.crude)
+        {
+            qualityModifier = 0.5f;
+            quality = ItemQuality.crude;
+        }
+        else if (qualityInt <= (int)ItemQuality.basic)
+        {
+            qualityModifier = 1f;
+            quality = ItemQuality.basic;
+        }
+        else if (qualityInt <= (int)ItemQuality.improved)
+        {
+            qualityModifier = 1.5f;
+            quality = ItemQuality.improved;
+        }
+        else if (qualityInt <= (int)ItemQuality.legendary)
+        {
+            qualityModifier = 2f;
+            quality = ItemQuality.legendary;
+        }
+        else
+        {
+            qualityModifier = 100f;
+            quality = ItemQuality.godly;
+        }
     }  
 
     public int getDamage()
     {
-        return damage;
+        return (int) (damage * qualityModifier);
     }
 
     public int getKnockBack()

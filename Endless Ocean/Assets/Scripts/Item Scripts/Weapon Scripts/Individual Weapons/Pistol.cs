@@ -20,8 +20,8 @@ public class Pistol : RangedWeapon  {
     /// Instantiates a single bullet travelling the direction the pistol is facing.
     /// </summary>
     /// <param name="playerDamage">The players damage which is added to the weapons attack.</param>
-    /// <param name="mousePositionInWorldCoords">The mouse position in the game which is the direction the bullet will travel.</param>
-    override public void attack(float playerDamage, Vector3 mousePositionInWorldCoords)
+    /// <param name="target">the direction the bullet will travel.</param>
+    override public void attack(float playerDamage, Vector3 target)
     {
         if (!base.useAmmo())
         {
@@ -31,7 +31,7 @@ public class Pistol : RangedWeapon  {
         bullet.GetComponent<Bullet>().speed = base.projectileSpeed;
         bullet.GetComponent<Bullet>().damage = base.damage;
         bullet.GetComponent<Bullet>().knockBack = this.knockBack;
-        bullet.transform.LookAt(mousePositionInWorldCoords);
+        bullet.transform.LookAt(target);
     }
 
     override public void reload()

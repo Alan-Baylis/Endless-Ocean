@@ -47,12 +47,15 @@ public abstract class NPCBehaviour : CharacterSuper
 
     protected void attackTarget(Transform target)
     {
-        if (nextMelee < Time.time)
+        if (weapon != null)
         {
-            nextMelee = Time.time + weapon.getAttackSpeed();
-            this.animator.SetTrigger("MeleeAttackTrigger");
-            weapon.attack(attack, target.position);
-            moveCharacter(0);
+            if (nextMelee < Time.time)
+            {
+                nextMelee = Time.time + weapon.getAttackSpeed();
+                this.animator.SetTrigger("MeleeAttackTrigger");
+                weapon.attack(attack, target.position);
+                moveCharacter(0);
+            }
         }
     }
 

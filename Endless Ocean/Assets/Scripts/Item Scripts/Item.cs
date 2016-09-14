@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 /// <summary>
-/// This is the super class for all items it contains functionality that is shared between all types ofitems such as flying out of chests and shoing tooltips.
+/// This is the super class for all items it contains functionality that is shared between all types of items such as flying out of chests and showing tooltips.
 /// 
 /// IMPORTANT: When overriding the Start and Update methods of this class. Be sure to call the base vesion as well so that the base functionality is not lost.
 /// </summary>
@@ -16,6 +16,18 @@ public class Item : MonoBehaviour{
 
     public GameObject tooltip;
 
+    public enum ItemQuality
+    {
+        NULL = 0,
+        crude = 30,
+        basic = 70,
+        improved = 90,
+        legendary = 100,
+        godly = 1000 //for developer usage
+    }
+
+    public ItemQuality quality = ItemQuality.NULL;
+
     //Used to stack consumables.
     public int itemCount = 1;
 
@@ -26,10 +38,30 @@ public class Item : MonoBehaviour{
         get { return false; }
     }
 
+    protected Color getQualityColour()
+    {
+        switch (quality)
+        {
+            case ItemQuality.crude:
+                return Color.red;
+            case ItemQuality.basic:
+                return Color.white;
+            case ItemQuality.improved:
+                return Color.green;
+            case ItemQuality.legendary:
+                return Color.blue;
+            case ItemQuality.godly:
+                return Color.yellow;
+            default:
+                return Color.grey;
+        }
+    }
+
     protected virtual void Start()
     {
         this.tooltip = Instantiate(Resources.Load("Prefabs/UI/ItemTooltip"), new Vector3(), Quaternion.identity) as GameObject;
-        this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
+        this.tooltip.transform.GetChild(0).GetComponent<Text>().text = "(" + quality + ") " + this.itemName;
+        this.tooltip.transform.GetChild(0).GetComponent<Text>().color = getQualityColour();
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);
         this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;

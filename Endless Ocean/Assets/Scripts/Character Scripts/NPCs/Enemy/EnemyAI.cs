@@ -9,6 +9,11 @@ public class EnemyAI : NPCBehaviour
     public float attackRange;
     public float detectRange;
 
+    public Weapon primaryWeapon;
+    public Weapon secondaryWeapon;
+
+    public Boolean floating = false;
+
     public Transform target;
 
 	// Use this for initialization
@@ -21,12 +26,33 @@ public class EnemyAI : NPCBehaviour
         // Assign objects that damage this character upon collision
         base.fears = "Player";
 
+        if (primaryWeapon != null)
+        {
+            equipWeapon(primaryWeapon.getModelPath(), weaponMounts.Primary, "EnemyWeapon");
 
-        equipWeapon(Club.modelPathLocal, weaponMounts.Primary, "EnemyWeapon");
-        equipWeapon(Pistol.modelPathLocal, weaponMounts.Secondary, "EnemyWeapon");
+            //set weapon quality
+            primaryMount.Weapon.setQuality(luck);
+            primaryMount.Weapon.useAmmo = false;
+        }
+        if (secondaryWeapon != null)
+        {
+            equipWeapon(secondaryWeapon.getModelPath(), weaponMounts.Secondary, "EnemyWeapon");
 
-        // Set primary/active player weapon as the one stored in the first slot
-        weapon = meeleMount.Weapon;
+            //set weapon quality
+            secondaryMount.Weapon.setQuality(luck);
+            secondaryMount.Weapon.useAmmo = false;
+        }
+
+        //set the starter weapon to set weapon
+        switch (activeWeaponType)
+        {
+            case weaponMounts.Primary:
+                weapon = primaryMount.Weapon;
+                break;
+            case weaponMounts.Secondary:
+                weapon = secondaryMount.Weapon;
+                break;
+        }
     }
 	
 	// Update is called once per frame
@@ -37,7 +63,11 @@ public class EnemyAI : NPCBehaviour
     new void FixedUpdate()
     {
         base.FixedUpdate();
-        //transform.LookAt(target);
+
+        if (floating)
+        {
+            transform.LookAt(target);
+        }
 
         //check if player is in range
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
@@ -48,7 +78,7 @@ public class EnemyAI : NPCBehaviour
                 pathToLocation(target.position);
             }else
             {
-                //attackTarget(target);
+                attackTarget(target);
             }
 
         }
