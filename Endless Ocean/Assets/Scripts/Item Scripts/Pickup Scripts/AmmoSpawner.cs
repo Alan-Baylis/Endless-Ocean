@@ -16,7 +16,7 @@ public class AmmoSpawner : MonoBehaviour
     {
         for (int i = 0; i < amountOfAmmo; i++)
         {
-            GameObject ammo = Instantiate(Resources.Load("Prefabs/Environment/Ammo"), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
+            GameObject ammo = Instantiate(Resources.Load("Prefabs/Pickups/Ammo"), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
             ammo.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
         }
     }

@@ -13,7 +13,7 @@ public class ExpSphereSpawner : MonoBehaviour {
     public static void spawnExpOrbs(int amountOfExp, Transform positionToSpawnAt) { 
         for (int i = 0; i < amountOfExp/10; i++)
         {
-            GameObject expShere = Instantiate(Resources.Load("Prefabs/Environment/ExpSphere"), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
+            GameObject expShere = Instantiate(Resources.Load("Prefabs/Pickups/ExpSphere"), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
             expShere.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
         }
     }

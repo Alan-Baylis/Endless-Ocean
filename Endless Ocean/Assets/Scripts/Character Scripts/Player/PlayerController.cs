@@ -161,7 +161,7 @@ public class PlayerController : CharacterSuper
         // Weapon event
         if (Input.GetButtonDown("Fire 1"))
         { // Button to activate: Left Mouse Click
-            if (Physics.CheckSphere(playerCameraController.getMouseLocationInWorldCoordinates(), 1f, itemsLayerMask))
+            if (Physics.CheckSphere(playerCameraController.getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask))
             {
                 Collider[] clickedItems = Physics.OverlapSphere(playerCameraController.getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask);
                 inventory.addItem(clickedItems[0].gameObject.GetComponent<Item>());

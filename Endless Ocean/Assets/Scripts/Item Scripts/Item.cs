@@ -24,7 +24,7 @@ public class Item : MonoBehaviour{
         get { return false; }
     }
 
-    protected void Start()
+    protected virtual void Start()
     {
         this.tooltip = Instantiate(Resources.Load("Prefabs/UI/ItemTooltip"), new Vector3(), Quaternion.identity) as GameObject;
         this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
@@ -33,7 +33,7 @@ public class Item : MonoBehaviour{
         this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (flyingOutOfChest)
         {
@@ -81,11 +81,11 @@ public class Item : MonoBehaviour{
     /// </summary>
     public void repositionTooltip()
     {
-        /*if (this.tooltip.activeSelf)
+        if (this.tooltip.activeSelf)
         {
             this.tooltip.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z);
             this.tooltip.transform.rotation = Quaternion.identity;
-        }*/
+        }
     }
 
     /// <summary>

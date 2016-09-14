@@ -15,7 +15,7 @@ public class TreasureSpawner : MonoBehaviour {
     {
         for (int i = 0; i < amountOfTreasure / 10; i++)
         {
-            GameObject expShere = Instantiate(Resources.Load("Prefabs/Environment/Treasure"), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
+            GameObject expShere = Instantiate(Resources.Load("Prefabs/Pickups/Treasure"), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
             expShere.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
         }
     }

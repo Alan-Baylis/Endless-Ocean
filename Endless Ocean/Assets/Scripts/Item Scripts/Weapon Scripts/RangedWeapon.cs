@@ -3,12 +3,12 @@ using System.Collections;
 
 public abstract class RangedWeapon : Weapon {
 
-    private PlayerController player;
-
-    protected void Start()
-    {
-        this.player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-    }
+    protected PlayerController player { get; set; }
+   
+    //protected void Start()
+    //{
+    //    this.player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+    //}
 
     //The travel speed of the bullet.
     protected float projectileSpeed;

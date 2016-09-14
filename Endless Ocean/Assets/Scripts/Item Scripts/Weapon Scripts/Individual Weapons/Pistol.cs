@@ -7,8 +7,9 @@ public class Pistol : RangedWeapon  {
 
     static public string modelPathLocal = "Prefabs/Weapons/Pistol";
 
-    public void Start()
+    protected override void Start()
     {
+        base.player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         base.Start();
         base.weaponAttackSpeed = 0.5f;
         base.projectileSpeed = 30f;

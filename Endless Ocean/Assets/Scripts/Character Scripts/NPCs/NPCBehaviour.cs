@@ -9,9 +9,9 @@ public abstract class NPCBehaviour : CharacterSuper
 
     public int[] itemPossibilites = {100};
 
-    private int maxAmountOfTreasure = 51;
-    private int maxAmountOfExp = 51;
-    private int maxAmountOfAmmo = 3;
+    private int maxAmountOfTreasure;
+    private int maxAmountOfExp;
+    private int maxAmountOfAmmo;
 
     //float healthbar above enemy
     public Image healthBar;
@@ -20,7 +20,6 @@ public abstract class NPCBehaviour : CharacterSuper
     // Use this for initialization
     new void Start () {
         // healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("HealthFG").GetComponent<Image>();
-
         base.Start();
         tracking = false;
     }
@@ -63,9 +62,9 @@ public abstract class NPCBehaviour : CharacterSuper
     public override void die()
     {
         System.Random random = new System.Random();
-        ExpSphereSpawner.spawnExpOrbs(random.Next(0, maxAmountOfExp), this.transform);
-        TreasureSpawner.spawnTreasure(random.Next(0, maxAmountOfTreasure), this.transform);
-        AmmoSpawner.spawnAmmo(random.Next(2, maxAmountOfAmmo), this.transform);
+        ExpSphereSpawner.spawnExpOrbs(random.Next(0, maxHealth/2), this.transform);
+        TreasureSpawner.spawnTreasure(random.Next(0, maxHealth/2), this.transform);
+        AmmoSpawner.spawnAmmo(random.Next(0, maxHealth/10), this.transform);
         ItemSpawner.spawnSpecificItems(itemDrops, itemPossibilites, this.transform);
         Destroy(this.gameObject);
     }
