@@ -1,14 +1,25 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using System.Collections;
 using System;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InventorySlot : Slot
+public class ShopSlot : Slot
 {
+    Shop shop;
+    PlayerController player;
 
     public int slotNumber;
     Text itemCount;
 
+    public void Start()
+    {
+        this.player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        this.shop = GameObject.FindWithTag("Shop").GetComponent<Shop>();
+        this.inventory = GameObject.FindWithTag("Inventory").GetComponent<Inventory>();
+        this.itemCount = this.gameObject.transform.GetChild(1).GetComponent<Text>();
+        this.itemImage = this.GetComponentsInChildren<Image>()[1];
+    }
 
     /// <summary>
     /// This function runs when the user clicks on the slot.
@@ -28,8 +39,7 @@ public class InventorySlot : Slot
     {
         if (!this.isSlotEmpty())
         {
-
-            this.inventory.showToolTip(inventory.items[this.slotNumber]);
+            this.shop.showToolTip(shop.items[this.slotNumber]);
         }
     }
 
@@ -43,7 +53,7 @@ public class InventorySlot : Slot
     {
         if (!this.isSlotEmpty())
         {
-            this.inventory.hideToolTip();
+            this.shop.hideToolTip();
         }
     }
 
@@ -92,15 +102,6 @@ public class InventorySlot : Slot
         }
     }
 
-    /// <summary>
-    /// Runs when the Gameobject is first created. Initializes key variables.
-    /// </summary>
-    void Start()
-    {
-        this.itemCount = this.gameObject.transform.GetChild(1).GetComponent<Text>();
-        this.itemImage = this.GetComponentsInChildren<Image>()[1];
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -109,11 +110,11 @@ public class InventorySlot : Slot
         if (!this.isSlotEmpty())
         {
             this.itemImage.enabled = true;
-            this.itemImage.sprite = this.inventory.items[this.slotNumber].itemIcon;
-            if (this.inventory.items[slotNumber].stackable)
+            this.itemImage.sprite = this.shop.items[this.slotNumber].itemIcon;
+            if (this.shop.items[slotNumber].stackable)
             {
                 this.itemCount.enabled = true;
-                this.itemCount.text = "" + this.inventory.items[this.slotNumber].itemCount;
+                this.itemCount.text = "" + this.shop.items[this.slotNumber].itemCount;
             }
         }
         else
@@ -128,7 +129,7 @@ public class InventorySlot : Slot
     /// <returns>A boolean indicating if the slot is empty or not.</returns>
     public bool isSlotEmpty()
     {
-        if (this.inventory.items[this.slotNumber].itemName != null)
+        if (this.shop.items[this.slotNumber].itemName != null)
         {
             return false;
         }

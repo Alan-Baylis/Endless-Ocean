@@ -19,6 +19,8 @@ public class Item : MonoBehaviour{
     //Used to stack consumables.
     public int itemCount = 1;
 
+    public int sellValue;
+
     public virtual bool stackable
     {
         get { return false; }

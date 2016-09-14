@@ -121,6 +121,10 @@ public class EquipmentSlot: Slot
         }
     }
 
+    /// <summary>
+    /// Returns a boolean indicating whether or not the slot is empty.
+    /// </summary>
+    /// <returns>A boolean indicating if the slot is empty or not.</returns>
     public bool isSlotEmpty()
     {
         if (this.equipment.equippedItems[bodypart].itemName != null)

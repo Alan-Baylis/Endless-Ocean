@@ -125,9 +125,9 @@ public class QuickItemSlot : Slot
     }
 
     /// <summary>
-    /// Checks if the slots contains an item by referring the quick item panel list.
+    /// Returns a boolean indicating whether or not the slot is empty.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A boolean indicating if the slot is empty or not.</returns>
     public bool isSlotEmpty()
     {
         if (this.quickItemsPanel.quickItems[this.slotNumber].itemName != null)
