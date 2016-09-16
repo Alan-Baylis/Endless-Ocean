@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class TreasureChest : MonoBehaviour {
 
     Animator animator;
+    private bool opened = false;
 
     // Use this for initialization
     void Start () {
@@ -15,8 +16,9 @@ public class TreasureChest : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            if (Input.GetKeyDown("e"))
+            if (Input.GetKeyDown("e") && (!opened))
             {
+                opened = true;
                 this.animator.SetBool("opened", true);
 
                 List<GameObject> spawnedObjects = ItemSpawner.spawnAnyItems(this.transform, 2);

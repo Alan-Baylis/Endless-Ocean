@@ -23,7 +23,7 @@ public class PlayerController : CharacterSuper
     public int experienceToLevel;
     public int currentExperience;
 
-    public int totalTreasure;
+    public int totalTreasure = 0;
 
     //Reference to the items menu UI element.
     public GameObject itemsMenu;
@@ -233,6 +233,9 @@ public class PlayerController : CharacterSuper
         {
             levelUp();
         }
+
+        //Update treasure label in inventory.
+        this.inventory.treasureLabel.text = "$" + this.totalTreasure.ToString();
     }
 
     public void levelUp()

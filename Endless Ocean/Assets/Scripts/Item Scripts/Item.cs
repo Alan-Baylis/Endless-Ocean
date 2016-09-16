@@ -32,6 +32,7 @@ public class Item : MonoBehaviour{
     public int itemCount = 1;
 
     public int sellValue;
+    public int buyValue;
 
     public virtual bool stackable
     {

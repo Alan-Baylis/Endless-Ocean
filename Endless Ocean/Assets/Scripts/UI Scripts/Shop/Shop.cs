@@ -23,6 +23,7 @@ public class Shop : MonoBehaviour
 
     //List holding items user owns.
     public List<Item> inventory = new List<Item>();
+    public Inventory inventoryGameObject;
 
     //Boolean determining when the inventory should be shown.
     private bool showShop;
@@ -48,7 +49,8 @@ public class Shop : MonoBehaviour
                 //Giving slot a name and number.
                 instantiatedSlot.name = "Slot " + slotCount;
                 instantiatedSlot.GetComponent<ShopSlot>().slotNumber = slotCount;
-                instantiatedSlot.GetComponent<ShopSlot>().inventory = GameObject.FindWithTag("Inventory").GetComponent<Inventory>();
+                instantiatedSlot.GetComponent<ShopSlot>().inventory = this.inventoryGameObject.GetComponent<Inventory>();
+                instantiatedSlot.GetComponent<ShopSlot>().shop = this;
                 //Making slot child of parent canvas.
                 instantiatedSlot.transform.parent = this.gameObject.transform;
                 //Positioning slot.
@@ -67,11 +69,22 @@ public class Shop : MonoBehaviour
     /// This function shows the tool tip.
     /// </summary>
     /// <param name="item">The item to show the tooltip for.</param>
-    public void showToolTip(Item item)
+    public void showToolTip(Item item, Vector3 tooltipPosition, bool canAfford)
     {
-        this.toolTip.transform.GetChild(0).GetComponent<Text>().text = item.itemName;
-        this.toolTip.transform.GetChild(1).GetComponent<Text>().text = item.description;
-        this.toolTip.transform.GetChild(2).GetComponent<Image>().sprite = item.itemIcon;
+        this.toolTip.transform.SetAsLastSibling();
+        this.toolTip.transform.Find("Item Name").GetComponent<Text>().text = item.itemName;
+        this.toolTip.transform.Find("Item Description").GetComponent<Text>().text = item.description;
+        this.toolTip.transform.Find("Item Image").GetComponent<Image>().sprite = item.itemIcon;
+        this.toolTip.GetComponent<RectTransform>().localPosition = new Vector3(tooltipPosition.x + 20, tooltipPosition.y - 20, tooltipPosition.z + 1);
+        if (!canAfford)
+        {
+            this.toolTip.transform.Find("Cost Label").GetComponent<Text>().color = Color.red;
+        }
+        else
+        {
+            this.toolTip.transform.Find("Cost Label").GetComponent<Text>().color = Color.black;
+        }
+        this.toolTip.transform.Find("Cost Label").GetComponent<Text>().text = "$" + item.buyValue.ToString();
         this.toolTip.SetActive(true);
     }
 
@@ -81,6 +94,54 @@ public class Shop : MonoBehaviour
     public void hideToolTip()
     {
         this.toolTip.SetActive(false);
+    }
+
+    /// <summary>
+    /// This function adds an item to the shop and stacks it if possible.
+    /// </summary>
+    /// <param name="item">The item to add.</param>
+    /// <returns>A boolean indicating whether or not the item was added successfully.</returns>
+    public bool addItem(Item item)
+    {
+        if (item.stackable)
+        {
+            for (int i = 0; i < this.items.Count; i++)
+            {
+                if (item.itemName == (this.items[i].itemName))
+                {
+                    this.items[i].itemCount++;
+                    Destroy(item.gameObject);
+                    return true;
+                }
+            }
+            return this.addItemInEmptySlot(item);
+        }
+        else
+        {
+            return this.addItemInEmptySlot(item);
+        }
+    }
+
+
+    /// <summary>
+    /// This function adds the specified item in the soonest open slot in the shop.
+    /// </summary>
+    /// <param name="item">The item to add.</param>
+    /// <returns>A boolean indicating whether or not the item was added successfully.</returns>
+    bool addItemInEmptySlot(Item item)
+    {
+        for (int i = 0; i < this.items.Count; i++)
+        {
+            if (this.items[i].itemName == null)
+            {
+                this.items[i] = item;
+                this.slots[i].GetComponent<ShopSlot>().item = item;
+                item.gameObject.SetActive(false);
+                item.gameObject.transform.parent = this.gameObject.transform;
+                return true;
+            }
+        }
+        return false;
     }
 
 }

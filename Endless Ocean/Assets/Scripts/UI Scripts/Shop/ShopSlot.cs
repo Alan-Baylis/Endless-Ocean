@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ShopSlot : Slot
 {
-    Shop shop;
+    public Shop shop;
     PlayerController player;
 
     public int slotNumber;
@@ -15,8 +15,6 @@ public class ShopSlot : Slot
     public void Start()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        this.shop = GameObject.FindWithTag("Shop").GetComponent<Shop>();
-        this.inventory = GameObject.FindWithTag("Inventory").GetComponent<Inventory>();
         this.itemCount = this.gameObject.transform.GetChild(1).GetComponent<Text>();
         this.itemImage = this.GetComponentsInChildren<Image>()[1];
     }
@@ -39,7 +37,7 @@ public class ShopSlot : Slot
     {
         if (!this.isSlotEmpty())
         {
-            this.shop.showToolTip(shop.items[this.slotNumber]);
+            this.shop.showToolTip(shop.items[this.slotNumber], this.GetComponent<RectTransform>().localPosition, (this.player.totalTreasure > shop.items[this.slotNumber].buyValue));
         }
     }
 
@@ -71,9 +69,14 @@ public class ShopSlot : Slot
         }
         if (!this.isSlotEmpty())
         {
-            this.itemCount.enabled = false;
-            this.inventory.startDraggingItem(inventory.items[slotNumber]);
-            this.inventory.items[slotNumber] = new Item();
+            this.shop.hideToolTip();
+            if (this.player.totalTreasure > this.shop.items[slotNumber].buyValue)
+            {
+                this.itemCount.enabled = false;
+                this.inventory.startDraggingItem(shop.items[slotNumber]);
+                this.shop.items[slotNumber] = new Item();
+                this.player.totalTreasure -= this.shop.items[slotNumber].buyValue;
+            }
         }
     }
 
@@ -87,17 +90,12 @@ public class ShopSlot : Slot
     {
         if (this.inventory.draggingItem)
         {
-            if (!this.isSlotEmpty())
+            if (this.isSlotEmpty())
             {
-                Item tempDraggingItem = this.inventory.draggedItem;
-                this.inventory.draggedItem = this.inventory.items[this.slotNumber];
-                this.inventory.draggedItemIcon.GetComponent<Image>().sprite = this.inventory.items[this.slotNumber].itemIcon;
-                this.inventory.items[this.slotNumber] = tempDraggingItem;
-            }
-            else if (this.isSlotEmpty())
-            {
-                this.inventory.items[this.slotNumber] = this.inventory.draggedItem;
+                this.shop.items[this.slotNumber] = this.inventory.draggedItem;
                 this.inventory.stopDraggingItem();
+                this.player.totalTreasure += this.inventory.draggedItem.sellValue;
+                Debug.Log(this.player.totalTreasure);
             }
         }
     }

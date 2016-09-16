@@ -23,6 +23,8 @@ public class Inventory : MonoBehaviour {
     //Reference to dragged image.
     public Item draggedItem;
     public GameObject draggedItemIcon;
+    //Reference to treasurelabel.
+    public Text treasureLabel;
 
     //List holding items user owns.
     public List<Item> inventory = new List<Item>();
@@ -186,6 +188,7 @@ public class Inventory : MonoBehaviour {
             }
             this.currentYLocation -= Inventory.INCREMENT;
             this.currentXlocation -= (Inventory.INCREMENT * 5);
+            this.treasureLabel = GameObject.Find("TreasureLabel").GetComponent<Text>();
         }
     }
 }

@@ -61,6 +61,7 @@ public class InventorySlot : Slot
         }
         if (!this.isSlotEmpty())
         {
+            this.inventory.hideToolTip();
             this.itemCount.enabled = false;
             this.inventory.startDraggingItem(inventory.items[slotNumber]);
             this.inventory.items[slotNumber] = new Item();
