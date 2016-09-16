@@ -37,15 +37,6 @@ public class QuickItemSlot : Slot
     }
 
     /// <summary>
-    /// Nothing happens when the user clicks on the quick item slots.
-    /// </summary>
-    /// <param name="eventData">Event date for the click.</param>
-    public override void OnPointerClick(PointerEventData eventData)
-    {
-        return;
-    }
-
-    /// <summary>
     /// If the user is dragging an item it is enabled and placed into the quic kitem bar at the index they click on. 
     /// 
     /// If there is an item in the slot they click on the user starts dragging that item.

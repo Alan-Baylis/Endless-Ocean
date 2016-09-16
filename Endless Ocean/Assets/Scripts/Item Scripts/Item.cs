@@ -16,6 +16,12 @@ public class Item : MonoBehaviour{
 
     public GameObject tooltip;
 
+    public string itemName;
+
+    public string description;
+
+    public Sprite itemIcon;
+
     public enum ItemQuality
     {
         NULL = 0,
@@ -89,12 +95,6 @@ public class Item : MonoBehaviour{
     {
         this.repositionTooltip();
     }
-
-    public string itemName;
-
-    public string description;
-
-    public Sprite itemIcon;
 
     /// <summary>
     /// Returns a bool indicating whether or not the Item can be placed in a quick item slot.

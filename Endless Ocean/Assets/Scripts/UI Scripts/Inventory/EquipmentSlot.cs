@@ -12,14 +12,6 @@ public class EquipmentSlot: Slot
     private Text itemCount;
 
     /// <summary>
-    /// This function runs when the user clicks on the slot.
-    /// </summary>
-    /// <param name="eventData">The event data from the click.</param>
-    public override void OnPointerClick(PointerEventData eventData)
-    {
-    }
-
-    /// <summary>
     /// This function runs when the user mouses over a slot.
     /// 
     /// It shows the tooltip for the item.
