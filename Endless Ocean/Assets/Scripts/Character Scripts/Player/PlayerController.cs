@@ -37,8 +37,8 @@ public class PlayerController : CharacterSuper
     public int maxEnergy;
     // How often energy regens
     protected float energyRegenSpeed = 0.1f;
-    // Used to calculate how to to rengerate
-    protected int regenAmount = 25;
+    // Used to calculate how to to rengerate, higher is slower
+    protected int regenAmount = 35;
     // Pentalty timer for when energy reaches 0
     protected int penaltyTimer = 0;
     // When pentaltyTimer reaches this value, penalty period is over
@@ -56,6 +56,10 @@ public class PlayerController : CharacterSuper
     public int healthBarHeight = 100;
 
     public int ammo;
+
+    // dodge stuff
+    int dodgeCost = 15;
+    int dodgeSpeed = 25;
 
     // Use this for initialization
     new void Start()
@@ -134,6 +138,25 @@ public class PlayerController : CharacterSuper
         }
     }
 
+    public IEnumerator DoDodge()
+    {
+        if (energy >= dodgeCost && onGround)
+        {
+            enableMove = false;
+            this.animator.SetBool("IsDodging",true);
+            this.energy -= dodgeCost;
+            if (facingRight)
+                rigidbody.velocity = new Vector3(dodgeSpeed, this.rigidbody.velocity.y, 0);
+            else
+                rigidbody.velocity = new Vector3(-dodgeSpeed, this.rigidbody.velocity.y, 0);
+
+            yield return new WaitForSeconds(.5f);
+            rigidbody.velocity = new Vector3(0, this.rigidbody.velocity.y, 0);
+            this.animator.SetBool("IsDodging", false);
+            enableMove = true;
+        }
+    }
+
     /// <summary>
     /// Runs before every frame. Performs physics calculates for game objects to be displayed when the next frame is rendered and updates the animator.
     /// </summary>
@@ -142,6 +165,11 @@ public class PlayerController : CharacterSuper
         if(this.health <= 0)
         {
             die();
+        }
+        // dodge
+        if (Input.GetButtonDown("Dodge")) // Button to activate: left shift
+        {
+            StartCoroutine(DoDodge());
         }
         // Button events
         // Swap weapons
