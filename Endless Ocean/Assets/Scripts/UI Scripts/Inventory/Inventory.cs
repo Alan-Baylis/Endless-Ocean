@@ -41,8 +41,8 @@ public class Inventory : MonoBehaviour {
     {
         //GameObject pistolTemp = Instantiate(Resources.Load("Prefabs/Weapons/Pistol")) as GameObject;
         //this.addItem(pistolTemp.GetComponent<Pistol>());
-        //GameObject clubTemp = Instantiate(Resources.Load("Prefabs/Weapons/Club")) as GameObject;
-        //this.addItem(clubTemp.GetComponent<Club>());
+        GameObject clubTemp = Instantiate(Resources.Load("Prefabs/Weapons/Club")) as GameObject;
+        this.addItem(clubTemp.GetComponent<Club>());
         //GameObject tp1 = Instantiate(Resources.Load("Prefabs/Consumables/TestPotion")) as GameObject;
         //this.addItem(tp1.GetComponent<Item>());
         //GameObject tp2 = Instantiate(Resources.Load("Prefabs/Consumables/TestPotion")) as GameObject;

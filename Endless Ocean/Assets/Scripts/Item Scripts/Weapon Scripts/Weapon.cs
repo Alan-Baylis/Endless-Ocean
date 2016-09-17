@@ -11,7 +11,18 @@ using System.Collections;
 /// </summary>
 public abstract class Weapon: Item{
 
+
+
     public bool useAmmo = true;
+
+
+    public override bool reforgable
+    {
+        get
+        {
+            return true;
+        }
+    }
 
     // Attack variables
     public int damage;
@@ -42,20 +53,19 @@ public abstract class Weapon: Item{
     /// </summary>
     abstract public void attack(float playerDamage, Vector3 mousePositionInWorldCoords);
 
-    new void Start()
+    protected override void Start()
     {
         base.Start();
-
     }
     
     public void setQuality(float luck)
     {
         int qualityInt = Random.Range(1, 100);
         qualityInt = (int) (qualityInt * luck);
-        if (quality != ItemQuality.NULL)
-        {
-            qualityInt = (int)quality;
-        }
+        //if (quality != ItemQuality.NULL)
+        //{
+        //    qualityInt = (int)quality;
+        //}
 
 
         if (qualityInt <= (int)ItemQuality.crude)

@@ -28,6 +28,9 @@ public class Shop : MonoBehaviour
     //Boolean determining when the inventory should be shown.
     private bool showShop;
 
+    //Reference to reforger panel.
+    public GameObject reforger;
+
     void Start()
     {
         this.initializeShop();
@@ -144,4 +147,12 @@ public class Shop : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Hides this panel and shows the reforger panel.
+    /// </summary>
+    public void showReforger()
+    {
+        this.gameObject.SetActive(false);
+        this.reforger.SetActive(true);
+    }
 }

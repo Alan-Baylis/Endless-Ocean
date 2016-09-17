@@ -45,6 +45,11 @@ public class Item : MonoBehaviour{
         get { return false; }
     }
 
+    public virtual bool reforgable
+    {
+        get { return false; }
+    }
+
     protected Color getQualityColour()
     {
         switch (quality)
