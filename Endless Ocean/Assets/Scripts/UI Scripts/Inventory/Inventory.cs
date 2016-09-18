@@ -29,6 +29,8 @@ public class Inventory : MonoBehaviour {
     //List holding items user owns.
     public List<Item> inventory = new List<Item>();
 
+    public PlayerController player;
+
     //Boolean determining when the inventory should be shown.
     private bool showInventory;
 
@@ -67,6 +69,8 @@ public class Inventory : MonoBehaviour {
             //Toggle showing the inventory.
             this.showInventory = !showInventory;
         }
+        //Update treasure label in inventory.
+        this.treasureLabel.text = "$" + this.player.totalTreasure.ToString();
     }
 
     /// <summary>

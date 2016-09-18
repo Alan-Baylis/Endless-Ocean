@@ -4,6 +4,9 @@ using System;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// This is the class for the reforger. It handles functionality to do with re-rolling item rarity and handling user input with reforging.
+/// </summary>
 public class Reforger : Slot
 {
 
@@ -16,7 +19,6 @@ public class Reforger : Slot
 
     void Start()
     {
-        this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         this.item = new Item();
         this.itemImage = this.transform.Find("ItemIcon").gameObject.GetComponent<Image>();
         this.costLabel = GameObject.FindGameObjectWithTag("ReforgerCostLabel").GetComponent<Text>();

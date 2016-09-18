@@ -26,7 +26,7 @@ public class PlayerController : CharacterSuper
     public int totalTreasure = 0;
 
     //Reference to the items menu UI element.
-    public GameObject itemsMenu;
+    public CharacterEquipment equipment;
     //Reference to the inventory script.
     public Inventory inventory;
     //Reference to the quickItemsPanel.
@@ -89,14 +89,9 @@ public class PlayerController : CharacterSuper
         experienceToLevel = currentLevel * 20;
 
         this.nextMelee = 0.0f;
+        //Must initialize inventory like this so that items can be picked up from the start.
         this.inventory.initializeInventory();
-        this.itemsMenu.SetActive(false);
-        //Hide Menu at start.
-        //COMMENTED THIS OUT FOR NOW, WAS BREAKING GAME
-        //this.itemsMenu.SetActive(false);
-
-        //this.utilityItem = this.utilityItem.GetComponent<UtilityItem>();
-
+        this.inventory.gameObject.SetActive(false);
         // TEMPORARY WEAPON EQUIPMENT/SWAPPING IMPLEMENTATION (Fraser, we'll need to get together and coordinate to get this working with inventory/drop/drag)
         
         equipWeapon(Club.modelPathLocal, weaponMounts.Primary, "PlayerWeapon");
@@ -179,7 +174,7 @@ public class PlayerController : CharacterSuper
         }
         if (Input.GetButtonDown("OpenItemsMenu")) // Button to activate: I
         {
-            itemsMenu.SetActive(!itemsMenu.activeInHierarchy);
+            this.toggleItemsMenu();
         }
         if (Input.GetButtonDown("ShowNearbyItemTooltips"))
         {
@@ -196,7 +191,6 @@ public class PlayerController : CharacterSuper
             {
                 Collider[] clickedItems = Physics.OverlapSphere(playerCameraController.getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask);
                 inventory.addItem(clickedItems[0].gameObject.GetComponent<Item>());
-
             }
             else if (nextMelee < Time.time)
             {
@@ -257,13 +251,10 @@ public class PlayerController : CharacterSuper
             moveCharacter(horizontalMove);
         }
         // Check for level up
-        if(currentExperience >= experienceToLevel)
+        if (currentExperience >= experienceToLevel)
         {
             levelUp();
         }
-
-        //Update treasure label in inventory.
-        this.inventory.treasureLabel.text = "$" + this.totalTreasure.ToString();
     }
 
     public void levelUp()
@@ -340,7 +331,8 @@ public class PlayerController : CharacterSuper
     /// </summary>
     public void closeAllUIWindows()
     {
-        itemsMenu.SetActive(false);
+        equipment.gameObject.SetActive(false);
+        inventory.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -365,6 +357,23 @@ public class PlayerController : CharacterSuper
         for (int i = 0; i < nearbyItems.Count; i++)
         {
             nearbyItems[i].gameObject.GetComponent<Item>().tooltip.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Function for opening the inventory. Handles edge cases that occure when interacting with the vendor.
+    /// </summary>
+    public void toggleItemsMenu()
+    {
+        if((this.equipment.gameObject.activeSelf && !this.inventory.gameObject.activeSelf) || (!this.equipment.gameObject.activeSelf && this.inventory.gameObject.activeSelf))
+        {
+            this.equipment.gameObject.SetActive(true);
+            this.inventory.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.equipment.gameObject.SetActive(!this.equipment.gameObject.activeSelf);
+            this.inventory.gameObject.SetActive(!this.inventory.gameObject.activeSelf);
         }
     }
 }

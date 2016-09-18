@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+/// <summary>
+/// This is the class for the shop. It contains functions for managing the shop slots and showing the shop tooltip.
+/// </summary>
 public class Shop : MonoBehaviour
 {
     //List of slots in inventory.
@@ -72,6 +75,8 @@ public class Shop : MonoBehaviour
     /// This function shows the tool tip.
     /// </summary>
     /// <param name="item">The item to show the tooltip for.</param>
+    /// <param name="tooltipPosition">The position to show the tooltip at.</param>
+    /// <param name="canAfford">A bool indicating if the player can afford the item.</param>
     public void showToolTip(Item item, Vector3 tooltipPosition, bool canAfford)
     {
         this.toolTip.transform.SetAsLastSibling();

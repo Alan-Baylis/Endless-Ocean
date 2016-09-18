@@ -64,10 +64,10 @@ public class ShopSlot : Slot
             this.shop.hideToolTip();
             if (this.player.totalTreasure > this.shop.items[slotNumber].buyValue)
             {
+                this.player.totalTreasure -= this.shop.items[slotNumber].buyValue;
                 this.itemCount.enabled = false;
                 this.inventory.startDraggingItem(shop.items[slotNumber]);
                 this.shop.items[slotNumber] = new Item();
-                this.player.totalTreasure -= this.shop.items[slotNumber].buyValue;
             }
         }
     }
