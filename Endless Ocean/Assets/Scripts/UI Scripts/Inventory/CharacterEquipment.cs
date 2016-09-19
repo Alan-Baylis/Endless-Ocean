@@ -42,7 +42,7 @@ public class CharacterEquipment : MonoBehaviour {
         this.equippedItems.Add("HEAD", new Item());
         this.equippedItems.Add("CHEST", new Item());
         this.equippedItems.Add("FEET", new Item());
-        this.validationPrompt = this.transform.GetChild(5).GetComponent<Text>();
+        this.validationPrompt = this.transform.Find("Validation Prompt").GetComponent<Text>();
 
         this.levelUpButtons.SetActive(false);
 

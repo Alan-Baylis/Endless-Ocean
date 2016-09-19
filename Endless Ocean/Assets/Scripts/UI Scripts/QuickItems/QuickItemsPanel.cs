@@ -54,12 +54,15 @@ public class QuickItemsPanel : MonoBehaviour {
     {
         if(!(this.quickItems[index].itemName == null))
         {
+            this.quickItems[index].gameObject.SetActive(true);
             this.quickItems[index].use(this.player);
             this.quickItems[index].itemCount--;
+            this.quickItems[index].gameObject.SetActive(false);
             if (this.quickItems[index].itemCount == 0)
             {
                 this.quickItems[index] = new Consumable();
             }
+            
         }
     }
 }

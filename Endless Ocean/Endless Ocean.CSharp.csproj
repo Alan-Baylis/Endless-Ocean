@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\DeathFromFalling.cs" />
     <Compile Include="Assets\Scripts\Helper Scripts\MoveTowardsObject.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\Consumable.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\HealthPotion.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\TestPotion.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\Equipment.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\TestHelmet.cs" />

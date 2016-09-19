@@ -29,7 +29,7 @@ public class ShopSlot : Slot
     {
         if (!this.isSlotEmpty())
         {
-            this.shop.showToolTip(shop.items[this.slotNumber], this.GetComponent<RectTransform>().localPosition, (this.player.totalTreasure > shop.items[this.slotNumber].buyValue));
+            this.shop.showToolTip(shop.items[this.slotNumber], this.GetComponent<RectTransform>().localPosition, (this.player.totalTreasure >= shop.items[this.slotNumber].buyValue));
         }
     }
 
@@ -62,7 +62,7 @@ public class ShopSlot : Slot
         if (!this.isSlotEmpty())
         {
             this.shop.hideToolTip();
-            if (this.player.totalTreasure > this.shop.items[slotNumber].buyValue)
+            if (this.player.totalTreasure >= this.shop.items[slotNumber].buyValue)
             {
                 this.player.totalTreasure -= this.shop.items[slotNumber].buyValue;
                 this.itemCount.enabled = false;

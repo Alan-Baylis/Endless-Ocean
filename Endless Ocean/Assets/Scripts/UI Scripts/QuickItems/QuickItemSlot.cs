@@ -50,7 +50,7 @@ public class QuickItemSlot : Slot
             {
                 Consumable tempConsumable = (Consumable)this.inventory.draggedItem;
                 //Enabling items on the quick item bar so their scripts can handle the itemCount and destoying themselves.s
-                tempConsumable.gameObject.SetActive(true);
+                //tempConsumable.gameObject.SetActive(true);
                 tempConsumable.gameObject.GetComponent<Consumable>().enabled = true;
                 if (!this.isSlotEmpty())
                 {
