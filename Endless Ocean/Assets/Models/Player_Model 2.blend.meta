@@ -38,6 +38,8 @@ ModelImporter:
     100060: Upper_Arm_R
     100062: Upper_Leg_L
     100064: Upper_Leg_R
+    100066: BezierCircle
+    100068: Character_001
     400000: Armature
     400002: Character
     400004: Chest
@@ -71,7 +73,13 @@ ModelImporter:
     400060: Upper_Arm_R
     400062: Upper_Leg_L
     400064: Upper_Leg_R
+    400066: BezierCircle
+    400068: Character_001
+    2300000: BezierCircle
+    3300000: BezierCircle
     4300000: Character
+    4300002: BezierCircle
+    4300004: Character_001
     7400000: Run
     7400002: Run_001
     7400004: Idle
@@ -80,6 +88,7 @@ ModelImporter:
     7400010: Dodge
     9500000: //RootNode
     13700000: Character
+    13700002: Character_001
   materials:
     importMaterials: 1
     materialName: 0
