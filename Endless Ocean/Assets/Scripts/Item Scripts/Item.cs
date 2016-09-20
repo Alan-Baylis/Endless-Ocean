@@ -72,7 +72,15 @@ public class Item : MonoBehaviour{
     protected virtual void Start()
     {
         this.tooltip = Instantiate(Resources.Load("Prefabs/UI/ItemTooltip"), new Vector3(), Quaternion.identity) as GameObject;
-        this.tooltip.transform.GetChild(0).GetComponent<Text>().text = "(" + quality + ") " + this.itemName;
+
+        if (quality == ItemQuality.NULL)
+        {
+            this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
+        }
+        else
+        {
+            this.tooltip.transform.GetChild(0).GetComponent<Text>().text = "(" + quality + ") " + this.itemName;
+        }
         this.tooltip.transform.GetChild(0).GetComponent<Text>().color = getQualityColour();
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);
