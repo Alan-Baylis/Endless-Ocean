@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 using System;
@@ -323,7 +324,8 @@ public class PlayerController : CharacterSuper
 
     public override void die()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        Application.LoadLevel("Game Over");
+        
     }
 
     /// <summary>

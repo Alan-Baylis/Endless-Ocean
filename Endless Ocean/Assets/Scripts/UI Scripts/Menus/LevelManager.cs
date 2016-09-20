@@ -6,7 +6,12 @@ public class LevelManager : MonoBehaviour {
 
     public void loadScene (string name)
     {
-        SceneManager.LoadScene(name);
+        Application.LoadLevel("Sidescrolling Scene");
+    }
+
+    public void Load ()
+    {
+        Application.LoadLevel("BoatM");
     }
 
     public void Exit ()
