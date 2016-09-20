@@ -2,16 +2,21 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour {
-
-    public void loadScene (string name)
+public class LevelManager : MonoBehaviour
+{
+    public void startGame ()
     {
         Application.LoadLevel("Sidescrolling Scene");
     }
 
-    public void Load ()
+    public void loadGame()
     {
         Application.LoadLevel("BoatM");
+    }
+
+    public void optionMenu ()
+    {
+        Application.LoadLevel("Options");
     }
 
     public void Exit ()

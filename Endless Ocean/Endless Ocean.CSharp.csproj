@@ -88,8 +88,32 @@
     <Reference Include="Triangle">
       <HintPath>Assets\ProCore\ProBuilder\Classes\ClassesLib\Triangle.dll</HintPath>
     </Reference>
+    <Reference Include="GETween">
+      <HintPath>Assets\GUI Animator\Common\Plugins\GETween.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIAnimatorFREE">
+      <HintPath>Assets\GUI Animator\GUI Animator FREE\Plugins\GUIAnimatorFREE.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DeathFromFalling.cs" />
+    <Compile Include="Assets\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCamera.cs" />
+    <Compile Include="Assets\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCameraUI.cs" />
+    <Compile Include="Assets\GE Common Assets\GE Toggle Full Screen\Scripts\GE_ToggleFullScreenUI.cs" />
+    <Compile Include="Assets\GE Common Assets\Scripts\GE_UIResponder.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo00.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo01.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo02.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo03.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo04.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo05.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo06.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo07.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo08.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_DemoPlaySound.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
+    <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
+    <Compile Include="Assets\Helper Scripts\MoveTowardsObject.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Misc\HueCube.cs" />
@@ -100,8 +124,7 @@
     <Compile Include="Assets\Scripts\Character Scripts\NPCs\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\NPCs\NPCBehaviour.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\Player\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\DeathFromFalling.cs" />
-    <Compile Include="Assets\Scripts\Helper Scripts\MoveTowardsObject.cs" />
+    <Compile Include="Assets\Scripts\InfiniteTerrain.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\Consumable.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\HealthPotion.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\TestPotion.cs" />
@@ -135,6 +158,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Menus\GameOver.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Menus\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\Menus\OptionsMenu.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\QuickItems\QuickItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\QuickItems\QuickItemsPanel.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Reforger\Reforger.cs" />
@@ -144,8 +168,12 @@
     <Compile Include="Assets\Scripts\UI Scripts\WeaponSwap Scripts\WeaponSwapSlot.cs" />
     <Compile Include="Assets\ShopNPC.cs" />
     <Compile Include="Assets\TreasureChest.cs" />
+    <Compile Include="Assets\Water Flow FREE\Scripts\WaterFlowFREEDemo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\GE Common Assets\Readme.txt" />
+    <None Include="Assets\GUI Animator\GUI Animator FREE\!How to.txt" />
+    <None Include="Assets\GUI Animator\GUI Animator FREE\Readme.txt" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\Credits.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\changelog.txt" />
@@ -160,6 +188,8 @@
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_UnlitVertexColor.shader" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_VertexShader.shader" />
     <None Include="Assets\ProCore\ProBuilder\readme.txt" />
+    <None Include="Assets\Water Flow FREE\Readme.txt" />
+    <None Include="Assets\Water Flow FREE\Shaders\Water Flow FREE Simple.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

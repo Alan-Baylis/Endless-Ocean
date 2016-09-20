@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameOver : MonoBehaviour {
 
-    public void restartGame (string name)
+    public void restartGame ()
     {
-        //SceneManager.LoadScene("Side Scrolling Scene");
         Application.LoadLevel("Sidescrolling Scene");
     }
 
