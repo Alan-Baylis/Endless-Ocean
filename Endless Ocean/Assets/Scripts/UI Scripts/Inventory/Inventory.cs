@@ -142,6 +142,22 @@ public class Inventory : MonoBehaviour {
     }
 
     /// <summary>
+    /// This function shows the tool tip.
+    /// </summary>
+    /// <param name="item">The item to show the tooltip for.</param>
+    /// <param name="tooltipPosition">The position to show the tooltip at.</param>
+    public void showToolTip(Item item, Vector3 tooltipPosition)
+    {
+        this.toolTip.transform.SetAsLastSibling();
+        this.toolTip.transform.Find("Item Name").GetComponent<Text>().text = item.itemName;
+        this.toolTip.transform.Find("Item Description").GetComponent<Text>().text = item.description;
+        this.toolTip.transform.Find("Item Image").GetComponent<Image>().sprite = item.itemIcon;
+        this.toolTip.GetComponent<RectTransform>().localPosition = new Vector3(tooltipPosition.x + 20, tooltipPosition.y - 20, tooltipPosition.z + 1);
+        this.toolTip.transform.Find("Cost Label").GetComponent<Text>().text = "$" + item.buyValue.ToString();
+        this.toolTip.SetActive(true);
+    }
+
+    /// <summary>
     /// This function shows an image by the cursor when an item is being dragged.
     /// </summary>
     /// <param name="item">The item being dragged.</param>

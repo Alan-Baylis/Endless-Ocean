@@ -19,8 +19,7 @@ public class InventorySlot : Slot
     {
         if (!this.isSlotEmpty())
         {
-
-            this.inventory.showToolTip(inventory.items[this.slotNumber]);
+            this.inventory.showToolTip(inventory.items[this.slotNumber], this.gameObject.GetComponent<RectTransform>().localPosition);
         }
     }
 
@@ -120,10 +119,18 @@ public class InventorySlot : Slot
     /// <returns>A boolean indicating if the slot is empty or not.</returns>
     public bool isSlotEmpty()
     {
-        if (this.inventory.items[this.slotNumber].itemName != null)
+        try
         {
-            return false;
+            if (this.inventory.items[this.slotNumber].itemName != null)
+            {
+                return false;
+            }
+            return true;
         }
-        return true;
+        catch (NullReferenceException ex)
+        {
+            Debug.Log("Slot was empty. Got Exception.");
+            return true;
+        }
     }
 }

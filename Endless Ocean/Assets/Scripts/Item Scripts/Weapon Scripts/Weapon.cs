@@ -41,6 +41,23 @@ public abstract class Weapon: Item{
         }
     }
 
+    //Changing buy and sell values based off item quality.
+    public override int buyValue
+    {
+        get
+        {
+            return ((int)quality * base.buyValue);
+        }
+    }
+
+    public override int sellValue
+    {
+        get
+        {
+            return ((int)quality * base.sellValue);
+        }
+    }
+
     protected float qualityModifier = 1;
 
     //Firerate of the gun.

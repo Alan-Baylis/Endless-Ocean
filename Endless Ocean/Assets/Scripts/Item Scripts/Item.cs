@@ -8,7 +8,8 @@ using System;
 /// IMPORTANT: When overriding the Start and Update methods of this class. Be sure to call the base vesion as well so that the base functionality is not lost.
 /// </summary>
 [System.Serializable()]
-public class Item : MonoBehaviour{
+public class Item : MonoBehaviour
+{
 
     bool flyingOutOfChest = false;
     private Vector3 startPosition;
@@ -37,8 +38,14 @@ public class Item : MonoBehaviour{
     //Used to stack consumables.
     public int itemCount = 1;
 
-    public int sellValue;
-    public int buyValue;
+    public virtual int sellValue
+    {
+        get { return 30; }
+    }
+    public virtual int buyValue
+    {
+        get { return 50; }
+    }
 
     public virtual bool stackable
     {
@@ -72,15 +79,7 @@ public class Item : MonoBehaviour{
     protected virtual void Start()
     {
         this.tooltip = Instantiate(Resources.Load("Prefabs/UI/ItemTooltip"), new Vector3(), Quaternion.identity) as GameObject;
-
-        if (quality == ItemQuality.NULL)
-        {
-            this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
-        }
-        else
-        {
-            this.tooltip.transform.GetChild(0).GetComponent<Text>().text = "(" + quality + ") " + this.itemName;
-        }
+        this.tooltip.transform.GetChild(0).GetComponent<Text>().text = "(" + quality + ") " + this.itemName;
         this.tooltip.transform.GetChild(0).GetComponent<Text>().color = getQualityColour();
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);
@@ -141,8 +140,10 @@ public class Item : MonoBehaviour{
     /// </summary>
     void OnMouseEnter()
     {
-        try { 
-            if (!(this.transform.parent.gameObject.CompareTag("WeaponMount"))) {
+        try
+        {
+            if ((!((this.transform.parent.gameObject.CompareTag("WeaponMount")) || (this.transform.parent.gameObject.CompareTag("ArmorMount")))))
+            {
                 this.tooltip.SetActive(true);
             }
         }

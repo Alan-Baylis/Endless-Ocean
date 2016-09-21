@@ -121,11 +121,19 @@ public class QuickItemSlot : Slot
     /// <returns>A boolean indicating if the slot is empty or not.</returns>
     public bool isSlotEmpty()
     {
-        if (this.quickItemsPanel.quickItems[this.slotNumber].itemName != null)
+        try
         {
-            return false;
+            if (this.quickItemsPanel.quickItems[this.slotNumber].itemName != null)
+            {
+                return false;
+            }
+            return true;
         }
-        return true;
+        catch (NullReferenceException ex)
+        {
+            Debug.Log("Slot was empty. Got Exception.");
+            return true;
+        }
     }
 
 }

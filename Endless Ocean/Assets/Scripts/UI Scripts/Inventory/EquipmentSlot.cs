@@ -3,11 +3,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EquipmentSlot: Slot
+
+public class EquipmentSlot : Slot
 {
 
     public CharacterEquipment equipment;
-    public String bodypart;
+    public Bodypart bodypart;
 
     private Text itemCount;
 
@@ -19,6 +20,10 @@ public class EquipmentSlot: Slot
     /// <param name="eventData">The data from the mouse over.</param>
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        if (!this.isSlotEmpty())
+        {
+            this.equipment.showToolTip(this.equipment.equippedItems[bodypart], this.GetComponent<RectTransform>().localPosition);
+        }
     }
 
     /// <summary>
@@ -29,6 +34,7 @@ public class EquipmentSlot: Slot
     /// <param name="eventData">The data from the mouse over.</param>
     public override void OnPointerExit(PointerEventData eventData)
     {
+        this.equipment.hideToolTip();
     }
 
     /// <summary>
@@ -39,11 +45,16 @@ public class EquipmentSlot: Slot
     /// <param name="eventData">The data from the drag.</param>
     public override void OnDrag(PointerEventData eventData)
     {
+        if (this.inventory.draggingItem)
+        {
+            return;
+        }
         if (!this.isSlotEmpty())
         {
+            this.equipment.removeEquipmentStatsFromPlayer(this.equipment.equippedItems[bodypart]);
             this.itemCount.enabled = false;
             this.inventory.startDraggingItem(this.equipment.equippedItems[bodypart]);
-            this.equipment.equippedItems[bodypart] = new Item();
+            this.equipment.equippedItems[bodypart] = new Equipment();
         }
     }
 
@@ -58,20 +69,22 @@ public class EquipmentSlot: Slot
         this.equipment.validationPrompt.text = "";
         if (this.inventory.draggingItem)
         {
-            if (this.inventory.draggedItem.GetType().ToString() == "Equipment") {
+            if (this.inventory.draggedItem.GetType().ToString() == "Equipment")
+            {
                 Equipment tempEquipment = (Equipment)this.inventory.draggedItem;
                 if (tempEquipment.bodypart == this.bodypart)
                 {
                     if (!this.isSlotEmpty())
                     {
+                        this.equipment.removeEquipmentStatsFromPlayer(this.equipment.equippedItems[bodypart]);
                         Item tempDraggingItem = this.inventory.draggedItem;
                         this.inventory.draggedItem = this.equipment.equippedItems[bodypart];
                         this.inventory.draggedItemIcon.GetComponent<Image>().sprite = this.inventory.draggedItem.itemIcon;
-                        this.equipment.equippedItems[bodypart] = tempDraggingItem;
+                        this.equipment.equipItem(this.bodypart, tempEquipment);
                     }
                     else if (this.isSlotEmpty())
                     {
-                        this.equipment.equippedItems[bodypart] = this.inventory.draggedItem;
+                        this.equipment.equipItem(this.bodypart, tempEquipment);
                         this.inventory.stopDraggingItem();
                     }
                 }
@@ -119,10 +132,18 @@ public class EquipmentSlot: Slot
     /// <returns>A boolean indicating if the slot is empty or not.</returns>
     public bool isSlotEmpty()
     {
-        if (this.equipment.equippedItems[bodypart].itemName != null)
+        try
         {
-            return false;
+            if (this.equipment.equippedItems[bodypart].itemName != null)
+            {
+                return false;
+            }
+            return true;
         }
-        return true;
+        catch(NullReferenceException ex)
+        {
+            Debug.Log("Slot was empty. Got Exception.");
+            return true;
+        }
     }
 }

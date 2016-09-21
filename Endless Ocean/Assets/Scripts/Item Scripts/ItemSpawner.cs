@@ -32,6 +32,18 @@ public class ItemSpawner : MonoBehaviour
                 spawnedObjects.Add(Instantiate(Resources.Load(possibleItems[i]), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject);
             }
         }
+        //Initializing equipment/weapon item rarities.
+        foreach (GameObject currentObject in spawnedObjects)
+        {
+            if(currentObject.GetComponent<Equipment>() != null)
+            {
+                currentObject.GetComponent<Equipment>().setQualityAndAttributes(1);
+            }
+            else if (currentObject.GetComponent<Weapon>() != null)
+            {
+                currentObject.GetComponent<Weapon>().setQuality(1);
+            }
+        }
         return spawnedObjects;
     }
 
@@ -48,6 +60,17 @@ public class ItemSpawner : MonoBehaviour
         {
             int randomInt = random.Next(0, itemDatabase.Length);
             spawnedObjects.Add(Instantiate(Resources.Load(itemDatabase[i]), positionToSpawnAt.position + new Vector3(0, 2, 0), positionToSpawnAt.rotation) as GameObject);
+        }
+        foreach (GameObject currentObject in spawnedObjects)
+        {
+            if (currentObject.GetComponent<Equipment>() != null)
+            {
+                currentObject.GetComponent<Equipment>().setQualityAndAttributes(1);
+            }
+            else if (currentObject.GetComponent<Weapon>() != null)
+            {
+                currentObject.GetComponent<Weapon>().setQuality(1);
+            }
         }
         return spawnedObjects;
     }

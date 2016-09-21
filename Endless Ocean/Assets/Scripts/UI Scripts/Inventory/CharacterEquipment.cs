@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class CharacterEquipment : MonoBehaviour {
+/// <summary>
+/// This class handles all functionality related to equipment and leveling for the character.
+/// </summary>
+/// 
+public enum Bodypart { HEAD, CHEST, FEET };
 
+public class CharacterEquipment : MonoBehaviour
+{
+    //Reference to the players inventory. 
     public Inventory inventory;
 
+    //Reference to the tooltip.
     public GameObject toolTip;
 
     public Text validationPrompt;
@@ -33,15 +41,17 @@ public class CharacterEquipment : MonoBehaviour {
 
     public GameObject levelUpButtons;
 
+    public Transform head;
 
-    public Dictionary<string, Item> equippedItems = new Dictionary<string, Item>(); 
+    public Dictionary<Bodypart, Equipment> equippedItems = new Dictionary<Bodypart, Equipment>();
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         this.player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        this.equippedItems.Add("HEAD", new Item());
-        this.equippedItems.Add("CHEST", new Item());
-        this.equippedItems.Add("FEET", new Item());
+        this.equippedItems.Add(Bodypart.HEAD, new Equipment());
+        this.equippedItems.Add(Bodypart.CHEST, new Equipment());
+        this.equippedItems.Add(Bodypart.FEET, new Equipment());
         this.validationPrompt = this.transform.Find("Validation Prompt").GetComponent<Text>();
 
         this.levelUpButtons.SetActive(false);
@@ -99,4 +109,89 @@ public class CharacterEquipment : MonoBehaviour {
         player.attack += 1;
         player.statPointsToAllocate -= 1;
     }
+
+    /// <summary>
+    /// This function equips the item on the specified body part.
+    /// </summary>
+    /// <param name="bodypart">The body part to equip the item on.</param>
+    /// <param name="equipment">The item to equip.</param>
+    public void equipItem(Bodypart bodypart, Equipment equipment)
+    {
+        if (bodypart == Bodypart.HEAD)
+        {
+            this.equippedItems[bodypart] = equipment;
+            equipment.transform.parent = this.head;
+            this.enableAndPositionItem(equipment);
+            this.addEquipmentStatsToPlayer(equipment);
+        }
+        else if (bodypart == Bodypart.CHEST)
+        {
+            this.addEquipmentStatsToPlayer(equipment);
+        }
+        else if(bodypart == Bodypart.FEET)
+        {
+            this.addEquipmentStatsToPlayer(equipment);
+        }
+    }
+
+    /// <summary>
+    /// This function enables and positions and item on the player model. It also disables the item tooltip.
+    /// </summary>
+    /// <param name="equipment">The equipment to enable and position.</param>
+    public void enableAndPositionItem(Equipment equipment)
+    {
+        equipment.GetComponent<Rigidbody>().isKinematic = true;
+        equipment.gameObject.transform.localPosition = Vector3.zero;
+        equipment.gameObject.SetActive(true);
+        equipment.tooltip.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// This function adds some equipments stats to the player.
+    /// </summary>
+    /// <param name="equipment">The equipment whose stats are being added.</param>
+    public void addEquipmentStatsToPlayer(Equipment equipment)
+    {
+        this.player.vigor += equipment.vigorBonus;
+        this.player.stamina += equipment.staminaBonus;
+        this.player.movementSpeed += equipment.moveSpeedBonus;
+        this.player.attack += equipment.damageBonus;
+    }
+
+    /// <summary>
+    /// This function removes some equipments stats from the player.
+    /// </summary>
+    /// <param name="equipment">The equipment whose stats are being removed.</param>
+    public void removeEquipmentStatsFromPlayer(Equipment equipment)
+    {
+        this.player.vigor -= equipment.vigorBonus;
+        this.player.stamina -= equipment.staminaBonus;
+        this.player.movementSpeed -= equipment.moveSpeedBonus;
+        this.player.attack -= equipment.damageBonus;
+    }
+
+    /// <summary>
+    /// This function shows the tool tip.
+    /// </summary>
+    /// <param name="item">The equipment to show the tooltip for.</param>
+    /// <param name="tooltipPosition">The position to show the tooltip at.</param>
+    public void showToolTip(Item item, Vector3 tooltipPosition)
+    {
+        this.toolTip.transform.SetAsLastSibling();
+        this.toolTip.transform.Find("Item Name").GetComponent<Text>().text = item.itemName;
+        this.toolTip.transform.Find("Item Description").GetComponent<Text>().text = item.description;
+        this.toolTip.transform.Find("Item Image").GetComponent<Image>().sprite = item.itemIcon;
+        this.toolTip.GetComponent<RectTransform>().localPosition = new Vector3(tooltipPosition.x + 20, tooltipPosition.y - 20, tooltipPosition.z + 1);
+        this.toolTip.transform.Find("Cost Label").GetComponent<Text>().text = "$" + item.buyValue.ToString();
+        this.toolTip.SetActive(true);
+    }
+
+    /// <summary>
+    /// This function hides the tool tip.
+    /// </summary>
+    public void hideToolTip()
+    {
+        this.toolTip.SetActive(false);
+    }
+
 }
