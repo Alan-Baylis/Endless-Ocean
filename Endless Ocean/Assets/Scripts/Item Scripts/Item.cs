@@ -9,7 +9,7 @@ using System;
 /// </summary>
 [System.Serializable()]
 public class Item : MonoBehaviour
-{
+{ 
 
     bool flyingOutOfChest = false;
     private Vector3 startPosition;
@@ -17,7 +17,19 @@ public class Item : MonoBehaviour
 
     public GameObject tooltip;
 
-    public string itemName;
+    public string itemType;
+
+    public virtual string itemName
+    {
+        get
+        {
+            if (quality == ItemQuality.NULL)
+            {
+                return null;
+            }
+            return (this.quality + " " + this.itemType);
+        }
+    }
 
     public string description;
 
@@ -26,11 +38,11 @@ public class Item : MonoBehaviour
     public enum ItemQuality
     {
         NULL = 0,
-        crude = 30,
-        basic = 70,
-        improved = 90,
-        legendary = 100,
-        godly = 1000 //for developer usage
+        Crude = 30,
+        Basic = 70,
+        Improved = 90,
+        Legendary = 100,
+        Godly = 1000 //for developer usage
     }
 
     public ItemQuality quality = ItemQuality.NULL;
@@ -40,11 +52,11 @@ public class Item : MonoBehaviour
 
     public virtual int sellValue
     {
-        get { return 30; }
+        get { return 3; }
     }
     public virtual int buyValue
     {
-        get { return 50; }
+        get { return 5; }
     }
 
     public virtual bool stackable
@@ -61,15 +73,15 @@ public class Item : MonoBehaviour
     {
         switch (quality)
         {
-            case ItemQuality.crude:
+            case ItemQuality.Crude:
                 return Color.red;
-            case ItemQuality.basic:
+            case ItemQuality.Basic:
                 return Color.white;
-            case ItemQuality.improved:
+            case ItemQuality.Improved:
                 return Color.green;
-            case ItemQuality.legendary:
+            case ItemQuality.Legendary:
                 return Color.blue;
-            case ItemQuality.godly:
+            case ItemQuality.Godly:
                 return Color.yellow;
             default:
                 return Color.grey;
@@ -79,7 +91,7 @@ public class Item : MonoBehaviour
     protected virtual void Start()
     {
         this.tooltip = Instantiate(Resources.Load("Prefabs/UI/ItemTooltip"), new Vector3(), Quaternion.identity) as GameObject;
-        this.tooltip.transform.GetChild(0).GetComponent<Text>().text = "(" + quality + ") " + this.itemName;
+        this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
         this.tooltip.transform.GetChild(0).GetComponent<Text>().color = getQualityColour();
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);

@@ -85,30 +85,30 @@ public abstract class Weapon: Item{
         //}
 
 
-        if (qualityInt <= (int)ItemQuality.crude)
+        if (qualityInt <= (int)ItemQuality.Crude)
         {
             qualityModifier = 0.5f;
-            quality = ItemQuality.crude;
+            quality = ItemQuality.Crude;
         }
-        else if (qualityInt <= (int)ItemQuality.basic)
+        else if (qualityInt <= (int)ItemQuality.Basic)
         {
             qualityModifier = 1f;
-            quality = ItemQuality.basic;
+            quality = ItemQuality.Basic;
         }
-        else if (qualityInt <= (int)ItemQuality.improved)
+        else if (qualityInt <= (int)ItemQuality.Improved)
         {
             qualityModifier = 1.5f;
-            quality = ItemQuality.improved;
+            quality = ItemQuality.Improved;
         }
-        else if (qualityInt <= (int)ItemQuality.legendary)
+        else if (qualityInt <= (int)ItemQuality.Legendary)
         {
             qualityModifier = 2f;
-            quality = ItemQuality.legendary;
+            quality = ItemQuality.Legendary;
         }
         else
         {
             qualityModifier = 100f;
-            quality = ItemQuality.godly;
+            quality = ItemQuality.Godly;
         }
     }  
 

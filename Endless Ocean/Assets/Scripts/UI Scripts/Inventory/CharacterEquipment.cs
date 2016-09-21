@@ -117,9 +117,9 @@ public class CharacterEquipment : MonoBehaviour
     /// <param name="equipment">The item to equip.</param>
     public void equipItem(Bodypart bodypart, Equipment equipment)
     {
+        this.equippedItems[bodypart] = equipment;
         if (bodypart == Bodypart.HEAD)
         {
-            this.equippedItems[bodypart] = equipment;
             equipment.transform.parent = this.head;
             this.enableAndPositionItem(equipment);
             this.addEquipmentStatsToPlayer(equipment);

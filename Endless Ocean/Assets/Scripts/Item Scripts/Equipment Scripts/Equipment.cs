@@ -41,32 +41,32 @@ public class Equipment : Item
         //{
         //    qualityInt = (int)quality;
         //}
-        if (qualityInt <= (int)ItemQuality.crude)
+        if (qualityInt <= (int)ItemQuality.Crude)
         {
             qualityModifier = 0.5f;
-            quality = ItemQuality.crude;
+            quality = ItemQuality.Crude;
         }
-        else if (qualityInt <= (int)ItemQuality.basic)
+        else if (qualityInt <= (int)ItemQuality.Basic)
         {
             qualityModifier = 1f;
-            quality = ItemQuality.basic;
+            quality = ItemQuality.Basic;
         }
-        else if (qualityInt <= (int)ItemQuality.improved)
+        else if (qualityInt <= (int)ItemQuality.Improved)
         {
             qualityModifier = 1.5f;
-            quality = ItemQuality.improved;
+            quality = ItemQuality.Improved;
             this.generateBonuses(3);
         }
-        else if (qualityInt <= (int)ItemQuality.legendary)
+        else if (qualityInt <= (int)ItemQuality.Legendary)
         {
             qualityModifier = 2f;
-            quality = ItemQuality.legendary;
+            quality = ItemQuality.Legendary;
             this.generateBonuses(7);
         }
         else
         {
             qualityModifier = 100f;
-            quality = ItemQuality.godly;
+            quality = ItemQuality.Godly;
         }
     }
 
@@ -76,6 +76,7 @@ public class Equipment : Item
     /// <param name="bonusPoints">The points to spend on bonuses.</param>
     private void generateBonuses(int bonusPoints)
     {
+        bonusPoints = (bonusPoints * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
         System.Random random = new System.Random();
         for (int i = 0; i < bonusPoints; i++)
         {

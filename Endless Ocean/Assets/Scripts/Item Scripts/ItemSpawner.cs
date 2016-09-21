@@ -2,15 +2,18 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
-
 /// <summary>
 /// This class spawns items from enemies and chests.
+/// 
+/// 
+/// NOTE ON EQUIPMENT: Equipment chest and boots items are automatically randomly generated using two base template prefabs. 
+/// Other items such as potions, weapons and helmets. Each have their own prefabs as they each have unique functioanlity. 
 /// </summary>
 public class ItemSpawner : MonoBehaviour
 {
 
     //Array containing resource path for all items in the game.
-    public static String[] itemDatabase = {"Prefabs/Consumables/TestPotion", "Prefabs/Equipment/TestHelmet"};
+    public static String[] itemDatabase = {"Prefabs/Equipment/ChestPiece", "Prefabs/Equipment/Boots"};
 
     /// <summary>
     /// This function is used to spawn specific items.
