@@ -98,6 +98,9 @@ public class PlayerController : CharacterSuper
         equipWeapon(Club.modelPathLocal, weaponMounts.Primary, "PlayerWeapon");
         equipWeapon(Pistol.modelPathLocal, weaponMounts.Secondary, "PlayerWeapon");
 
+        primaryMount.MountPoint.gameObject.SetActive(true); // show weapon
+        secondaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
+
         //set the starter weapon to set weapon
         switch (activeWeaponType)
         {

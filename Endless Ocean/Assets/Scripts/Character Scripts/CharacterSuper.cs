@@ -309,7 +309,7 @@ public abstract class CharacterSuper : MonoBehaviour
                 secondaryMount.Weapon.tag = tag;
                 break;
         }
-        swapWeapons();
+        //swapWeapons();
     }
 
     /// <summary>

@@ -156,6 +156,9 @@ public class CharacterEquipment : MonoBehaviour
         this.player.stamina += equipment.staminaBonus;
         this.player.movementSpeed += equipment.moveSpeedBonus;
         this.player.attack += equipment.damageBonus;
+
+        this.player.updateEnergy();
+        this.player.updateHealth();
     }
 
     /// <summary>
