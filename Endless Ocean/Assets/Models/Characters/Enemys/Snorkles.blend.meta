@@ -1,0 +1,527 @@
+fileFormatVersion: 2
+guid: 29faa7b6390ca734f91aacfe0cd6b299
+timeCreated: 1474538061
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Ankle_Left
+    100002: Ankle_Right
+    100004: Antenna
+    100006: Ariel
+    100008: Arm_Left
+    100010: Arm_Lower_Left
+    100012: Arm_Lower_Right
+    100014: Arm_Right
+    100016: Arm_Upper_Left
+    100018: Arm_Upper_Right
+    100020: Armature
+    100022: BezierCircle
+    100024: Body
+    100026: Body_Left
+    100028: Body_Lower
+    100030: Body_Right
+    100032: Body_Upper
+    100034: CrystalExternal
+    100036: CrystalInternal
+    100038: Foot_Left
+    100040: Foot_Left_0
+    100042: Foot_Right
+    100044: Foot_Right_0
+    100046: Goggles
+    100048: Hand_Left
+    100050: Hand_Left_0
+    100052: Hand_RIght
+    100054: Hand_Right
+    100056: Hip_Left
+    100058: Hip_Right
+    100060: Knee_Left
+    100062: Knee_Right
+    100064: Leg_Left
+    100066: Leg_Right
+    100068: Shin_Left
+    100070: Shin_Right
+    100072: Shoulder_Left
+    100074: Shoulder_Right
+    100076: //RootNode
+    100078: Thigh_Left
+    100080: Thigh_Right
+    100082: Vent
+    400000: Ankle_Left
+    400002: Ankle_Right
+    400004: Antenna
+    400006: Ariel
+    400008: Arm_Left
+    400010: Arm_Lower_Left
+    400012: Arm_Lower_Right
+    400014: Arm_Right
+    400016: Arm_Upper_Left
+    400018: Arm_Upper_Right
+    400020: Armature
+    400022: BezierCircle
+    400024: Body
+    400026: Body_Left
+    400028: Body_Lower
+    400030: Body_Right
+    400032: Body_Upper
+    400034: CrystalExternal
+    400036: CrystalInternal
+    400038: Foot_Left
+    400040: Foot_Left_0
+    400042: Foot_Right
+    400044: Foot_Right_0
+    400046: Goggles
+    400048: Hand_Left
+    400050: Hand_Left_0
+    400052: Hand_RIght
+    400054: Hand_Right
+    400056: Hip_Left
+    400058: Hip_Right
+    400060: Knee_Left
+    400062: Knee_Right
+    400064: Leg_Left
+    400066: Leg_Right
+    400068: Shin_Left
+    400070: Shin_Right
+    400072: Shoulder_Left
+    400074: Shoulder_Right
+    400076: //RootNode
+    400078: Thigh_Left
+    400080: Thigh_Right
+    400082: Vent
+    2300000: BezierCircle
+    3300000: BezierCircle
+    4300000: Goggles
+    4300002: Foot_Right
+    4300004: Foot_Left
+    4300006: Hand_Left
+    4300008: Hand_RIght
+    4300010: Body
+    4300012: Vent
+    4300014: Ariel
+    4300016: CrystalExternal
+    4300018: CrystalInternal
+    4300020: Arm_Left
+    4300022: Arm_Right
+    4300024: Leg_Right
+    4300026: Leg_Left
+    4300028: BezierCircle
+    7400000: Idle
+    7400002: Jump
+    7400004: Run
+    7400006: Default Take
+    9500000: //RootNode
+    13700000: Ariel
+    13700002: Arm_Left
+    13700004: Arm_Right
+    13700006: Body
+    13700008: CrystalExternal
+    13700010: CrystalInternal
+    13700012: Foot_Left
+    13700014: Foot_Right
+    13700016: Goggles
+    13700018: Hand_Left
+    13700020: Hand_RIght
+    13700022: Leg_Left
+    13700024: Leg_Right
+    13700026: Vent
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 249
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Ariel
+        weight: 1
+      - path: Arm_Left
+        weight: 1
+      - path: Arm_Right
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Body_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left/Hand_Left_0
+        weight: 1
+      - path: Armature/Body_Lower
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left/Foot_Left_0
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right/Foot_Right_0
+        weight: 1
+      - path: Armature/Body_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right/Hand_Right
+        weight: 1
+      - path: Armature/Body_Upper
+        weight: 1
+      - path: Armature/Body_Upper/Antenna
+        weight: 1
+      - path: BezierCircle
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: CrystalExternal
+        weight: 1
+      - path: CrystalInternal
+        weight: 1
+      - path: Foot_Left
+        weight: 1
+      - path: Foot_Right
+        weight: 1
+      - path: Goggles
+        weight: 1
+      - path: Hand_Left
+        weight: 1
+      - path: Hand_RIght
+        weight: 1
+      - path: Leg_Left
+        weight: 1
+      - path: Leg_Right
+        weight: 1
+      - path: Vent
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Jump
+      takeName: Jump
+      firstFrame: -1
+      lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Ariel
+        weight: 1
+      - path: Arm_Left
+        weight: 1
+      - path: Arm_Right
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Body_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left/Hand_Left_0
+        weight: 1
+      - path: Armature/Body_Lower
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left/Foot_Left_0
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right/Foot_Right_0
+        weight: 1
+      - path: Armature/Body_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right/Hand_Right
+        weight: 1
+      - path: Armature/Body_Upper
+        weight: 1
+      - path: Armature/Body_Upper/Antenna
+        weight: 1
+      - path: BezierCircle
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: CrystalExternal
+        weight: 1
+      - path: CrystalInternal
+        weight: 1
+      - path: Foot_Left
+        weight: 1
+      - path: Foot_Right
+        weight: 1
+      - path: Goggles
+        weight: 1
+      - path: Hand_Left
+        weight: 1
+      - path: Hand_RIght
+        weight: 1
+      - path: Leg_Left
+        weight: 1
+      - path: Leg_Right
+        weight: 1
+      - path: Vent
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Run
+      firstFrame: -1
+      lastFrame: 13
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Ariel
+        weight: 1
+      - path: Arm_Left
+        weight: 1
+      - path: Arm_Right
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Body_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left/Hand_Left_0
+        weight: 1
+      - path: Armature/Body_Lower
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left/Foot_Left_0
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right/Foot_Right_0
+        weight: 1
+      - path: Armature/Body_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right/Hand_Right
+        weight: 1
+      - path: Armature/Body_Upper
+        weight: 1
+      - path: Armature/Body_Upper/Antenna
+        weight: 1
+      - path: BezierCircle
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: CrystalExternal
+        weight: 1
+      - path: CrystalInternal
+        weight: 1
+      - path: Foot_Left
+        weight: 1
+      - path: Foot_Right
+        weight: 1
+      - path: Goggles
+        weight: 1
+      - path: Hand_Left
+        weight: 1
+      - path: Hand_RIght
+        weight: 1
+      - path: Leg_Left
+        weight: 1
+      - path: Leg_Right
+        weight: 1
+      - path: Vent
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,7 +5,7 @@ using System.Collections;
 /// </summary>
 public class Pistol : RangedWeapon  {
 
-    static public string modelPathLocal = "Prefabs/Weapons/Pistol";
+    static public string modelPathLocal = "Prefabs/Weapons/Handgun";
 
     protected override void Start()
     {
@@ -14,6 +14,7 @@ public class Pistol : RangedWeapon  {
         base.weaponAttackSpeed = 0.5f;
         base.projectileSpeed = 30f;
         this.knockBack = 300;
+        range = 10;
     }
 
     /// <summary>

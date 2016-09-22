@@ -239,17 +239,20 @@ public abstract class CharacterSuper : MonoBehaviour
             int knockBack = col.gameObject.GetComponent<Bullet>().getKnockBack();
 
             this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+            Destroy(col.gameObject.GetComponentInParent<Rigidbody>().gameObject);
         }
         // When character is hit with an enemy weapon
         else if (col.gameObject.tag == fears+"Weapon")
         {
             int damage = col.gameObject.GetComponent<Weapon>().getDamage() + col.transform.root.GetComponent<CharacterSuper>().attack;
             int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
+            bool collisionHandled = col.gameObject.GetComponent<Weapon>().collisonHandled;
 
 
-            if (animController.GetCurrentAnimatorStateInfo(1).IsName("Melee Attack"))
+            if (animController.GetCurrentAnimatorStateInfo(1).IsName("Melee Attack") && !collisionHandled)
             {
                 this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+                col.gameObject.GetComponent<Weapon>().collisonHandled = true;
             }
 
         }

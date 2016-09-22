@@ -25,9 +25,11 @@ public abstract class Weapon: Item{
     }
 
     // Attack variables
+    public bool collisonHandled = false;
     public int damage;
     public int knockBack;
     public int energyCost;
+    public int range;
     public string weaponTag;
     public string WeaponTag
     {
@@ -125,6 +127,11 @@ public abstract class Weapon: Item{
     public float getAttackSpeed()
     {
         return weaponAttackSpeed;
+    }
+
+    protected void OnTriggerExit(Collider col)
+    {
+        collisonHandled = false;
     }
 
     public abstract string getModelPath();

@@ -6,7 +6,6 @@ public class EnemyAI : NPCBehaviour
 {
 
     //enemy variables
-    public float attackRange;
     public float detectRange;
 
     public Weapon primaryWeapon;
@@ -18,8 +17,6 @@ public class EnemyAI : NPCBehaviour
 
 	// Use this for initialization
 	new void Start () {
-        this.health = 100;
-        this.maxHealth = 100;
 
         base.Start();
 
@@ -72,8 +69,7 @@ public class EnemyAI : NPCBehaviour
         //check if player is in range
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
         {
-            
-            if (Vector3.Distance(transform.position, target.position) >= attackRange)
+            if (Vector3.Distance(transform.position, target.position) >= weapon.range)
             {
                 pathToLocation(target.position);
             }else

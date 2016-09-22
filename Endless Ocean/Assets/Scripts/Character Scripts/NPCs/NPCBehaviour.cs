@@ -46,14 +46,17 @@ public abstract class NPCBehaviour : CharacterSuper
     }
 
     protected void attackTarget(Transform target)
-    {
+    { 
+        //shoot at target, not their feet
+        Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
+
         if (weapon != null)
         {
             if (nextMelee < Time.time)
             {
                 nextMelee = Time.time + weapon.getAttackSpeed();
                 this.animator.SetTrigger("MeleeAttackTrigger");
-                weapon.attack(attack, target.position);
+                weapon.attack(attack, targetPosition);
                 moveCharacter(0);
             }
         }

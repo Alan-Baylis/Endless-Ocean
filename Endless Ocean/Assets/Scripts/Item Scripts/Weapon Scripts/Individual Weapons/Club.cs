@@ -18,6 +18,7 @@ public class Club : MeleeWeapon {
         this.weaponAttackSpeed = 0.5f;
         this.knockBack = 250;
         this.energyCost = 25;
+        range = 2;
     }
 
     void FixedUpdate()
