@@ -77,6 +77,9 @@ public class EnemyAI : NPCBehaviour
                 attackTarget(target);
             }
 
+        }else
+        {
+            moveCharacter(0);
         }
     }
 

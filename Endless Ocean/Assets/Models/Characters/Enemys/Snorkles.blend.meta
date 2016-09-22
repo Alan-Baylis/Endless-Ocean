@@ -110,6 +110,7 @@ ModelImporter:
     7400002: Jump
     7400004: Run
     7400006: Default Take
+    7400008: Jump0
     9500000: //RootNode
     13700000: Ariel
     13700002: Arm_Left
@@ -149,127 +150,15 @@ ModelImporter:
     - serializedVersion: 16
       name: Default Take
       takeName: Default Take
-      firstFrame: 0
-      lastFrame: 249
+      firstFrame: 25
+      lastFrame: 26
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Ariel
-        weight: 1
-      - path: Arm_Left
-        weight: 1
-      - path: Arm_Right
-        weight: 1
-      - path: Armature
-        weight: 1
-      - path: Armature/Body_Left
-        weight: 1
-      - path: Armature/Body_Left/Shoulder_Left
-        weight: 1
-      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left
-        weight: 1
-      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left
-        weight: 1
-      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left/Hand_Left_0
-        weight: 1
-      - path: Armature/Body_Lower
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Left
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Left/Thigh_Left
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left/Foot_Left_0
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Right
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Right/Thigh_Right
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right
-        weight: 1
-      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right/Foot_Right_0
-        weight: 1
-      - path: Armature/Body_Right
-        weight: 1
-      - path: Armature/Body_Right/Shoulder_Right
-        weight: 1
-      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right
-        weight: 1
-      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right
-        weight: 1
-      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right/Hand_Right
-        weight: 1
-      - path: Armature/Body_Upper
-        weight: 1
-      - path: Armature/Body_Upper/Antenna
-        weight: 1
-      - path: BezierCircle
-        weight: 1
-      - path: Body
-        weight: 1
-      - path: CrystalExternal
-        weight: 1
-      - path: CrystalInternal
-        weight: 1
-      - path: Foot_Left
-        weight: 1
-      - path: Foot_Right
-        weight: 1
-      - path: Goggles
-        weight: 1
-      - path: Hand_Left
-        weight: 1
-      - path: Hand_RIght
-        weight: 1
-      - path: Leg_Left
-        weight: 1
-      - path: Leg_Right
-        weight: 1
-      - path: Vent
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Jump
-      takeName: Jump
-      firstFrame: -1
-      lastFrame: 11
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -373,15 +262,127 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: Run
-      firstFrame: -1
-      lastFrame: 13
+      firstFrame: 0
+      lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Ariel
+        weight: 1
+      - path: Arm_Left
+        weight: 1
+      - path: Arm_Right
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Body_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left
+        weight: 1
+      - path: Armature/Body_Left/Shoulder_Left/Arm_Upper_Left/Arm_Lower_Left/Hand_Left_0
+        weight: 1
+      - path: Armature/Body_Lower
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Left/Thigh_Left/Knee_Left/Shin_Left/Ankle_Left/Foot_Left_0
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right
+        weight: 1
+      - path: Armature/Body_Lower/Hip_Right/Thigh_Right/Knee_Right/Shin_Right/Ankle_Right/Foot_Right_0
+        weight: 1
+      - path: Armature/Body_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right
+        weight: 1
+      - path: Armature/Body_Right/Shoulder_Right/Arm_Upper_Right/Arm_Lower_Right/Hand_Right
+        weight: 1
+      - path: Armature/Body_Upper
+        weight: 1
+      - path: Armature/Body_Upper/Antenna
+        weight: 1
+      - path: BezierCircle
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: CrystalExternal
+        weight: 1
+      - path: CrystalInternal
+        weight: 1
+      - path: Foot_Left
+        weight: 1
+      - path: Foot_Right
+        weight: 1
+      - path: Goggles
+        weight: 1
+      - path: Hand_Left
+        weight: 1
+      - path: Hand_RIght
+        weight: 1
+      - path: Leg_Left
+        weight: 1
+      - path: Leg_Right
+        weight: 1
+      - path: Vent
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Jump0
+      takeName: Jump
+      firstFrame: -1
+      lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 4
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

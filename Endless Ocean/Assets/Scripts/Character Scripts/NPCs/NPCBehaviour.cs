@@ -26,8 +26,8 @@ public abstract class NPCBehaviour : CharacterSuper
 	
 	// Update is called once per frame
 	protected void FixedUpdate() {
-	    
-	}
+        weapon.useAmmo = false;
+    }
 
     protected void pathToLocation(Vector3 destination)
     {
@@ -49,6 +49,7 @@ public abstract class NPCBehaviour : CharacterSuper
     { 
         //shoot at target, not their feet
         Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
+        moveCharacter(0);
 
         if (weapon != null)
         {
@@ -57,7 +58,6 @@ public abstract class NPCBehaviour : CharacterSuper
                 nextMelee = Time.time + weapon.getAttackSpeed();
                 this.animator.SetTrigger("MeleeAttackTrigger");
                 weapon.attack(attack, targetPosition);
-                moveCharacter(0);
             }
         }
     }

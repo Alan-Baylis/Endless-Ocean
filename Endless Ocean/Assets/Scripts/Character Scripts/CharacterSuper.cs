@@ -309,6 +309,7 @@ public abstract class CharacterSuper : MonoBehaviour
                 secondaryMount.Weapon.tag = tag;
                 break;
         }
+        swapWeapons();
     }
 
     /// <summary>
@@ -316,8 +317,6 @@ public abstract class CharacterSuper : MonoBehaviour
     /// </summary>
     public void swapWeapons()
     {
-        secondaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
-        primaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
         // Check for empty slots
         if (!primaryMount.weaponLoaded() || !secondaryMount.weaponLoaded())
         {
@@ -329,7 +328,8 @@ public abstract class CharacterSuper : MonoBehaviour
             weapon = primaryMount.Weapon; // set as new active weapons
             activeWeaponType = weaponMounts.Secondary;
             primaryMount.MountPoint.gameObject.SetActive(true); // show weapon
-            
+            secondaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
+
         }
         // No empty slots and active weapon is the second one, switch to first wep
         else if (activeWeaponType == weaponMounts.Secondary)
@@ -337,7 +337,8 @@ public abstract class CharacterSuper : MonoBehaviour
             weapon = secondaryMount.Weapon; // set as new active weapon
             activeWeaponType = weaponMounts.Primary;
             secondaryMount.MountPoint.gameObject.SetActive(true); // show weapon
-            
+            primaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
+
         }
     }
 }
