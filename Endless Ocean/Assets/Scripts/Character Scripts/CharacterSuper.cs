@@ -290,26 +290,47 @@ public abstract class CharacterSuper : MonoBehaviour
     /// <summary>
     /// Used to equip enemies and player with weapons
     /// </summary>
-    /// <param name="modelPath">Model path to gameObject weapon prefab</param>
+    /// <param name="weaponGameObject">The weapon gameObject to equip.</param>
     /// <param name="mount">Mount point for weapon to be attached (slot1 or slot2)</param>
     /// <param name="tag">Tag for weapon, determines whether enemy or player is equiping</param>
-    protected void equipWeapon(string modelPath, weaponMounts mount, string tag)
+    public void equipWeapon(GameObject weaponGameObject, weaponMounts mount, string tag)
+    {
+        weaponGameObject.transform.position = weaponMount.transform.position;
+        weaponGameObject.transform.rotation = weaponMount.transform.rotation;
+        switch (mount)
+        {
+            case weaponMounts.Primary:
+                primaryMount.WeaponFromGameObject = weaponGameObject;
+                primaryMount.Weapon.weaponTag = tag;
+                primaryMount.Weapon.tag = tag;
+                weaponGameObject.SetActive(true);
+                this.weapon = weaponGameObject.GetComponent<Weapon>();
+                break;
+            case weaponMounts.Secondary:
+                secondaryMount.WeaponFromGameObject = weaponGameObject;
+                secondaryMount.Weapon.WeaponTag = tag;
+                secondaryMount.Weapon.tag = tag;
+                weaponGameObject.SetActive(true);
+                break;
+        }
+        //swapWeapons();
+    }
+
+    /// <summary>
+    /// This function removes a weapon from the specified weaponMount.
+    /// </summary>
+    /// <param name="mount">The weapon mount to remove the weapon for.</param>
+    public void removeWeaponFromMount(weaponMounts mount)
     {
         switch (mount)
         {
             case weaponMounts.Primary:
-                primaryMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
-                primaryMount.Weapon.weaponTag = tag;
-                primaryMount.Weapon.tag = tag;
-
+                primaryMount.Weapon = null;
                 break;
             case weaponMounts.Secondary:
-                secondaryMount.WeaponFromGameObject = Instantiate(Resources.Load(modelPath), weaponMount.transform.position, weaponMount.transform.rotation) as GameObject;
-                secondaryMount.Weapon.WeaponTag = tag;
-                secondaryMount.Weapon.tag = tag;
+                secondaryMount.Weapon = null;
                 break;
         }
-        //swapWeapons();
     }
 
     /// <summary>

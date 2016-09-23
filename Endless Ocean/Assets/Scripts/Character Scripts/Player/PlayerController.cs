@@ -92,11 +92,13 @@ public class PlayerController : CharacterSuper
         this.nextMelee = 0.0f;
         //Must initialize inventory like this so that items can be picked up from the start.
         this.inventory.initializeInventory();
+        GameObject pistolTemp = Instantiate(Resources.Load("Prefabs/Weapons/Pistol")) as GameObject;
+        inventory.addItem(pistolTemp.GetComponent<Pistol>());
+        GameObject clubTemp = Instantiate(Resources.Load("Prefabs/Weapons/Club")) as GameObject;
+        inventory.addItem(clubTemp.GetComponent<Club>());
         this.inventory.gameObject.SetActive(false);
+
         // TEMPORARY WEAPON EQUIPMENT/SWAPPING IMPLEMENTATION (Fraser, we'll need to get together and coordinate to get this working with inventory/drop/drag)
-        
-        equipWeapon(Club.modelPathLocal, weaponMounts.Primary, "PlayerWeapon");
-        equipWeapon(Pistol.modelPathLocal, weaponMounts.Secondary, "PlayerWeapon");
 
         primaryMount.MountPoint.gameObject.SetActive(true); // show weapon
         secondaryMount.MountPoint.gameObject.SetActive(false); // hide weapon

@@ -25,7 +25,7 @@ public class EnemyAI : NPCBehaviour
 
         if (primaryWeapon != null)
         {
-            equipWeapon(primaryWeapon.getModelPath(), weaponMounts.Primary, "EnemyWeapon");
+            equipWeapon(primaryWeapon.gameObject, weaponMounts.Primary, "EnemyWeapon");
 
             //set weapon quality
             primaryMount.Weapon.setQuality(luck);
@@ -33,7 +33,7 @@ public class EnemyAI : NPCBehaviour
         }
         if (secondaryWeapon != null)
         {
-            equipWeapon(secondaryWeapon.getModelPath(), weaponMounts.Secondary, "EnemyWeapon");
+            equipWeapon(secondaryWeapon.gameObject, weaponMounts.Secondary, "EnemyWeapon");
 
             //set weapon quality
             secondaryMount.Weapon.setQuality(luck);

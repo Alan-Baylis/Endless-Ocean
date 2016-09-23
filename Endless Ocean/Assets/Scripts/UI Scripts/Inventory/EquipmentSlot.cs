@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class EquipmentSlot : Slot
 {
 
-    public CharacterEquipment equipment;
+    private CharacterEquipment equipment;
     public Bodypart bodypart;
 
     private Text itemCount;

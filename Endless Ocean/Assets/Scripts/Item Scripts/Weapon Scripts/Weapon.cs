@@ -16,6 +16,11 @@ public abstract class Weapon: Item{
     public bool useAmmo = true;
 
 
+    public override bool mouseClickEquipable
+    {
+        get { return true; }
+    }
+
     public override bool reforgable
     {
         get
@@ -42,6 +47,8 @@ public abstract class Weapon: Item{
             weaponTag = value;
         }
     }
+
+
 
     //Changing buy and sell values based off item quality.
     public override int buyValue

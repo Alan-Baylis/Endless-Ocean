@@ -17,17 +17,21 @@ public class Item : MonoBehaviour
 
     public GameObject tooltip;
 
-    public string itemType;
+    public string itemNameWithoutQuality;
 
     public virtual string itemName
     {
         get
         {
-            if (quality == ItemQuality.NULL)
+            if (quality == ItemQuality.NULL && itemNameWithoutQuality == "")
             {
                 return null;
             }
-            return (this.quality + " " + this.itemType);
+            else if (quality == ItemQuality.NULL)
+            {
+                return itemNameWithoutQuality;
+            }
+            return (this.quality + " " + this.itemNameWithoutQuality);
         }
     }
 
@@ -58,13 +62,18 @@ public class Item : MonoBehaviour
     {
         get { return 5; }
     }
-
+    //Property indicating if an item is stackable.
     public virtual bool stackable
     {
         get { return false; }
     }
-
+    //Property indicating if an item is reforgable - can it be placed in the reforger?.
     public virtual bool reforgable
+    {
+        get { return false; }
+    }
+    //Property indicating if an item can be equipped in the players weapons slots.
+    public virtual bool mouseClickEquipable
     {
         get { return false; }
     }
