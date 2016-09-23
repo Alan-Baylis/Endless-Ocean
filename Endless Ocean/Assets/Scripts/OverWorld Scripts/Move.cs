@@ -37,5 +37,10 @@ public class Move : MonoBehaviour
         {
             transform.Rotate(Vector3.up * rotationspeed * Time.deltaTime);
         }
+
+        if(Input.GetKey(KeyCode.B))
+        {
+            Application.LoadLevel("Ship Scene");
+        }
     }
 }
