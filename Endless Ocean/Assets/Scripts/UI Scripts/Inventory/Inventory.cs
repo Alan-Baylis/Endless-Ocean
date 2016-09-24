@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : PanelSuper {
 
     //List of slots in inventory.
     public List<GameObject> slots = new List<GameObject>();
@@ -17,9 +17,6 @@ public class Inventory : MonoBehaviour {
 
     //Reference to inventory slot prefab.
     public GameObject slot;
-
-    //Rerference to tooltip.
-    public GameObject toolTip;
     //Reference to dragged image.
     public Item draggedItem;
     public GameObject draggedItemIcon;
@@ -157,41 +154,6 @@ public class Inventory : MonoBehaviour {
         this.addItemInSpecifiedSlot(slotNumber, item);
     }
 
-    /// <summary>
-    /// This function shows the tool tip.
-    /// </summary>
-    /// <param name="item">The item to show the tooltip for.</param>
-    public void showToolTip(Item item)
-    {
-        this.toolTip.transform.GetChild(0).GetComponent<Text>().text = item.itemName;
-        this.toolTip.transform.GetChild(1).GetComponent<Text>().text = item.description;
-        this.toolTip.transform.GetChild(2).GetComponent<Image>().sprite = item.itemIcon;
-        this.toolTip.SetActive(true);
-    }
-
-    /// <summary>
-    /// This function hides the tool tip.
-    /// </summary>
-    public void hideToolTip()
-    {
-        this.toolTip.SetActive(false);
-    }
-
-    /// <summary>
-    /// This function shows the tool tip.
-    /// </summary>
-    /// <param name="item">The item to show the tooltip for.</param>
-    /// <param name="tooltipPosition">The position to show the tooltip at.</param>
-    public void showToolTip(Item item, Vector3 tooltipPosition)
-    {
-        this.toolTip.transform.SetAsLastSibling();
-        this.toolTip.transform.Find("Item Name").GetComponent<Text>().text = item.itemName;
-        this.toolTip.transform.Find("Item Description").GetComponent<Text>().text = item.description;
-        this.toolTip.transform.Find("Item Image").GetComponent<Image>().sprite = item.itemIcon;
-        this.toolTip.GetComponent<RectTransform>().localPosition = new Vector3(tooltipPosition.x + 20, tooltipPosition.y - 20, tooltipPosition.z + 1);
-        this.toolTip.transform.Find("Cost Label").GetComponent<Text>().text = "$" + item.buyValue.ToString();
-        this.toolTip.SetActive(true);
-    }
 
     /// <summary>
     /// This function shows an image by the cursor when an item is being dragged.
