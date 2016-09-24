@@ -1,0 +1,266 @@
+fileFormatVersion: 2
+guid: dd9914992c9cc364083eec81c831d4ee
+timeCreated: 1474694466
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: _HDMICableWidth
+    100002: _PowerCableWidth
+    100004: AICrystal
+    100006: Books
+    100008: CloverHead_Screen
+    100010: CloverHead_Tower
+    100012: //RootNode
+    100014: ConsoleBlock
+    100016: Floaty
+    100018: HDMI_Cable
+    100020: HDMI_Head_A
+    100022: HDMI_Head_B
+    100024: HologramField_AICore
+    100026: HologramField_floaty
+    100028: HologramField_INM
+    100030: HologramField_off
+    100032: INM
+    100034: Power_Cable_Screen
+    100036: Power_Cable_Tower
+    100038: Screen
+    100040: Tower
+    100042: USB_Stick
+    100044: Wall_Plug_Screen
+    100046: Wall_Plug_Tower
+    400000: _HDMICableWidth
+    400002: _PowerCableWidth
+    400004: AICrystal
+    400006: Books
+    400008: CloverHead_Screen
+    400010: CloverHead_Tower
+    400012: //RootNode
+    400014: ConsoleBlock
+    400016: Floaty
+    400018: HDMI_Cable
+    400020: HDMI_Head_A
+    400022: HDMI_Head_B
+    400024: HologramField_AICore
+    400026: HologramField_floaty
+    400028: HologramField_INM
+    400030: HologramField_off
+    400032: INM
+    400034: Power_Cable_Screen
+    400036: Power_Cable_Tower
+    400038: Screen
+    400040: Tower
+    400042: USB_Stick
+    400044: Wall_Plug_Screen
+    400046: Wall_Plug_Tower
+    2300000: _HDMICableWidth
+    2300002: _PowerCableWidth
+    2300004: AICrystal
+    2300006: Books
+    2300008: CloverHead_Screen
+    2300010: CloverHead_Tower
+    2300012: ConsoleBlock
+    2300014: Floaty
+    2300016: HDMI_Cable
+    2300018: HDMI_Head_A
+    2300020: HDMI_Head_B
+    2300022: HologramField_AICore
+    2300024: HologramField_floaty
+    2300026: HologramField_INM
+    2300028: HologramField_off
+    2300030: INM
+    2300032: Power_Cable_Screen
+    2300034: Power_Cable_Tower
+    2300036: Screen
+    2300038: Tower
+    2300040: USB_Stick
+    2300042: Wall_Plug_Screen
+    2300044: Wall_Plug_Tower
+    3300000: _HDMICableWidth
+    3300002: _PowerCableWidth
+    3300004: AICrystal
+    3300006: Books
+    3300008: CloverHead_Screen
+    3300010: CloverHead_Tower
+    3300012: ConsoleBlock
+    3300014: Floaty
+    3300016: HDMI_Cable
+    3300018: HDMI_Head_A
+    3300020: HDMI_Head_B
+    3300022: HologramField_AICore
+    3300024: HologramField_floaty
+    3300026: HologramField_INM
+    3300028: HologramField_off
+    3300030: INM
+    3300032: Power_Cable_Screen
+    3300034: Power_Cable_Tower
+    3300036: Screen
+    3300038: Tower
+    3300040: USB_Stick
+    3300042: Wall_Plug_Screen
+    3300044: Wall_Plug_Tower
+    4300000: HologramField_off
+    4300002: HologramField_floaty
+    4300004: HologramField_AICore
+    4300006: Books
+    4300008: Wall_Plug_Tower
+    4300010: CloverHead_Tower
+    4300012: HologramField_INM
+    4300014: ConsoleBlock
+    4300016: Tower
+    4300018: CloverHead_Screen
+    4300020: HDMI_Head_A
+    4300022: HDMI_Head_B
+    4300024: _HDMICableWidth
+    4300026: HDMI_Cable
+    4300028: Screen
+    4300030: _PowerCableWidth
+    4300032: Power_Cable_Tower
+    4300034: Wall_Plug_Screen
+    4300036: Power_Cable_Screen
+    4300038: AICrystal
+    4300040: Floaty
+    4300042: INM
+    4300044: USB_Stick
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: _HDMICableWidth
+        weight: 1
+      - path: _PowerCableWidth
+        weight: 1
+      - path: AICrystal
+        weight: 1
+      - path: Books
+        weight: 1
+      - path: CloverHead_Screen
+        weight: 1
+      - path: CloverHead_Tower
+        weight: 1
+      - path: ConsoleBlock
+        weight: 1
+      - path: Floaty
+        weight: 1
+      - path: HDMI_Cable
+        weight: 1
+      - path: HDMI_Head_A
+        weight: 1
+      - path: HDMI_Head_B
+        weight: 1
+      - path: HologramField_AICore
+        weight: 1
+      - path: HologramField_floaty
+        weight: 1
+      - path: HologramField_INM
+        weight: 1
+      - path: HologramField_off
+        weight: 1
+      - path: INM
+        weight: 1
+      - path: Power_Cable_Screen
+        weight: 1
+      - path: Power_Cable_Tower
+        weight: 1
+      - path: Screen
+        weight: 1
+      - path: Tower
+        weight: 1
+      - path: USB_Stick
+        weight: 1
+      - path: Wall_Plug_Screen
+        weight: 1
+      - path: Wall_Plug_Tower
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

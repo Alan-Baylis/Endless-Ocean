@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 48030f52c2d5b8d429a392fd75109ead
-timeCreated: 1474541235
+timeCreated: 1474694605
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -84,7 +84,59 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 249
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ConsolBlock
+        weight: 1
+      - path: Control_Panel
+        weight: 1
+      - path: GlobalProject
+        weight: 1
+      - path: GlobalProject/GlobalProjectTree
+        weight: 1
+      - path: Globe
+        weight: 1
+      - path: HologramField
+        weight: 1
+      - path: Screen
+        weight: 1
+      - path: Screen2
+        weight: 1
+      - path: Torus
+        weight: 1
+      - path: Tower
+        weight: 1
+      - path: USB_Stick
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
