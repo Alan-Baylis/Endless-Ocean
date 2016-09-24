@@ -118,6 +118,46 @@ public class Inventory : MonoBehaviour {
     }
 
     /// <summary>
+    /// This functions adds an item to the stack in the specified slot.
+    /// </summary>
+    /// <param name="slotNumber">The slot whose count should be incremented.</param>
+    public void stackItemInSpecifiedSlot(int slotNumber, Item item)
+    {
+            this.items[slotNumber].itemCount++;
+            Destroy(item.gameObject);
+    }
+
+    /// <summary>
+    /// This functions adds an item in the specified slot.
+    /// </summary>
+    /// <param name="slotNumber">The slot to add the item in.</param>
+    public void addItemInSpecifiedSlot(int slotNumber, Item item)
+    {
+        this.items[slotNumber] = item;
+        this.slots[slotNumber].GetComponent<InventorySlot>().item = item;
+        item.gameObject.SetActive(false);
+        item.gameObject.transform.parent = this.gameObject.transform;
+    }
+
+    /// <summary>
+    /// This function handles adding items from other UI elements to the inventory eg from quick slot or equipment to the inventory.
+    /// </summary>
+    /// <param name="item">The item to add to the inventory.</param>
+    /// <param name="slotNumber">The slot to add the item in.</param>
+    public void handleAddItemFromUI(Item item, int slotNumber)
+    {
+        if (item.stackable)
+        {
+            if (item.itemName == this.items[slotNumber].itemName)
+            {
+                this.stackItemInSpecifiedSlot(slotNumber, item);
+                return;
+            }
+        }
+        this.addItemInSpecifiedSlot(slotNumber, item);
+    }
+
+    /// <summary>
     /// This function shows the tool tip.
     /// </summary>
     /// <param name="item">The item to show the tooltip for.</param>

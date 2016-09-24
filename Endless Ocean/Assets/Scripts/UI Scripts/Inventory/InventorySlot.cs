@@ -73,11 +73,11 @@ public class InventorySlot : Slot
                 Item tempDraggingItem = this.inventory.draggedItem;
                 this.inventory.draggedItem = this.inventory.items[this.slotNumber];
                 this.inventory.draggedItemIcon.GetComponent<Image>().sprite = this.inventory.items[this.slotNumber].itemIcon;
-                this.inventory.items[this.slotNumber] = tempDraggingItem;
+                this.inventory.handleAddItemFromUI(tempDraggingItem, this.slotNumber);
             }
             else if (this.isSlotEmpty())
             {
-                this.inventory.items[this.slotNumber] = this.inventory.draggedItem;
+                this.inventory.handleAddItemFromUI(this.inventory.draggedItem, this.slotNumber);
                 this.inventory.stopDraggingItem();
             }
         }

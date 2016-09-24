@@ -326,9 +326,19 @@ public abstract class CharacterSuper : MonoBehaviour
         {
             case weaponMounts.Primary:
                 primaryMount.Weapon = null;
+                //Destroy(primaryMount.MountPoint.gameObject.transform.GetChild(0).gameObject);
+                if (activeWeaponType == weaponMounts.Primary)
+                {
+                    this.weapon = null;
+                }
                 break;
             case weaponMounts.Secondary:
                 secondaryMount.Weapon = null;
+                //Destroy(secondaryMount.MountPoint.gameObject.transform.GetChild(0).gameObject);
+                if (activeWeaponType == weaponMounts.Secondary)
+                {
+                    this.weapon = null;
+                }
                 break;
         }
     }

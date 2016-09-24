@@ -147,6 +147,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\Menus\GameOver.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Menus\LevelManager.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Menus\OptionsMenu.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\PanelSuper.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\QuickItems\QuickItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\QuickItems\QuickItemsPanel.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Reforger\Reforger.cs" />
