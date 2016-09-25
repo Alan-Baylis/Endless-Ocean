@@ -27,6 +27,9 @@ public abstract class NPCBehaviour : CharacterSuper
 	// Update is called once per frame
 	protected void FixedUpdate() {
         weapon.useAmmo = false;
+
+        checkIfOnGround();
+        animator.SetBool("grounded", true); //Currently having issues with checkIfOnground and AI
     }
 
     protected void pathToLocation(Vector3 destination)
@@ -43,6 +46,13 @@ public abstract class NPCBehaviour : CharacterSuper
 
         moveCharacter(direction);
         tracking = false;
+    }
+
+    new protected void equipWeapon(GameObject weaponGameObject, weaponMounts mount, string tag)
+    {
+        Weapon weapon = weaponGameObject.GetComponent<Weapon>();
+        GameObject weaponToEquip = Instantiate(Resources.Load(weapon.getModelPath())) as GameObject;
+        base.equipWeapon(weaponToEquip, mount, tag);
     }
 
     protected void attackTarget(Transform target)

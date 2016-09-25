@@ -92,9 +92,9 @@ public class PlayerController : CharacterSuper
         this.nextMelee = 0.0f;
         //Must initialize inventory like this so that items can be picked up from the start.
         this.inventory.initializeInventory();
-        GameObject pistolTemp = Instantiate(Resources.Load("Prefabs/Weapons/Pistol")) as GameObject;
+        GameObject pistolTemp = Instantiate(Resources.Load(Pistol.modelPathLocal)) as GameObject;
         inventory.addItem(pistolTemp.GetComponent<Pistol>());
-        GameObject clubTemp = Instantiate(Resources.Load("Prefabs/Weapons/Club")) as GameObject;
+        GameObject clubTemp = Instantiate(Resources.Load(Club.modelPathLocal)) as GameObject;
         inventory.addItem(clubTemp.GetComponent<Club>());
         this.inventory.gameObject.SetActive(false);
 
@@ -198,7 +198,7 @@ public class PlayerController : CharacterSuper
                 Collider[] clickedItems = Physics.OverlapSphere(playerCameraController.getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask);
                 inventory.addItem(clickedItems[0].gameObject.GetComponent<Item>());
             }
-            else if (nextMelee < Time.time)
+            else if (nextMelee < Time.time && weapon != null && !inventory.gameObject.activeSelf)
             {
 
                 if (energy > 0)
@@ -246,8 +246,8 @@ public class PlayerController : CharacterSuper
             //CODE FOR JUMPING.
             if (onGround && (Input.GetAxis("Jump") > 0))
             {
-                this.onGround = false;
-                this.animator.SetBool("grounded", this.onGround);
+                //this.onGround = false;
+                //this.animator.SetBool("grounded", this.onGround);
                 this.rigidbody.AddForce(new Vector3(0, jumpHeight, 0));
             }
             checkIfOnGround();
