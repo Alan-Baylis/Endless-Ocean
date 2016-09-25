@@ -61,6 +61,8 @@ public abstract class CharacterSuper : MonoBehaviour
     public int stamina;
     //The height the player will jump when the user makes them jump.
     public float jumpHeight;
+    protected Vector3 velocity;
+
     // Determines energy
     public int vigor;
 
@@ -185,7 +187,35 @@ public abstract class CharacterSuper : MonoBehaviour
         //If the user if moving apply movement force to player.
         if (move != 0 && this.enableMove)
         {
-            rigidbody.velocity = new Vector3(move * movementSpeed, this.rigidbody.velocity.y, 0);
+            //movement while in air
+            if(!onGround)
+            {
+                // if trying to move left when maximum left speed is reached
+                if (velocity.x <= -movementSpeed && move == -1)
+                {
+                }
+                // if trying to move left when maximum right speed is reached
+                else if (velocity.x >= movementSpeed && move == 1)
+                {
+                }
+                // move right
+                else if (move == 1)
+                {
+                    velocity.x += (movementSpeed / 8);
+                }
+                // move left
+                else if (move == -1)
+                {
+                    velocity.x -= (movementSpeed / 8);
+                }
+
+                rigidbody.velocity = new Vector3(velocity.x, this.rigidbody.velocity.y, 0);
+
+            }
+            else
+            {
+                rigidbody.velocity = new Vector3(move * movementSpeed, this.rigidbody.velocity.y, 0);
+            }
         }
 
         //If the game object starts moving left and is facing right turn the object around.
@@ -349,13 +379,8 @@ public abstract class CharacterSuper : MonoBehaviour
     /// <returns>An int specifying the new active weapon slot. 0 if the weapon was not swapped.</returns>
     public int swapWeapons()
     {
-        // Check for empty slots
-        if (!primaryMount.weaponLoaded() || !secondaryMount.weaponLoaded())
-        {
-            return 0; 
-        }
         // No empty slots and active weapon is the first one, switch to second wep
-        else if (activeWeaponType == weaponMounts.Primary)
+         if (activeWeaponType == weaponMounts.Primary)
         {
             weapon = primaryMount.Weapon; // set as new active weapons
             activeWeaponType = weaponMounts.Secondary;

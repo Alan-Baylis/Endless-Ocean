@@ -250,9 +250,13 @@ public class PlayerController : CharacterSuper
             //CODE FOR JUMPING.
             if (onGround && (Input.GetAxis("Jump") > 0))
             {
-                //this.onGround = false;
+
                 //this.animator.SetBool("grounded", this.onGround);
+
+                // Store horizontal velocity at time of jump
+                this.velocity = rigidbody.velocity;
                 this.rigidbody.AddForce(new Vector3(0, jumpHeight, 0));
+                this.onGround = false;
             }
             checkIfOnGround();
             this.animator.SetBool("grounded", this.onGround);
