@@ -13,6 +13,7 @@ public class PanelSuper : MonoBehaviour {
 	public virtual void showToolTip(Item item, Vector3 tooltipPosition)
     {
         this.toolTip.transform.Find("Equipment Labels").gameObject.SetActive(false);
+        this.toolTip.transform.Find("Weapon Labels").gameObject.SetActive(false);
         this.toolTip.transform.SetAsLastSibling();
         this.toolTip.transform.Find("Item Name").GetComponent<Text>().text = item.itemName;
         this.toolTip.transform.Find("Item Description").GetComponent<Text>().text = item.description;
@@ -23,10 +24,10 @@ public class PanelSuper : MonoBehaviour {
         //Checking if the item is equipment.
         if(item.GetComponent<Equipment>() != null)
         {
-            this.toolTip.transform.Find("Equipment Labels").gameObject.SetActive(true);
             GameObject equipmentLabels = this.toolTip.transform.Find("Equipment Labels").gameObject;
+            equipmentLabels.SetActive(true);
             //Reseting all labels to be black.
-            foreach (Transform child in this.toolTip.transform)
+            foreach (Transform child in equipmentLabels.transform)
             {
                 if (child.gameObject.GetComponent<Text>() != null)
                 {
@@ -75,6 +76,16 @@ public class PanelSuper : MonoBehaviour {
             {
                 equipmentLabels.transform.Find("Damage Label").GetComponent<Text>().text = tempEquipment.damageBonus.ToString();
             }
+        }
+        if(item.GetComponent<Weapon>() != null)
+        {
+            Weapon tempWeapon = item.GetComponent<Weapon>();
+            GameObject weaponLabels = this.toolTip.transform.Find("Weapon Labels").gameObject;
+            weaponLabels.SetActive(true);
+            weaponLabels.transform.Find("Damage Label").GetComponent<Text>().text = tempWeapon.getDamage().ToString();
+            weaponLabels.transform.Find("Energy Cost Label").GetComponent<Text>().text = tempWeapon.energyCost.ToString();
+            weaponLabels.transform.Find("Knockback Label").GetComponent<Text>().text = tempWeapon.getKnockBack().ToString();
+
         }
     }
 
