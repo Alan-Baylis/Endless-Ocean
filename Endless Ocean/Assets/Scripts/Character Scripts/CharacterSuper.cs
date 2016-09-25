@@ -346,12 +346,13 @@ public abstract class CharacterSuper : MonoBehaviour
     /// <summary>
     /// Swaps the character's currently held weapon from the two possible slots
     /// </summary>
-    public void swapWeapons()
+    /// <returns>An int specifying the new active weapon slot. 0 if the weapon was not swapped.</returns>
+    public int swapWeapons()
     {
         // Check for empty slots
         if (!primaryMount.weaponLoaded() || !secondaryMount.weaponLoaded())
         {
-            //do not switch
+            return 0; 
         }
         // No empty slots and active weapon is the first one, switch to second wep
         else if (activeWeaponType == weaponMounts.Primary)
@@ -360,7 +361,7 @@ public abstract class CharacterSuper : MonoBehaviour
             activeWeaponType = weaponMounts.Secondary;
             primaryMount.MountPoint.gameObject.SetActive(true); // show weapon
             secondaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
-
+            return 1;
         }
         // No empty slots and active weapon is the second one, switch to first wep
         else if (activeWeaponType == weaponMounts.Secondary)
@@ -369,7 +370,8 @@ public abstract class CharacterSuper : MonoBehaviour
             activeWeaponType = weaponMounts.Primary;
             secondaryMount.MountPoint.gameObject.SetActive(true); // show weapon
             primaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
-
+            return 2;
         }
+        return 0;
     }
 }

@@ -8,6 +8,10 @@ using System.Collections.Generic;
 public class PlayerController : CharacterSuper
 {
 
+    public delegate void WeaponSwapEventHandler(int slotNumber);
+
+    public event WeaponSwapEventHandler weaponSwapped;
+
     // Player HUD elements FG
     public Image playerHealthBar;
     public Image playerEnergyBar;
@@ -176,7 +180,7 @@ public class PlayerController : CharacterSuper
         // Swap weapons
         if (Input.GetButtonDown("SwapWeapons")) // Button to activate: Q
         {
-            this.swapWeapons();
+            this.weaponSwapped(this.swapWeapons());
         }
         if (Input.GetButtonDown("OpenItemsMenu")) // Button to activate: I
         {

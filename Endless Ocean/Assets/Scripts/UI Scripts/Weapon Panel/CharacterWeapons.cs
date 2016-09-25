@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,6 +17,7 @@ public class CharacterWeapons : MonoBehaviour {
     void Start()
     {
         this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        this.player.weaponSwapped += this.setWeaponSlotBackgrounds;
         this.transform.Find("FirstWeapon").GetComponent<WeaponSlot>().slotNumber = 0;
         this.transform.Find("SecondWeapon").GetComponent<WeaponSlot>().slotNumber = 1;
     }
@@ -49,6 +51,24 @@ public class CharacterWeapons : MonoBehaviour {
         else if (slotNumber == 1)
         {
             player.removeWeaponFromMount(CharacterSuper.weaponMounts.Secondary);
+        }
+    }
+
+    /// <summary>
+    /// This function changes the weapon slot background image to show what weapon is selected.
+    /// </summary>
+    /// <param name="slotNumber">The slotNumber of the selected weapon.</param>
+    public void setWeaponSlotBackgrounds(int slotNumber)
+    {
+        this.transform.Find("SecondWeapon").GetComponent<Image>().sprite = ((GameObject)Resources.Load("Prefabs/UI/InventorySlot")).GetComponent<Image>().sprite;
+        this.transform.Find("FirstWeapon").GetComponent<Image>().sprite = ((GameObject)Resources.Load("Prefabs/UI/InventorySlot")).GetComponent<Image>().sprite;
+        if (slotNumber == 1)
+        {
+            this.transform.Find("FirstWeapon").GetComponent<Image>().sprite = ((GameObject)Resources.Load("Prefabs/UI/SelectedWeaponSlot")).GetComponent<Image>().sprite;
+        }
+        else
+        {
+            this.transform.Find("SecondWeapon").GetComponent<Image>().sprite = ((GameObject)Resources.Load("Prefabs/UI/SelectedWeaponSlot")).GetComponent<Image>().sprite;
         }
     }
 }

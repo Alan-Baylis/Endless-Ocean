@@ -154,8 +154,8 @@
     <Compile Include="Assets\Scripts\UI Scripts\Shop\Shop.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Shop\ShopSlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Slot.cs" />
-    <Compile Include="Assets\Scripts\UI Scripts\WeaponSwap Scripts\CharacterWeapons.cs" />
-    <Compile Include="Assets\Scripts\UI Scripts\WeaponSwap Scripts\WeaponSlot.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\Weapon Panel\CharacterWeapons.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\Weapon Panel\WeaponSlot.cs" />
     <Compile Include="Assets\ShopNPC.cs" />
     <Compile Include="Assets\TreasureChest.cs" />
     <Compile Include="Assets\Water Flow FREE\Scripts\WaterFlowFREEDemo.cs" />
