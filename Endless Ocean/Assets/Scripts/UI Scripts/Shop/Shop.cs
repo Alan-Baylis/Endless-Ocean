@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// This is the class for the shop. It contains functions for managing the shop slots and showing the shop tooltip.
 /// </summary>
-public class Shop : MonoBehaviour
+public class Shop : PanelSuper
 {
     //List of slots in inventory.
     public List<GameObject> slots = new List<GameObject>();
@@ -20,9 +20,6 @@ public class Shop : MonoBehaviour
 
     //Reference to inventory slot prefab.
     public GameObject slot;
-
-    //Rerference to tooltip.
-    public GameObject toolTip;
 
     //List holding items user owns.
     public List<Item> inventory = new List<Item>();
@@ -69,39 +66,6 @@ public class Shop : MonoBehaviour
             this.currentYLocation -= Shop.INCREMENT;
             this.currentXlocation -= (Shop.INCREMENT * 5);
         }
-    }
-
-    /// <summary>
-    /// This function shows the tool tip.
-    /// </summary>
-    /// <param name="item">The item to show the tooltip for.</param>
-    /// <param name="tooltipPosition">The position to show the tooltip at.</param>
-    /// <param name="canAfford">A bool indicating if the player can afford the item.</param>
-    public void showToolTip(Item item, Vector3 tooltipPosition, bool canAfford)
-    {
-        this.toolTip.transform.SetAsLastSibling();
-        this.toolTip.transform.Find("Item Name").GetComponent<Text>().text = item.itemName;
-        this.toolTip.transform.Find("Item Description").GetComponent<Text>().text = item.description;
-        this.toolTip.transform.Find("Item Image").GetComponent<Image>().sprite = item.itemIcon;
-        this.toolTip.GetComponent<RectTransform>().localPosition = new Vector3(tooltipPosition.x + 20, tooltipPosition.y - 20, tooltipPosition.z + 1);
-        if (!canAfford)
-        {
-            this.toolTip.transform.Find("Cost Label").GetComponent<Text>().color = Color.red;
-        }
-        else
-        {
-            this.toolTip.transform.Find("Cost Label").GetComponent<Text>().color = Color.black;
-        }
-        this.toolTip.transform.Find("Cost Label").GetComponent<Text>().text = "$" + item.buyValue.ToString();
-        this.toolTip.SetActive(true);
-    }
-
-    /// <summary>
-    /// This function hides the tool tip.
-    /// </summary>
-    public void hideToolTip()
-    {
-        this.toolTip.SetActive(false);
     }
 
     /// <summary>

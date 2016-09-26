@@ -45,23 +45,55 @@ public class Equipment : Item
         {
             qualityModifier = 0.5f;
             quality = ItemQuality.Crude;
+            if(this.bodypart == Bodypart.FEET)
+            {
+                this.defense = (3 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
+            }
+            else if (this.bodypart == Bodypart.CHEST)
+            {
+                this.defense = (5 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
+            }
         }
         else if (qualityInt <= (int)ItemQuality.Basic)
         {
             qualityModifier = 1f;
             quality = ItemQuality.Basic;
+            if (this.bodypart == Bodypart.FEET)
+            {
+                this.defense = (5 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
+            }
+            else if (this.bodypart == Bodypart.CHEST)
+            {
+                this.defense = (7 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
+            }
         }
         else if (qualityInt <= (int)ItemQuality.Improved)
         {
             qualityModifier = 1.5f;
             quality = ItemQuality.Improved;
             this.generateBonuses(3);
+            if (this.bodypart == Bodypart.FEET)
+            {
+                this.defense = (7 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
+            }
+            else if (this.bodypart == Bodypart.CHEST)
+            {
+                this.defense = (9 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
+            }
         }
         else if (qualityInt <= (int)ItemQuality.Legendary)
         {
             qualityModifier = 2f;
             quality = ItemQuality.Legendary;
             this.generateBonuses(7);
+            if (this.bodypart == Bodypart.FEET)
+            {
+                this.defense = (9 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
+            }
+            else if (this.bodypart == Bodypart.CHEST)
+            {
+                this.defense = (11 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
+            }
         }
         else
         {

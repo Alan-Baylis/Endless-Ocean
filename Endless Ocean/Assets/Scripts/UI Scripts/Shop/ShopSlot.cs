@@ -29,7 +29,7 @@ public class ShopSlot : Slot
     {
         if (!this.isSlotEmpty())
         {
-            this.shop.showToolTip(shop.items[this.slotNumber], this.GetComponent<RectTransform>().localPosition, (this.player.totalTreasure >= shop.items[this.slotNumber].buyValue));
+            this.shop.showToolTip(shop.items[this.slotNumber], this.GetComponent<RectTransform>().localPosition);
         }
     }
 

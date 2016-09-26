@@ -22,10 +22,7 @@ public abstract class RangedWeapon : Weapon {
     /// <returns>A bool inidicating if the player has ammo to fire.</returns>
     new protected virtual bool useAmmo()
     {
-        if (!base.useAmmo)
-        {
-            return true;
-        }else if(this.player.ammo > 0 )
+        if(this.player.ammo > 0 )
         {
             this.player.ammo--;
             return true;

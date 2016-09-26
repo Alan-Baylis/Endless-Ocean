@@ -8,13 +8,10 @@ using UnityEngine.UI;
 /// 
 public enum Bodypart { HEAD, CHEST, FEET };
 
-public class CharacterEquipment : MonoBehaviour
+public class CharacterEquipment : PanelSuper
 {
     //Reference to the players inventory. 
     public Inventory inventory;
-
-    //Reference to the tooltip.
-    public GameObject toolTip;
 
     public Text validationPrompt;
 
@@ -42,6 +39,10 @@ public class CharacterEquipment : MonoBehaviour
     public GameObject levelUpButtons;
 
     public Transform head;
+
+    //Ints used to revert player stats when equipment is removed.
+    private int oldHealth;
+    private int oldEnergy;
 
     public Dictionary<Bodypart, Equipment> equippedItems = new Dictionary<Bodypart, Equipment>();
 
@@ -171,30 +172,8 @@ public class CharacterEquipment : MonoBehaviour
         this.player.stamina -= equipment.staminaBonus;
         this.player.movementSpeed -= equipment.moveSpeedBonus;
         this.player.attack -= equipment.damageBonus;
-    }
-
-    /// <summary>
-    /// This function shows the tool tip.
-    /// </summary>
-    /// <param name="item">The equipment to show the tooltip for.</param>
-    /// <param name="tooltipPosition">The position to show the tooltip at.</param>
-    public void showToolTip(Item item, Vector3 tooltipPosition)
-    {
-        this.toolTip.transform.SetAsLastSibling();
-        this.toolTip.transform.Find("Item Name").GetComponent<Text>().text = item.itemName;
-        this.toolTip.transform.Find("Item Description").GetComponent<Text>().text = item.description;
-        this.toolTip.transform.Find("Item Image").GetComponent<Image>().sprite = item.itemIcon;
-        this.toolTip.GetComponent<RectTransform>().localPosition = new Vector3(tooltipPosition.x + 20, tooltipPosition.y - 20, tooltipPosition.z + 1);
-        this.toolTip.transform.Find("Cost Label").GetComponent<Text>().text = "$" + item.buyValue.ToString();
-        this.toolTip.SetActive(true);
-    }
-
-    /// <summary>
-    /// This function hides the tool tip.
-    /// </summary>
-    public void hideToolTip()
-    {
-        this.toolTip.SetActive(false);
+        this.player.updateEnergy();
+        this.player.updateHealth();
     }
 
 }

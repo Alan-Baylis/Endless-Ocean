@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    protected virtual void Start()
     {
         this.GetComponent<Rigidbody>().velocity = transform.forward * speed;
         Destroy(this.gameObject, 25f);
@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
         return knockBack;
     }
 
-    protected void OnTriggerEnter(Collider col)
+    protected virtual void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "Player")
         {

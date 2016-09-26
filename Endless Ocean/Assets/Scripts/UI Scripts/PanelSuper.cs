@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Linq;
 
 public class PanelSuper : MonoBehaviour {
 
@@ -32,6 +33,10 @@ public class PanelSuper : MonoBehaviour {
                 if (child.gameObject.GetComponent<Text>() != null)
                 {
                     child.gameObject.GetComponent<Text>().color = Color.black;
+                    if (child.gameObject.GetComponent<Text>().text.All(char.IsDigit))
+                    {
+                        child.gameObject.GetComponent<Text>().text = 0.ToString();
+                    }
                 }
             }
             //Showing defense.
