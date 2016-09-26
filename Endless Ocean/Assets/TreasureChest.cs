@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class TreasureChest : MonoBehaviour {
 
     Animator animator;
     private bool opened = false;
+    public Image prompt;
 
     // Use this for initialization
     void Start () {
@@ -16,8 +18,14 @@ public class TreasureChest : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
+            if (!opened)
+            {
+                prompt.gameObject.SetActive(true);
+            }
+
             if (Input.GetKeyDown("e") && (!opened))
             {
+                prompt.gameObject.SetActive(false);
                 opened = true;
                 this.animator.SetBool("opened", true);
 
@@ -36,6 +44,14 @@ public class TreasureChest : MonoBehaviour {
                     }
                 }
             }
+        }
+    }
+
+    protected void OnTriggerExit(Collider col)
+    {
+        if(!opened)
+        {
+            prompt.gameObject.SetActive(false);
         }
     }
 }
