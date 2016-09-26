@@ -78,10 +78,12 @@ public class Item : MonoBehaviour
         get { return false; }
     }
 
-    protected Color getQualityColour()
+    public Color getQualityColour()
     {
         switch (quality)
         {
+            case ItemQuality.NULL:
+                return Color.black;
             case ItemQuality.Crude:
                 return Color.red;
             case ItemQuality.Basic:

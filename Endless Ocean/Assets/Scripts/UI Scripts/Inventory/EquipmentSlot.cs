@@ -69,7 +69,7 @@ public class EquipmentSlot : Slot
         this.equipment.validationPrompt.text = "";
         if (this.inventory.draggingItem)
         {
-            if (this.inventory.draggedItem.GetType().ToString() == "Equipment")
+            if (this.inventory.draggedItem.GetComponent<Equipment>() != null)
             {
                 Equipment tempEquipment = (Equipment)this.inventory.draggedItem;
                 if (tempEquipment.bodypart == this.bodypart)

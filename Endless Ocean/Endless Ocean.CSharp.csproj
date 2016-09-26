@@ -117,6 +117,8 @@
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\Consumable.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\HealthPotion.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\TestPotion.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\Boots.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\ChestPiece.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\Equipment.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\TestHelmet.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
@@ -133,11 +135,11 @@
     <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\GrapplePullObject.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\UtilityItem.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\Bullet.cs" />
-    <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\EnvironmentalBullet.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\Individual Weapons\Club.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\Individual Weapons\Pistol.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\MeleeWeapon.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\RangedWeapon.cs" />
+    <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\SpawnableBarrel.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\OverWorld Scripts\CamMove.cs" />
     <Compile Include="Assets\Scripts\OverWorld Scripts\InfiniteTerrain.cs" />

@@ -87,7 +87,6 @@ public class ShopSlot : Slot
                 this.shop.items[this.slotNumber] = this.inventory.draggedItem;
                 this.inventory.stopDraggingItem();
                 this.player.totalTreasure += this.inventory.draggedItem.sellValue;
-                Debug.Log(this.player.totalTreasure);
             }
         }
     }

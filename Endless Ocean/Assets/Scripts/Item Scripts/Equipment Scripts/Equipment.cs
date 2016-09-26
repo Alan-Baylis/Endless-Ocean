@@ -12,9 +12,9 @@ public class Equipment : Item
     public int moveSpeedBonus;
     public int damageBonus;
 
-    public int defense;
-
     protected float qualityModifier = 1;
+
+    protected int qualityInt;
 
     //Changing buy and sell values based off item quality.
     public override int buyValue
@@ -35,7 +35,7 @@ public class Equipment : Item
 
     public void setQualityAndAttributes(float luck)
     {
-        int qualityInt = Random.Range(1, 100);
+        qualityInt = Random.Range(1, 100);
         qualityInt = (int)(qualityInt * luck);
         //if (quality != ItemQuality.NULL)
         //{
@@ -45,60 +45,29 @@ public class Equipment : Item
         {
             qualityModifier = 0.5f;
             quality = ItemQuality.Crude;
-            if(this.bodypart == Bodypart.FEET)
-            {
-                this.defense = (3 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
-            }
-            else if (this.bodypart == Bodypart.CHEST)
-            {
-                this.defense = (5 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
-            }
         }
         else if (qualityInt <= (int)ItemQuality.Basic)
         {
             qualityModifier = 1f;
             quality = ItemQuality.Basic;
-            if (this.bodypart == Bodypart.FEET)
-            {
-                this.defense = (5 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
-            }
-            else if (this.bodypart == Bodypart.CHEST)
-            {
-                this.defense = (7 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
-            }
         }
         else if (qualityInt <= (int)ItemQuality.Improved)
         {
             qualityModifier = 1.5f;
             quality = ItemQuality.Improved;
-            this.generateBonuses(3);
-            if (this.bodypart == Bodypart.FEET)
-            {
-                this.defense = (7 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
-            }
-            else if (this.bodypart == Bodypart.CHEST)
-            {
-                this.defense = (9 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
-            }
         }
         else if (qualityInt <= (int)ItemQuality.Legendary)
         {
             qualityModifier = 2f;
             quality = ItemQuality.Legendary;
-            this.generateBonuses(7);
-            if (this.bodypart == Bodypart.FEET)
-            {
-                this.defense = (9 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
-            }
-            else if (this.bodypart == Bodypart.CHEST)
-            {
-                this.defense = (11 * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
-            }
         }
         else
         {
             qualityModifier = 100f;
             quality = ItemQuality.Godly;
+        }
+        if((quality != ItemQuality.Crude ) && (quality != ItemQuality.Basic)){
+            this.generateBonuses((qualityInt * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel) / 80);
         }
     }
 
@@ -106,7 +75,7 @@ public class Equipment : Item
     /// This method generates the bonuses for newly created equipment.
     /// </summary>
     /// <param name="bonusPoints">The points to spend on bonuses.</param>
-    private void generateBonuses(int bonusPoints)
+    protected virtual void generateBonuses(int bonusPoints)
     {
         bonusPoints = (bonusPoints * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);
         System.Random random = new System.Random();
@@ -136,9 +105,9 @@ public class Equipment : Item
     /// This method returns the items defense.
     /// </summary>
     /// <returns>The equipment's defense.</returns>
-    public int getDefense()
+    public virtual int getDefense()
     {
-        return (int) (this.defense * qualityModifier);
+        return (qualityInt);
     }
 
     // Update is called once per frame

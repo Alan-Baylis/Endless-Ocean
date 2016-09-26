@@ -269,7 +269,7 @@ public abstract class CharacterSuper : MonoBehaviour
             int knockBack = col.gameObject.GetComponent<Bullet>().getKnockBack();
 
             this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
-            if (col.gameObject.GetComponent<EnvironmentalBullet>() == null)
+            if (col.gameObject.GetComponent<SpawnableBarrel>() == null)
             {
                 Destroy(col.gameObject.GetComponentInParent<Rigidbody>().gameObject);
             }

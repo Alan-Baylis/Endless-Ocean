@@ -17,6 +17,7 @@ public class PanelSuper : MonoBehaviour {
         this.toolTip.transform.Find("Weapon Labels").gameObject.SetActive(false);
         this.toolTip.transform.SetAsLastSibling();
         this.toolTip.transform.Find("Item Name").GetComponent<Text>().text = item.itemName;
+        this.toolTip.transform.Find("Item Name").GetComponent<Text>().color = item.getQualityColour();
         this.toolTip.transform.Find("Item Description").GetComponent<Text>().text = item.description;
         this.toolTip.transform.Find("Item Image").GetComponent<Image>().sprite = item.itemIcon;
         this.toolTip.GetComponent<RectTransform>().localPosition = new Vector3(tooltipPosition.x + 20, tooltipPosition.y - 20, tooltipPosition.z + 1);
@@ -41,7 +42,7 @@ public class PanelSuper : MonoBehaviour {
             }
             //Showing defense.
             Equipment tempEquipment = item.GetComponent<Equipment>();
-            equipmentLabels.transform.Find("Defence Label").GetComponent<Text>().text = tempEquipment.defense.ToString();
+            equipmentLabels.transform.Find("Defence Label").GetComponent<Text>().text = tempEquipment.getDefense().ToString();
             //Iterating through all bonuses and if they are > 1 show them else gray out the labels.
             if (tempEquipment.vigorBonus == 0)
             {
@@ -92,6 +93,7 @@ public class PanelSuper : MonoBehaviour {
             weaponLabels.transform.Find("Knockback Label").GetComponent<Text>().text = tempWeapon.getKnockBack().ToString();
 
         }
+        this.customizeTooltip(item);
     }
 
     /// <summary>
@@ -100,5 +102,13 @@ public class PanelSuper : MonoBehaviour {
     public void hideToolTip()
     {
         this.toolTip.SetActive(false);
+    }
+
+    /// <summary>
+    /// This function makes changes to the tooltip unique to the panel it appears in.
+    /// </summary>
+    public virtual void customizeTooltip(Item item)
+    {
+
     }
 }

@@ -5,7 +5,9 @@ public class BarrelSpawner : MonoBehaviour {
 
     private GameObject player;
     public Vector3 barrelSpawnPosition;
-    private float nextBarrel;
+   // private float nextBarrel;
+
+    public bool hasBarrelSpawned;
 
 	// Use this for initialization
 	void Start () {
@@ -20,11 +22,12 @@ public class BarrelSpawner : MonoBehaviour {
         {
             if (Input.GetButtonDown("Interact"))
             {
-                if (Time.time >= nextBarrel)
+                if (!hasBarrelSpawned)
                 {
                     GameObject barrel = Instantiate(Resources.Load("Prefabs/Environment/SpawnableBarrel")) as GameObject;
                     barrel.transform.position = barrelSpawnPosition;
-                    nextBarrel = Time.time + 25f;
+                    barrel.GetComponentInChildren<SpawnableBarrel>().spawner = this;
+                    this.hasBarrelSpawned = true;
                 }
             }
         }

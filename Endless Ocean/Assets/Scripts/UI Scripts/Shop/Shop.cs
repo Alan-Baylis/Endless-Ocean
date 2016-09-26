@@ -31,6 +31,9 @@ public class Shop : PanelSuper
     //Reference to reforger panel.
     public GameObject reforger;
 
+    //Refernce to player.
+    public PlayerController player;
+
     void Start()
     {
         this.initializeShop();
@@ -66,6 +69,7 @@ public class Shop : PanelSuper
             this.currentYLocation -= Shop.INCREMENT;
             this.currentXlocation -= (Shop.INCREMENT * 5);
         }
+        this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     /// <summary>
@@ -123,5 +127,16 @@ public class Shop : PanelSuper
     {
         this.gameObject.SetActive(false);
         this.reforger.SetActive(true);
+    }
+
+    public override void customizeTooltip(Item item)
+    {
+        if (item.buyValue > player.totalTreasure) {
+            this.transform.Find("Tooltip").transform.Find("Cost Label").GetComponent<Text>().color = Color.red;
+        }
+        else
+        {
+            this.transform.Find("Tooltip").transform.Find("Cost Label").GetComponent<Text>().color = Color.black;
+        }
     }
 }
