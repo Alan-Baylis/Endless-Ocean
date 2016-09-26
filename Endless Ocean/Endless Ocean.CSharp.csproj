@@ -136,6 +136,8 @@
     <Compile Include="Assets\Scripts\OverWorld Scripts\InfiniteTerrain.cs" />
     <Compile Include="Assets\Scripts\OverWorld Scripts\Move.cs" />
     <Compile Include="Assets\Scripts\Puzzle Scripts\PressurePlate.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\DialogueBox\DialogueHolder.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\DialogueBox\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Inventory\CharacterEquipment.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Inventory\EquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Inventory\Inventory.cs" />
