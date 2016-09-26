@@ -7,6 +7,7 @@ public class Move : MonoBehaviour
     public Rigidbody rb;
     float speed = 20f;
     float bSpeed = 10f;
+    float boostSpeed = 40f;
     // float maxSpeed = 20f;
     // float accel = .2f;
     float rotationspeed = 50;
@@ -36,6 +37,10 @@ public class Move : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(Vector3.up * rotationspeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.MovePosition(transform.position + transform.forward * boostSpeed * Time.deltaTime);
         }
 
         if(Input.GetKey(KeyCode.B))
