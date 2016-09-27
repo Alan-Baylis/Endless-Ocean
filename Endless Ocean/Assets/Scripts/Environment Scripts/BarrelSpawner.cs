@@ -15,10 +15,11 @@ public class BarrelSpawner : MonoBehaviour {
 	}
 
     /// <summary>
-    /// Called once  per frame. Lets the user spawn a barrel if they are close enough.
+    /// Called as long as the player is inside the barrels collider.
     /// </summary>
-    void Update () {
-        if (Vector3.Distance(this.transform.position, this.player.transform.position) < 10)
+    /// <param name="other">The other collider.</param>
+    void OnTriggerStay (Collider other) {
+        if (other.gameObject.CompareTag("Player"))
         {
             if (Input.GetButtonDown("Interact"))
             {

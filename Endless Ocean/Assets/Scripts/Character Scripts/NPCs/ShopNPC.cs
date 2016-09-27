@@ -20,18 +20,28 @@ public class ShopNPC : MonoBehaviour {
 	/// <summary>
     /// Called once  per frame. Lets the user open the vendor windows if they are close enough.
     /// </summary>
-	void Update () {
-	    if(Vector3.Distance(this.transform.position, this.player.transform.position) < 5)
+    /// <param name="other">The other collider.</param>
+	void OnTriggerStay (Collider other) {
+	    if(other.gameObject.CompareTag("Player"))
         {
             if (Input.GetButtonDown("Interact"))
             {
-                this.vendorPanels.SetActive(!this.vendorPanels.activeSelf);
-                this.inventory.SetActive(!this.inventory.activeSelf);
+                this.vendorPanels.SetActive(true);
+                this.inventory.SetActive(true);
             }
         }
-        else
+	}
+
+    /// <summary>
+    /// Closes the shop menu when the player goes too far from the shop.
+    /// </summary>
+    /// <param name="other">The other collider.</param>
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
             this.vendorPanels.SetActive(false);
+            this.inventory.SetActive(false);
         }
-	}
+    }
 }
