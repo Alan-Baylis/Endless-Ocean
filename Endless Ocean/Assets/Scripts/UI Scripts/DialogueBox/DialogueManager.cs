@@ -5,6 +5,7 @@ public class DialogueManager : MonoBehaviour {
 
     public GameObject dialogueBox;
     public Text textBody;
+    public Text speakerName;
 
     public bool dialogueActive;
 
@@ -18,7 +19,6 @@ public class DialogueManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
     }
 	
 	// Update is called once per frame

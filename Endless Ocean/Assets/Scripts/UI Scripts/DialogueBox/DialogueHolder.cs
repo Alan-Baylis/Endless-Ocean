@@ -6,6 +6,7 @@ public class DialogueHolder : MonoBehaviour {
     private DialogueManager dialogueManager;
 
     public string[] dialogueLines;
+    public string speakerName;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class DialogueHolder : MonoBehaviour {
                     Time.timeScale = 0;
                     dialogueManager.currentLine = 0;
                     dialogueManager.currentLetter = 0;
+                    dialogueManager.speakerName.text = this.speakerName;
                     dialogueManager.dialogueLines = this.dialogueLines;
                     dialogueManager.showDialogue();
                 }
