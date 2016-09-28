@@ -7,7 +7,7 @@ using System.Collections;
 public class ShopNPC : MonoBehaviour {
 
     private GameObject player;
-    public GameObject vendorPanels;
+    public GameObject reforgerPanel;
     public GameObject inventory;
 
 	/// <summary>
@@ -15,6 +15,8 @@ public class ShopNPC : MonoBehaviour {
     /// </summary>
 	void Start () {
         this.player = GameObject.FindGameObjectWithTag("Player");
+        this.inventory = GameObject.FindGameObjectWithTag("ItemsMenu").transform.Find("Inventory").gameObject;
+        this.reforgerPanel = GameObject.FindGameObjectWithTag("VendorPanels").transform.Find("ReforgerPanel").gameObject;
 	}
 	
 	/// <summary>
@@ -26,7 +28,7 @@ public class ShopNPC : MonoBehaviour {
         {
             if (Input.GetButtonDown("Interact"))
             {
-                this.vendorPanels.SetActive(true);
+                this.reforgerPanel.SetActive(true);
                 this.inventory.SetActive(true);
             }
         }
@@ -40,7 +42,7 @@ public class ShopNPC : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            this.vendorPanels.SetActive(false);
+            this.reforgerPanel.SetActive(false);
             this.inventory.SetActive(false);
         }
     }

@@ -19,9 +19,6 @@ public class PlayerController : CharacterSuper
     public Image playerHealthBarBG;
     public Image playerEnergyBarBG;
 
-    //Other game objects.
-    public CameraController playerCameraController;
-
     //Interfaces that separate the player controller from weapons and utility items (eg: grapple)
     public Grapple grapple;
 
@@ -194,12 +191,16 @@ public class PlayerController : CharacterSuper
         {
             this.hideNearbyItemTooltips();
         }
+        if (Input.GetKey(KeyCode.B))
+        {
+            Application.LoadLevel("Ship Scene");
+        }
         // Weapon event
         if (Input.GetButtonDown("Fire 1"))
         { // Button to activate: Left Mouse Click
-            if (Physics.CheckSphere(playerCameraController.getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask))
+            if (Physics.CheckSphere(Camera.main.gameObject.GetComponent<CameraController>().getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask))
             {
-                Collider[] clickedItems = Physics.OverlapSphere(playerCameraController.getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask);
+                Collider[] clickedItems = Physics.OverlapSphere(Camera.main.gameObject.GetComponent<CameraController>().getMouseLocationInWorldCoordinates(), .01f, itemsLayerMask);
                 inventory.addItem(clickedItems[0].gameObject.GetComponent<Item>());
             }
             else if (nextMelee < Time.time && weapon != null && !inventory.gameObject.activeSelf)
@@ -218,7 +219,7 @@ public class PlayerController : CharacterSuper
 
                     this.playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
                     this.animator.SetTrigger("MeleeAttackTrigger");
-                    this.weapon.attack(this.attack, playerCameraController.getMouseLocationInWorldCoordinates());
+                    this.weapon.attack(this.attack, Camera.main.gameObject.GetComponent<CameraController>().getMouseLocationInWorldCoordinates());
                 }
             }
         }
@@ -356,7 +357,7 @@ public class PlayerController : CharacterSuper
     public void showNearbyItemTooltips()
     {
         this.nearbyItems.Clear();
-        Collider[] nearbyColliders = Physics.OverlapSphere(playerCameraController.getMouseLocationInWorldCoordinates(), 15f, itemsLayerMask);
+        Collider[] nearbyColliders = Physics.OverlapSphere(Camera.main.gameObject.GetComponent<CameraController>().getMouseLocationInWorldCoordinates(), 15f, itemsLayerMask);
         for(int i = 0; i < nearbyColliders.Length; i++)
         {
             nearbyColliders[i].gameObject.GetComponent<Item>().tooltip.SetActive(true);

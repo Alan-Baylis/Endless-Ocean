@@ -114,6 +114,8 @@
     <Compile Include="Assets\Scripts\Character Scripts\NPCs\ShopNPC.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\BarrelSpawner.cs" />
+    <Compile Include="Assets\Scripts\Environment Scripts\PlayerInitializer.cs" />
+    <Compile Include="Assets\Scripts\Environment Scripts\PreserveAcrossLevels.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\Consumable.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\EnergyPotion.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\HealthPotion.cs" />

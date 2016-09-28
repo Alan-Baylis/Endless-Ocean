@@ -79,9 +79,20 @@ public abstract class Weapon: Item{
     /// </summary>
     abstract public void attack(float playerDamage, Vector3 mousePositionInWorldCoords);
 
+    /// <summary>
+    /// Sets the weapons tag depending on if the enemy or player is holding the weapon.
+    /// </summary>
     protected override void Start()
     {
         base.Start();
+        if(this.gameObject.transform.parent.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            this.tag = "EnemyWeapon";
+        }
+        else
+        {
+            this.tag = "PlayerWeapon";
+        }
     }
     
     public void setQuality(float luck)
