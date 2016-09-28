@@ -64,6 +64,18 @@
     <Reference Include="Mono.Cecil">
       <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
     <Reference Include="GETween">
       <HintPath>Assets\GUI Animator\Common\Plugins\GETween.dll</HintPath>
     </Reference>
@@ -144,8 +156,9 @@
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\SpawnableBarrel.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\OverWorld Scripts\CamMove.cs" />
-    <Compile Include="Assets\Scripts\OverWorld Scripts\InfiniteTerrain.cs" />
     <Compile Include="Assets\Scripts\OverWorld Scripts\Move.cs" />
+    <Compile Include="Assets\Scripts\OverWorld Scripts\Wrap World.cs" />
+    <Compile Include="Assets\Scripts\OverWorld Scripts\test Scripts\InfiniteTerrain.cs" />
     <Compile Include="Assets\Scripts\Puzzle Scripts\PressurePlate.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\DialogueBox\DialogueHolder.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\DialogueBox\DialogueManager.cs" />
