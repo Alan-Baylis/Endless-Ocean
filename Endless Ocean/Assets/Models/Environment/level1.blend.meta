@@ -123,6 +123,12 @@ ModelImporter:
     100230: Cube_099
     100232: Cube_100
     100234: Cube_101
+    100236: AirCon
+    100238: Cube_Cube_007
+    100240: Cube_Cube_008
+    100242: Cube_Cube_009
+    100244: Cube_Cube_010
+    100246: ground_001
     400000: BarrelStack1
     400002: BarrelStack1_001
     400004: BarrelStack1_002
@@ -241,6 +247,12 @@ ModelImporter:
     400230: Cube_099
     400232: Cube_100
     400234: Cube_101
+    400236: AirCon
+    400238: Cube_Cube_007
+    400240: Cube_Cube_008
+    400242: Cube_Cube_009
+    400244: Cube_Cube_010
+    400246: ground_001
     2300000: BarrelStack1
     2300002: BarrelStack1_001
     2300004: BarrelStack1_002
@@ -358,6 +370,12 @@ ModelImporter:
     2300228: Cube_099
     2300230: Cube_100
     2300232: Cube_101
+    2300234: AirCon
+    2300236: Cube_Cube_007
+    2300238: Cube_Cube_008
+    2300240: Cube_Cube_009
+    2300242: Cube_Cube_010
+    2300244: ground_001
     3300000: BarrelStack1
     3300002: BarrelStack1_001
     3300004: BarrelStack1_002
@@ -475,6 +493,12 @@ ModelImporter:
     3300228: Cube_099
     3300230: Cube_100
     3300232: Cube_101
+    3300234: AirCon
+    3300236: Cube_Cube_007
+    3300238: Cube_Cube_008
+    3300240: Cube_Cube_009
+    3300242: Cube_Cube_010
+    3300244: ground_001
     4300000: BarrelStack1_004
     4300002: BarrelStack1_003
     4300004: BarrelStack1_001
@@ -592,6 +616,12 @@ ModelImporter:
     4300228: Cube_089
     4300230: Cube_088
     4300232: Cube_087
+    4300234: AirCon
+    4300236: ground_001
+    4300238: Cube_Cube_010
+    4300240: Cube_Cube_009
+    4300242: Cube_Cube_008
+    4300244: Cube_Cube_007
     7400000: Default Take
     9500000: //RootNode
   materials:
