@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endless Ocean.CSharp.Plugins", "Endless Ocean.CSharp.Plugins.csproj", "{5CA4EA70-24C3-7FF5-5F9A-D560DCB172C8}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endless Ocean.CSharp", "Endless Ocean.CSharp.csproj", "{E1E481AF-E631-BB8F-C416-506970EBB578}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endless Ocean.CSharp.Editor", "Endless Ocean.CSharp.Editor.csproj", "{2A212BD2-D912-58D3-B37E-8C8719927FCB}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CA4EA70-24C3-7FF5-5F9A-D560DCB172C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA4EA70-24C3-7FF5-5F9A-D560DCB172C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA4EA70-24C3-7FF5-5F9A-D560DCB172C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA4EA70-24C3-7FF5-5F9A-D560DCB172C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E1E481AF-E631-BB8F-C416-506970EBB578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E1E481AF-E631-BB8F-C416-506970EBB578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1E481AF-E631-BB8F-C416-506970EBB578}.Release|Any CPU.ActiveCfg = Release|Any CPU
