@@ -195,6 +195,10 @@ public class PlayerController : CharacterSuper
         {
             Application.LoadLevel("Ship Scene");
         }
+        if (Input.GetKey(KeyCode.N))
+        {
+            Application.LoadLevel("BoatM");
+        }
         // Weapon event
         if (Input.GetButtonDown("Fire 1"))
         { // Button to activate: Left Mouse Click
