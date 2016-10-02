@@ -9,11 +9,11 @@ using System.Collections;
 public class StillBodyWater : MonoBehaviour
 {
 
-    private int floatHeight = 1;
+    private float floatHeight;
     //Int with the water level where water stops.
-    private float waterLevel = 0;
+    private float waterLevel;
     //An int to decresen the force lifting up objects that 'float'
-    private float bounceDamp = .4f;
+    private float bounceDamp;
 
     private float moveSpeedRemoved;
 
@@ -50,7 +50,7 @@ public class StillBodyWater : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            this.moveSpeedRemoved = (other.GetComponent<PlayerController>().movementSpeed);
+            this.moveSpeedRemoved = (other.GetComponent<PlayerController>().movementSpeed / 2);
             other.gameObject.GetComponent<PlayerController>().movementSpeed /= 2;
             other.gameObject.GetComponent<Rigidbody>().mass /= 2;
         }
@@ -74,11 +74,8 @@ public class StillBodyWater : MonoBehaviour
     /// </summary>
     void Start()
     {
-        this.waterLevel = this.gameObject.transform.position.y;
-    }
-
-    void FixedUpdate()
-    {
-        this.waterLevel = this.gameObject.transform.position.y;
+        this.waterLevel = this.gameObject.transform.position.y + this.transform.lossyScale.y;
+        this.floatHeight = this.waterLevel;
+        this.bounceDamp = 1f;
     }
 }
