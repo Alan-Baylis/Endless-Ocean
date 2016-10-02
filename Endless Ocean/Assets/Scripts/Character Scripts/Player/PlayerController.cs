@@ -396,4 +396,20 @@ public class PlayerController : CharacterSuper
             this.inventory.gameObject.SetActive(!this.inventory.gameObject.activeSelf);
         }
     }
+
+    public void setModel(int value)
+    {
+        Transform exo = transform.Find("Exo");
+        Transform human = transform.Find("Human");
+        if (value == 0)
+        {
+            exo.gameObject.SetActive(false);
+            human.gameObject.SetActive(true);
+        }
+        else
+        {
+            exo.gameObject.SetActive(true);
+            human.gameObject.SetActive(false);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class getExo : MonoBehaviour {
 
@@ -8,8 +9,10 @@ public class getExo : MonoBehaviour {
     public string[] dialogueLines;
     public string speakerName;
     bool spokenTo = false;
-    public Mesh human;
-    public Mesh exo;
+    public GameObject human;
+    public GameObject exo;
+    public Image blackLayer;
+
 
     // Use this for initialization
     void Start()
@@ -37,13 +40,24 @@ public class getExo : MonoBehaviour {
                     dialogueManager.dialogueLines = this.dialogueLines;
                     dialogueManager.showDialogue();
                     spokenTo = true;
+
+                    blackLayer.GetComponent<FadeEffect>().fadeOutBool = true;
                 }
-            }
-            if(dialogueManager.dialogueActive == false && spokenTo == true)
+
+                }
+
+            if (spokenTo == true && blackLayer.GetComponent<FadeEffect>().fadeOutBool == false)
             {
-                
+                human.SetActive(false);
+                exo.SetActive(true);
+                this.gameObject.SetActive(false);
             }
 
+
+            
+
         }
-    }
+
+        }
+    
 }
