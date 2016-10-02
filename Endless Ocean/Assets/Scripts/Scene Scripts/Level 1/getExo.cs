@@ -13,7 +13,6 @@ public class getExo : MonoBehaviour {
     public GameObject exo;
     public Image blackLayer;
 
-
     // Use this for initialization
     void Start()
     {

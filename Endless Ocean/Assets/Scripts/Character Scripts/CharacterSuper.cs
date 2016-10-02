@@ -81,7 +81,7 @@ public abstract class CharacterSuper : MonoBehaviour
     //Movement Variables 
 
     protected bool facingRight;
-    protected bool enableMove;
+    public bool enableMove;
     #endregion
 
     #region mesh component variables

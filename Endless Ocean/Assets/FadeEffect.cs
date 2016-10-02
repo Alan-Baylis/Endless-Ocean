@@ -11,6 +11,8 @@ public class FadeEffect : MonoBehaviour {
     public bool fadeOutBool = false;
     public bool fadeInBool = false;
 
+    public GameObject player;
+
     // Use this for initialization
     void Start()
     {
@@ -36,6 +38,7 @@ public class FadeEffect : MonoBehaviour {
 
     IEnumerator performFadeOut()
     {
+        player.GetComponent<PlayerController>().enableMove = false;
         while (blackLayer.color.a < 1.0f)
         {
             Color c = blackLayer.color;
@@ -60,7 +63,7 @@ public class FadeEffect : MonoBehaviour {
             yield return null;
         }
         fadeInBool = false;
-
+        player.GetComponent<PlayerController>().enableMove = true;
         yield return null;
     }
 }
