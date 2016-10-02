@@ -64,18 +64,6 @@
     <Reference Include="Mono.Cecil">
       <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
     <Reference Include="GETween">
       <HintPath>Assets\GUI Animator\Common\Plugins\GETween.dll</HintPath>
     </Reference>
@@ -134,6 +122,7 @@
     <Compile Include="Assets\Scripts\Environment Scripts\BarrelSpawner.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\PlayerInitializer.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\PreserveAcrossLevels.cs" />
+    <Compile Include="Assets\Scripts\Environment Scripts\RisingWaterLevel.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\StillBodyWater.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\Consumable.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\EnergyPotion.cs" />
