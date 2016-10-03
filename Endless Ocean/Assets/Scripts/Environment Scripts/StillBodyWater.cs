@@ -9,13 +9,14 @@ using System.Collections;
 public class StillBodyWater : MonoBehaviour
 {
 
-    private float floatHeight;
+    public float floatHeight;
     //Int with the water level where water stops.
-    private float waterLevel;
+    public float waterLevel;
     //An int to decresen the force lifting up objects that 'float'
     private float bounceDamp;
 
     private float moveSpeedRemoved;
+
 
 
 

@@ -125,6 +125,7 @@
     <Compile Include="Assets\Scripts\Environment Scripts\PreserveAcrossLevels.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\RisingWaterLevel.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\StillBodyWater.cs" />
+    <Compile Include="Assets\Scripts\Environment Scripts\WaterSource.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\Consumable.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\EnergyPotion.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Consumables Scripts\HealthPotion.cs" />
