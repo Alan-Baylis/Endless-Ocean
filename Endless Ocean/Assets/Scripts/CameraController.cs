@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour {
     private Transform target;
     public float smoothing = 5f;
 
-    Vector3 offset = new Vector3(0, 7.5f, -50);
+    public Vector3 offset;
 
 
 	// Use this for initialization
