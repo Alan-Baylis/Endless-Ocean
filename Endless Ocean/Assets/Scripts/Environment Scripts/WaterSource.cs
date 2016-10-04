@@ -22,4 +22,19 @@ public class WaterSource : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Allows the user to start water source pouring water.
+    /// </summary>
+    /// <param name="other">The other collider inside the water sources collider.</param>
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                this.GetComponent<ParticleSystem>().enableEmission = true;
+            }
+        }
+    }
+
 }

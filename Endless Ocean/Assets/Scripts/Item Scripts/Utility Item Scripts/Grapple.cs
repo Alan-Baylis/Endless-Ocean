@@ -109,15 +109,18 @@ public class Grapple: MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This function draws the grapple's rope.
+    /// </summary>
     void LateUpdate()
     {
         if (this.grappling)
         {
-            this.drawRope(playerRigidbody.position, this.otherEnd);
+            this.drawRope(this.gameObject.transform.position, this.otherEnd);
         }
         else if (this.pulling)
         {
-            this.drawRope(playerRigidbody.position, this.otherObject.position);
+            this.drawRope(this.gameObject.transform.position, this.otherObject.position);
         }
     }
 
