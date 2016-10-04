@@ -15,7 +15,20 @@ public class Move : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
-    void FixedUpdate()
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.tag == "Player")
+        {
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                Application.LoadLevel("Sidescrolling scene");
+            }
+        }
+    }
+
+
+                void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
