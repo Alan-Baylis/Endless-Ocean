@@ -23,7 +23,11 @@ public class PressurePlate : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         this.animator.SetBool("PressurePlateDown", this.pressurePlateDown);
-        this.doorAnimator.SetBool("PressurePlateDown", this.pressurePlateDown);
+
+        if (triggeredObject != null)
+        {
+            this.doorAnimator.SetBool("PressurePlateDown", this.pressurePlateDown);
+        }
         if (pressurePlateDown)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.green;
