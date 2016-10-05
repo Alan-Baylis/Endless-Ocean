@@ -206,7 +206,6 @@ public class Inventory : PanelSuper {
             }
             this.currentYLocation -= Inventory.INCREMENT;
             this.currentXlocation -= (Inventory.INCREMENT * 5);
-            this.treasureLabel = GameObject.Find("TreasureLabel").GetComponent<Text>();
         }
     }
 }
