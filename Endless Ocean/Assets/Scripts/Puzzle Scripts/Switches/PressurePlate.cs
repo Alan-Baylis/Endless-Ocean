@@ -8,26 +8,19 @@ public class PressurePlate : MonoBehaviour {
     // Animation controller
     Animator animator;
     // Door reference
-    public GameObject triggeredObject;
+    public PuzzleObject triggeredObject;
     // Parent reference
     public GameObject parent;
-    // Door Animator
-    Animator doorAnimator;
 
     // Use this for initialization
     void Start () {
         this.animator = this.parent.GetComponent<Animator>();
-        this.doorAnimator = this.triggeredObject.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         this.animator.SetBool("PressurePlateDown", this.pressurePlateDown);
 
-        if (triggeredObject != null)
-        {
-            this.doorAnimator.SetBool("PressurePlateDown", this.pressurePlateDown);
-        }
         if (pressurePlateDown)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.green;
@@ -44,6 +37,7 @@ public class PressurePlate : MonoBehaviour {
         if (col.gameObject.tag == "WeightCube" || col.gameObject.tag == "Player")
         {
             pressurePlateDown = true;
+            UpdateTriggeredObjects();
         }
     }
 
@@ -51,5 +45,14 @@ public class PressurePlate : MonoBehaviour {
     void OnTriggerExit(Collider col)
     {
          pressurePlateDown = false;
+            UpdateTriggeredObjects();
+    }
+
+    void UpdateTriggeredObjects()
+    {
+        if (triggeredObject != null)
+        {
+            triggeredObject.isActive = pressurePlateDown;
+        }
     }
 }
