@@ -150,6 +150,9 @@ public abstract class CharacterSuper : MonoBehaviour
     //Character collider
     public Collider col;
 
+    private Material replaceMat;
+    private static Material damageMaterial;
+
     // Use this for initialization
     protected void Start()
     {
@@ -158,7 +161,8 @@ public abstract class CharacterSuper : MonoBehaviour
         this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
         this.enableMove = true;
-
+        CharacterSuper.damageMaterial = Resources.Load("Materials/DamageMaterial") as Material;
+        //this.replaceMat = this.transform.Find("Body").GetComponent<SkinnedMeshRenderer>().material;
 
         // Get weapon mount location so that we can easily attach weapons to them
         secondaryMount.MountPoint = primaryWeaponSlot;
@@ -318,6 +322,8 @@ public abstract class CharacterSuper : MonoBehaviour
         {
             die();
         }
+
+        StartCoroutine(flashOnDamageTaken());
     }
 
     /// <summary>
@@ -401,5 +407,32 @@ public abstract class CharacterSuper : MonoBehaviour
             return 2;
         }
         return 0;
+    }
+
+    /// <summary>
+    /// Flashes the character model red over several frames when the ytake damage.
+    /// </summary>
+    /// <returns>Return null. Is a co-routine so returns at the end of each frame.</returns>
+    IEnumerator flashOnDamageTaken()
+    {
+        //Initializing colors.
+        SkinnedMeshRenderer body = this.gameObject.transform.Find("Body").GetComponent<SkinnedMeshRenderer>();
+        for(int i = 0; i < 5; i++)
+        {
+            if(i == 0)
+            {
+                body.material = CharacterSuper.damageMaterial;
+            }
+            else if(i % 2 == 0)
+            {
+                body.material = CharacterSuper.damageMaterial;
+            }
+            else
+            {
+                body.material = this.replaceMat;
+            }
+            yield return new WaitForSeconds(.5f);
+        }
+        body.material = this.replaceMat;
     }
 }

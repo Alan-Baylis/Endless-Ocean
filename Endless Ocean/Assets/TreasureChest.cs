@@ -9,9 +9,12 @@ public class TreasureChest : MonoBehaviour {
     private bool opened = false;
     public Image prompt;
 
+    private ParticleSystem chestEffect;
+
     // Use this for initialization
     void Start () {
         this.animator = this.GetComponent<Animator>();
+        this.chestEffect = this.GetComponentInChildren<ParticleSystem>();
     }
 
     protected void OnTriggerStay(Collider col)
@@ -25,6 +28,7 @@ public class TreasureChest : MonoBehaviour {
 
             if (Input.GetKeyDown("e") && (!opened))
             {
+                StartCoroutine(this.showTreasureOpenEffect());
                 prompt.gameObject.SetActive(false);
                 opened = true;
                 this.animator.SetBool("opened", true);
@@ -53,5 +57,16 @@ public class TreasureChest : MonoBehaviour {
         {
             prompt.gameObject.SetActive(false);
         }
+    }
+
+    IEnumerator showTreasureOpenEffect()
+    {
+        int framesToRunFor = 25;
+        this.chestEffect.enableEmission = true;
+        for(int i = 0; i < framesToRunFor; i++)
+        {
+            yield return null;
+        }
+        this.chestEffect.enableEmission = false;
     }
 }

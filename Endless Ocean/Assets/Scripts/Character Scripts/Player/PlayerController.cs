@@ -63,11 +63,11 @@ public class PlayerController : CharacterSuper
     int dodgeCost = 15;
     int dodgeSpeed = 25;
 
+
     // Use this for initialization
     new void Start()
     {
         base.Start();
-
         // Assign objects that damage this character upon collision
         base.fears = "Enemy";
 

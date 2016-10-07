@@ -27,4 +27,14 @@ public class ExpSphere : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
+
+    void FixedUpdate()
+    {
+        if(Vector3.Distance(this.transform.position, player.gameObject.transform.position) < 5f)
+        {
+            Debug.Log("Close");
+            this.gameObject.GetComponent<MoveTowardsObject>().objectToMoveTowards = this.player.gameObject;
+            this.gameObject.GetComponent<MoveTowardsObject>().enabled = true;
+        }
+    }
 }
