@@ -159,12 +159,11 @@ public class PlayerController : CharacterSuper
         }
     }
 
-    /// <summary>
-    /// Runs before every frame. Performs physics calculates for game objects to be displayed when the next frame is rendered and updates the animator.
-    /// </summary>
-    void FixedUpdate()
+    new void Update()
     {
-        if(this.health <= 0)
+        base.Update();
+
+        if (this.health <= 0)
         {
             die();
         }
@@ -223,6 +222,14 @@ public class PlayerController : CharacterSuper
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Runs before every frame. Performs physics calculates for game objects to be displayed when the next frame is rendered and updates the animator.
+    /// </summary>
+    void FixedUpdate()
+    {
+        
         //If statements for using quick items.
         #region
         if (Input.GetButtonDown("UseQuickItem1"))
