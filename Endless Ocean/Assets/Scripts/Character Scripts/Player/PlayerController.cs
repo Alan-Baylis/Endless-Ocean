@@ -193,11 +193,7 @@ public class PlayerController : CharacterSuper
         }
         if (Input.GetKey(KeyCode.B))
         {
-            Application.LoadLevel("Ship Scene");
-        }
-        if (Input.GetKey(KeyCode.N))
-        {
-            Application.LoadLevel("BoatM");
+            SceneManager.LoadScene("BoatM");
         }
         // Weapon event
         if (Input.GetButtonDown("Fire 1"))
@@ -342,8 +338,8 @@ public class PlayerController : CharacterSuper
 
     public override void die()
     {
-        Application.LoadLevel("Game Over");
-        
+        SceneManager.LoadScene("Game Over");
+        //transform.position = Vector3.zero;
     }
 
     /// <summary>

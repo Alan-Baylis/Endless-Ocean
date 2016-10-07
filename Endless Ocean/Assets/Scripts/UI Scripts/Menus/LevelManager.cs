@@ -6,17 +6,18 @@ public class LevelManager : MonoBehaviour
 {
     public void startGame ()
     {
-        Application.LoadLevel("Sidescrolling Scene");
+        //Application.LoadLevel("Sidescrolling Scene");
+        SceneManager.LoadScene("Sidescrolling Scene");
     }
 
     public void loadGame()
     {
-        Application.LoadLevel("BoatM");
+        SceneManager.LoadScene("BoatM");
     }
 
     public void optionMenu ()
     {
-        Application.LoadLevel("Options");
+        SceneManager.LoadScene("Options");
     }
 
     public void Exit ()

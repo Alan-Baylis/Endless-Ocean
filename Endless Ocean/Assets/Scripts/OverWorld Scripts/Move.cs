@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
@@ -16,19 +17,9 @@ public class Move : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void OnTriggerStay(Collider col)
-    {
-        if (col.tag == "Player")
-        {
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                Application.LoadLevel("Sidescrolling scene");
-            }
-        }
-    }
 
 
-                void FixedUpdate()
+     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
