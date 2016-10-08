@@ -63,6 +63,10 @@ public abstract class CharacterSuper : MonoBehaviour
     public float jumpHeight;
     protected Vector3 velocity;
 
+    [SerializeField]
+    protected float recovery;
+    protected float recoveryTimer;
+
     // Determines energy
     public int vigor;
 
@@ -174,6 +178,14 @@ public abstract class CharacterSuper : MonoBehaviour
 
     }
 
+    protected void FixedUpdate()
+    {
+        if (recoveryTimer < 0)
+        {
+            recoveryTimer = 0;
+        }
+    }
+
     // <summary>
     // This function flips the game object when the user turns it around my moving it.
     // </summary>
@@ -187,6 +199,12 @@ public abstract class CharacterSuper : MonoBehaviour
 
     protected void moveCharacter(float move)
     {
+        //Stun Timer
+        if (recoveryTimer != 0)
+        {
+            move = 0;
+        }
+
         //If the user if moving apply movement force to player.
         if (move != 0 && this.enableMove)
         {
@@ -270,8 +288,10 @@ public abstract class CharacterSuper : MonoBehaviour
         {
             int damage = col.gameObject.GetComponent<Bullet>().getDamage();
             int knockBack = col.gameObject.GetComponent<Bullet>().getKnockBack();
+            float stun = col.gameObject.GetComponent<Bullet>().getStun();
 
             this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+            recoveryTimer = stun;
             if (col.gameObject.GetComponent<SpawnableBarrel>() == null)
             {
                 Destroy(col.gameObject.GetComponentInParent<Rigidbody>().gameObject);
@@ -281,6 +301,7 @@ public abstract class CharacterSuper : MonoBehaviour
         else if (col.gameObject.tag == fears+"Weapon")
         {
             int damage = col.gameObject.GetComponent<Weapon>().getDamage() + col.transform.root.GetComponent<CharacterSuper>().attack;
+            float stun = col.gameObject.GetComponent<Weapon>().getStun();
             int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
             bool collisionHandled = col.gameObject.GetComponent<Weapon>().collisonHandled;
 
@@ -288,6 +309,8 @@ public abstract class CharacterSuper : MonoBehaviour
             if (animController.GetCurrentAnimatorStateInfo(1).IsName("Melee Attack") && !collisionHandled)
             {
                 this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+                recoveryTimer = stun;
+
                 col.gameObject.GetComponent<Weapon>().collisonHandled = true;
             }
 

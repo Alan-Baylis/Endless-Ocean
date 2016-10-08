@@ -27,6 +27,11 @@ public class Bullet : MonoBehaviour
 
     }
 
+    public float getStun()
+    {
+        return knockBack * 0.1f;
+    }
+
     public int getDamage()
     {
         return damage;

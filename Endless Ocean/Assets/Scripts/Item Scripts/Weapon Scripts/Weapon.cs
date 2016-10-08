@@ -31,6 +31,7 @@ public abstract class Weapon: Item{
 
     // Attack variables
     public bool collisonHandled = false;
+    public int stun;
     public int damage;
     public int knockBack;
     public int energyCost;
@@ -135,6 +136,11 @@ public abstract class Weapon: Item{
     public int getDamage()
     {
         return (int) (damage * qualityModifier);
+    }
+
+    public float getStun()
+    {
+        return stun + (knockBack * 0.1f);
     }
 
     public int getKnockBack()

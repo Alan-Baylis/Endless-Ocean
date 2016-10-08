@@ -25,7 +25,8 @@ public abstract class NPCBehaviour : CharacterSuper
     }
 	
 	// Update is called once per frame
-	protected void FixedUpdate() {
+	new protected void FixedUpdate() {
+        base.FixedUpdate();
         weapon.useAmmo = false;
 
         checkIfOnGround();

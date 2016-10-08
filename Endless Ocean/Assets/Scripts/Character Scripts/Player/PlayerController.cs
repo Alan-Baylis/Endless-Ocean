@@ -71,6 +71,9 @@ public class PlayerController : CharacterSuper
         // Assign objects that damage this character upon collision
         base.fears = "Enemy";
 
+        //disable grapple if exo isn't enabled
+        grapple.isEnabled = false;
+
         // Set energy and attack variables
         this.attack = 5;
         this.stamina = 5;
@@ -228,9 +231,9 @@ public class PlayerController : CharacterSuper
     /// <summary>
     /// Runs before every frame. Performs physics calculates for game objects to be displayed when the next frame is rendered and updates the animator.
     /// </summary>
-    void FixedUpdate()
+    new void FixedUpdate()
     {
-        
+        base.FixedUpdate();
         //If statements for using quick items.
         #region
         if (Input.GetButtonDown("UseQuickItem1"))

@@ -12,6 +12,7 @@ using System;
 /// </summary>
 public class Grapple: MonoBehaviour
 {
+    public bool isEnabled;
 
     float lastFire;
     float grappleReloadSpeed;
@@ -63,14 +64,15 @@ public class Grapple: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-            if (Input.GetMouseButtonDown(1))
-            {
+
+        if (Input.GetMouseButtonDown(1) && isEnabled)
+        {
             if (this.grappling || this.pulling)
             {
                 this.destroyRope();
             }
-            else { 
+            else
+            {
                 RaycastHit grappleRaycastHitData;
                 bool canGrapple = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 15f, grappleMask);
                 if (canGrapple)
