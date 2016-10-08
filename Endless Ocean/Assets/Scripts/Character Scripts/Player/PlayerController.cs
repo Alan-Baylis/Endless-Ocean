@@ -71,15 +71,15 @@ public class PlayerController : CharacterSuper
         // Assign objects that damage this character upon collision
         base.fears = "Enemy";
 
-        //disable grapple if exo isn't enabled
-        grapple.isEnabled = false;
-
         // Set energy and attack variables
         this.attack = 5;
         this.stamina = 5;
         this.vigor = 10;
 
         this.currentLevel = 5;
+
+        //enable grapple - need to code this to trigger only when wearing exo
+        grapple.isEnabled = true;
 
         // Set health
         this.maxHealth = this.stamina * 10;
