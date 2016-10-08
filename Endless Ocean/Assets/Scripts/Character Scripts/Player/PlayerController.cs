@@ -219,6 +219,7 @@ public class PlayerController : CharacterSuper
                     this.playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
                     this.animator.SetTrigger("MeleeAttackTrigger");
                     this.weapon.attack(this.attack, Camera.main.gameObject.GetComponent<CameraController>().getMouseLocationInWorldCoordinates());
+
                 }
             }
         }

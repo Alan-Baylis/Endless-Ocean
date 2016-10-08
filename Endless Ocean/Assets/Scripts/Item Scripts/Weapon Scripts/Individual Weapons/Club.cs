@@ -19,6 +19,7 @@ public class Club : MeleeWeapon {
         this.knockBack = 250;
         this.energyCost = 25;
         range = 2;
+        this.character = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     void FixedUpdate()
@@ -27,11 +28,22 @@ public class Club : MeleeWeapon {
 
     public override void attack(float playerDamage, Vector3 mousePositionInWorldCoords)
     {
+        this.trailRenderer.enabled = true;
+        StartCoroutine(hideTrailWhenFinishedAttacking());
 
     }
 
     public override string getModelPath()
     {
         return modelPathLocal;
+    }
+    
+    private IEnumerator hideTrailWhenFinishedAttacking()
+    {
+        if(this.character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < this.character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length)
+        {
+            yield return null;
+        }
+        this.trailRenderer.enabled = false;
     }
 }

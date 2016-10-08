@@ -150,8 +150,8 @@ public abstract class CharacterSuper : MonoBehaviour
     //Character collider
     public Collider col;
 
-    private Material replaceMat;
-    private static Material damageMaterial;
+    public Material damageMaterial;
+    public Material bodyMaterial;
 
     // Use this for initialization
     protected void Start()
@@ -161,7 +161,6 @@ public abstract class CharacterSuper : MonoBehaviour
         this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
         this.enableMove = true;
-        CharacterSuper.damageMaterial = Resources.Load("Materials/DamageMaterial") as Material;
         //this.replaceMat = this.transform.Find("Body").GetComponent<SkinnedMeshRenderer>().material;
 
         // Get weapon mount location so that we can easily attach weapons to them
@@ -421,18 +420,31 @@ public abstract class CharacterSuper : MonoBehaviour
         {
             if(i == 0)
             {
-                body.material = CharacterSuper.damageMaterial;
+                body.material = this.damageMaterial;
             }
             else if(i % 2 == 0)
             {
-                body.material = CharacterSuper.damageMaterial;
+                body.material = this.damageMaterial;
             }
             else
             {
-                body.material = this.replaceMat;
+                body.material = this.bodyMaterial;
             }
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.15f);
         }
-        body.material = this.replaceMat;
+        body.material = this.bodyMaterial;
+    }
+
+    /// <summary>
+    /// Makes the character wait until an animation is completed in a co-routine.
+    /// </summary>
+    /// <param name="animationToWaitFor">The animation to wait for.</param>
+    /// <returns></returns>
+    public static IEnumerator WaitForAnimation(Animation animationToWaitFor)
+    {
+        do
+        {
+            yield return null;
+        } while (animationToWaitFor.isPlaying);
     }
 }

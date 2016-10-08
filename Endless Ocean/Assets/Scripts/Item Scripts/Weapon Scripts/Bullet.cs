@@ -10,13 +10,15 @@ public class Bullet : MonoBehaviour
     public int damage;
     public float speed;
     public int knockBack;
-
+    private ParticleSystem bulletTrail;
 
     // Use this for initialization
     protected virtual void Start()
     {
         this.GetComponent<Rigidbody>().velocity = transform.forward * speed;
+        this.bulletTrail = this.GetComponentInChildren<ParticleSystem>();
         Destroy(this.gameObject, 25f);
+        StartCoroutine(hideBulletTrail());
     }
 
     // Update is called once per frame
@@ -41,6 +43,16 @@ public class Bullet : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    IEnumerator hideBulletTrail()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            this.bulletTrail.emissionRate--;
+            yield return new WaitForSeconds(.15f);
+        }
+        this.bulletTrail.enableEmission = false;
     }
 
 }

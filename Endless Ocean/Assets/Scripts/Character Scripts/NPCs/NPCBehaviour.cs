@@ -82,6 +82,7 @@ public abstract class NPCBehaviour : CharacterSuper
         TreasureSpawner.spawnTreasure(random.Next(0, maxHealth/2), this.transform);
         AmmoSpawner.spawnAmmo(random.Next(0, maxHealth/10), this.transform);
         ItemSpawner.spawnSpecificItems(itemDrops, itemPossibilites, this.transform);
+        Instantiate(Resources.Load("Prefabs/Explosions/explosion_enemy"), this.transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 }
