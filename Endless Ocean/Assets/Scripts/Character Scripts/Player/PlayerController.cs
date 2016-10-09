@@ -12,6 +12,8 @@ public class PlayerController : CharacterSuper
 
     public event WeaponSwapEventHandler weaponSwapped;
 
+    public bool reforgerSaved = false;
+
     // Player HUD elements FG
     public Image playerHealthBar;
     public Image playerEnergyBar;
@@ -195,7 +197,7 @@ public class PlayerController : CharacterSuper
         }
         if (Input.GetKey(KeyCode.B))
         {
-            SceneManager.LoadScene("BoatM");
+            SceneManager.LoadScene("Ship Scene");
         }
         // Weapon event
         if (Input.GetButtonDown("Fire 1"))

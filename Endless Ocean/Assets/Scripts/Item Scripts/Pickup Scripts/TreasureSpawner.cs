@@ -16,10 +16,10 @@ public class TreasureSpawner : MonoBehaviour {
     public static void spawnTreasure(int amountOfTreasure, Transform positionToSpawnAt)
     {
         System.Random random = new System.Random();
-        for (int i = 0; i < 100 / 10; i++)
+        for (int i = 0; i < amountOfTreasure / 10; i++)
         {
-            GameObject expShere = Instantiate(Resources.Load(treasurePrefabs[random.Next(0, 4)]), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
-            expShere.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
+            GameObject treasure = Instantiate(Resources.Load(treasurePrefabs[random.Next(0, 4)]), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
+            treasure.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
         }
     }
 
@@ -31,12 +31,12 @@ public class TreasureSpawner : MonoBehaviour {
     public static IEnumerator spawnTreasureCoroutine(int amountOfTreasure, Transform positionToSpawnAt)
     {
         System.Random random = new System.Random();
-        for (int i = 0; i < 100 / 10; i++)
+        for (int i = 0; i < amountOfTreasure/10; i++)
         {
-            GameObject expShere = Instantiate(Resources.Load(treasurePrefabs[random.Next(0, 4)]), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
-            expShere.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
-            Debug.Log("Spawned Treasure");
+            GameObject treasure = Instantiate(Resources.Load(treasurePrefabs[random.Next(0, 4)]), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
+            treasure.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
             yield return null;
         }
+        Destroy(positionToSpawnAt.gameObject);
     }
 }

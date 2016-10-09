@@ -40,10 +40,11 @@ public class Club : MeleeWeapon {
     
     private IEnumerator hideTrailWhenFinishedAttacking()
     {
-        if(this.character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < this.character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length)
-        {
-            yield return null;
-        }
+        //if(this.character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < this.character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length)
+        //{
+        //    yield return null;
+        //}
+        yield return new WaitForSeconds(.2f);
         this.trailRenderer.enabled = false;
     }
 }

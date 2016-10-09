@@ -80,10 +80,11 @@ public abstract class NPCBehaviour : CharacterSuper
     {
         System.Random random = new System.Random();
         ExpSphereSpawner.spawnExpOrbs(random.Next(0, maxHealth/2), this.transform);
-        TreasureSpawner.spawnTreasure(random.Next(0, maxHealth/2), this.transform);
+        StartCoroutine(TreasureSpawner.spawnTreasureCoroutine(random.Next(0, maxHealth/2), this.transform));
         AmmoSpawner.spawnAmmo(random.Next(0, maxHealth/10), this.transform);
         ItemSpawner.spawnSpecificItems(itemDrops, itemPossibilites, this.transform);
         Instantiate(Resources.Load("Prefabs/Explosions/explosion_enemy"), this.transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
+        this.GetComponent<MeshRenderer>().enabled = false;
+        this.GetComponent<Collider>().enabled = false;
     }
 }
