@@ -52,7 +52,6 @@ public class Grapple: MonoBehaviour
     GrapplePullObject otherObjectMover;
 
     public Rigidbody playerRigidbody;
-    public CameraController playerCameraController;
 
     // Use this for initialization
     void Start()
@@ -74,7 +73,7 @@ public class Grapple: MonoBehaviour
             else
             {
                 RaycastHit grappleRaycastHitData;
-                bool canGrapple = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 15f, grappleMask);
+                bool canGrapple = Physics.Raycast(playerRigidbody.position, Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 15f, grappleMask);
                 if (canGrapple)
                 {
                     this.createGrapplingRope(grappleRaycastHitData);
@@ -82,7 +81,7 @@ public class Grapple: MonoBehaviour
                 else
                 {
                     RaycastHit pullingRaycastHitData = new RaycastHit();
-                    bool canPull = Physics.Raycast(playerRigidbody.position, playerCameraController.getMouseLocationInWorldCoordinates() - playerRigidbody.position, out pullingRaycastHitData, 7f, pullMask);
+                    bool canPull = Physics.Raycast(playerRigidbody.position, Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates() - playerRigidbody.position, out pullingRaycastHitData, 7f, pullMask);
                     if (canPull)
                     {
                         this.creatingPullingRope(playerRigidbody, pullingRaycastHitData.rigidbody, pullingRaycastHitData.point);

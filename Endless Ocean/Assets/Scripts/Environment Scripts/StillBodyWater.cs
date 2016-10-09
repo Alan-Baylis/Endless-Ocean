@@ -43,32 +43,32 @@ public class StillBodyWater : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Makes the player move slower and jump higher in water.
-    /// </summary>
-    /// <param name="other">The other collider.</param>
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            this.moveSpeedRemoved = (other.GetComponent<PlayerController>().movementSpeed / 2);
-            other.gameObject.GetComponent<PlayerController>().movementSpeed /= 2;
-            other.gameObject.GetComponent<Rigidbody>().mass /= 2;
-        }
-    }
+    ///// <summary>
+    ///// Makes the player move slower and jump higher in water.
+    ///// </summary>
+    ///// <param name="other">The other collider.</param>
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        this.moveSpeedRemoved = (other.GetComponent<PlayerController>().movementSpeed / 2);
+    //        other.gameObject.GetComponent<PlayerController>().movementSpeed /= 2;
+    //        other.gameObject.GetComponent<Rigidbody>().mass /= 2;
+    //    }
+    //}
 
-    /// <summary>
-    /// Returns the players movement to normal when they leave the water.
-    /// </summary>
-    /// <param name="other">The other collider.</param>
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<PlayerController>().movementSpeed += this.moveSpeedRemoved;
-            other.gameObject.GetComponent<Rigidbody>().mass *= 2;
-        }
-    }
+    ///// <summary>
+    ///// Returns the players movement to normal when they leave the water.
+    ///// </summary>
+    ///// <param name="other">The other collider.</param>
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        other.gameObject.GetComponent<PlayerController>().movementSpeed += this.moveSpeedRemoved;
+    //        other.gameObject.GetComponent<Rigidbody>().mass *= 2;
+    //    }
+    //}
 
     /// <summary>
     /// Initializes key variables.
