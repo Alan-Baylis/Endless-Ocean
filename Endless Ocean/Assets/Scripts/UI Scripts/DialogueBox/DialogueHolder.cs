@@ -26,12 +26,7 @@ public class DialogueHolder : MonoBehaviour {
             {
                 if (!dialogueManager.dialogueActive)
                 {
-                    Time.timeScale = 0;
-                    dialogueManager.currentLine = 0;
-                    dialogueManager.currentLetter = 0;
-                    dialogueManager.speakerName.text = this.speakerName;
-                    dialogueManager.dialogueLines = this.dialogueLines;
-                    dialogueManager.showDialogue();
+                    dialogueManager.showDialogue(this.speakerName, this.dialogueLines,0.0f);
                 }
             }
         }

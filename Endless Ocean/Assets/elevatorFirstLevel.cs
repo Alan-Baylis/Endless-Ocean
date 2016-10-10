@@ -6,11 +6,17 @@ public class elevatorFirstLevel : MonoBehaviour
     bool triggered;
     public Animator elevatorAC;
 
+    public string[] dialogueLines;
+    public string speakerName;
+
+    private DialogueManager dialogueManager;
+
     // Use this for initialization
     void Start()
     {
         triggered = false;
         this.elevatorAC = this.GetComponent<Animator>();
+        dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
     // Update is called once per frame
@@ -27,6 +33,7 @@ public class elevatorFirstLevel : MonoBehaviour
             {
                 triggered = true;
                 this.elevatorAC.SetBool("triggered", true);
+                dialogueManager.showDialogue(this.speakerName, this.dialogueLines, 12.0f);
             }
         }
     }

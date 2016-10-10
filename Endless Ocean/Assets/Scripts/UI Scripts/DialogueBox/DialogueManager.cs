@@ -17,29 +17,57 @@ public class DialogueManager : MonoBehaviour {
     public AudioClip typeSound1;
     public AudioClip typeSound2;
 
+    bool onTimer = false;
+    float countDown; // 15 seconds
+    float timeBetweenMessages;
+
     // Use this for initialization
     void Start () {
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //next dialogue box
-        // On R temporarily until I can find a solution
-	    if(dialogueActive && Input.GetKeyDown(KeyCode.R))
+        if (onTimer)
         {
-            currentLine++;
-            textBody.text = "";
-            currentLetter = 0;
+            countDown -= Time.deltaTime;
+            if (countDown <= 0)
+            {
+                dialogueBox.SetActive(true);
+                currentLine++;
+                textBody.text = "";
+                currentLetter = 0;
+                countDown = timeBetweenMessages; // 15 seconds
+            }
         }
-        // if all lines exhauseted, stop writing message
-        if(currentLine >= dialogueLines.Length)
-        {
-            dialogueBox.SetActive(false);
-            dialogueActive = false;
-            currentLine = 0;
-            textBody.text = "";
-            Time.timeScale = 1;
-        }
+
+            //next dialogue box
+            // On R temporarily until I can find a solution
+            if (dialogueActive && Input.GetKeyDown(KeyCode.R))
+            {
+                if (onTimer)
+                {
+                    dialogueBox.SetActive(false);
+                }
+                else
+                {
+                    currentLine++;
+                    textBody.text = "";
+                    currentLetter = 0;
+                }
+            }
+
+
+            // if all lines exhauseted, stop writing message
+            if (currentLine >= dialogueLines.Length)
+            {
+                dialogueBox.SetActive(false);
+                dialogueActive = false;
+                onTimer = false;
+                currentLine = 0;
+                textBody.text = "";
+                Time.timeScale = 1;
+            }
+        
 
         if (dialogueActive)
         {
@@ -65,8 +93,27 @@ public class DialogueManager : MonoBehaviour {
         }
     }
 
-    public void showDialogue()
+    public void showDialogue(string speakerName, string[] dialogueLines, float timer)
     {
+
+        timeBetweenMessages = timer;
+        countDown = timeBetweenMessages;
+
+        if (timeBetweenMessages > 0.0f)
+        {
+            onTimer = true;
+        }
+        else
+        {
+            onTimer = false;
+            Time.timeScale = 0;
+        }
+
+        this.currentLine = 0;
+        this.currentLetter = 0;
+        this.speakerName.text = speakerName;
+        this.dialogueLines = dialogueLines;
+
         textBody.text = "";
         dialogueActive = true;
         dialogueBox.SetActive(true);
