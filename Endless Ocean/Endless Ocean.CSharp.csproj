@@ -185,6 +185,7 @@
     <Compile Include="Assets\elevatorFirstLevel.cs" />
     <Compile Include="Assets\interactablePrompt.cs" />
     <Compile Include="Assets\interactablePromptToggle.cs" />
+    <Compile Include="Assets\zoomCameraCollider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GE Common Assets\Readme.txt" />
