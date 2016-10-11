@@ -9,8 +9,7 @@ public class getExo : MonoBehaviour {
     public string[] dialogueLines;
     public string speakerName;
     bool spokenTo = false;
-    public GameObject human;
-    public GameObject exo;
+    public GameObject player;
     public Image blackLayer;
 
     // Use this for initialization
@@ -42,8 +41,7 @@ public class getExo : MonoBehaviour {
 
             if (spokenTo == true && blackLayer.GetComponent<FadeEffect>().fadeOutBool == false)
             {
-                human.SetActive(false);
-                exo.SetActive(true);
+                player.GetComponent<PlayerController>().setModel(1);
                 this.gameObject.SetActive(false);
             }
 

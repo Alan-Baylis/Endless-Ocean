@@ -105,6 +105,7 @@
     <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_DemoPlaySound.cs" />
     <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
     <Compile Include="Assets\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
+    <Compile Include="Assets\GrappleTutorial.cs" />
     <Compile Include="Assets\Helper Scripts\MoveTowardsObject.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\Weapon Panel\CharacterWeapons.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Weapon Panel\WeaponSlot.cs" />
     <Compile Include="Assets\TreasureChest.cs" />
+    <Compile Include="Assets\TutorialMovementScript.cs" />
     <Compile Include="Assets\Water Flow FREE\Scripts\WaterFlowFREEDemo.cs" />
     <Compile Include="Assets\elevatorFirstLevel.cs" />
     <Compile Include="Assets\interactablePrompt.cs" />

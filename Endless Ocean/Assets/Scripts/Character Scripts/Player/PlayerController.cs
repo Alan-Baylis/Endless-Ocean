@@ -65,6 +65,9 @@ public class PlayerController : CharacterSuper
     int dodgeCost = 15;
     int dodgeSpeed = 25;
 
+    // is the player wearing exo?
+    bool hasExo;
+
 
     // Use this for initialization
     new void Start()
@@ -78,10 +81,12 @@ public class PlayerController : CharacterSuper
         this.stamina = 5;
         this.vigor = 10;
 
+        this.hasExo = false;
+
         this.currentLevel = 5;
 
         //enable grapple - need to code this to trigger only when wearing exo
-        grapple.isEnabled = true;
+        grapple.isEnabled = false;
 
         // Set health
         this.maxHealth = this.stamina * 10;
@@ -133,14 +138,14 @@ public class PlayerController : CharacterSuper
     /// </summary>
     private void RegenEnergy()
     {
-        if(this.energy == 0 && this.penaltyTimer < this.pentaltyLength)
+        if (this.energy == 0 && this.penaltyTimer < this.pentaltyLength)
         {
             this.penaltyTimer += 1;
         }
         else if (this.energy < maxEnergy)
         {
             this.penaltyTimer = 0;
-            energy += this.maxEnergy/regenAmount;
+            energy += this.maxEnergy / regenAmount;
             playerEnergyBar.fillAmount = (float)energy / (float)maxEnergy;
         }
     }
@@ -150,7 +155,7 @@ public class PlayerController : CharacterSuper
         if (energy >= dodgeCost && onGround)
         {
             enableMove = false;
-            this.animator.SetBool("IsDodging",true);
+            this.animator.SetBool("IsDodging", true);
             this.energy -= dodgeCost;
             if (facingRight)
                 rigidbody.velocity = new Vector3(dodgeSpeed, this.rigidbody.velocity.y, 0);
@@ -371,7 +376,7 @@ public class PlayerController : CharacterSuper
     {
         this.nearbyItems.Clear();
         Collider[] nearbyColliders = Physics.OverlapSphere(Camera.main.gameObject.GetComponent<CameraController>().getMouseLocationInWorldCoordinates(), 15f, itemsLayerMask);
-        for(int i = 0; i < nearbyColliders.Length; i++)
+        for (int i = 0; i < nearbyColliders.Length; i++)
         {
             nearbyColliders[i].gameObject.GetComponent<Item>().tooltip.SetActive(true);
             nearbyItems.Add(nearbyColliders[i].gameObject.GetComponent<Item>());
@@ -394,7 +399,7 @@ public class PlayerController : CharacterSuper
     /// </summary>
     public void toggleItemsMenu()
     {
-        if((this.equipment.gameObject.activeSelf && !this.inventory.gameObject.activeSelf) || (!this.equipment.gameObject.activeSelf && this.inventory.gameObject.activeSelf))
+        if ((this.equipment.gameObject.activeSelf && !this.inventory.gameObject.activeSelf) || (!this.equipment.gameObject.activeSelf && this.inventory.gameObject.activeSelf))
         {
             this.equipment.gameObject.SetActive(true);
             this.inventory.gameObject.SetActive(true);
@@ -410,15 +415,32 @@ public class PlayerController : CharacterSuper
     {
         Transform exo = transform.Find("Exo");
         Transform human = transform.Find("Human");
+
         if (value == 0)
         {
+            hasExo = false;
+            grapple.isEnabled = false;
             exo.gameObject.SetActive(false);
             human.gameObject.SetActive(true);
         }
         else
         {
+            grapple.isEnabled = true;
+            hasExo = true;
             exo.gameObject.SetActive(true);
             human.gameObject.SetActive(false);
+        }
+    }
+
+    public bool getExoState()
+    {
+        if (hasExo)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
