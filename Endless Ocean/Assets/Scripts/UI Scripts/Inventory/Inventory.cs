@@ -100,6 +100,7 @@ public class Inventory : PanelSuper {
     /// <returns>A boolean indicating whether or not the item was added successfully.</returns>
     bool addItemInEmptySlot(Item item)
     {
+        item.itemIcon = item.getQualityIcon();
         for (int i = 0; i < this.items.Count; i++)
         {
             if(this.items[i].itemName == null)

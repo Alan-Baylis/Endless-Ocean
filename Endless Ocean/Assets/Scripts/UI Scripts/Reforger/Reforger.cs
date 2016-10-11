@@ -119,6 +119,7 @@ public class Reforger : Slot
         {
             Weapon tempWeapon = (Weapon)this.item;
             tempWeapon.setQuality(player.luck);
+            tempWeapon.itemIcon = tempWeapon.getQualityIcon();
             this.item = tempWeapon;
         }
         else
