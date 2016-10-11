@@ -37,8 +37,12 @@ public class Item : MonoBehaviour
 
     public string description;
 
-    public Sprite itemIconCrude;
+    //main icon
     public Sprite itemIcon;
+
+
+    public Sprite itemIconCrude;
+    public Sprite itemIconBasic;
     public Sprite itemIconImproved;
     public Sprite itemIconLegendary;
     public Sprite itemIconGodly;
@@ -82,6 +86,27 @@ public class Item : MonoBehaviour
         get { return false; }
     }
 
+    public Sprite getQualityIcon()
+    {
+        switch (quality)
+        {
+            case ItemQuality.NULL:
+                return itemIcon;
+            case ItemQuality.Crude:
+                return itemIconCrude;
+            case ItemQuality.Basic:
+                return itemIconBasic;
+            case ItemQuality.Improved:
+                return itemIconImproved;
+            case ItemQuality.Legendary:
+                return itemIconLegendary;
+            case ItemQuality.Godly:
+                return itemIconGodly;
+            default:
+                return itemIcon;
+        }
+    }
+
     public Color getQualityColour()
     {
         switch (quality)
@@ -108,6 +133,8 @@ public class Item : MonoBehaviour
         this.tooltip = Instantiate(Resources.Load("Prefabs/UI/ItemTooltip"), new Vector3(), Quaternion.identity) as GameObject;
         this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
         this.tooltip.transform.GetChild(0).GetComponent<Text>().color = getQualityColour();
+        this.itemIcon = getQualityIcon();
+
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);
         this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
