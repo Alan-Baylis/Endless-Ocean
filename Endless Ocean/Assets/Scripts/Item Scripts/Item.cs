@@ -37,7 +37,11 @@ public class Item : MonoBehaviour
 
     public string description;
 
+    public Sprite itemIconCrude;
     public Sprite itemIcon;
+    public Sprite itemIconImproved;
+    public Sprite itemIconLegendary;
+    public Sprite itemIconGodly;
 
     public enum ItemQuality
     {
