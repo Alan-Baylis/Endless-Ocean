@@ -184,6 +184,43 @@ ModelImporter:
     100352: Cylinder_009
     100354: Cylinder_010
     100356: Cube_136
+    100358: BarrelStack1_007
+    100360: Cube_137
+    100362: Cube_138
+    100364: Cube_139
+    100366: Cube_140
+    100368: Cube_141
+    100370: Cube_142
+    100372: Cylinder_011
+    100374: Cylinder_012
+    100376: Cylinder_013
+    100378: Cylinder_014
+    100380: Cylinder_015
+    100382: Cylinder_016
+    100384: Plane
+    100386: Cube_143
+    100388: Cube_144
+    100390: Cube_145
+    100392: Cube_146
+    100394: Cube_147
+    100396: Cube_148
+    100398: Cube_149
+    100400: Cube_150
+    100402: Cylinder_017
+    100404: Cylinder_018
+    100406: Cylinder_019
+    100408: Cylinder_020
+    100410: Cylinder_021
+    100412: Cylinder_023
+    100414: Cylinder_024
+    100416: Cube_152
+    100418: Cube_153
+    100420: Cube_037_MeshPart0
+    100422: Cube_037_MeshPart1
+    100424: Cube_154
+    100426: Plane_001
+    100428: Cylinder_022
+    100430: Cylinder_025
     400000: BarrelStack1
     400002: BarrelStack1_001
     400004: BarrelStack1_002
@@ -363,6 +400,43 @@ ModelImporter:
     400352: Cylinder_009
     400354: Cylinder_010
     400356: Cube_136
+    400358: BarrelStack1_007
+    400360: Cube_137
+    400362: Cube_138
+    400364: Cube_139
+    400366: Cube_140
+    400368: Cube_141
+    400370: Cube_142
+    400372: Cylinder_011
+    400374: Cylinder_012
+    400376: Cylinder_013
+    400378: Cylinder_014
+    400380: Cylinder_015
+    400382: Cylinder_016
+    400384: Plane
+    400386: Cube_143
+    400388: Cube_144
+    400390: Cube_145
+    400392: Cube_146
+    400394: Cube_147
+    400396: Cube_148
+    400398: Cube_149
+    400400: Cube_150
+    400402: Cylinder_017
+    400404: Cylinder_018
+    400406: Cylinder_019
+    400408: Cylinder_020
+    400410: Cylinder_021
+    400412: Cylinder_023
+    400414: Cylinder_024
+    400416: Cube_152
+    400418: Cube_153
+    400420: Cube_037_MeshPart0
+    400422: Cube_037_MeshPart1
+    400424: Cube_154
+    400426: Plane_001
+    400428: Cylinder_022
+    400430: Cylinder_025
     2300000: BarrelStack1
     2300002: BarrelStack1_001
     2300004: BarrelStack1_002
@@ -541,6 +615,43 @@ ModelImporter:
     2300350: Cylinder_009
     2300352: Cylinder_010
     2300354: Cube_136
+    2300356: BarrelStack1_007
+    2300358: Cube_137
+    2300360: Cube_138
+    2300362: Cube_139
+    2300364: Cube_140
+    2300366: Cube_141
+    2300368: Cube_142
+    2300370: Cylinder_011
+    2300372: Cylinder_012
+    2300374: Cylinder_013
+    2300376: Cylinder_014
+    2300378: Cylinder_015
+    2300380: Cylinder_016
+    2300382: Plane
+    2300384: Cube_143
+    2300386: Cube_144
+    2300388: Cube_145
+    2300390: Cube_146
+    2300392: Cube_147
+    2300394: Cube_148
+    2300396: Cube_149
+    2300398: Cube_150
+    2300400: Cylinder_017
+    2300402: Cylinder_018
+    2300404: Cylinder_019
+    2300406: Cylinder_020
+    2300408: Cylinder_021
+    2300410: Cylinder_023
+    2300412: Cylinder_024
+    2300414: Cube_152
+    2300416: Cube_153
+    2300418: Cube_037_MeshPart0
+    2300420: Cube_037_MeshPart1
+    2300422: Cube_154
+    2300424: Plane_001
+    2300426: Cylinder_022
+    2300428: Cylinder_025
     3300000: BarrelStack1
     3300002: BarrelStack1_001
     3300004: BarrelStack1_002
@@ -719,6 +830,43 @@ ModelImporter:
     3300350: Cylinder_009
     3300352: Cylinder_010
     3300354: Cube_136
+    3300356: BarrelStack1_007
+    3300358: Cube_137
+    3300360: Cube_138
+    3300362: Cube_139
+    3300364: Cube_140
+    3300366: Cube_141
+    3300368: Cube_142
+    3300370: Cylinder_011
+    3300372: Cylinder_012
+    3300374: Cylinder_013
+    3300376: Cylinder_014
+    3300378: Cylinder_015
+    3300380: Cylinder_016
+    3300382: Plane
+    3300384: Cube_143
+    3300386: Cube_144
+    3300388: Cube_145
+    3300390: Cube_146
+    3300392: Cube_147
+    3300394: Cube_148
+    3300396: Cube_149
+    3300398: Cube_150
+    3300400: Cylinder_017
+    3300402: Cylinder_018
+    3300404: Cylinder_019
+    3300406: Cylinder_020
+    3300408: Cylinder_021
+    3300410: Cylinder_023
+    3300412: Cylinder_024
+    3300414: Cube_152
+    3300416: Cube_153
+    3300418: Cube_037_MeshPart0
+    3300420: Cube_037_MeshPart1
+    3300422: Cube_154
+    3300424: Plane_001
+    3300426: Cylinder_022
+    3300428: Cylinder_025
     4300000: BarrelStack1_004
     4300002: BarrelStack1_003
     4300004: BarrelStack1_001
@@ -897,6 +1045,43 @@ ModelImporter:
     4300350: Cylinder_008
     4300352: Cylinder_007
     4300354: Cube_136
+    4300356: Plane
+    4300358: Cylinder_016
+    4300360: Cylinder_015
+    4300362: Cube_142
+    4300364: Cube_141
+    4300366: Cube_140
+    4300368: Cube_139
+    4300370: Cylinder_014
+    4300372: Cylinder_013
+    4300374: Cylinder_012
+    4300376: Cylinder_011
+    4300378: Cube_138
+    4300380: BarrelStack1_007
+    4300382: Cube_137
+    4300384: Cylinder_017
+    4300386: Cylinder_021
+    4300388: Cube_150
+    4300390: Cylinder_024
+    4300392: Cylinder_023
+    4300394: Cube_149
+    4300396: Cube_148
+    4300398: Cube_147
+    4300400: Cube_146
+    4300402: Cylinder_020
+    4300404: Cylinder_019
+    4300406: Cube_145
+    4300408: Cube_144
+    4300410: Cylinder_018
+    4300412: Cube_143
+    4300414: Cube_153
+    4300416: Cube_152
+    4300418: Cube_154
+    4300420: Cube_037_MeshPart0
+    4300422: Cube_037_MeshPart1
+    4300424: Plane_001
+    4300426: Cylinder_025
+    4300428: Cylinder_022
     7400000: Default Take
     9500000: //RootNode
   materials:
