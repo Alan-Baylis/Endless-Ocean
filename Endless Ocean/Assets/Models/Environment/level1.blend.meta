@@ -183,6 +183,7 @@ ModelImporter:
     100350: Cylinder_008
     100352: Cylinder_009
     100354: Cylinder_010
+    100356: Cube_136
     400000: BarrelStack1
     400002: BarrelStack1_001
     400004: BarrelStack1_002
@@ -361,6 +362,7 @@ ModelImporter:
     400350: Cylinder_008
     400352: Cylinder_009
     400354: Cylinder_010
+    400356: Cube_136
     2300000: BarrelStack1
     2300002: BarrelStack1_001
     2300004: BarrelStack1_002
@@ -538,6 +540,7 @@ ModelImporter:
     2300348: Cylinder_008
     2300350: Cylinder_009
     2300352: Cylinder_010
+    2300354: Cube_136
     3300000: BarrelStack1
     3300002: BarrelStack1_001
     3300004: BarrelStack1_002
@@ -715,6 +718,7 @@ ModelImporter:
     3300348: Cylinder_008
     3300350: Cylinder_009
     3300352: Cylinder_010
+    3300354: Cube_136
     4300000: BarrelStack1_004
     4300002: BarrelStack1_003
     4300004: BarrelStack1_001
@@ -892,6 +896,7 @@ ModelImporter:
     4300348: Cylinder_009
     4300350: Cylinder_008
     4300352: Cylinder_007
+    4300354: Cube_136
     7400000: Default Take
     9500000: //RootNode
   materials:
