@@ -59,10 +59,15 @@ public abstract class CharacterSuper : MonoBehaviour
     public int attack;
     // Determines how much health the player has
     public int stamina;
+    // Current Armour Level
+    [SerializeField]
+    protected int armour;
+
     //The height the player will jump when the user makes them jump.
     public float jumpHeight;
     protected Vector3 velocity;
 
+    //Stun Variables 
     [SerializeField]
     protected float recovery;
     protected float recoveryTimer;
@@ -85,6 +90,7 @@ public abstract class CharacterSuper : MonoBehaviour
     //Movement Variables 
 
     protected bool facingRight;
+    [HideInInspector]
     public bool enableMove;
     #endregion
 
@@ -170,6 +176,13 @@ public abstract class CharacterSuper : MonoBehaviour
         // Get weapon mount location so that we can easily attach weapons to them
         secondaryMount.MountPoint = primaryWeaponSlot;
         primaryMount.MountPoint = secondaryWeaponSlot;
+        if (primaryMount.weaponLoaded())
+        {
+            weapon = primaryMount.Weapon;
+        }else if (secondaryMount.weaponLoaded())
+        {
+            weapon = secondaryMount.Weapon;
+        }
     }
 
     // Update is called once per frame
@@ -180,9 +193,18 @@ public abstract class CharacterSuper : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        if (recovery == 0)
+        {
+            recovery = 1;
+        }
+
         if (recoveryTimer < 0)
         {
             recoveryTimer = 0;
+        }
+        else if (recoveryTimer > 0)
+        {
+            recoveryTimer -= Time.deltaTime * recovery;
         }
     }
 
@@ -327,9 +349,10 @@ public abstract class CharacterSuper : MonoBehaviour
     /// <param name="damage">Amount of damage taken</param>
     /// <param name="source">Position/direction of the damage source</param>
     /// <param name="knockBack">Amount of knock back stored within damage gameObject</param>
-    protected void takeDamage(int damage, Vector3 source, int knockBack)
+    protected virtual void takeDamage(int damage, Vector3 source, int knockBack)
     {
-        this.health -= damage;
+        
+        this.health -= (armour > 0) ? (int) (damage - ((damage * 0.8) * (armour/100))) : damage;
 
         //Debug.Log("I took "+damage+" damage, now my health is "+this.health +"out of a possible "+maxHealth);
 
@@ -362,7 +385,7 @@ public abstract class CharacterSuper : MonoBehaviour
         {
             case weaponMounts.Primary:
                 primaryMount.WeaponFromGameObject = weaponGameObject;
-                primaryMount.Weapon.weaponTag = tag;
+                primaryMount.Weapon.WeaponTag = tag;
                 primaryMount.Weapon.tag = tag;
                 weaponGameObject.SetActive(true);
                 this.weapon = weaponGameObject.GetComponent<Weapon>();
@@ -407,11 +430,17 @@ public abstract class CharacterSuper : MonoBehaviour
     /// <summary>
     /// Swaps the character's currently held weapon from the two possible slots
     /// </summary>
+    /// <param name="animationToWaitFor">The animation to wait for.</param>
     /// <returns>An int specifying the new active weapon slot. 0 if the weapon was not swapped.</returns>
-    public int swapWeapons()
+    public int swapWeapons(weaponMounts mount)
     {
+        if (activeWeaponType == mount)
+        {
+            return 0;
+        }
+
         // No empty slots and active weapon is the first one, switch to second wep
-         if (activeWeaponType == weaponMounts.Primary)
+         if (mount == weaponMounts.Primary)
         {
             weapon = primaryMount.Weapon; // set as new active weapons
             activeWeaponType = weaponMounts.Secondary;
@@ -420,7 +449,7 @@ public abstract class CharacterSuper : MonoBehaviour
             return 1;
         }
         // No empty slots and active weapon is the second one, switch to first wep
-        else if (activeWeaponType == weaponMounts.Secondary)
+        else if (mount == weaponMounts.Secondary)
         {
             weapon = secondaryMount.Weapon; // set as new active weapon
             activeWeaponType = weaponMounts.Primary;
@@ -429,6 +458,17 @@ public abstract class CharacterSuper : MonoBehaviour
             return 2;
         }
         return 0;
+    }
+
+    public int swapWeapons()
+    {
+        if (activeWeaponType == weaponMounts.Primary)
+        {
+            return swapWeapons(weaponMounts.Secondary);
+        }else
+        {
+            return swapWeapons(weaponMounts.Primary);
+        }
     }
 
     /// <summary>

@@ -6,17 +6,19 @@ public class EnemyAI : NPCBehaviour
 {
 
     //enemy variables
+    [SerializeField]
     public float detectRange;
 
+    [SerializeField]
     public Weapon primaryWeapon;
+    [SerializeField]
     public Weapon secondaryWeapon;
 
-    public Boolean floating = false;
-
+    [SerializeField]
     public Transform target;
 
-	// Use this for initialization
-	new void Start () {
+    // Use this for initialization
+    new void Start () {
 
         base.Start();
 
@@ -29,7 +31,6 @@ public class EnemyAI : NPCBehaviour
 
             //set weapon quality
             primaryMount.Weapon.setQuality(luck);
-            primaryMount.Weapon.useAmmo = false;
         }
         if (secondaryWeapon != null)
         {
@@ -37,7 +38,6 @@ public class EnemyAI : NPCBehaviour
 
             //set weapon quality
             secondaryMount.Weapon.setQuality(luck);
-            secondaryMount.Weapon.useAmmo = false;
         }
 
         //set the starter weapon to set weapon
@@ -54,32 +54,40 @@ public class EnemyAI : NPCBehaviour
 	
 	// Update is called once per frame
 	new void Update () {
-	
+        base.Update();
 	}
 
     new void FixedUpdate()
     {
         base.FixedUpdate();
 
-        if (floating)
-        {
-            transform.LookAt(target);
-        }
-
         //check if player is in range
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
         {
-            if (Vector3.Distance(transform.position, target.position) >= weapon.range)
-            {
-                pathToLocation(target.position);
-            }else
-            {
-                attackTarget(target);
-            }
-
-        }else
+            makeActionDecision();
+        }
+        else if (!patrolling)
         {
             moveCharacter(0);
+        }
+    }
+
+    protected virtual void makeActionDecision()
+    {
+        //Decide on an action
+        if (Vector3.Distance(transform.position, target.position) < shortestRange)
+        {
+            swapWeapons(shortRangeWeapon);
+            attackTarget(target);
+        }
+        else if (Vector3.Distance(transform.position, target.position) < longestRange)
+        {
+            swapWeapons(longRangeWeapon);
+            attackTarget(target);
+        }
+        else
+        {
+            pathToLocation(target.position);
         }
     }
 

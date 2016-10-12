@@ -40,7 +40,6 @@ public class Item : MonoBehaviour
     //main icon
     public Sprite itemIcon;
 
-
     public Sprite itemIconCrude;
     public Sprite itemIconBasic;
     public Sprite itemIconImproved;
@@ -60,6 +59,7 @@ public class Item : MonoBehaviour
     public ItemQuality quality = ItemQuality.NULL;
 
     //Used to stack consumables.
+    [HideInInspector]
     public int itemCount = 1;
 
     public virtual int sellValue

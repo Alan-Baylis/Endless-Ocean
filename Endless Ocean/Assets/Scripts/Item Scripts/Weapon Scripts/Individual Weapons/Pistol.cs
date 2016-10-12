@@ -9,7 +9,6 @@ public class Pistol : RangedWeapon  {
 
     protected override void Start()
     {
-        base.player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         base.Start();
         base.weaponAttackSpeed = 0.5f;
         base.projectileSpeed = 30f;
@@ -24,10 +23,6 @@ public class Pistol : RangedWeapon  {
     /// <param name="target">the direction the bullet will travel.</param>
     override public void attack(float playerDamage, Vector3 target)
     {
-        if (!base.useAmmo())
-        {
-            return;
-        }
         GameObject bullet = base.getBulletPrefab();
         bullet.GetComponent<Bullet>().speed = base.projectileSpeed;
         bullet.GetComponent<Bullet>().damage = base.damage;

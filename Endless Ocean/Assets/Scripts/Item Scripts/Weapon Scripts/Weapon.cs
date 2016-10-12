@@ -11,10 +11,8 @@ using System.Collections;
 /// </summary>
 public abstract class Weapon: Item{
 
-
-
-    public bool useAmmo = true;
-
+    [HideInInspector]
+    public int requiredAmmo;
 
     public override bool mouseClickEquipable
     {
@@ -30,13 +28,16 @@ public abstract class Weapon: Item{
     }
 
     // Attack variables
+    [HideInInspector]
     public bool collisonHandled = false;
     public int stun;
     public int damage;
     public int knockBack;
     public int energyCost;
     public int range;
-    public string weaponTag;
+
+    [HideInInspector]
+    protected string weaponTag;
     public string WeaponTag
     {
         get
@@ -48,8 +49,6 @@ public abstract class Weapon: Item{
             weaponTag = value;
         }
     }
-
-
 
     //Changing buy and sell values based off item quality.
     public override int buyValue

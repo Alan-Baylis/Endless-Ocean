@@ -214,22 +214,32 @@ public class PlayerController : CharacterSuper
             }
             else if (nextMelee < Time.time && weapon != null && !inventory.gameObject.activeSelf)
             {
-
-                if (energy > 0)
-                {
-                    if (energy - weapon.energyCost < 0)
+                if (weapon.requiredAmmo <= ammo) {
+                    if (energy > 0)
                     {
-                        energy = 0;
-                    }
-                    else
-                    {
-                        energy -= weapon.energyCost;
-                    }
+                        if (energy - weapon.energyCost < 0)
+                        {
+                            energy = 0;
+                        }
+                        else
+                        {
+                            energy -= weapon.energyCost;
+                        }
 
-                    this.playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
-                    this.animator.SetTrigger("MeleeAttackTrigger");
-                    this.weapon.attack(this.attack, Camera.main.gameObject.GetComponent<CameraController>().getMouseLocationInWorldCoordinates());
+                        if (ammo - weapon.requiredAmmo < 0)
+                        {
+                            ammo = 0;
+                        }
+                        else
+                        {
+                            ammo -= weapon.requiredAmmo;
+                        }
 
+
+                        this.playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
+                        this.animator.SetTrigger("MeleeAttackTrigger");
+                        this.weapon.attack(this.attack, Camera.main.gameObject.GetComponent<CameraController>().getMouseLocationInWorldCoordinates());
+                    }
                 }
             }
         }
