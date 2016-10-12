@@ -23,9 +23,10 @@ public class Grapple: MonoBehaviour
     //Bools indicating what the grapple is doing.
     public bool grappling = false;
     public bool pulling = false;
+    public bool retractingRope = false;
     //The line rendere that draws the grapples rope.
     private static LineRenderer ropeLineRenderer;
-    private Vector3 otherEnd;
+    public Vector3 otherEnd;
     //A reference to the other object the grapple is attatched to.
     private Rigidbody otherObject;
     
@@ -53,6 +54,8 @@ public class Grapple: MonoBehaviour
 
     public Rigidbody playerRigidbody;
 
+    Coroutine retractRopeCoroutine;
+
     // Use this for initialization
     void Start()
     {
@@ -68,30 +71,45 @@ public class Grapple: MonoBehaviour
         {
             if (this.grappling || this.pulling)
             {
-                this.destroyRope();
+                this.retractRopeCoroutine = StartCoroutine(this.retractRope());
             }
             else
             {
+                if (this.retractRopeCoroutine != null)
+                {
+                    StopCoroutine(this.retractRopeCoroutine);
+                }
+                //Immediately retract rope.
+                this.retractingRope = false;
+                //Check if can grapple.
                 RaycastHit grappleRaycastHitData;
                 bool canGrapple = Physics.Raycast(playerRigidbody.position, Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 15f, grappleMask);
+                //Grapple if possible.
                 if (canGrapple)
                 {
                     this.createGrapplingRope(grappleRaycastHitData);
                 }
                 else
                 {
+                    //Else check if can pull.
                     RaycastHit pullingRaycastHitData = new RaycastHit();
                     bool canPull = Physics.Raycast(playerRigidbody.position, Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates() - playerRigidbody.position, out pullingRaycastHitData, 7f, pullMask);
+                    //Pull if possible.
                     if (canPull)
                     {
                         this.creatingPullingRope(playerRigidbody, pullingRaycastHitData.rigidbody, pullingRaycastHitData.point);
+                    }
+                    //Else throw out rope and miss.
+                    else
+                    {
+                        this.createMissRope(Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates());
                     }
                 }
             }
         }
         else if (Input.GetButtonDown("StopUsingUtilityItem"))
         {
-            this.destroyRope();
+            this.retractRopeCoroutine = StartCoroutine(this.retractRope());
         }
     }
 
@@ -115,13 +133,18 @@ public class Grapple: MonoBehaviour
     /// </summary>
     void LateUpdate()
     {
-        if (this.grappling)
+        if (this.grappling )
         {
             this.drawRope(this.gameObject.transform.position, this.otherEnd);
         }
         else if (this.pulling)
         {
-            this.drawRope(this.gameObject.transform.position, this.otherObject.position);
+            this.otherEnd = this.otherObject.position;
+            this.drawRope(this.gameObject.transform.position, this.otherEnd);
+        }
+        else if (this.retractingRope)
+        {
+            this.drawRope(this.gameObject.transform.position, this.otherEnd);
         }
     }
 
@@ -227,8 +250,8 @@ public class Grapple: MonoBehaviour
         //grappleJoint.yMotion = ConfigurableJointMotion.Limited;
         ////Adding second body.
         //grappleJoint.connectedBody = secondRigidbody;
-        this.otherEnd = secondRigidbody.position;
         this.otherObject = secondRigidbody;
+        this.otherEnd = secondRigidbody.position;
         //grappleJoint.connectedAnchor = secondRigidbody.gameObject.transform.InverseTransformPoint(point);
         ////Allow the two objects attatched to each other to collide - prevents them from passing through eachother.
         //grappleJoint.enableCollision = true;
@@ -249,25 +272,49 @@ public class Grapple: MonoBehaviour
     }
 
     /// <summary>
-    /// This function moves the player while they are puling 
+    /// This function destroys the rope if the player gets too far from teh object they are pulling.
     /// </summary>
     public void handlePullingRopeStretching()
     {
-        if (Vector3.Distance(this.otherObject.position, this.playerRigidbody.position) > Grapple.MAX_PULLING_ROPE_LENGTH)
+        if (Vector3.Distance(this.otherEnd, this.playerRigidbody.position) > Grapple.MAX_PULLING_ROPE_LENGTH)
         {
-            this.destroyRope();
+            this.destroyRopeJoint();
         }
     }
     #endregion
 
     /// <summary>
+    /// Creates a miss rope that is immediately retracted.
+    /// </summary>
+    /// <param name="clickLocation">The location the user clicked on used as the other end of the rope.</param>
+    private void createMissRope(Vector3 clickLocation)
+    {
+        float distance = Vector3.Distance(clickLocation, this.transform.position);
+        //If user clicked further than rope length shrink it.
+        if (distance > Grapple.MAX_ROPE_LENGTH)
+        {
+            float xGradient = (clickLocation.x - this.transform.position.x)/ distance;
+            float yGradient = (clickLocation.y - this.transform.position.y)/ distance;
+
+            float xPosition = xGradient * Grapple.MAX_ROPE_LENGTH;
+            float yPosition = yGradient * Grapple.MAX_ROPE_LENGTH;
+
+            this.otherEnd = (new Vector3(this.transform.position.x + xPosition, this.transform.position.y + yPosition, 0));
+        }
+        else
+        {
+            this.otherEnd = clickLocation;
+        }
+        this.retractRopeCoroutine = StartCoroutine(this.retractRope());
+    }
+
+    /// <summary>
     /// This function destroys all the rope game objects and resets key variables.
     /// </summary>
-    public void destroyRope()
+    public void destroyRopeJoint()
     {
         if (grappling)
         {
-            ropeLineRenderer.SetVertexCount(0);
             Destroy(this.playerRigidbody.gameObject.GetComponent<ConfigurableJoint>());
             grappling = false;
         }
@@ -275,7 +322,6 @@ public class Grapple: MonoBehaviour
         {
             Destroy(this.otherObjectMover);
         }
-        ropeLineRenderer.enabled = false;
         grappling = false;
         pulling = false;
     }
@@ -290,5 +336,32 @@ public class Grapple: MonoBehaviour
         Grapple.ropeLineRenderer.SetVertexCount(2);
         Grapple.ropeLineRenderer.SetPositions(new Vector3[] { firstPoint, secondPoint });
         Grapple.ropeLineRenderer.enabled = true;
+    }
+
+
+    /// <summary>
+    /// This function retracts the grapple rope and stop the user from grappling once it is disabled.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator retractRope()
+    {
+        destroyRopeJoint();
+        this.retractingRope = true;
+        while (Vector3.Distance(this.otherEnd, this.transform.position) > .3f) {
+            this.otherEnd = Vector3.MoveTowards(this.otherEnd, this.gameObject.transform.position, .5f);
+            yield return new WaitForSeconds(.025f);
+        }
+        this.retractingRope = false;
+        ropeLineRenderer.SetVertexCount(0);
+        Debug.Log("Done");
+    }
+
+    /// <summary>
+    /// Retracts the rope immeditialey when the player wants to fire it while still retracting it from their last fire.
+    /// </summary>
+    private void retractRopeImmediately()
+    {
+        ropeLineRenderer.SetVertexCount(0);
+        this.retractingRope = false;
     }
 }

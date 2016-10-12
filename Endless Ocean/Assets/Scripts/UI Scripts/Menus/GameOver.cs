@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour {
 
+    void Start()
+    {
+        GameObject.FindGameObjectWithTag("Player").SetActive(false);
+    }
+
     public void restartGame ()
     {
         SceneManager.LoadScene("Sidescrolling Scene");
