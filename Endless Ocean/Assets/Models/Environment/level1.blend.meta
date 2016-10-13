@@ -221,6 +221,15 @@ ModelImporter:
     100426: Plane_001
     100428: Cylinder_022
     100430: Cylinder_025
+    100432: BezierCurve_003
+    100434: BezierCurve_004
+    100436: BezierCurve_005
+    100438: Cylinder_026
+    100440: Cylinder_027
+    100442: Cylinder_028
+    100444: Cylinder_029
+    100446: Cylinder_030
+    100448: Cylinder_031
     400000: BarrelStack1
     400002: BarrelStack1_001
     400004: BarrelStack1_002
@@ -437,6 +446,15 @@ ModelImporter:
     400426: Plane_001
     400428: Cylinder_022
     400430: Cylinder_025
+    400432: BezierCurve_003
+    400434: BezierCurve_004
+    400436: BezierCurve_005
+    400438: Cylinder_026
+    400440: Cylinder_027
+    400442: Cylinder_028
+    400444: Cylinder_029
+    400446: Cylinder_030
+    400448: Cylinder_031
     2300000: BarrelStack1
     2300002: BarrelStack1_001
     2300004: BarrelStack1_002
@@ -652,6 +670,15 @@ ModelImporter:
     2300424: Plane_001
     2300426: Cylinder_022
     2300428: Cylinder_025
+    2300430: BezierCurve_003
+    2300432: BezierCurve_004
+    2300434: BezierCurve_005
+    2300436: Cylinder_026
+    2300438: Cylinder_027
+    2300440: Cylinder_028
+    2300442: Cylinder_029
+    2300444: Cylinder_030
+    2300446: Cylinder_031
     3300000: BarrelStack1
     3300002: BarrelStack1_001
     3300004: BarrelStack1_002
@@ -867,6 +894,15 @@ ModelImporter:
     3300424: Plane_001
     3300426: Cylinder_022
     3300428: Cylinder_025
+    3300430: BezierCurve_003
+    3300432: BezierCurve_004
+    3300434: BezierCurve_005
+    3300436: Cylinder_026
+    3300438: Cylinder_027
+    3300440: Cylinder_028
+    3300442: Cylinder_029
+    3300444: Cylinder_030
+    3300446: Cylinder_031
     4300000: BarrelStack1_004
     4300002: BarrelStack1_003
     4300004: BarrelStack1_001
@@ -1082,11 +1118,20 @@ ModelImporter:
     4300424: Plane_001
     4300426: Cylinder_025
     4300428: Cylinder_022
+    4300430: BezierCurve_005
+    4300432: Cylinder_031
+    4300434: Cylinder_030
+    4300436: Cylinder_029
+    4300438: Cylinder_028
+    4300440: BezierCurve_004
+    4300442: BezierCurve_003
+    4300444: Cylinder_027
+    4300446: Cylinder_026
     7400000: Default Take
     9500000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 1
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4

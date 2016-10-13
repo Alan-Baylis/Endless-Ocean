@@ -8,14 +8,13 @@ public class zoomCameraCollider : MonoBehaviour
 
     float fieldOfView;
     float maxFieldOfView;
-    float targetZoom;
+    public float targetZoom;
 
     // Use this for initialization
     void Start()
     {
         maxFieldOfView = camera.fieldOfView;
         fieldOfView = maxFieldOfView;
-        targetZoom = 25.0f;
     }
 
     // Update is called once per frame
