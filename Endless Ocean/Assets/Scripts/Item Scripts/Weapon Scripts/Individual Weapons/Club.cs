@@ -12,13 +12,6 @@ public class Club : MeleeWeapon {
     new void Start()
     {
         base.Start();
-        Debug.Log("Started");
-
-        this.damage = 25;
-        this.weaponAttackSpeed = 0.5f;
-        this.knockBack = 250;
-        this.energyCost = 25;
-        range = 2;
         this.character = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 

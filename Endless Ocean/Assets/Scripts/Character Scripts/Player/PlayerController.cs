@@ -214,6 +214,8 @@ public class PlayerController : CharacterSuper
             }
             else if (nextMelee < Time.time && weapon != null && !inventory.gameObject.activeSelf)
             {
+                nextMelee = Time.time + weapon.getAttackSpeed();
+
                 if (weapon.requiredAmmo <= ammo) {
                     if (energy > 0)
                     {

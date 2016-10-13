@@ -88,10 +88,18 @@ public abstract class Weapon: Item{
         if(this.gameObject.transform.parent.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             this.tag = "EnemyWeapon";
+            if(this.transform.FindChild("collider") != null)
+            {
+                this.transform.FindChild("collider").tag = "EnemyWeapon";
+            }
         }
         else
         {
             this.tag = "PlayerWeapon";
+            if (this.transform.FindChild("collider") != null)
+            {
+                this.transform.FindChild("collider").tag = "PlayerWeapon";
+            }
         }
     }
     

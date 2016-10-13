@@ -322,10 +322,10 @@ public abstract class CharacterSuper : MonoBehaviour
         // When character is hit with an enemy weapon
         else if (col.gameObject.tag == fears+"Weapon")
         {
-            int damage = col.gameObject.GetComponent<Weapon>().getDamage() + col.transform.root.GetComponent<CharacterSuper>().attack;
-            float stun = col.gameObject.GetComponent<Weapon>().getStun();
-            int knockBack = col.gameObject.GetComponent<Weapon>().getKnockBack();
-            bool collisionHandled = col.gameObject.GetComponent<Weapon>().collisonHandled;
+            int damage = col.transform.parent.gameObject.GetComponent<Weapon>().getDamage() + col.transform.root.GetComponent<CharacterSuper>().attack;
+            float stun = col.transform.parent.gameObject.GetComponent<Weapon>().getStun();
+            int knockBack = col.transform.parent.gameObject.GetComponent<Weapon>().getKnockBack();
+            bool collisionHandled = col.transform.parent.gameObject.GetComponent<Weapon>().collisonHandled;
 
 
             if (animController.GetCurrentAnimatorStateInfo(1).IsName("Melee Attack") && !collisionHandled)
@@ -333,7 +333,7 @@ public abstract class CharacterSuper : MonoBehaviour
                 this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
                 recoveryTimer = stun;
 
-                col.gameObject.GetComponent<Weapon>().collisonHandled = true;
+                col.transform.parent.gameObject.GetComponent<Weapon>().collisonHandled = true;
             }
 
         }
