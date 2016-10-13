@@ -25,7 +25,7 @@ public class Grapple: MonoBehaviour
     public bool pulling = false;
     public bool retractingRope = false;
     //The line rendere that draws the grapples rope.
-    private static LineRenderer ropeLineRenderer;
+    private LineRenderer ropeLineRenderer;
     public Vector3 otherEnd;
     //A reference to the other object the grapple is attatched to.
     private Rigidbody otherObject;
@@ -59,8 +59,7 @@ public class Grapple: MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Grapple.ropeLineRenderer = this.gameObject.AddComponent<LineRenderer>();
-        Grapple.ropeLineRenderer.SetWidth(.02f, .02f);
+        this.ropeLineRenderer = this.gameObject.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -276,9 +275,11 @@ public class Grapple: MonoBehaviour
     /// </summary>
     public void handlePullingRopeStretching()
     {
+        Debug.Log("Difference " + (this.otherEnd - this.playerRigidbody.position));
+        Debug.Log("Magnitide" + (this.otherEnd - this.playerRigidbody.position).magnitude);
         if (Vector3.Distance(this.otherEnd, this.playerRigidbody.position) > Grapple.MAX_PULLING_ROPE_LENGTH)
         {
-            this.destroyRopeJoint();
+            StartCoroutine(this.retractRope());
         }
     }
     #endregion
@@ -333,9 +334,9 @@ public class Grapple: MonoBehaviour
     /// <param name="secondPoint">The second point for the rope.</param>
     public void drawRope(Vector3 firstPoint, Vector3 secondPoint)
     {
-        Grapple.ropeLineRenderer.SetVertexCount(2);
-        Grapple.ropeLineRenderer.SetPositions(new Vector3[] { firstPoint, secondPoint });
-        Grapple.ropeLineRenderer.enabled = true;
+        this.ropeLineRenderer.SetVertexCount(2);
+        this.ropeLineRenderer.SetPositions(new Vector3[] { firstPoint, secondPoint });
+        this.ropeLineRenderer.enabled = true;
     }
 
 
@@ -353,7 +354,6 @@ public class Grapple: MonoBehaviour
         }
         this.retractingRope = false;
         ropeLineRenderer.SetVertexCount(0);
-        Debug.Log("Done");
     }
 
     /// <summary>
