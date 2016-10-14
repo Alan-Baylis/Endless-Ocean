@@ -113,7 +113,7 @@ public abstract class CharacterSuper : MonoBehaviour
     //The radius of the cirle to check for objects in the ground layer when jumping.
     protected float groundCheckRadius = 0.2f;
     //A layer mask that filters out game objects that are not in the ground layer.
-    public LayerMask groundLayerMask;
+    public LayerMask canWalkOnLayerMask;
     //The transform of a gameobject used to position the cicle used to determine if the game object is on the ground when jumping.
     public Transform groundCheck;
 
@@ -280,7 +280,7 @@ public abstract class CharacterSuper : MonoBehaviour
     /// </summary>
     protected void checkIfOnGround()
     {
-        groundCollisions = Physics.OverlapSphere(this.groundCheck.position, this.groundCheckRadius, this.groundLayerMask);
+        groundCollisions = Physics.OverlapSphere(this.groundCheck.position, this.groundCheckRadius, this.canWalkOnLayerMask);
         if (groundCollisions.Length > 0)
         {
             this.onGround = true;

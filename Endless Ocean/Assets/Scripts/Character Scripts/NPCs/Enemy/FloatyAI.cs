@@ -3,9 +3,14 @@ using System.Collections;
 
 public class FloatyAI : EnemyAI {
 
+    private bool attacking;
+    private Quaternion groundCheckLocationRotation;
+
 	// Use this for initialization
 	new void Start () {
         base.Start();
+        this.longestRange = 10;
+        this.groundCheckLocationRotation = this.groundCheck.rotation;
 	}
 	
 	// Update is called once per frame
@@ -21,12 +26,19 @@ public class FloatyAI : EnemyAI {
         //check if player is in range
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
         {
-            makeActionDecision();
+            this.facePlayer(this.target);
+            this.makeActionDecision();
         }
-        else if (!patrolling)
-        {
-            moveCharacter(0);
-        }
+        //else if (!patrolling)
+        //{
+        //    base.moveCharacter(0);
+        //}
+    }
+
+    void LateUpdate()
+    {
+        this.groundCheck.transform.rotation = this.groundCheckLocationRotation;
+        transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z);
     }
 
 
@@ -51,7 +63,13 @@ public class FloatyAI : EnemyAI {
     //This is the code which manages how the enemy attacks - overrides from NPCBehaviour
     protected override void attackTarget(Transform target)
     {
-        base.attackTarget(target);
+        //shoot at target, not their feet
+        Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
+        
+        
+        
+        
+        
         //shoot at target, not their feet
         //Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
         //moveCharacter(0);
@@ -73,22 +91,24 @@ public class FloatyAI : EnemyAI {
     {
         base.makeActionDecision();
 
-        ////Decide on an action
-        //if (Vector3.Distance(transform.position, target.position) < shortestRange)
-        //{
-        //    swapWeapons(shortRangeWeapon);
-        //    attackTarget(target);
-        //}
-        //else if (Vector3.Distance(transform.position, target.position) < longestRange)
-        //{
-        //    swapWeapons(longRangeWeapon);
-        //    attackTarget(target);
-        //}
-        //else
-        //{
-        //    pathToLocation(target.position);
-        //}
+        //Decide on an action
+        if (Vector3.Distance(transform.position, target.position) < longestRange)
+        {
+            attackTarget(target);
+        }
+        else
+        {
+            base.pathToLocation(target.position);
+        }
+    }
 
+    /// <summary>
+    /// Makes the floaty NPC look at the target.
+    /// </summary>
+    /// <param name="target">The target of the enemy. The player.</param>
+    private void facePlayer(Transform target)
+    {
+        this.transform.LookAt(target);
     }
 
 
