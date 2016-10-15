@@ -5,7 +5,7 @@ using System.Collections;
 /// </summary>
 public class Pistol : RangedWeapon  {
 
-    static public string modelPathLocal = "Prefabs/Weapons/Handgun";
+    static public string modelPathLocal = "Prefabs/Weapons/HandgunFBX";
 
     protected override void Start()
     {

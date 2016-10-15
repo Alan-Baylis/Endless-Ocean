@@ -35,6 +35,9 @@ public struct weaponMount
         set
         {
             value.transform.parent = mountPoint.transform;
+            value.transform.localPosition = Vector3.zero;
+            value.transform.localRotation = Quaternion.identity;
+
             weapon = value.GetComponent<Weapon>();
         }
     }
@@ -379,22 +382,20 @@ public abstract class CharacterSuper : MonoBehaviour
     /// <param name="tag">Tag for weapon, determines whether enemy or player is equiping</param>
     public void equipWeapon(GameObject weaponGameObject, weaponMounts mount, string tag)
     {
-        weaponGameObject.transform.position = weaponMount.transform.position;
-        weaponGameObject.transform.rotation = weaponMount.transform.rotation;
         switch (mount)
         {
             case weaponMounts.Primary:
+                weaponGameObject.SetActive(true);
                 primaryMount.WeaponFromGameObject = weaponGameObject;
                 primaryMount.Weapon.WeaponTag = tag;
                 primaryMount.Weapon.tag = tag;
-                weaponGameObject.SetActive(true);
                 this.weapon = weaponGameObject.GetComponent<Weapon>();
                 break;
             case weaponMounts.Secondary:
+                weaponGameObject.SetActive(true);
                 secondaryMount.WeaponFromGameObject = weaponGameObject;
                 secondaryMount.Weapon.WeaponTag = tag;
                 secondaryMount.Weapon.tag = tag;
-                weaponGameObject.SetActive(true);
                 break;
         }
         //swapWeapons();

@@ -137,7 +137,7 @@ public class Item : MonoBehaviour
 
         this.tooltip.transform.parent = this.gameObject.transform;
         this.tooltip.SetActive(false);
-        this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+        //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
     }
 
     protected virtual void Update()

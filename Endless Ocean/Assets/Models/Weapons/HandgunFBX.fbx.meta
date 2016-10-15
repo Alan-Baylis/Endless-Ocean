@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 12b66270fb1bf5d4082dde5c087e675e
-timeCreated: 1474538166
+guid: 19e4776f3c3c5d646b599cf73c25a8bc
+timeCreated: 1476482921
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: Barrel
-    100002: Barrel_Cradle
-    100004: Barrel_Internal
+    100002: Barrel Cradle
+    100004: Barrel Internal
     100006: BarrelStart
     100008: BarrelSupport
     100010: Body
@@ -17,8 +17,8 @@ ModelImporter:
     100018: Trigger
     100020: TriggerGuard
     400000: Barrel
-    400002: Barrel_Cradle
-    400004: Barrel_Internal
+    400002: Barrel Cradle
+    400004: Barrel Internal
     400006: BarrelStart
     400008: BarrelSupport
     400010: Body
@@ -28,8 +28,8 @@ ModelImporter:
     400018: Trigger
     400020: TriggerGuard
     2300000: Barrel
-    2300002: Barrel_Cradle
-    2300004: Barrel_Internal
+    2300002: Barrel Cradle
+    2300004: Barrel Internal
     2300006: BarrelStart
     2300008: BarrelSupport
     2300010: Body
@@ -37,9 +37,10 @@ ModelImporter:
     2300014: Grip
     2300016: Trigger
     2300018: TriggerGuard
+    2300020: //RootNode
     3300000: Barrel
-    3300002: Barrel_Cradle
-    3300004: Barrel_Internal
+    3300002: Barrel Cradle
+    3300004: Barrel Internal
     3300006: BarrelStart
     3300008: BarrelSupport
     3300010: Body
@@ -47,6 +48,7 @@ ModelImporter:
     3300014: Grip
     3300016: Trigger
     3300018: TriggerGuard
+    3300020: //RootNode
     4300000: Trigger
     4300002: Grip
     4300004: TriggerGuard
@@ -54,10 +56,9 @@ ModelImporter:
     4300008: BarrelSupport
     4300010: Barrel
     4300012: Body
-    4300014: Barrel_Cradle
-    4300016: Barrel_Internal
+    4300014: Barrel Cradle
+    4300016: Barrel Internal
     4300018: BarrelStart
-    7400000: Default Take
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -73,7 +74,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -117,7 +118,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
