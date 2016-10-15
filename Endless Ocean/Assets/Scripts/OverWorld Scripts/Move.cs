@@ -6,12 +6,17 @@ public class Move : MonoBehaviour
 {
     public Vector3 teleportPoint;
     public Rigidbody rb;
-    float speed = 20f;
-    float bSpeed = 10f;
+    float maxfSpeed = 20f;
+    float maxbSpeed = -10f;
     float boostSpeed = 40f;
     // float maxSpeed = 20f;
     // float accel = .2f;
     float rotationspeed = 50;
+
+    float currentSpeed;
+    float accelleration = 1f;
+    float decellerate = 0.99f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,17 +28,34 @@ public class Move : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+            if(currentSpeed < maxfSpeed)
+            {
+                currentSpeed += accelleration;
+            }
+            
         }
         // Backward movement
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             //rb.MovePosition(transform.position / speed * Time.deltaTime);
             //rb.AddRelativeForce(transform.forward * -6);
-            rb.MovePosition(transform.position -= transform.forward * bSpeed * Time.deltaTime);
+            if (currentSpeed > maxbSpeed)
+            {
+                currentSpeed -= accelleration;
+            }
         }
-            // Left movement
-            if (Input.GetKey(KeyCode.A))
+        else
+        {
+            if(currentSpeed != 0)
+            {
+                currentSpeed *= decellerate;
+            }
+        }
+
+        rb.MovePosition(transform.position + transform.forward * currentSpeed * Time.deltaTime);
+
+        // Left movement
+        if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.down * rotationspeed * Time.deltaTime);
         }
