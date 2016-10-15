@@ -30,7 +30,7 @@ public class Move : MonoBehaviour
         {
             //rb.MovePosition(transform.position / speed * Time.deltaTime);
             //rb.AddRelativeForce(transform.forward * -6);
-            rb.MovePosition(transform.localPosition -= transform.forward * bSpeed * Time.deltaTime);
+            rb.MovePosition(transform.position -= transform.forward * bSpeed * Time.deltaTime);
         }
             // Left movement
             if (Input.GetKey(KeyCode.A))

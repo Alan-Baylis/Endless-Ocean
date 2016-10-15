@@ -1,28 +1,10 @@
-Base path: E:/Unity/Editor/Data
+Base path: D:/Program Files/Unity/Editor/Data
 Cmd: getPlatforms
-Cmd: preprocess
-  insize=4398 outsize=1114 ok=1
-Cmd: preprocess
-  insize=21706 outsize=3790 ok=1
-Cmd: preprocess
-  insize=13365 outsize=2743 ok=1
-Cmd: preprocess
-  insize=542 outsize=1522 ok=1
-Cmd: preprocess
-  insize=968 outsize=1739 ok=1
-Cmd: preprocess
-  insize=1124 outsize=1648 ok=1
-Cmd: preprocess
-  insize=820 outsize=364 ok=1
-Cmd: preprocess
-  insize=12498 outsize=2620 ok=1
-Cmd: preprocess
-  insize=607 outsize=280 ok=1
-Cmd: preprocess
-  insize=769 outsize=410 ok=1
-Cmd: preprocess
-  insize=989 outsize=421 ok=1
-Cmd: preprocess
-  insize=936 outsize=413 ok=1
-Cmd: preprocess
-  insize=1679 outsize=477 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10620 outsize=1446 kw=FOG_EXP2 WATER_SIMPLE WATER_EDGEBLEND_OFF WATER_VERTEX_DISPLACEMENT_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10620 outsize=2470 kw=FOG_EXP2 WATER_SIMPLE WATER_EDGEBLEND_OFF WATER_VERTEX_DISPLACEMENT_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=9879 outsize=1370 kw=WATER_EDGEBLEND_ON WATER_SIMPLE WATER_VERTEX_DISPLACEMENT_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=9879 outsize=2394 kw=WATER_EDGEBLEND_ON WATER_SIMPLE WATER_VERTEX_DISPLACEMENT_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1

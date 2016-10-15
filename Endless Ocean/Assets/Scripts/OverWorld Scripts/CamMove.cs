@@ -22,7 +22,7 @@ public class CamMove : MonoBehaviour
         //transform.position = player.transform.position + offset;
         //transform.LookAt(player.transform.position);
 
-        transform.position = player.transform.position - transform.forward * 40;
+        transform.position = player.transform.position - transform.forward * 25;
         //transform.position = player.transform.position + transform.up * 15;
         //transform.rotation = Quaternion.AngleAxis(30, Vector3.up);
         transform.LookAt(transform);
