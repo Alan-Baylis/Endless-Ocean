@@ -222,7 +222,7 @@ public abstract class CharacterSuper : MonoBehaviour
         transform.localScale = reversescale;
     }
 
-    protected void moveCharacter(float move)
+    protected virtual void moveCharacter(float move)
     {
         //Stun Timer
         if (recoveryTimer != 0)
@@ -261,6 +261,7 @@ public abstract class CharacterSuper : MonoBehaviour
             else
             {
                 rigidbody.velocity = new Vector3(move * movementSpeed, this.rigidbody.velocity.y, 0);
+                Debug.Log("Moving");
             }
         }
 

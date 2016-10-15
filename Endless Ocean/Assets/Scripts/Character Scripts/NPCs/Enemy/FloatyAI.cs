@@ -1,28 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FloatyAI : EnemyAI {
+public class FloatyAI : EnemyAI
+{
 
     private bool attacking;
     private Quaternion groundCheckLocationRotation;
+    private float targetHeightFromPlayer = 9f;
+    private float verticalMoveSpeedBoost = 2f;
 
-	// Use this for initialization
-	new void Start () {
+    // Use this for initialization
+    new void Start()
+    {
         base.Start();
-        this.longestRange = 10;
+        this.longestRange = 20;
         this.groundCheckLocationRotation = this.groundCheck.rotation;
-	}
-	
-	// Update is called once per frame
-	new void Update () {
-        base.Update();
-	}
+    }
 
-    // Update is called once per refresh
+    // Update is called once per frame
+    new void Update()
+    {
+        base.Update();
+    }
+
     new void FixedUpdate()
     {
-        base.FixedUpdate();
-
         //check if player is in range
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
         {
@@ -38,26 +40,8 @@ public class FloatyAI : EnemyAI {
     void LateUpdate()
     {
         this.groundCheck.transform.rotation = this.groundCheckLocationRotation;
-        transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z);
+        //transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z);
     }
-
-
-    //This is the method used for moving the enemy from current location to a set destination - overrides from NPCBehaviour
-    protected override void pathToLocation(Vector3 destination)
-    {
-        base.pathToLocation(destination);
-        //float direction = 0;
-        //if (rigidbody.position.x > destination.x)
-        //{
-        //    direction = -1;
-        //}
-        //else
-        //{
-        //    direction = 1;
-        //}
-
-        //moveCharacter(direction);
-     }
 
 
     //This is the code which manages how the enemy attacks - overrides from NPCBehaviour
@@ -65,11 +49,11 @@ public class FloatyAI : EnemyAI {
     {
         //shoot at target, not their feet
         Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
-        
-        
-        
-        
-        
+
+
+
+
+
         //shoot at target, not their feet
         //Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
         //moveCharacter(0);
@@ -92,13 +76,16 @@ public class FloatyAI : EnemyAI {
         base.makeActionDecision();
 
         //Decide on an action
-        if (Vector3.Distance(transform.position, target.position) < longestRange)
+        if (!attacking)
         {
-            attackTarget(target);
-        }
-        else
-        {
-            base.pathToLocation(target.position);
+            if (Vector3.Distance(transform.position, target.position) < longestRange && (Mathf.Abs(this.transform.position.y - (this.targetHeightFromPlayer + target.position.y)) < 0.3))
+            {
+                StartCoroutine(this.attackCoroutine(target.position));
+            }
+            else
+            {
+                this.pathToLocation(target.position);
+            }
         }
     }
 
@@ -111,5 +98,69 @@ public class FloatyAI : EnemyAI {
         this.transform.LookAt(target);
     }
 
+    #region Movement Functions
 
+    protected void moveCharacter(float horizontalDirection, float verticalDirection)
+    {
+        //Stun Timer
+        if (recoveryTimer != 0)
+        {
+            horizontalDirection = 0;
+        }
+        else
+        {
+            rigidbody.velocity = new Vector3(horizontalDirection * movementSpeed, (verticalDirection * movementSpeed), 0);
+        }
+    }
+
+    //This is the method used for moving the enemy from current location to a set destination - overrides from NPCBehaviour
+    protected override void pathToLocation(Vector3 destination)
+    {
+        float horizontalDirection = 0;
+        float verticalDirection = 0;
+        if (this.gameObject.transform.position.x > destination.x)
+        {
+            horizontalDirection = -1;
+        }
+        else
+        {
+            horizontalDirection = 1;
+        }
+
+        if (this.gameObject.transform.position.y > (destination.y + this.targetHeightFromPlayer))
+        {
+            verticalDirection = -1;
+        }
+        else if (this.gameObject.transform.position.y < (destination.y + this.targetHeightFromPlayer))
+        {
+            verticalDirection = 1;
+        }
+
+        this.moveCharacter(horizontalDirection, verticalDirection);
+    }
+
+    #endregion
+
+    private IEnumerator attackCoroutine(Vector3 target)
+    {
+        this.attacking = true;
+        Vector3 targetPosition;
+        if(this.transform.position.x < target.x)
+        {
+            targetPosition = new Vector3(target.x + 2, target.y, 0);
+        }
+        else
+        {
+            targetPosition = new Vector3(target.x - 2, target.y, 0);
+        }
+        Vector3 newVelocity = Vector3.zero;
+        Debug.Log((this.transform.position - targetPosition).magnitude);
+        while ((this.transform.position - targetPosition).magnitude > 0.5)
+        {
+            Vector3.SmoothDamp(this.transform.position, targetPosition, ref newVelocity, 1f);
+            this.GetComponent<Rigidbody>().velocity = newVelocity;
+            yield return null;
+        }
+        this.attacking = false;
+    }
 }
