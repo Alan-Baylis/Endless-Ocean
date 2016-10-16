@@ -216,7 +216,8 @@ public class PlayerController : CharacterSuper
             {
                 nextMelee = Time.time + weapon.getAttackSpeed();
 
-                if (weapon.requiredAmmo <= ammo) {
+                if (weapon.requiredAmmo <= ammo)
+                {
                     if (energy > 0)
                     {
                         if (energy - weapon.energyCost < 0)

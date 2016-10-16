@@ -182,7 +182,8 @@ public abstract class CharacterSuper : MonoBehaviour
         if (primaryMount.weaponLoaded())
         {
             weapon = primaryMount.Weapon;
-        }else if (secondaryMount.weaponLoaded())
+        }
+        else if (secondaryMount.weaponLoaded())
         {
             weapon = secondaryMount.Weapon;
         }
@@ -234,7 +235,7 @@ public abstract class CharacterSuper : MonoBehaviour
         if (move != 0 && this.enableMove)
         {
             //movement while in air
-            if(!onGround)
+            if (!onGround)
             {
                 // if trying to move left when maximum left speed is reached
                 if (velocity.x <= -movementSpeed && move == -1)
@@ -309,7 +310,7 @@ public abstract class CharacterSuper : MonoBehaviour
             health = 0;
         }
         // If the thing hitting the character is a projectile
-        else if (col.gameObject.tag == fears+"Projectile")
+        else if (col.gameObject.tag == fears + "Projectile")
         {
             Bullet collidingBullet = col.gameObject.GetComponent<Bullet>();
             if (collidingBullet != null)
@@ -325,7 +326,7 @@ public abstract class CharacterSuper : MonoBehaviour
             {
                 Destroy(col.gameObject.GetComponentInParent<Rigidbody>().gameObject);
             }
-            else if(col.gameObject.GetComponent<FloatyAI>() != null)
+            else if (col.gameObject.GetComponent<FloatyAI>() != null)
             {
                 int damage = col.gameObject.GetComponent<FloatyAI>().attack;
                 int knockBack = col.gameObject.GetComponent<FloatyAI>().knockBack;
@@ -336,7 +337,7 @@ public abstract class CharacterSuper : MonoBehaviour
             }
         }
         // When character is hit with an enemy weapon
-        else if (col.gameObject.tag == fears+"Weapon")
+        else if (col.gameObject.tag == fears + "Weapon")
         {
             int damage = col.transform.parent.gameObject.GetComponent<Weapon>().getDamage() + col.transform.root.GetComponent<CharacterSuper>().attack;
             float stun = col.transform.parent.gameObject.GetComponent<Weapon>().getStun();
@@ -367,13 +368,13 @@ public abstract class CharacterSuper : MonoBehaviour
     /// <param name="knockBack">Amount of knock back stored within damage gameObject</param>
     protected virtual void takeDamage(int damage, Vector3 source, int knockBack)
     {
-        
-        this.health -= (armour > 0) ? (int) (damage - ((damage * 0.8) * (armour/100))) : damage;
+
+        this.health -= (armour > 0) ? (int)(damage - ((damage * 0.8) * (armour / 100))) : damage;
 
         //Debug.Log("I took "+damage+" damage, now my health is "+this.health +"out of a possible "+maxHealth);
 
         Vector3 direction = transform.position - source;
-        
+
         direction.Normalize();
         direction.y += 0.4f;
 
@@ -384,7 +385,7 @@ public abstract class CharacterSuper : MonoBehaviour
             die();
         }
 
-        StartCoroutine(flashOnDamageTaken());
+        StartCoroutine(this.flashOnDamageTaken());
     }
 
     /// <summary>
@@ -454,7 +455,7 @@ public abstract class CharacterSuper : MonoBehaviour
         }
 
         // No empty slots and active weapon is the first one, switch to second wep
-         if (mount == weaponMounts.Primary)
+        if (mount == weaponMounts.Primary)
         {
             weapon = primaryMount.Weapon; // set as new active weapons
             activeWeaponType = weaponMounts.Secondary;
@@ -479,7 +480,8 @@ public abstract class CharacterSuper : MonoBehaviour
         if (activeWeaponType == weaponMounts.Primary)
         {
             return swapWeapons(weaponMounts.Secondary);
-        }else
+        }
+        else
         {
             return swapWeapons(weaponMounts.Primary);
         }
@@ -489,32 +491,32 @@ public abstract class CharacterSuper : MonoBehaviour
     /// Flashes the character model red over several frames when the ytake damage.
     /// </summary>
     /// <returns>Return null. Is a co-routine so returns at the end of each frame.</returns>
-    IEnumerator flashOnDamageTaken()
+    protected virtual IEnumerator flashOnDamageTaken()
     {
         //Initializing colors.
         Transform bodyTransform = this.gameObject.transform.Find("Body");
-        if(bodyTransform == null)
-        {
-            if (this.gameObject.transform.Find("Exo").gameObject.activeSelf)
-            {
-                bodyTransform = this.gameObject.transform.Find("Exo");
-            }
-        }
-        if(bodyTransform == null)
-        {
-            if (this.gameObject.transform.Find("Human").gameObject.activeSelf)
-            {
-                bodyTransform = this.gameObject.transform.Find("Human");
-            }
-        }
+        //if(bodyTransform == null)
+        //{
+        //    if (this.gameObject.transform.Find("Exo").gameObject.activeSelf)
+        //    {
+        //        bodyTransform = this.gameObject.transform.Find("Exo");
+        //    }
+        //}
+        //if(bodyTransform == null)
+        //{
+        //    if (this.gameObject.transform.Find("Human").gameObject.activeSelf)
+        //    {
+        //        bodyTransform = this.gameObject.transform.Find("Human");
+        //    }
+        //}
         SkinnedMeshRenderer body = bodyTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
         for (int i = 0; i < 5; i++)
         {
-            if(i == 0)
+            if (i == 0)
             {
                 body.material = this.damageMaterial;
             }
-            else if(i % 2 == 0)
+            else if (i % 2 == 0)
             {
                 body.material = this.damageMaterial;
             }

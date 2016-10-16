@@ -25,6 +25,7 @@ public class FloatyAI : EnemyAI
         base.Start();
         this.longestRange = 20;
         this.groundCheckLocationRotation = this.groundCheck.rotation;
+        base.fears = "Player";
     }
 
     // Update is called once per frame
@@ -41,6 +42,8 @@ public class FloatyAI : EnemyAI
             this.facePlayer(this.target);
             this.makeActionDecision();
         }
+        Debug.Log(this.bouncing);
+        Debug.Log("Attacking" + this.attacking);
     }
 
     void LateUpdate()
@@ -80,7 +83,6 @@ public class FloatyAI : EnemyAI
     protected override void makeActionDecision()
     {
         //Decide on an action
-        Debug.Log("Bouncing is " + this.bouncing);
         if (!attacking && !bouncing)
         {
             if (Vector3.Distance(transform.position, target.position) < longestRange && (Mathf.Abs(this.transform.position.y - (this.targetHeightFromPlayer + target.position.y)) < 0.3))
@@ -111,6 +113,7 @@ public class FloatyAI : EnemyAI
         if (recoveryTimer != 0)
         {
             horizontalDirection = 0;
+            verticalDirection = 0;
         }
         else
         {
@@ -156,17 +159,18 @@ public class FloatyAI : EnemyAI
         this.attacking = true;
         float attackStartTime = Time.time;
         Vector3 targetPosition;
-        if(this.transform.position.x < target.x)
+        if (this.transform.position.x < target.x)
         {
-            targetPosition = new Vector3(target.x + 2, target.y, 0);
+            targetPosition = new Vector3(target.x, target.y + 1, 0);
         }
         else
         {
-            targetPosition = new Vector3(target.x - 2, target.y, 0);
+            targetPosition = new Vector3(target.x, target.y + 1, 0);
         }
         Vector3 newVelocity = Vector3.zero;
-        while ((attackStartTime + 2f > Time.time) && attacking)
+        while ((attackStartTime + 2f > Time.time) && attacking && (this.transform.position != targetPosition))
         {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, targetPosition, (.5f / (1 / (Time.time - attackStartTime))));
             Vector3.SmoothDamp(this.transform.position, targetPosition, ref newVelocity, 1f);
             this.GetComponent<Rigidbody>().velocity = newVelocity;
             yield return null;
@@ -182,11 +186,10 @@ public class FloatyAI : EnemyAI
     private IEnumerator bounceCoroutine(Transform other)
     {
         this.bouncing = true;
-        Debug.Log("Boucning");
         float bounceStartTime = Time.time;
         Vector3 direction = this.gameObject.transform.position - other.position;
         //this.GetComponent<Rigidbody>().AddForce(direction.normalized * bounceForce);
-        while(bounceStartTime + 1f > Time.time)
+        while (bounceStartTime + 1f > Time.time)
         {
             Vector3 velocity = Vector3.zero;
             Vector3.SmoothDamp(this.transform.position, direction.normalized * 50, ref velocity, 1f);
@@ -198,13 +201,39 @@ public class FloatyAI : EnemyAI
 
     protected override void OnTriggerEnter(Collider other)
     {
+        base.OnTriggerEnter(other);
         if (other.gameObject.CompareTag("Player"))
         {
             this.attacking = false;
             StartCoroutine(this.bounceCoroutine(other.transform));
-            base.OnTriggerEnter(other);
-
         }
+    }
 
+    /// <summary>
+    /// Flashes the character model red over several frames when the ytake damage.
+    /// </summary>
+    /// <returns>Return null. Is a co-routine so returns at the end of each frame.</returns>
+    protected override IEnumerator flashOnDamageTaken()
+    {
+        //Initializing colors.
+        Transform bodyTransform = this.gameObject.transform.Find("Body");
+        MeshRenderer body = bodyTransform.gameObject.GetComponent<MeshRenderer>();
+        for (int i = 0; i < 5; i++)
+        {
+            if (i == 0)
+            {
+                body.materials = new Material[] { body.materials[1], this.damageMaterial };
+            }
+            else if (i % 2 == 0)
+            {
+                body.materials = new Material[] { body.materials[1], this.damageMaterial };
+            }
+            else
+            {
+                body.materials = new Material[] { body.materials[1], this.bodyMaterial };
+            }
+            yield return new WaitForSeconds(.15f);
+        }
+        body.materials = new Material[] { body.materials[1], this.bodyMaterial };
     }
 }
