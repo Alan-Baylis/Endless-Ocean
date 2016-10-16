@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The class for FloatyAI contains functionality unique to floaty.
+/// </summary>
 public class FloatyAI : EnemyAI
 {
 
