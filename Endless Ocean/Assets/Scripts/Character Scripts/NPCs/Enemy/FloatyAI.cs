@@ -4,10 +4,20 @@ using System.Collections;
 public class FloatyAI : EnemyAI
 {
 
-    private bool attacking;
+    private bool attacking = false;
+    private bool bouncing = false;
+
     private Quaternion groundCheckLocationRotation;
     private float targetHeightFromPlayer = 9f;
     private float verticalMoveSpeedBoost = 2f;
+
+    public int knockBack;
+    public int stun;
+
+    private float bounceForce = 300f;
+
+
+
 
     // Use this for initialization
     new void Start()
@@ -31,10 +41,6 @@ public class FloatyAI : EnemyAI
             this.facePlayer(this.target);
             this.makeActionDecision();
         }
-        //else if (!patrolling)
-        //{
-        //    base.moveCharacter(0);
-        //}
     }
 
     void LateUpdate()
@@ -73,10 +79,9 @@ public class FloatyAI : EnemyAI
     //This is where the enemy decides what to do - called from the fixedUpdate - overrides from enemyAI
     protected override void makeActionDecision()
     {
-        base.makeActionDecision();
-
         //Decide on an action
-        if (!attacking)
+        Debug.Log("Bouncing is " + this.bouncing);
+        if (!attacking && !bouncing)
         {
             if (Vector3.Distance(transform.position, target.position) < longestRange && (Mathf.Abs(this.transform.position.y - (this.targetHeightFromPlayer + target.position.y)) < 0.3))
             {
@@ -141,9 +146,15 @@ public class FloatyAI : EnemyAI
 
     #endregion
 
+    /// <summary>
+    /// A coroutine that makes the floaty fly at the player in an attack.
+    /// </summary>
+    /// <param name="target">The transform of the target to attack.</param>
+    /// <returns></returns>
     private IEnumerator attackCoroutine(Vector3 target)
     {
         this.attacking = true;
+        float attackStartTime = Time.time;
         Vector3 targetPosition;
         if(this.transform.position.x < target.x)
         {
@@ -154,13 +165,46 @@ public class FloatyAI : EnemyAI
             targetPosition = new Vector3(target.x - 2, target.y, 0);
         }
         Vector3 newVelocity = Vector3.zero;
-        Debug.Log((this.transform.position - targetPosition).magnitude);
-        while ((this.transform.position - targetPosition).magnitude > 0.5)
+        while ((attackStartTime + 2f > Time.time) && attacking)
         {
             Vector3.SmoothDamp(this.transform.position, targetPosition, ref newVelocity, 1f);
             this.GetComponent<Rigidbody>().velocity = newVelocity;
             yield return null;
         }
         this.attacking = false;
+    }
+
+    /// <summary>
+    /// Makes the floaty boucne away from the player and overrides its normal movement.
+    /// </summary>
+    /// <param name="other">The object the floaty is bouncing away from.</param>
+    /// <returns></returns>
+    private IEnumerator bounceCoroutine(Transform other)
+    {
+        this.bouncing = true;
+        Debug.Log("Boucning");
+        float bounceStartTime = Time.time;
+        Vector3 direction = this.gameObject.transform.position - other.position;
+        //this.GetComponent<Rigidbody>().AddForce(direction.normalized * bounceForce);
+        while(bounceStartTime + 1f > Time.time)
+        {
+            Vector3 velocity = Vector3.zero;
+            Vector3.SmoothDamp(this.transform.position, direction.normalized * 50, ref velocity, 1f);
+            this.GetComponent<Rigidbody>().velocity = velocity;
+            yield return null;
+        }
+        this.bouncing = false;
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            this.attacking = false;
+            StartCoroutine(this.bounceCoroutine(other.transform));
+            base.OnTriggerEnter(other);
+
+        }
+
     }
 }

@@ -261,7 +261,6 @@ public abstract class CharacterSuper : MonoBehaviour
             else
             {
                 rigidbody.velocity = new Vector3(move * movementSpeed, this.rigidbody.velocity.y, 0);
-                Debug.Log("Moving");
             }
         }
 
@@ -299,7 +298,7 @@ public abstract class CharacterSuper : MonoBehaviour
     /// What happens when character collides with certain objects
     /// </summary>
     /// <param name="col">GameObject involved in collision</param>
-    protected void OnTriggerEnter(Collider col)
+    protected virtual void OnTriggerEnter(Collider col)
     {
         Animator animController = col.transform.root.GetComponent<Animator>();
         int attackState = Animator.StringToHash("Attack Layer.Melee Attack");
@@ -312,15 +311,28 @@ public abstract class CharacterSuper : MonoBehaviour
         // If the thing hitting the character is a projectile
         else if (col.gameObject.tag == fears+"Projectile")
         {
-            int damage = col.gameObject.GetComponent<Bullet>().getDamage();
-            int knockBack = col.gameObject.GetComponent<Bullet>().getKnockBack();
-            float stun = col.gameObject.GetComponent<Bullet>().getStun();
+            Bullet collidingBullet = col.gameObject.GetComponent<Bullet>();
+            if (collidingBullet != null)
+            {
+                int damage = collidingBullet.getDamage();
+                int knockBack = collidingBullet.getKnockBack();
+                float stun = collidingBullet.getStun();
 
-            this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
-            recoveryTimer = stun;
-            if (col.gameObject.GetComponent<SpawnableBarrel>() == null)
+                this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+                recoveryTimer = stun;
+            }
+            if (col.gameObject.GetComponent<Bullet>() != null)
             {
                 Destroy(col.gameObject.GetComponentInParent<Rigidbody>().gameObject);
+            }
+            else if(col.gameObject.GetComponent<FloatyAI>() != null)
+            {
+                int damage = col.gameObject.GetComponent<FloatyAI>().attack;
+                int knockBack = col.gameObject.GetComponent<FloatyAI>().knockBack;
+                float stun = col.gameObject.GetComponent<FloatyAI>().stun;
+
+                this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+                recoveryTimer = stun;
             }
         }
         // When character is hit with an enemy weapon
@@ -480,8 +492,23 @@ public abstract class CharacterSuper : MonoBehaviour
     IEnumerator flashOnDamageTaken()
     {
         //Initializing colors.
-        SkinnedMeshRenderer body = this.gameObject.transform.Find("Body").GetComponent<SkinnedMeshRenderer>();
-        for(int i = 0; i < 5; i++)
+        Transform bodyTransform = this.gameObject.transform.Find("Body");
+        if(bodyTransform == null)
+        {
+            if (this.gameObject.transform.Find("Exo").gameObject.activeSelf)
+            {
+                bodyTransform = this.gameObject.transform.Find("Exo");
+            }
+        }
+        if(bodyTransform == null)
+        {
+            if (this.gameObject.transform.Find("Human").gameObject.activeSelf)
+            {
+                bodyTransform = this.gameObject.transform.Find("Human");
+            }
+        }
+        SkinnedMeshRenderer body = bodyTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
+        for (int i = 0; i < 5; i++)
         {
             if(i == 0)
             {
