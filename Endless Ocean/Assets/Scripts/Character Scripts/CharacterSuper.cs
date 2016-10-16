@@ -495,20 +495,6 @@ public abstract class CharacterSuper : MonoBehaviour
     {
         //Initializing colors.
         Transform bodyTransform = this.gameObject.transform.Find("Body");
-        //if(bodyTransform == null)
-        //{
-        //    if (this.gameObject.transform.Find("Exo").gameObject.activeSelf)
-        //    {
-        //        bodyTransform = this.gameObject.transform.Find("Exo");
-        //    }
-        //}
-        //if(bodyTransform == null)
-        //{
-        //    if (this.gameObject.transform.Find("Human").gameObject.activeSelf)
-        //    {
-        //        bodyTransform = this.gameObject.transform.Find("Human");
-        //    }
-        //}
         SkinnedMeshRenderer body = bodyTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
         for (int i = 0; i < 5; i++)
         {

@@ -456,4 +456,58 @@ public class PlayerController : CharacterSuper
             return false;
         }
     }
+
+    /// <summary>
+    /// Flashes the character model red over several frames when they take damage.
+    /// </summary>
+    /// <returns>Return null. Is a co-routine so returns at the end of each frame.</returns>
+    protected override IEnumerator flashOnDamageTaken()
+    {
+        SkinnedMeshRenderer body;
+        if (this.hasExo)
+        {
+            body = this.transform.Find("Exo").GetComponent<SkinnedMeshRenderer>();
+            Material[] materialsBackup = body.materials;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 0)
+                {
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial };
+                }
+                else if (i % 2 == 0)
+                {
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial};
+                }
+                else
+                {
+                    body.materials = new Material[] {materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4], materialsBackup[5]};
+                }
+                yield return new WaitForSeconds(.15f);
+            }
+            body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4], materialsBackup[5] };
+
+        }
+        else
+        {
+            body = this.transform.Find("Human").GetComponent<SkinnedMeshRenderer>();
+            Material[] materialsBackup = body.materials;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 0)
+                {
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial};
+                }
+                else if (i % 2 == 0)
+                {
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial};
+                }
+                else
+                {
+                    body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4]};
+                }
+                yield return new WaitForSeconds(.15f);
+            }
+            body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4]};
+        }
+    }
 }
