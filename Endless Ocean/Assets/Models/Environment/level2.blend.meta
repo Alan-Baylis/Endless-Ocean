@@ -81,6 +81,20 @@ ModelImporter:
     100146: Level2_WaterTank
     100148: Level2_Mast1
     100150: Level2_Mast2
+    100152: backgroundShip
+    100154: Level2_GroundChunk1_001
+    100156: Level2_Rock_016
+    100158: Level2_Rock_017
+    100160: Level2_Rock_018
+    100162: Level2_Rock_019
+    100164: Level2_Rock_020
+    100166: Level2_Rock_021
+    100168: Level2_Rock_022
+    100170: Level2_Rock_023
+    100172: Level2_Rock_024
+    100174: Level2_Rock_025
+    100176: Level2_Rock_026
+    100178: backgroundShip_001
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -157,6 +171,20 @@ ModelImporter:
     400146: Level2_WaterTank
     400148: Level2_Mast1
     400150: Level2_Mast2
+    400152: backgroundShip
+    400154: Level2_GroundChunk1_001
+    400156: Level2_Rock_016
+    400158: Level2_Rock_017
+    400160: Level2_Rock_018
+    400162: Level2_Rock_019
+    400164: Level2_Rock_020
+    400166: Level2_Rock_021
+    400168: Level2_Rock_022
+    400170: Level2_Rock_023
+    400172: Level2_Rock_024
+    400174: Level2_Rock_025
+    400176: Level2_Rock_026
+    400178: backgroundShip_001
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -232,6 +260,20 @@ ModelImporter:
     2300144: Level2_WaterTank
     2300146: Level2_Mast1
     2300148: Level2_Mast2
+    2300150: backgroundShip
+    2300152: Level2_GroundChunk1_001
+    2300154: Level2_Rock_016
+    2300156: Level2_Rock_017
+    2300158: Level2_Rock_018
+    2300160: Level2_Rock_019
+    2300162: Level2_Rock_020
+    2300164: Level2_Rock_021
+    2300166: Level2_Rock_022
+    2300168: Level2_Rock_023
+    2300170: Level2_Rock_024
+    2300172: Level2_Rock_025
+    2300174: Level2_Rock_026
+    2300176: backgroundShip_001
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -307,6 +349,20 @@ ModelImporter:
     3300144: Level2_WaterTank
     3300146: Level2_Mast1
     3300148: Level2_Mast2
+    3300150: backgroundShip
+    3300152: Level2_GroundChunk1_001
+    3300154: Level2_Rock_016
+    3300156: Level2_Rock_017
+    3300158: Level2_Rock_018
+    3300160: Level2_Rock_019
+    3300162: Level2_Rock_020
+    3300164: Level2_Rock_021
+    3300166: Level2_Rock_022
+    3300168: Level2_Rock_023
+    3300170: Level2_Rock_024
+    3300172: Level2_Rock_025
+    3300174: Level2_Rock_026
+    3300176: backgroundShip_001
     4300000: Cube_020
     4300002: Cube_019
     4300004: Cube_015
@@ -382,6 +438,20 @@ ModelImporter:
     4300144: Level2_ElevatorEntrance
     4300146: Level2_Mast1
     4300148: Level2_Mast2
+    4300150: Level2_GroundChunk1_001
+    4300152: Level2_Rock_021
+    4300154: Level2_Rock_020
+    4300156: Level2_Rock_019
+    4300158: Level2_Rock_018
+    4300160: Level2_Rock_017
+    4300162: Level2_Rock_016
+    4300164: backgroundShip
+    4300166: Level2_Rock_026
+    4300168: Level2_Rock_025
+    4300170: Level2_Rock_024
+    4300172: Level2_Rock_023
+    4300174: Level2_Rock_022
+    4300176: backgroundShip_001
     7400000: Default Take
     9500000: //RootNode
   materials:
