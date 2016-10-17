@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// The class for FloatyAI contains functionality unique to floaty.
@@ -192,7 +194,7 @@ public class FloatyAI : EnemyAI
         float bounceStartTime = Time.time;
         Vector3 direction = this.gameObject.transform.position - other.position;
         //this.GetComponent<Rigidbody>().AddForce(direction.normalized * bounceForce);
-        while (bounceStartTime + 1f > Time.time)
+        while (bounceStartTime + .5f > Time.time)
         {
             Vector3 velocity = Vector3.zero;
             Vector3.SmoothDamp(this.transform.position, direction.normalized * 50, ref velocity, 1f);
@@ -202,6 +204,10 @@ public class FloatyAI : EnemyAI
         this.bouncing = false;
     }
 
+    /// <summary>
+    /// If the floaty collides with the player start the bounce co routine.
+    /// </summary>
+    /// <param name="other">The other thing the floaty collided with.</param>
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
@@ -239,4 +245,6 @@ public class FloatyAI : EnemyAI
         }
         body.materials = new Material[] { body.materials[1], this.bodyMaterial };
     }
-}
+
+ 
+} 
