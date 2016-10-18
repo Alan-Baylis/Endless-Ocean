@@ -230,6 +230,7 @@ ModelImporter:
     100444: Cylinder_029
     100446: Cylinder_030
     100448: Cylinder_031
+    100450: Level1_RockPile_002
     400000: BarrelStack1
     400002: BarrelStack1_001
     400004: BarrelStack1_002
@@ -455,6 +456,7 @@ ModelImporter:
     400444: Cylinder_029
     400446: Cylinder_030
     400448: Cylinder_031
+    400450: Level1_RockPile_002
     2300000: BarrelStack1
     2300002: BarrelStack1_001
     2300004: BarrelStack1_002
@@ -679,6 +681,7 @@ ModelImporter:
     2300442: Cylinder_029
     2300444: Cylinder_030
     2300446: Cylinder_031
+    2300448: Level1_RockPile_002
     3300000: BarrelStack1
     3300002: BarrelStack1_001
     3300004: BarrelStack1_002
@@ -903,6 +906,7 @@ ModelImporter:
     3300442: Cylinder_029
     3300444: Cylinder_030
     3300446: Cylinder_031
+    3300448: Level1_RockPile_002
     4300000: BarrelStack1_004
     4300002: BarrelStack1_003
     4300004: BarrelStack1_001
@@ -1127,6 +1131,7 @@ ModelImporter:
     4300442: BezierCurve_003
     4300444: Cylinder_027
     4300446: Cylinder_026
+    4300448: Level1_RockPile_002
     7400000: Default Take
     9500000: //RootNode
   materials:
