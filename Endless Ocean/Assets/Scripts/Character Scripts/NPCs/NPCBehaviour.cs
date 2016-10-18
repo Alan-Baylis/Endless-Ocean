@@ -58,11 +58,6 @@ public abstract class NPCBehaviour : CharacterSuper
 
         checkIfOnGround();
         animator.SetBool("grounded", true); //Currently having issues with checkIfOnground and AI
-
-        if (patrolling)
-        {
-            patrol();
-        }
     }
 
     public void setPatrol(List<Vector3> locations)

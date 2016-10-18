@@ -70,6 +70,13 @@ public class EnemyAI : NPCBehaviour
         {
             moveCharacter(0);
         }
+        else
+        {
+            if (patrolling)
+            {
+                patrol();
+            }
+        }
     }
 
     protected virtual void makeActionDecision()

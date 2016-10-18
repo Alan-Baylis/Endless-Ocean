@@ -458,7 +458,7 @@ public abstract class CharacterSuper : MonoBehaviour
         if (mount == weaponMounts.Primary)
         {
             weapon = primaryMount.Weapon; // set as new active weapons
-            activeWeaponType = weaponMounts.Secondary;
+            activeWeaponType = weaponMounts.Primary;
             primaryMount.MountPoint.gameObject.SetActive(true); // show weapon
             secondaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
             return 1;
@@ -467,7 +467,7 @@ public abstract class CharacterSuper : MonoBehaviour
         else if (mount == weaponMounts.Secondary)
         {
             weapon = secondaryMount.Weapon; // set as new active weapon
-            activeWeaponType = weaponMounts.Primary;
+            activeWeaponType = weaponMounts.Secondary;
             secondaryMount.MountPoint.gameObject.SetActive(true); // show weapon
             primaryMount.MountPoint.gameObject.SetActive(false); // hide weapon
             return 2;
