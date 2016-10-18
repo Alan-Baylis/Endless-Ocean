@@ -101,6 +101,12 @@ ModelImporter:
     100186: Level2_Rock_030
     100188: Level2_Mast2_001
     100190: Level2_Mast2_002
+    100192: Level2_Rock_031
+    100194: Level2_Rock_032
+    100196: Level2_Rock_033
+    100198: Level2_Rock_034
+    100200: Level2_Rock_035
+    100202: island1rocks
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -197,6 +203,12 @@ ModelImporter:
     400186: Level2_Rock_030
     400188: Level2_Mast2_001
     400190: Level2_Mast2_002
+    400192: Level2_Rock_031
+    400194: Level2_Rock_032
+    400196: Level2_Rock_033
+    400198: Level2_Rock_034
+    400200: Level2_Rock_035
+    400202: island1rocks
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -292,6 +304,12 @@ ModelImporter:
     2300184: Level2_Rock_030
     2300186: Level2_Mast2_001
     2300188: Level2_Mast2_002
+    2300190: Level2_Rock_031
+    2300192: Level2_Rock_032
+    2300194: Level2_Rock_033
+    2300196: Level2_Rock_034
+    2300198: Level2_Rock_035
+    2300200: island1rocks
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -387,6 +405,12 @@ ModelImporter:
     3300184: Level2_Rock_030
     3300186: Level2_Mast2_001
     3300188: Level2_Mast2_002
+    3300190: Level2_Rock_031
+    3300192: Level2_Rock_032
+    3300194: Level2_Rock_033
+    3300196: Level2_Rock_034
+    3300198: Level2_Rock_035
+    3300200: island1rocks
     4300000: Cube_020
     4300002: Cube_019
     4300004: Cube_015
@@ -482,6 +506,12 @@ ModelImporter:
     4300184: Level2_Rock_029
     4300186: Level2_Mast2_002
     4300188: Level2_Mast2_001
+    4300190: Level2_Rock_035
+    4300192: Level2_Rock_034
+    4300194: Level2_Rock_033
+    4300196: Level2_Rock_032
+    4300198: Level2_Rock_031
+    4300200: island1rocks
     7400000: Default Take
     9500000: //RootNode
   materials:
