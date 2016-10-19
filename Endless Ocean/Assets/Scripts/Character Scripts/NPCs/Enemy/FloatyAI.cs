@@ -41,6 +41,7 @@ public class FloatyAI : EnemyAI
 
     new void FixedUpdate()
     {
+        base.FixedUpdate();
         //check if player is in range
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
         {
@@ -65,7 +66,7 @@ public class FloatyAI : EnemyAI
         Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
 
 
-
+        
 
 
         //shoot at target, not their feet

@@ -228,6 +228,7 @@ public abstract class CharacterSuper : MonoBehaviour
         //Stun Timer
         if (recoveryTimer != 0)
         {
+            Debug.Log("Stunned");
             move = 0;
         }
 
