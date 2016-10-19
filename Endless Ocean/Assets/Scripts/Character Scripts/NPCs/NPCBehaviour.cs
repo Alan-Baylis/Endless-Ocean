@@ -188,7 +188,11 @@ public abstract class NPCBehaviour : CharacterSuper
         AmmoSpawner.spawnAmmo(random.Next(0, maxHealth/10), this.transform);
         ItemSpawner.spawnSpecificItems(itemDrops, itemPossibilites, this.transform);
         Instantiate(Resources.Load("Prefabs/Explosions/explosion_enemy"), this.transform.position, Quaternion.identity);
-        this.GetComponent<MeshRenderer>().enabled = false;
+        MeshRenderer[] renderers = this.GetComponentsInChildren<MeshRenderer>();
+        for(int i = 0; i < renderers.Length; i++)
+        {
+            renderers[i].enabled = false;
+        }
         this.GetComponent<Collider>().enabled = false;
     }
 
