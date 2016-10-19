@@ -12,10 +12,12 @@ public class SpawnableBarrel : Bullet {
 
     protected override void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.layer == LayerMask.GetMask("Enemy"))
+        Debug.Log("Not Inside");
+        if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            Debug.Log("Inside");
             this.spawner.hasBarrelSpawned = false;
-            Destroy(this.gameObject.transform.parent);
+            Destroy(this.gameObject.transform.parent.gameObject);
         }
     }
 }

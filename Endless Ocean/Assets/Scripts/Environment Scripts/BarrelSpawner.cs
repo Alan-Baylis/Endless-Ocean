@@ -23,6 +23,7 @@ public class BarrelSpawner : MonoBehaviour {
         {
             if (Input.GetButtonDown("Interact"))
             {
+                Debug.Log(hasBarrelSpawned);
                 if (!hasBarrelSpawned)
                 {
                     GameObject barrel = Instantiate(Resources.Load("Prefabs/Environment/SpawnableBarrel")) as GameObject;
