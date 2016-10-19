@@ -472,19 +472,19 @@ public class PlayerController : CharacterSuper
             {
                 if (i == 0)
                 {
-                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial };
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial };
                 }
                 else if (i % 2 == 0)
                 {
-                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial};
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial };
                 }
                 else
                 {
-                    body.materials = new Material[] {materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4], materialsBackup[5]};
+                    body.materials = new Material[] {materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4], materialsBackup[5], materialsBackup[6] };
                 }
                 yield return new WaitForSeconds(.15f);
             }
-            body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4], materialsBackup[5] };
+            body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4], materialsBackup[5], materialsBackup[6] };
 
         }
         else
@@ -495,19 +495,19 @@ public class PlayerController : CharacterSuper
             {
                 if (i == 0)
                 {
-                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial};
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial };
                 }
                 else if (i % 2 == 0)
                 {
-                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial};
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial, this.damageMaterial };
                 }
                 else
                 {
-                    body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4]};
+                    body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4], materialsBackup[5] };
                 }
                 yield return new WaitForSeconds(.15f);
             }
-            body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4]};
+            body.materials = new Material[] { materialsBackup[0], materialsBackup[1], materialsBackup[2], materialsBackup[3], materialsBackup[4], materialsBackup[5] };
         }
     }
 }
