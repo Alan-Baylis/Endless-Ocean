@@ -33,7 +33,7 @@ public class RisingPlatform : PuzzleObject  {
 
         Gizmos.color = Color.red;
         float height = endTransform.position.y - startTransform.position.y;
-        Gizmos.DrawWireCube(new Vector3(endTransform.position.x, endTransform.position.y - (height / 2)), new Vector3(platform.localScale.x,height));
+        Gizmos.DrawWireCube(new Vector3(endTransform.position.x, endTransform.position.y - (height / 2),endTransform.position.z), new Vector3(platform.localScale.x,height+platform.localScale.y,platform.localScale.z));
     }
 
     void SetDestination(Transform dest)
