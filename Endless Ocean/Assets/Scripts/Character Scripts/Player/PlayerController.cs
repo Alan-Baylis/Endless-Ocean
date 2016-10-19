@@ -102,7 +102,10 @@ public class PlayerController : CharacterSuper
 
         this.nextMelee = 0.0f;
         //Must initialize inventory like this so that items can be picked up from the start.
-        this.inventory.initializeInventory();
+        if (!this.inventory.drawn)
+        {
+            this.inventory.drawInventory();
+        }
         GameObject pistolTemp = Instantiate(Resources.Load(Pistol.modelPathLocal)) as GameObject;
         inventory.addItem(pistolTemp.GetComponent<Pistol>());
         GameObject clubTemp = Instantiate(Resources.Load(Club.modelPathLocal)) as GameObject;
