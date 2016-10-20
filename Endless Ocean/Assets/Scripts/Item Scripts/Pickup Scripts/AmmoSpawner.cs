@@ -20,4 +20,22 @@ public class AmmoSpawner : MonoBehaviour
             ammo.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
         }
     }
+
+    /// <summary>
+    /// This method spawns ammo. One ammo prefab for each piece of ammo a mob drops.
+    /// 
+    /// This methods runs as a coroutine for performance reasons.
+    /// </summary>
+    /// <param name="amountOfAmmo">The amount of ammo the player gets.</param>
+    /// <param name="positionToSpawnAt">The position to spawn the ammo at.</param>
+    public static IEnumerator spawnAmmoCoroutine(int amountOfAmmo, Transform positionToSpawnAt, OnDeathSpawner.SpawnerCoroutineCallback callback)
+    {
+        for (int i = 0; i < amountOfAmmo; i++)
+        {
+            GameObject ammo = Instantiate(Resources.Load("Prefabs/Pickups/Ammo"), positionToSpawnAt.position, positionToSpawnAt.rotation) as GameObject;
+            ammo.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
+            yield return null;
+        }
+        callback();
+    }
 }

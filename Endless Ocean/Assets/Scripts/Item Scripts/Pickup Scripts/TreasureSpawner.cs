@@ -28,7 +28,7 @@ public class TreasureSpawner : MonoBehaviour {
     /// </summary>
     /// <param name="amountOfTreasure">The amount of trasure the player gets.</param>
     /// <param name="positionToSpawnAt">The position to spawn the treasure at.</param>
-    public static IEnumerator spawnTreasureCoroutine(int amountOfTreasure, Transform positionToSpawnAt)
+    public static IEnumerator spawnTreasureCoroutine(int amountOfTreasure, Transform positionToSpawnAt, OnDeathSpawner.SpawnerCoroutineCallback callback)
     {
         System.Random random = new System.Random();
         for (int i = 0; i < amountOfTreasure/10; i++)
@@ -37,6 +37,6 @@ public class TreasureSpawner : MonoBehaviour {
             treasure.GetComponent<MoveTowardsObject>().objectToMoveTowards = GameObject.FindWithTag("Player");
             yield return null;
         }
-        Destroy(positionToSpawnAt.gameObject);
+        callback();
     }
 }
