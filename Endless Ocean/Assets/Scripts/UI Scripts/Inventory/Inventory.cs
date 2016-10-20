@@ -33,6 +33,8 @@ public class Inventory : PanelSuper {
 
     public bool draggingItem = false;
 
+    public bool drawn;
+
     /// <summary>
     /// Runs when the object is first created - intializes key varaibles and positions UI elements.
     /// </summary>
@@ -182,7 +184,7 @@ public class Inventory : PanelSuper {
     /// <summary>
     /// Instantiates key game objects for storing items.
     /// </summary>
-    public void initializeInventory()
+    public void drawInventory()
     {
         int slotCount = 0;
         for (slotsX = 0; slotsX < 4; slotsX++)
@@ -208,5 +210,6 @@ public class Inventory : PanelSuper {
             this.currentYLocation -= Inventory.INCREMENT;
             this.currentXlocation -= (Inventory.INCREMENT * 5);
         }
+        this.drawn = true;
     }
 }
