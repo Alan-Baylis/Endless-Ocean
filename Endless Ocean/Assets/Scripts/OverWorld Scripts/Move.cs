@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
-    public Vector3 teleportPoint;
     public Rigidbody rb;
     float maxfSpeed = 20f;
     float maxbSpeed = -10f;
