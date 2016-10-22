@@ -37,7 +37,6 @@ public class StillBodyWater : MonoBehaviour
                 //{
                 //    floatForce.y--;
                 //}
-                Debug.Log(floatForce.y);
                 col.GetComponent<Rigidbody>().AddForce(floatForce);
             }
         }

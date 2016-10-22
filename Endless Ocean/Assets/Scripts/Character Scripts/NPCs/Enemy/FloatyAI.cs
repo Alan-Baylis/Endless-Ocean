@@ -41,15 +41,12 @@ public class FloatyAI : EnemyAI
 
     new void FixedUpdate()
     {
-        base.FixedUpdate();
         //check if player is in range
         if (Vector3.Distance(transform.position, target.position) <= detectRange)
         {
             this.facePlayer(this.target);
             this.makeActionDecision();
         }
-        Debug.Log(this.bouncing);
-        Debug.Log("Attacking" + this.attacking);
     }
 
     void LateUpdate()
