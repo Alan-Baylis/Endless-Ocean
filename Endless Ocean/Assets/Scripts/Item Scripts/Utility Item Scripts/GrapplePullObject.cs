@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class GrapplePullObject : MonoBehaviour {
 
-    public float velocity;
+    public float velocityIncrement;
     public GameObject objectToMoveTowards;
     public bool moveInYAxis = false;
     private Rigidbody playerRigidbody;
@@ -21,7 +21,7 @@ public class GrapplePullObject : MonoBehaviour {
     /// </summary>
     public void init(GameObject objectToMoveTowards, float velocity, bool moveInYAxis, Rigidbody playerRigidbody)
     {
-        this.velocity = velocity;
+        this.velocityIncrement = velocity;
         this.objectToMoveTowards = objectToMoveTowards;
         this.moveInYAxis = moveInYAxis;
         this.playerRigidbody = playerRigidbody;
@@ -30,15 +30,13 @@ public class GrapplePullObject : MonoBehaviour {
 	/// <summary>
     /// Runs once each frame and moves the object towards the player.
     /// </summary>
-	void Update () {
+	void FixedUpdate () {
         if (Vector3.Distance(objectToMoveTowards.transform.position, this.transform.position) > 5) {
             Vector3 direction = (objectToMoveTowards.transform.position - this.transform.position);
             if (!moveInYAxis) {
                 direction.y = 0;
             }
-            this.GetComponent<Rigidbody>().velocity += Vector3.ClampMagnitude((direction * velocity), .4f);
-            Vector3 tempVelocity = new Vector3();
-            tempVelocity = this.GetComponent<Rigidbody>().velocity;
+            Vector3 tempVelocity = this.GetComponent<Rigidbody>().velocity + Vector3.ClampMagnitude((direction * velocityIncrement), .4f);
             tempVelocity.x = Mathf.Clamp(tempVelocity.x, -(playerRigidbody.gameObject.GetComponent<PlayerController>().movementSpeed), playerRigidbody.gameObject.GetComponent<PlayerController>().movementSpeed);
             this.GetComponent<Rigidbody>().velocity = tempVelocity;
         }

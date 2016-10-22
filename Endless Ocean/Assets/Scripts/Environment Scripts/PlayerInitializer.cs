@@ -11,14 +11,11 @@ public class PlayerInitializer : MonoBehaviour {
     /// Resets the players position and enables the player game objects.
     /// </summary>
 	void Start () {
-        GameObject[] rootObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+        PreserveAcrossLevels[] preservedObjects = Resources.FindObjectsOfTypeAll<PreserveAcrossLevels>();
 
-        foreach(GameObject gameObject in rootObjects)
+        foreach(PreserveAcrossLevels preservedObject in preservedObjects)
         {
-            if(gameObject.CompareTag("Player") || gameObject.CompareTag("Player Related"))
-            {
-                gameObject.SetActive(true);
-            }
+            preservedObject.gameObject.SetActive(true);
         }
 
         if (positionToStartAt == null)

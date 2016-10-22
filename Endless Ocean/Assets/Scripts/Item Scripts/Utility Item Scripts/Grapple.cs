@@ -275,8 +275,6 @@ public class Grapple: MonoBehaviour
     /// </summary>
     public void handlePullingRopeStretching()
     {
-        Debug.Log("Difference " + (this.otherEnd - this.playerRigidbody.position));
-        Debug.Log("Magnitide" + (this.otherEnd - this.playerRigidbody.position).magnitude);
         if (Vector3.Distance(this.otherEnd, this.playerRigidbody.position) > Grapple.MAX_PULLING_ROPE_LENGTH)
         {
             StartCoroutine(this.retractRope());

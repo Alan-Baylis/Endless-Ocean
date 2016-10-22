@@ -16,7 +16,7 @@ public class OptionalSceneTransition : MonoBehaviour
     /// <param name="col">The collider of the object that entered the trigger collider.</param>
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("PlayerShip"))
         {
             if (Input.GetButtonDown("Interact"))
             {
