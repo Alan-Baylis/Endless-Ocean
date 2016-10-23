@@ -25,6 +25,12 @@ public abstract class NPCBehaviour : CharacterSuper
     protected List<Vector3> patrolLocations = new List<Vector3>();
     private int currentPatrolObjective;
 
+    //wall and drop avoidance
+    [SerializeField]
+    protected Transform wallCheck;
+    [SerializeField]
+    protected Transform dropCheck;
+
     //Known thine weapons
     protected weaponMounts shortRangeWeapon;
     protected int shortestRange;
@@ -85,6 +91,7 @@ public abstract class NPCBehaviour : CharacterSuper
 
     protected virtual void pathToLocation(Vector3 destination)
     {
+        //get direction of travel
         float direction = 0;
         if (rigidbody.position.x > destination.x)
         {
@@ -93,6 +100,16 @@ public abstract class NPCBehaviour : CharacterSuper
         else
         {
             direction = 1;
+        }
+        setDirection(direction);
+
+        if (!groundCollisionCheck(dropCheck.position))
+        {
+            direction = 0;
+        } else if (groundCollisionCheck(wallCheck.position))
+        {
+            direction = 0;
+            this.rigidbody.AddForce(new Vector3(direction,1) * 200  );
         }
 
         moveCharacter(direction);
