@@ -136,6 +136,28 @@ ModelImporter:
     100256: shipPuzzle3_005
     100258: shipRailingsCombined
     100260: shipRailingsCombined_001
+    100262: Cylinder_005
+    100264: Cylinder_007
+    100266: Cylinder_008
+    100268: Cylinder_009
+    100270: Cylinder_010
+    100272: mastPlatforms
+    100274: masts
+    100276: backgroundShip_002
+    100278: backgroundShip_003
+    100280: backgroundShip_004
+    100282: backgroundShip_005
+    100284: backgroundShip_006
+    100286: backgroundShip_007
+    100288: backgroundShip_008
+    100290: backgroundShip_009
+    100292: backgroundShip_010
+    100294: backgroundShip_012
+    100296: backgroundShip_013
+    100298: backgroundShip_014
+    100300: backgroundShip_016
+    100302: backgroundShip_017
+    100304: backgroundShip_018
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -267,6 +289,28 @@ ModelImporter:
     400256: shipPuzzle3_005
     400258: shipRailingsCombined
     400260: shipRailingsCombined_001
+    400262: Cylinder_005
+    400264: Cylinder_007
+    400266: Cylinder_008
+    400268: Cylinder_009
+    400270: Cylinder_010
+    400272: mastPlatforms
+    400274: masts
+    400276: backgroundShip_002
+    400278: backgroundShip_003
+    400280: backgroundShip_004
+    400282: backgroundShip_005
+    400284: backgroundShip_006
+    400286: backgroundShip_007
+    400288: backgroundShip_008
+    400290: backgroundShip_009
+    400292: backgroundShip_010
+    400294: backgroundShip_012
+    400296: backgroundShip_013
+    400298: backgroundShip_014
+    400300: backgroundShip_016
+    400302: backgroundShip_017
+    400304: backgroundShip_018
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -397,6 +441,28 @@ ModelImporter:
     2300254: shipPuzzle3_005
     2300256: shipRailingsCombined
     2300258: shipRailingsCombined_001
+    2300260: Cylinder_005
+    2300262: Cylinder_007
+    2300264: Cylinder_008
+    2300266: Cylinder_009
+    2300268: Cylinder_010
+    2300270: mastPlatforms
+    2300272: masts
+    2300274: backgroundShip_002
+    2300276: backgroundShip_003
+    2300278: backgroundShip_004
+    2300280: backgroundShip_005
+    2300282: backgroundShip_006
+    2300284: backgroundShip_007
+    2300286: backgroundShip_008
+    2300288: backgroundShip_009
+    2300290: backgroundShip_010
+    2300292: backgroundShip_012
+    2300294: backgroundShip_013
+    2300296: backgroundShip_014
+    2300298: backgroundShip_016
+    2300300: backgroundShip_017
+    2300302: backgroundShip_018
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -527,6 +593,28 @@ ModelImporter:
     3300254: shipPuzzle3_005
     3300256: shipRailingsCombined
     3300258: shipRailingsCombined_001
+    3300260: Cylinder_005
+    3300262: Cylinder_007
+    3300264: Cylinder_008
+    3300266: Cylinder_009
+    3300268: Cylinder_010
+    3300270: mastPlatforms
+    3300272: masts
+    3300274: backgroundShip_002
+    3300276: backgroundShip_003
+    3300278: backgroundShip_004
+    3300280: backgroundShip_005
+    3300282: backgroundShip_006
+    3300284: backgroundShip_007
+    3300286: backgroundShip_008
+    3300288: backgroundShip_009
+    3300290: backgroundShip_010
+    3300292: backgroundShip_012
+    3300294: backgroundShip_013
+    3300296: backgroundShip_014
+    3300298: backgroundShip_016
+    3300300: backgroundShip_017
+    3300302: backgroundShip_018
     4300000: Cube_020
     4300002: Cube_019
     4300004: Cube_015
@@ -657,6 +745,28 @@ ModelImporter:
     4300254: shipPuzzle3_003
     4300256: shipRailingsCombined
     4300258: shipRailingsCombined_001
+    4300260: Cylinder_010
+    4300262: Cylinder_009
+    4300264: Cylinder_008
+    4300266: Cylinder_007
+    4300268: Cylinder_005
+    4300270: mastPlatforms
+    4300272: masts
+    4300274: backgroundShip_018
+    4300276: backgroundShip_017
+    4300278: backgroundShip_016
+    4300280: backgroundShip_014
+    4300282: backgroundShip_013
+    4300284: backgroundShip_012
+    4300286: backgroundShip_010
+    4300288: backgroundShip_009
+    4300290: backgroundShip_008
+    4300292: backgroundShip_007
+    4300294: backgroundShip_006
+    4300296: backgroundShip_005
+    4300298: backgroundShip_004
+    4300300: backgroundShip_003
+    4300302: backgroundShip_002
     7400000: Default Take
     9500000: //RootNode
   materials:
