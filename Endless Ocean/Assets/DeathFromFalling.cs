@@ -7,7 +7,7 @@ public class DeathFromFalling : MonoBehaviour {
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            Destroy(col.gameObject);
+            GameOver.previousLevel = Application.loadedLevelName;
             Application.LoadLevel(Application.loadedLevel);
             col.gameObject.transform.position = Vector3.zero;
         }

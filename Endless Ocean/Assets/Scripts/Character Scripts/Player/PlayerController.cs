@@ -372,6 +372,7 @@ public class PlayerController : CharacterSuper
 
     public override void die()
     {
+        GameOver.previousLevel = Application.loadedLevelName;
         SceneManager.LoadScene("Game Over");
         //transform.position = Vector3.zero;
     }

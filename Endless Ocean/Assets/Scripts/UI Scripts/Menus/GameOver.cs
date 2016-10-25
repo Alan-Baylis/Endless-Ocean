@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour {
 
+    public static string previousLevel;
+
     void Start()
     {
         GameObject.FindGameObjectWithTag("Player").SetActive(false);
@@ -10,7 +12,7 @@ public class GameOver : MonoBehaviour {
 
     public void restartGame ()
     {
-        SceneManager.LoadScene("Sidescrolling Scene");
+        SceneManager.LoadScene(previousLevel);
         transform.position = Vector3.zero;
     }
 
