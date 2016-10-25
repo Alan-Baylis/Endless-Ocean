@@ -31,6 +31,7 @@ public class FloatyAI : EnemyAI
         this.longestRange = 20;
         this.groundCheckLocationRotation = this.groundCheck.rotation;
         base.fears = "Player";
+        this.target = PreserveAcrossLevels.playerInstance.gameObject.transform;
     }
 
     // Update is called once per frame

@@ -5,13 +5,12 @@ public class CameraController : MonoBehaviour {
 
     private Transform target;
     public float smoothing = 5f;
-
     public Vector3 offset;
 
 
 	// Use this for initialization
-	void Start () {
-        this.target = GameObject.FindGameObjectWithTag("Player").transform;
+	void Awake () {
+        this.target = PreserveAcrossLevels.playerInstance.gameObject.transform;
 	}
 	
 	// Update is called once per frame

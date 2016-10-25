@@ -11,12 +11,8 @@ public class PlayerInitializer : MonoBehaviour {
     /// Resets the players position and enables the player game objects.
     /// </summary>
 	void Start () {
-        PreserveAcrossLevels[] preservedObjects = Resources.FindObjectsOfTypeAll<PreserveAcrossLevels>();
-
-        foreach(PreserveAcrossLevels preservedObject in preservedObjects)
-        {
-            preservedObject.gameObject.SetActive(true);
-        }
+        PreserveAcrossLevels.playerGuiInstance.gameObject.SetActive(true);
+        PreserveAcrossLevels.playerInstance.gameObject.SetActive(true);
 
         PlayerController playerController = PreserveAcrossLevels.playerInstance.GetComponent<PlayerController>();
         playerController.health = playerController.stamina * 10;
