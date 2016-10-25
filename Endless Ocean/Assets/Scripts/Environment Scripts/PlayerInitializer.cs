@@ -18,13 +18,16 @@ public class PlayerInitializer : MonoBehaviour {
             preservedObject.gameObject.SetActive(true);
         }
 
+        PlayerController playerController = PreserveAcrossLevels.playerInstance.GetComponent<PlayerController>();
+        playerController.health = playerController.stamina * 10;
+
         if (positionToStartAt == null)
         {
-            GameObject.FindGameObjectWithTag("Player").transform.position = Vector3.zero;
+            PreserveAcrossLevels.playerInstance.transform.position = Vector3.zero;
         }
         else
         {
-            GameObject.FindGameObjectWithTag("Player").transform.position = positionToStartAt;
+            PreserveAcrossLevels.playerInstance.transform.position = positionToStartAt;
         }
 	}
 }

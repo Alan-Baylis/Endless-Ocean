@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 public class PlayerController : CharacterSuper
 {
-
     public delegate void WeaponSwapEventHandler(int slotNumber);
 
     public event WeaponSwapEventHandler weaponSwapped;
@@ -134,6 +133,7 @@ public class PlayerController : CharacterSuper
 
         // Energy regeneration, invoke repeating method
         InvokeRepeating("RegenEnergy", energyRegenSpeed, energyRegenSpeed);
+
     }
 
     /// <summary>

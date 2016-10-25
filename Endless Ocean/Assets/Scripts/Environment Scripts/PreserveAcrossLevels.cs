@@ -5,6 +5,9 @@ using System.Collections;
 /// </summary>
 public class PreserveAcrossLevels : MonoBehaviour {
 
+    public static PreserveAcrossLevels playerInstance;
+    public static PreserveAcrossLevels playerGuiInstance;
+
     /// <summary>
     /// Runs before the object is created.
     /// 
@@ -12,6 +15,28 @@ public class PreserveAcrossLevels : MonoBehaviour {
     /// </summary>
     void Awake()
     {
+        if (this.gameObject.CompareTag("Player"))
+        {
+            if (PreserveAcrossLevels.playerInstance == null)
+            {
+                PreserveAcrossLevels.playerInstance = this;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        else if (this.gameObject.CompareTag("Player Related"))
+        {
+            if (PreserveAcrossLevels.playerGuiInstance == null)
+            {
+                PreserveAcrossLevels.playerGuiInstance = this;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
         DontDestroyOnLoad(this.gameObject);
     }
 }
