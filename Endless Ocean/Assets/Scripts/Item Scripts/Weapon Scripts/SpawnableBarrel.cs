@@ -10,7 +10,7 @@ public class SpawnableBarrel : Bullet {
 	    
 	}
 
-    protected override void OnTriggerEnter(Collider col)
+    protected void OnTriggerEnter(Collider col)
     {
         Debug.Log("Not Inside");
         if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))

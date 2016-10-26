@@ -106,7 +106,8 @@ namespace ProBuilder2.Examples
 		public float rotateSpeed = 100f;
 
 		/**
-		 *	\brief This is responsible for moving the camera around and not much else.
+		 *	\brief This is responsible for moving the 
+         *	 around and not much else.
 		 */
 		public void LateUpdate()
 		{

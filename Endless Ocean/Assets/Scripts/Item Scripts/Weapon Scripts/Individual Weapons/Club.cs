@@ -4,6 +4,9 @@ using System;
 
 public class Club : MeleeWeapon {
 
+    private static AudioClip meleeAttackSound1;
+    private static AudioClip meleeAttackSound2;
+
     Animator myAnimator;
     PlayerController character;
 
@@ -11,6 +14,14 @@ public class Club : MeleeWeapon {
     // Use this for initialization
     new void Start()
     {
+        if(meleeAttackSound1 == null)
+        {
+            meleeAttackSound1 = Resources.Load("Sounds/Melee Attack Sound 1") as AudioClip;
+        }
+        if(meleeAttackSound2 == null)
+        {
+            meleeAttackSound2 = Resources.Load("Sounds/Melee Attack Sound 2") as AudioClip;
+        }
         base.Start();
         this.character = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
@@ -23,7 +34,16 @@ public class Club : MeleeWeapon {
     {
         this.trailRenderer.enabled = true;
         StartCoroutine(hideTrailWhenFinishedAttacking());
-
+        System.Random random = new System.Random();
+        int soundChoice = random.Next(0, 2);
+        if(soundChoice == 0)
+        {
+            AudioSource.PlayClipAtPoint(meleeAttackSound1, this.transform.position);
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(meleeAttackSound2, this.transform.position);
+        }
     }
 
     public override string getModelPath()

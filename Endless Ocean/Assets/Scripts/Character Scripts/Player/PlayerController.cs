@@ -71,6 +71,11 @@ public class PlayerController : CharacterSuper
     // Use this for initialization
     new void Start()
     {
+        //Must initialize inventory like this so that items can be picked up from the start.
+        if (!this.inventory.drawn)
+        {
+            this.inventory.drawInventory();
+        }
         base.Start();
         // Assign objects that damage this character upon collision
         base.fears = "Enemy";
@@ -100,11 +105,6 @@ public class PlayerController : CharacterSuper
         experienceToLevel = currentLevel * 20;
 
         this.nextMelee = 0.0f;
-        //Must initialize inventory like this so that items can be picked up from the start.
-        if (!this.inventory.drawn)
-        {
-            this.inventory.drawInventory();
-        }
         GameObject pistolTemp = Instantiate(Resources.Load(Pistol.modelPathLocal)) as GameObject;
         inventory.addItem(pistolTemp.GetComponent<Pistol>());
         GameObject clubTemp = Instantiate(Resources.Load(Club.modelPathLocal)) as GameObject;

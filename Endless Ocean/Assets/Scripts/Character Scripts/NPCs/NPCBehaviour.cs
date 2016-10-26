@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public abstract class NPCBehaviour : CharacterSuper
 {
+    protected static AudioClip deathExplosion;
+
     [SerializeField]
     private String[] itemDrops = {"Prefabs/Consumables/TestPotion"};
     [SerializeField]
@@ -40,6 +42,14 @@ public abstract class NPCBehaviour : CharacterSuper
 
     //float healthbar above enemy
     public Image healthBar;
+
+    void Awake()
+    {
+        if (deathExplosion == null)
+        {
+            deathExplosion = Resources.Load("Sounds/Enemy Death Explosion Sound") as AudioClip;
+        }
+    }
 
     // Use this for initialization
     new void Start () {
@@ -199,10 +209,11 @@ public abstract class NPCBehaviour : CharacterSuper
     /// </summary>
     public override void die()
     {
+        Destroy(this.gameObject);
         GameObject onDeathSpawner = Instantiate(Resources.Load("Prefabs/Pickups/OnDeathSpawner"), this.transform.position, Quaternion.identity) as GameObject;
         onDeathSpawner.GetComponent<OnDeathSpawner>().startItemSpawningCoroutines(this.maxHealth, this.itemPossibilites, this.itemDrops);
         Instantiate(Resources.Load("Prefabs/Explosions/explosion_enemy"), this.transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
+        AudioSource.PlayClipAtPoint(deathExplosion, this.transform.position);
     }
 
 

@@ -21,13 +21,15 @@ public class FloatyAI : EnemyAI
 
     private float bounceForce = 300f;
 
-
-
+    private RectTransform enemyCanvas;
+    private Quaternion enemyCanvasStartRotation;
 
     // Use this for initialization
     new void Start()
     {
         base.Start();
+        this.enemyCanvas = this.GetComponentInChildren<Canvas>().GetComponent<RectTransform>();
+        this.enemyCanvasStartRotation = this.enemyCanvas.localRotation;
         this.longestRange = 20;
         this.groundCheckLocationRotation = this.groundCheck.rotation;
         base.fears = "Player";
@@ -37,7 +39,7 @@ public class FloatyAI : EnemyAI
     // Update is called once per frame
     new void Update()
     {
-        base.Update();
+     //   this.enemyCanvas.localRotation = this.enemyCanvasStartRotation;
     }
 
     new void FixedUpdate()
@@ -47,6 +49,10 @@ public class FloatyAI : EnemyAI
         {
             this.facePlayer(this.target);
             this.makeActionDecision();
+        }
+        else
+        {
+            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
 
@@ -113,6 +119,7 @@ public class FloatyAI : EnemyAI
 
     protected void moveCharacter(float horizontalDirection, float verticalDirection)
     {
+        this.recoveryTimer = 0;
         //Stun Timer
         if (recoveryTimer != 0)
         {
@@ -190,10 +197,10 @@ public class FloatyAI : EnemyAI
     private IEnumerator bounceCoroutine(Transform other)
     {
         this.bouncing = true;
-        float bounceStartTime = Time.time;
+        float bounceStartTime = Time.fixedTime;
         Vector3 direction = this.gameObject.transform.position - other.position;
         //this.GetComponent<Rigidbody>().AddForce(direction.normalized * bounceForce);
-        while (bounceStartTime + .5f > Time.time)
+        while (bounceStartTime + .5f > Time.fixedTime && ((Mathf.Abs(this.transform.position.x - this.target.position.x)) < 5))
         {
             Vector3 velocity = Vector3.zero;
             Vector3.SmoothDamp(this.transform.position, direction.normalized * 50, ref velocity, 1f);

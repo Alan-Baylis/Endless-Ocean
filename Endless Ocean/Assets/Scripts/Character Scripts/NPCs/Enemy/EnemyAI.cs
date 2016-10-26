@@ -19,7 +19,6 @@ public class EnemyAI : NPCBehaviour
 
     // Use this for initialization
     new void Start () {
-
         base.Start();
 
         // Assign objects that damage this character upon collision
