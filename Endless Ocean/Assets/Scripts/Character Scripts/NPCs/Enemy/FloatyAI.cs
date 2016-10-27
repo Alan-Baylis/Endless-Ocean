@@ -22,24 +22,19 @@ public class FloatyAI : EnemyAI
     private float bounceForce = 300f;
 
     private RectTransform enemyCanvas;
-    private Quaternion enemyCanvasStartRotation;
+
+    private Vector3 canvasOffset;
 
     // Use this for initialization
     new void Start()
     {
         base.Start();
-        this.enemyCanvas = this.GetComponentInChildren<Canvas>().GetComponent<RectTransform>();
-        this.enemyCanvasStartRotation = this.enemyCanvas.localRotation;
+        this.enemyCanvas = this.GetComponentInChildren<RectTransform>();
+        this.canvasOffset = this.enemyCanvas.transform.position - this.transform.position;
         this.longestRange = 20;
         this.groundCheckLocationRotation = this.groundCheck.rotation;
         base.fears = "Player";
         this.target = PreserveAcrossLevels.playerInstance.gameObject.transform;
-    }
-
-    // Update is called once per frame
-    new void Update()
-    {
-     //   this.enemyCanvas.localRotation = this.enemyCanvasStartRotation;
     }
 
     new void FixedUpdate()
@@ -59,7 +54,7 @@ public class FloatyAI : EnemyAI
     void LateUpdate()
     {
         this.groundCheck.transform.rotation = this.groundCheckLocationRotation;
-        //transform.localEulerAngles = new Vector3(0, 0, transform.localEulerAngles.z);
+        this.enemyCanvas.position = this.transform.position + canvasOffset;
     }
 
 

@@ -42,9 +42,9 @@ public class Bullet : MonoBehaviour
         return knockBack;
     }
 
-    protected virtual void OnCollisionEnter(Collision col)
+    protected virtual void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "Player")
+        if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "Player" && !col.isTrigger)
         {
             Instantiate(Resources.Load("Prefabs/Explosions/explosion_enemy"), this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
