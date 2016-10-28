@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// This is the class for the reforger. It handles functionality to do with re-rolling item rarity and handling user input with reforging.
 /// </summary>
-public class Reforger : Slot
+public class ReforgerSlot : Slot
 {
 
     //Reference to shop.

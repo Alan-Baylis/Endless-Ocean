@@ -185,7 +185,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\PanelSuper.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\QuickItems\QuickItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\QuickItems\QuickItemsPanel.cs" />
-    <Compile Include="Assets\Scripts\UI Scripts\Reforger\Reforger.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\Reforger\ReforgerSlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Shop\Shop.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Shop\ShopSlot.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Slot.cs" />
@@ -218,6 +218,7 @@
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_UnlitVertexColor.shader" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_VertexShader.shader" />
     <None Include="Assets\ProCore\ProBuilder\readme.txt" />
+    <None Include="Assets\Scripts\Character Scripts\NPCs\Enemy\Project Class Diagram.cd" />
     <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
