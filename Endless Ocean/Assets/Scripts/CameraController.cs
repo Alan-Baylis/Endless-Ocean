@@ -6,18 +6,23 @@ public class CameraController : MonoBehaviour {
     private Transform target;
     public float smoothing = 5f;
     public Vector3 offset;
+    public bool followPlayer;
 
 
 	// Use this for initialization
 	void Awake () {
         this.target = PreserveAcrossLevels.playerInstance.gameObject.transform;
+        this.followPlayer = true;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        Vector3 targetCameraPosition = target.position + offset;
-        this.transform.position = Vector3.Lerp(transform.position, targetCameraPosition, smoothing * Time.deltaTime);
-	}
+        if (followPlayer)
+        {
+            Vector3 targetCameraPosition = target.position + offset;
+            this.transform.position = Vector3.Lerp(transform.position, targetCameraPosition, smoothing * Time.deltaTime);
+        }
+        }
 
     //HELPER FUNCTIONS
     /// <summary>
