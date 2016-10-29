@@ -33,7 +33,7 @@ public class elevatorFirstLevel : MonoBehaviour
             {
                 triggered = true;
                 this.elevatorAC.SetBool("triggered", true);
-                dialogueManager.showDialogue(this.speakerName, this.dialogueLines, 12.0f);
+                dialogueManager.showDialogue(this.speakerName, this.dialogueLines, 6.0f);
             }
         }
     }

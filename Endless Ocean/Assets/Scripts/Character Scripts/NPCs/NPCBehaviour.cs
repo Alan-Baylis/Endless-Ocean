@@ -119,7 +119,8 @@ public abstract class NPCBehaviour : CharacterSuper
         } else if (groundCollisionCheck(wallCheck.position))
         {
             direction = 0;
-            this.rigidbody.AddForce(new Vector3(direction,1) * 200  );
+            //Jump
+            this.rigidbody.AddForce(new Vector3(direction,1) * 120  );
         }
 
         moveCharacter(direction);
