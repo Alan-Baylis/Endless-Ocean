@@ -14,8 +14,10 @@ public class ReforgerSlot : Slot
     public GameObject shop;
 
     Text costLabel;
+    int reforgeCost = 20;
     PlayerController player;
     public GameObject validationPrompt;
+    public PanelSuper reforgerPanel;
 
     void Start()
     {
@@ -93,7 +95,7 @@ public class ReforgerSlot : Slot
         }
         if (!this.isSlotEmpty())
         {
-            this.inventory.hideToolTip();
+            this.reforgerPanel.hideToolTip();
             this.inventory.startDraggingItem(this.item);
             this.item = new Item();
         }
@@ -101,12 +103,18 @@ public class ReforgerSlot : Slot
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        return;
+        if (!this.isSlotEmpty())
+        {
+            this.reforgerPanel.showToolTip(this.item, this.GetComponent<RectTransform>().localPosition);
+        }
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        return;
+        if (!this.isSlotEmpty())
+        {
+            this.reforgerPanel.hideToolTip();
+        }
     }
 
     /// <summary>
@@ -115,12 +123,13 @@ public class ReforgerSlot : Slot
     public void reforgeItem()
     {
         this.validationPrompt.SetActive(false);
-        if (!this.isSlotEmpty())
+        if (!this.isSlotEmpty() && player.totalTreasure > reforgeCost)
         {
             Weapon tempWeapon = (Weapon)this.item;
             tempWeapon.setQuality(player.luck);
             tempWeapon.itemIcon = tempWeapon.getQualityIcon();
             this.item = tempWeapon;
+            player.totalTreasure -= reforgeCost;
         }
         else
         {
