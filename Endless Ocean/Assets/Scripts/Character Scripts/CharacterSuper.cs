@@ -95,6 +95,8 @@ public abstract class CharacterSuper : MonoBehaviour
     protected bool facingRight;
     [HideInInspector]
     public bool enableMove;
+    [SerializeField]
+    public LayerMask groundLayerMask;
     #endregion
 
     #region mesh component variables
@@ -269,6 +271,8 @@ public abstract class CharacterSuper : MonoBehaviour
         setDirection(move);
 
         animator.SetFloat("Speed", Mathf.Abs(move));
+
+        this.stopHangingOnWall();
     }
 
     protected void setDirection(float move)
@@ -535,5 +539,34 @@ public abstract class CharacterSuper : MonoBehaviour
         {
             yield return null;
         } while (animationToWaitFor.isPlaying);
+    }
+
+    /// <summary>
+    /// This functions stops the player's horizontal movement if it is going to collide with something.
+    /// 
+    /// This should prevent the wall stickiness problem.
+    /// </summary>
+    private void stopHangingOnWall()
+    {
+        float direction;
+        if (facingRight)
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = -1;
+        }
+        //Fire two raycasts to calc the gradient of the ground in front of the player.
+        RaycastHit lowerRaycastHitData;
+        //Physics.Raycast(this.transform.position, new Vector3(direction, 0, 0), out lowerRaycastHitData, 1f, groundLayerMask);
+        //RaycastHit higherRaycastHitData;
+        //Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), new Vector3(direction, 0, 0), out higherRaycastHitData, 1f, groundLayerMask);
+        //Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), new Vector3(direction, 0, 0), Color.red, 100f);
+        //If land has a gradient grater than 1:1 player cannot climb up it.
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1.5f, 0), new Vector3(direction, 0, 0), out lowerRaycastHitData, 1f, groundLayerMask))
+        {
+            this.rigidbody.velocity = new Vector3(0, this.rigidbody.velocity.y, 0);
+        }
     }
 }
