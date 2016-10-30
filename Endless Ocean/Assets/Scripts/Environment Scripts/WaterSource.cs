@@ -57,6 +57,7 @@ public class WaterSource : MonoBehaviour {
         yield return new WaitForSeconds(5);
         cam.GetComponent<CameraController>().followPlayer = true;
         GameObject.Find("Player").GetComponent<PlayerController>().enableMove = true;
+        this.gameObject.SetActive(false);
         yield return null;
     }
 
