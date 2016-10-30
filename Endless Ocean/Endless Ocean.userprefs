@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Endless Ocean.CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Environment Scripts\StillBodyWater.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Item Scripts\Utility Item Scripts\Grapple.cs">
     <Files>
       <File FileName="Assets\Scripts\UI Scripts\Menus\LevelManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Environment Scripts\StillBodyWater.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Item Scripts\Utility Item Scripts\Grapple.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

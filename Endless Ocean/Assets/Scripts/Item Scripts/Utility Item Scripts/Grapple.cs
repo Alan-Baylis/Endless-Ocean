@@ -56,6 +56,9 @@ public class Grapple: MonoBehaviour
 
     Coroutine retractRopeCoroutine;
 
+    public AudioClip grappleShotNoise;
+    public AudioClip grappleRetractNoise;
+
     // Use this for initialization
     void Start()
     {
@@ -162,6 +165,7 @@ public class Grapple: MonoBehaviour
         this.drawRope(playerRigidbody.position, this.otherEnd);
         this.otherObject = raycastHitData.rigidbody;
         this.grappling = true;
+        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position);
     }
 
     /// <summary>
@@ -268,6 +272,8 @@ public class Grapple: MonoBehaviour
         //grappleJoint.axis = new Vector3(0, 0, 1);
         this.pulling = true;
         //return grappleJoint;
+        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position);
+
     }
 
     /// <summary>
@@ -344,6 +350,7 @@ public class Grapple: MonoBehaviour
     /// <returns></returns>
     private IEnumerator retractRope()
     {
+        AudioSource.PlayClipAtPoint(this.grappleRetractNoise, this.transform.position);
         destroyRopeJoint();
         this.retractingRope = true;
         while (Vector3.Distance(this.otherEnd, this.transform.position) > .3f) {

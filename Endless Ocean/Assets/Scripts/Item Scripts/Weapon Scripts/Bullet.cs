@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
     {
         if (impactSound == null)
         {
-            impactSound = Resources.Load("Sounds/EnemyDeath Explosion Sound") as AudioClip;
+            impactSound = Resources.Load("Sounds/Enemy Death Explosion Sound") as AudioClip;
         }
         this.GetComponent<Rigidbody>().velocity = transform.forward * speed;
         this.bulletTrail = this.GetComponentInChildren<ParticleSystem>();

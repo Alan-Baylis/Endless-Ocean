@@ -1,4 +1,4 @@
-Base path: D:/Program Files/Unity/Editor/Data
+Base path: C:/Program Files/Unity/Editor/Data
 Cmd: getPlatforms
 Cmd: preprocess
   insize=4398 outsize=1114 ok=1
@@ -11,11 +11,11 @@ Platform defines: UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPEC
 Cmd: preprocess
   insize=13365 outsize=2743 ok=1
 Cmd: preprocess
-  insize=542 outsize=1523 ok=1
+  insize=542 outsize=1522 ok=1
 Cmd: preprocess
-  insize=968 outsize=1742 ok=1
+  insize=968 outsize=1739 ok=1
 Cmd: preprocess
-  insize=1124 outsize=1649 ok=1
+  insize=1124 outsize=1648 ok=1
 Cmd: preprocess
   insize=820 outsize=364 ok=1
 Cmd: preprocess
@@ -34,3 +34,7 @@ Cmd: preprocess
   insize=936 outsize=413 ok=1
 Cmd: preprocess
   insize=1679 outsize=477 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10620 outsize=1446 kw=FOG_LINEAR WATER_SIMPLE WATER_EDGEBLEND_ON WATER_VERTEX_DISPLACEMENT_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10620 outsize=3006 kw=FOG_LINEAR WATER_SIMPLE WATER_EDGEBLEND_ON WATER_VERTEX_DISPLACEMENT_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
