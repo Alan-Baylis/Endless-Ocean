@@ -7,6 +7,8 @@ using System.Collections;
 public class Bullet : MonoBehaviour
 {
 
+    static public AudioClip impactSound;
+
     public int damage;
     public float speed;
     public int knockBack;
@@ -15,6 +17,10 @@ public class Bullet : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+        if (impactSound == null)
+        {
+            impactSound = Resources.Load("Sounds/EnemyDeath Explosion Sound") as AudioClip;
+        }
         this.GetComponent<Rigidbody>().velocity = transform.forward * speed;
         this.bulletTrail = this.GetComponentInChildren<ParticleSystem>();
         Destroy(this.gameObject, 25f);
@@ -47,6 +53,7 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "Player" && !col.isTrigger)
         {
             Instantiate(Resources.Load("Prefabs/Explosions/explosion_enemy"), this.transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(Bullet.impactSound, this.transform.position);
             Destroy(this.gameObject);
         }
     }

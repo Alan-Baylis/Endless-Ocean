@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public abstract class NPCBehaviour : CharacterSuper
 {
-    protected static AudioClip deathExplosion;
+    public AudioClip deathExplosion;
 
     [SerializeField]
     private String[] itemDrops = {"Prefabs/Consumables/TestPotion"};
@@ -42,14 +42,6 @@ public abstract class NPCBehaviour : CharacterSuper
 
     //float healthbar above enemy
     public Image healthBar;
-
-    void Awake()
-    {
-        if (deathExplosion == null)
-        {
-            deathExplosion = Resources.Load("Sounds/Enemy Death Explosion Sound") as AudioClip;
-        }
-    }
 
     // Use this for initialization
     new void Start () {

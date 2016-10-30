@@ -19,6 +19,8 @@ public class ReforgerSlot : Slot
     public GameObject validationPrompt;
     public PanelSuper reforgerPanel;
 
+    public AudioClip reforgeSound;
+
     void Start()
     {
         this.item = new Item();
@@ -130,6 +132,7 @@ public class ReforgerSlot : Slot
             tempWeapon.itemIcon = tempWeapon.getQualityIcon();
             this.item = tempWeapon;
             player.totalTreasure -= reforgeCost;
+            AudioSource.PlayClipAtPoint(this.reforgeSound, this.transform.position);
         }
         else
         {

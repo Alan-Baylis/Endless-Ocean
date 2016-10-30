@@ -67,6 +67,10 @@ public class PlayerController : CharacterSuper
     // is the player wearing exo?
     bool hasExo;
 
+    public AudioClip jumpSound1;
+    public AudioClip jumpSound2;
+
+    private float jumpNoiseBlocker;
 
     // Use this for initialization
     new void Start()
@@ -292,6 +296,21 @@ public class PlayerController : CharacterSuper
                 this.velocity = rigidbody.velocity;
                 this.rigidbody.AddForce(new Vector3(0, jumpHeight, 0));
                 this.onGround = false;
+                if (this.jumpNoiseBlocker + .5 < Time.time)
+                {
+                    System.Random random = new System.Random();
+                    int randomInt = random.Next(0, 2);
+                    if (randomInt == 0)
+                    {
+                        this.jumpNoiseBlocker = Time.time;
+                        AudioSource.PlayClipAtPoint(this.jumpSound1, this.transform.position);
+                    }
+                    else
+                    {
+                        this.jumpNoiseBlocker = Time.time;
+                        AudioSource.PlayClipAtPoint(this.jumpSound2, this.transform.position);
+                    }
+                }
             }
             checkIfOnGround();
             this.animator.SetBool("grounded", this.onGround);
