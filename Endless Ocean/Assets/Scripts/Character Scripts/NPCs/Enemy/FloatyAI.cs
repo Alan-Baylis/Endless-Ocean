@@ -25,6 +25,8 @@ public class FloatyAI : EnemyAI
 
     private Vector3 canvasOffset;
 
+    public AudioClip floatyAttackNoise;
+
     // Use this for initialization
     new void Start()
     {
@@ -162,6 +164,7 @@ public class FloatyAI : EnemyAI
     /// <returns></returns>
     private IEnumerator attackCoroutine(Vector3 target)
     {
+        AudioSource.PlayClipAtPoint(this.floatyAttackNoise, this.transform.position);
         this.attacking = true;
         float attackStartTime = Time.time;
         Vector3 targetPosition;

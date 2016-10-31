@@ -17,6 +17,8 @@ public class RisingPlatform : PuzzleObject  {
 
     Vector3 direction;
     Transform destination;
+
+    public AudioSource risingPlatformAudioSource;
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -24,6 +26,10 @@ public class RisingPlatform : PuzzleObject  {
             {
                 platform.GetComponent<Rigidbody>().MovePosition(platform.position + direction * speed * Time.fixedDeltaTime);
             }
+        else
+        {
+            this.risingPlatformAudioSource.enabled = false;
+        }
 	}
 
     void OnDrawGizmos()
@@ -45,6 +51,8 @@ public class RisingPlatform : PuzzleObject  {
     protected override void onActive()
     {
         SetDestination(endTransform);
+        //this.risingPlatformAudioSource.enabled = true;
+
     }
 
     protected override void onDeactive()

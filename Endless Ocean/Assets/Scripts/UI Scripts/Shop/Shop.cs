@@ -34,6 +34,8 @@ public class Shop : PanelSuper
     //Refernce to player.
     public PlayerController player;
 
+    public AudioClip sellSound;
+
     void Start()
     {
         this.initializeShop();

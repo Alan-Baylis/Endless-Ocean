@@ -20,7 +20,7 @@ public class EnemyAI : NPCBehaviour
     // Use this for initialization
     new void Start () {
         base.Start();
-
+        this.target = PreserveAcrossLevels.playerInstance.transform;
         // Assign objects that damage this character upon collision
         base.fears = "Player";
 

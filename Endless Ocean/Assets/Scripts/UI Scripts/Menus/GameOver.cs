@@ -7,6 +7,7 @@ public class GameOver : MonoBehaviour {
 
     void Start()
     {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().maxHealth;
         GameObject.FindGameObjectWithTag("Player").SetActive(false);
     }
 
