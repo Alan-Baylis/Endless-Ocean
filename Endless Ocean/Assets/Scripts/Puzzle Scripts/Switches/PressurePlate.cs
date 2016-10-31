@@ -12,8 +12,19 @@ public class PressurePlate : MonoBehaviour {
     // Parent reference
     public GameObject parent;
 
+    public AudioClip buttonPressedSound;
+    public AudioClip buttonDepressedSound;
+
     // Use this for initialization
     void Start () {
+        if(buttonDepressedSound == null)
+        {
+            buttonDepressedSound = Resources.Load("Sounds/Button Off") as AudioClip;
+        }
+        if(buttonPressedSound == null)
+        {
+            buttonPressedSound = Resources.Load("Sounds/Button On") as AudioClip;
+        }
         this.animator = this.parent.GetComponent<Animator>();
     }
 	
@@ -38,6 +49,7 @@ public class PressurePlate : MonoBehaviour {
         {
             pressurePlateDown = true;
             UpdateTriggeredObjects();
+            AudioSource.PlayClipAtPoint(this.buttonPressedSound, this.transform.position);
         }
     }
 
@@ -45,7 +57,8 @@ public class PressurePlate : MonoBehaviour {
     void OnTriggerExit(Collider col)
     {
          pressurePlateDown = false;
-            UpdateTriggeredObjects();
+         UpdateTriggeredObjects();
+        AudioSource.PlayClipAtPoint(this.buttonDepressedSound, this.transform.position);
     }
 
     void UpdateTriggeredObjects()

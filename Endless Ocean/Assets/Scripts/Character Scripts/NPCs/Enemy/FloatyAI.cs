@@ -225,26 +225,31 @@ public class FloatyAI : EnemyAI
     /// <returns>Return null. Is a co-routine so returns at the end of each frame.</returns>
     protected override IEnumerator flashOnDamageTaken()
     {
-        //Initializing colors.
-        Transform bodyTransform = this.gameObject.transform.Find("Body");
-        MeshRenderer body = bodyTransform.gameObject.GetComponent<MeshRenderer>();
-        for (int i = 0; i < 5; i++)
+        if (!flashing)
         {
-            if (i == 0)
+            //Initializing colors.
+            this.flashing = true;
+            Transform bodyTransform = this.gameObject.transform.Find("Body");
+            MeshRenderer body = bodyTransform.gameObject.GetComponent<MeshRenderer>();
+            for (int i = 0; i < 5; i++)
             {
-                body.materials = new Material[] { body.materials[1], this.damageMaterial };
+                if (i == 0)
+                {
+                    body.materials = new Material[] { body.materials[1], this.damageMaterial };
+                }
+                else if (i % 2 == 0)
+                {
+                    body.materials = new Material[] { body.materials[1], this.damageMaterial };
+                }
+                else
+                {
+                    body.materials = new Material[] { body.materials[1], this.bodyMaterial };
+                }
+                yield return new WaitForSeconds(.15f);
             }
-            else if (i % 2 == 0)
-            {
-                body.materials = new Material[] { body.materials[1], this.damageMaterial };
-            }
-            else
-            {
-                body.materials = new Material[] { body.materials[1], this.bodyMaterial };
-            }
-            yield return new WaitForSeconds(.15f);
+            body.materials = new Material[] { body.materials[1], this.bodyMaterial };
+            this.flashing = false;
         }
-        body.materials = new Material[] { body.materials[1], this.bodyMaterial };
     }
 
  

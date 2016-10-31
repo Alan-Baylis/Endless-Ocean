@@ -9,7 +9,11 @@ public class elevatorFirstLevel : MonoBehaviour
     public string[] dialogueLines;
     public string speakerName;
 
+    public AudioClip buttonBeepSound;
+
     private DialogueManager dialogueManager;
+
+    public AudioSource elevatorAudioSource;
 
     // Use this for initialization
     void Start()
@@ -31,6 +35,8 @@ public class elevatorFirstLevel : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.E))
             {
+                AudioSource.PlayClipAtPoint(this.buttonBeepSound, this.transform.position);
+                this.elevatorAudioSource.enabled = true;
                 triggered = true;
                 this.elevatorAC.SetBool("triggered", true);
                 dialogueManager.showDialogue(this.speakerName, this.dialogueLines, 6.0f);

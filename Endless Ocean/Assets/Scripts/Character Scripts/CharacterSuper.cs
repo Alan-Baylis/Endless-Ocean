@@ -168,6 +168,8 @@ public abstract class CharacterSuper : MonoBehaviour
     public Material damageMaterial;
     public Material bodyMaterial;
 
+    protected bool flashing = false;
+
     // Use this for initialization
     protected void Start()
     {
@@ -506,26 +508,31 @@ public abstract class CharacterSuper : MonoBehaviour
     /// <returns>Return null. Is a co-routine so returns at the end of each frame.</returns>
     protected virtual IEnumerator flashOnDamageTaken()
     {
-        //Initializing colors.
-        Transform bodyTransform = this.gameObject.transform.Find("Body");
-        SkinnedMeshRenderer body = bodyTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
-        for (int i = 0; i < 5; i++)
+        if (!flashing)
         {
-            if (i == 0)
+            this.flashing = true;
+            //Initializing colors.
+            Transform bodyTransform = this.gameObject.transform.Find("Body");
+            SkinnedMeshRenderer body = bodyTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
+            for (int i = 0; i < 5; i++)
             {
-                body.material = this.damageMaterial;
+                if (i == 0)
+                {
+                    body.material = this.damageMaterial;
+                }
+                else if (i % 2 == 0)
+                {
+                    body.material = this.damageMaterial;
+                }
+                else
+                {
+                    body.material = this.bodyMaterial;
+                }
+                yield return new WaitForSeconds(.15f);
             }
-            else if (i % 2 == 0)
-            {
-                body.material = this.damageMaterial;
-            }
-            else
-            {
-                body.material = this.bodyMaterial;
-            }
-            yield return new WaitForSeconds(.15f);
+            body.material = this.bodyMaterial;
+            this.flashing = false;
         }
-        body.material = this.bodyMaterial;
     }
 
     /// <summary>

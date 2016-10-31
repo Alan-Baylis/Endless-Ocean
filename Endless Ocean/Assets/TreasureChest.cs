@@ -11,6 +11,8 @@ public class TreasureChest : MonoBehaviour {
 
     private ParticleSystem chestEffect;
 
+    public AudioClip openSound;
+
     // Use this for initialization
     void Start () {
         this.animator = this.GetComponent<Animator>();
@@ -28,6 +30,7 @@ public class TreasureChest : MonoBehaviour {
 
             if (Input.GetKeyDown("e") && (!opened))
             {
+                AudioSource.PlayClipAtPoint(this.openSound, this.transform.position);
                 StartCoroutine(this.showTreasureOpenEffect());
                 prompt.gameObject.SetActive(false);
                 opened = true;
