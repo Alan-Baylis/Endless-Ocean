@@ -49,7 +49,7 @@ public class PressurePlate : MonoBehaviour {
         {
             pressurePlateDown = true;
             UpdateTriggeredObjects();
-            AudioSource.PlayClipAtPoint(this.buttonPressedSound, this.transform.position);
+            AudioSource.PlayClipAtPoint(this.buttonPressedSound, this.transform.position, 1.5f);
         }
     }
 
@@ -58,7 +58,7 @@ public class PressurePlate : MonoBehaviour {
     {
          pressurePlateDown = false;
          UpdateTriggeredObjects();
-        AudioSource.PlayClipAtPoint(this.buttonDepressedSound, this.transform.position);
+        AudioSource.PlayClipAtPoint(this.buttonDepressedSound, this.transform.position, 1.5f);
     }
 
     void UpdateTriggeredObjects()

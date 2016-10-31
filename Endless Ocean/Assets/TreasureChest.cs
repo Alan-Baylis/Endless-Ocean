@@ -30,7 +30,7 @@ public class TreasureChest : MonoBehaviour {
 
             if (Input.GetKeyDown("e") && (!opened))
             {
-                AudioSource.PlayClipAtPoint(this.openSound, this.transform.position);
+                AudioSource.PlayClipAtPoint(this.openSound, this.transform.position, 2f);
                 StartCoroutine(this.showTreasureOpenEffect());
                 prompt.gameObject.SetActive(false);
                 opened = true;
