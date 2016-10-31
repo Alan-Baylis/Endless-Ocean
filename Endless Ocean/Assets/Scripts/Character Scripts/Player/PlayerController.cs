@@ -56,7 +56,8 @@ public class PlayerController : CharacterSuper
     // For leveling
     public int statPointsToAllocate;
 
-    public int healthBarHeight = 100;
+
+    public int healthBarHeightSize = 10;
 
     public int ammo;
 
@@ -72,9 +73,13 @@ public class PlayerController : CharacterSuper
 
     private float jumpNoiseBlocker;
 
+    private int statIncrement = 10;
+
     // Use this for initialization
     new void Start()
     {
+        
+
         //Must initialize inventory like this so that items can be picked up from the start.
         if (!this.inventory.drawn)
         {
@@ -87,7 +92,7 @@ public class PlayerController : CharacterSuper
         // Set energy and attack variables
         this.attack = 5;
         this.stamina = 5;
-        this.vigor = 10;
+        this.vigor = 5;
 
         this.hasExo = false;
 
@@ -97,15 +102,16 @@ public class PlayerController : CharacterSuper
         grapple.isEnabled = false;
 
         // Set health
-        this.maxHealth = this.stamina * 10;
-        this.health = this.stamina * 10;
+        this.maxHealth = this.stamina * statIncrement;
+        this.health = this.maxHealth;
+        this.expandBar(playerHealthBar, playerHealthBarBG, statIncrement, maxHealth);
 
-
-        this.maxEnergy = this.vigor * 5;
+        this.maxEnergy = this.vigor * statIncrement;
         this.energy = this.maxEnergy;
+        this.expandBar(playerEnergyBar, playerEnergyBarBG, statIncrement, maxEnergy);
 
         // Set experience values
-        currentExperience = 70;
+        currentExperience = 500;
         experienceToLevel = currentLevel * 20;
 
         this.nextMelee = 0.0f;
@@ -340,10 +346,18 @@ public class PlayerController : CharacterSuper
     /// </summary>
     public void updateHealth()
     {
-        this.maxHealth = this.stamina * 10;
-        //playerHealthBar.transform.localScale = new Vector3(2, 1, 0);
-        //playerHealthBarBG.transform.localScale = new Vector3(2, 1, 0);
+        this.maxHealth = this.stamina * statIncrement;
+        this.health += statIncrement;
+        expandBar(playerHealthBar, playerHealthBarBG, statIncrement, maxHealth);
         this.updateHealthBar();
+    }
+
+    public void expandBar(Image statBar, Image statBarBG, int valueAdded, int maxStat)
+    {
+
+        statBar.rectTransform.sizeDelta = new Vector2(maxStat, healthBarHeightSize);
+        statBarBG.rectTransform.sizeDelta = new Vector2(maxStat, healthBarHeightSize);
+        statBarBG.transform.position = new Vector2(statBarBG.transform.position.x + valueAdded, statBarBG.transform.position.y);
     }
 
     /// <summary>
@@ -351,9 +365,9 @@ public class PlayerController : CharacterSuper
     /// </summary>
     public void updateEnergy()
     {
-        this.maxEnergy = this.vigor * 5;
-        //playerEnergyBar.rectTransform.sizeDelta = new Vector2(healthBarHeight, this.maxEnergy);
-        //playerEnergyBarBG.rectTransform.sizeDelta = new Vector2(healthBarHeight, this.maxEnergy);
+        this.maxEnergy = this.vigor * statIncrement;
+        this.energy += statIncrement;
+        expandBar(playerEnergyBar, playerEnergyBarBG, statIncrement, maxEnergy);
         this.updateEnergyBar();
     }
 
