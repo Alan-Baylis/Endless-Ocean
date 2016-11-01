@@ -65,8 +65,8 @@ public class CharacterEquipment : PanelSuper
     {
         this.levelLabel.text = player.currentLevel.ToString();
         this.damageLabel.text = player.attack.ToString();
-        this.healthLabel.text = player.maxHealth.ToString();
-        this.energyLabel.text = player.maxEnergy.ToString();
+        this.healthLabel.text = player.health.ToString() +"/"+ player.maxHealth.ToString();
+        this.energyLabel.text = player.energy.ToString() + "/" + player.maxEnergy.ToString();
         this.movementSpeedLabel.text = player.movementSpeed.ToString();
         this.pointsToAllocateLabel.text = player.statPointsToAllocate.ToString();
         this.staminaLabel.text = player.stamina.ToString();

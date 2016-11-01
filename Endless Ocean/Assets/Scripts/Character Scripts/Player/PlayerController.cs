@@ -335,6 +335,7 @@ public class PlayerController : CharacterSuper
     {
         // Level up
         statPointsToAllocate += 5;
+        health = maxHealth;
         int leftOverExperience = currentExperience - experienceToLevel;
         currentExperience = leftOverExperience;
         currentLevel += 1;
@@ -347,7 +348,7 @@ public class PlayerController : CharacterSuper
     public void updateHealth()
     {
         this.maxHealth = this.stamina * statIncrement;
-        this.health += statIncrement;
+        //this.health += statIncrement;
         expandBar(playerHealthBar, playerHealthBarBG, statIncrement, maxHealth);
         this.updateHealthBar();
     }
@@ -366,7 +367,7 @@ public class PlayerController : CharacterSuper
     public void updateEnergy()
     {
         this.maxEnergy = this.vigor * statIncrement;
-        this.energy += statIncrement;
+        //this.energy += statIncrement;
         expandBar(playerEnergyBar, playerEnergyBarBG, statIncrement, maxEnergy);
         this.updateEnergyBar();
     }
