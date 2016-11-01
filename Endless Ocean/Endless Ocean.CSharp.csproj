@@ -193,6 +193,7 @@
     <Compile Include="Assets\elevatorFirstLevel.cs" />
     <Compile Include="Assets\interactablePrompt.cs" />
     <Compile Include="Assets\interactablePromptToggle.cs" />
+    <Compile Include="Assets\reforgerRescue.cs" />
     <Compile Include="Assets\rotateShipTurbines.cs" />
     <Compile Include="Assets\zoomCameraCollider.cs" />
   </ItemGroup>

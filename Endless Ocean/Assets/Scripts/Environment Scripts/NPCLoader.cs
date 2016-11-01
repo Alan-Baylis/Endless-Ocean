@@ -17,9 +17,5 @@ public class NPCLoader : MonoBehaviour {
         {
             reforger.SetActive(true);
         }
-        else
-        {
-            reforger.SetActive(false);
-        }
 	}
 }

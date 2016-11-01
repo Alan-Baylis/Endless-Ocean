@@ -11,7 +11,7 @@ public class PlayerController : CharacterSuper
 
     public event WeaponSwapEventHandler weaponSwapped;
 
-    public bool reforgerSaved = false;
+    public bool reforgerSaved;
 
     // Player HUD elements FG
     public Image playerHealthBar;
@@ -78,7 +78,8 @@ public class PlayerController : CharacterSuper
     // Use this for initialization
     new void Start()
     {
-        
+
+        reforgerSaved = false;
 
         //Must initialize inventory like this so that items can be picked up from the start.
         if (!this.inventory.drawn)
