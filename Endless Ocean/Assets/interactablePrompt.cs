@@ -17,7 +17,7 @@ public class interactablePrompt : MonoBehaviour {
 
     public void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" || col.gameObject.CompareTag("PlayerShip"))
         {
             prompt.gameObject.SetActive(true);
         }
