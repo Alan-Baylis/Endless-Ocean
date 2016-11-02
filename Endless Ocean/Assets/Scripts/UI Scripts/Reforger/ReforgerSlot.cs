@@ -21,6 +21,10 @@ public class ReforgerSlot : Slot
 
     public AudioClip reforgeSound;
 
+    public Image reforgerEffectImage;
+    private float effectStartTime;
+    private Coroutine effectCoroutine;
+
     void Start()
     {
         this.item = new Item();
@@ -132,7 +136,12 @@ public class ReforgerSlot : Slot
             tempWeapon.itemIcon = tempWeapon.getQualityIcon();
             this.item = tempWeapon;
             player.totalTreasure -= reforgeCost;
-            AudioSource.PlayClipAtPoint(this.reforgeSound, this.transform.position, 3.5f);
+            AudioSource.PlayClipAtPoint(this.reforgeSound, this.transform.position, 14f);
+            if(effectCoroutine != null)
+            {
+                StopCoroutine(effectCoroutine);
+            }
+            effectCoroutine = StartCoroutine(flashReforgerEffectImage());
         }
         else
         {
@@ -147,5 +156,46 @@ public class ReforgerSlot : Slot
     {
         this.gameObject.transform.parent.gameObject.SetActive(false);
         this.shop.SetActive(true);
+    }
+
+    /// <summary>
+    /// Flahses the reforger image to give the user a visual queue when an item is reforged.
+    /// </summary>
+    /// <returns>WaitforSeconds to make execution of the function wait.</returns>
+    private IEnumerator flashReforgerEffectImage()
+    {
+        effectStartTime = Time.time;
+        reforgerEffectImage.gameObject.SetActive(true);
+        int direction = 1;
+        Color cHolder = reforgerEffectImage.color;
+        cHolder.a = 0;
+        while(effectStartTime + 3f > Time.time)
+        {
+            if(direction == 1)
+            {
+                Debug.Log("inc");
+                cHolder.a += .10f;
+                reforgerEffectImage.color = cHolder;
+                if(reforgerEffectImage.color.a > .90f)
+                {
+                    direction = -1;
+                }
+            }
+            else
+            {
+                Debug.Log("dec");
+                cHolder.a -= .10f;
+                reforgerEffectImage.color = cHolder;
+                if (reforgerEffectImage.color.a < .10f)
+                {
+                    direction = 1;
+                }
+            }
+            yield return new WaitForSeconds(.01f);
+        }
+        Color c = reforgerEffectImage.color;
+        c.a = 0;
+        reforgerEffectImage.color = c;
+        reforgerEffectImage.gameObject.SetActive(false);
     }
 }

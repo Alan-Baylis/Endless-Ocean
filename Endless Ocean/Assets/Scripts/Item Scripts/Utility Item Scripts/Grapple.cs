@@ -65,10 +65,8 @@ public class Grapple: MonoBehaviour
         this.ropeLineRenderer = this.gameObject.GetComponent<LineRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
         if (Input.GetMouseButtonDown(1) && isEnabled)
         {
             if (this.grappling || this.pulling)
@@ -113,10 +111,6 @@ public class Grapple: MonoBehaviour
         {
             this.retractRopeCoroutine = StartCoroutine(this.retractRope());
         }
-    }
-
-    void FixedUpdate()
-    {
         //Overriding player movement if rope is active.
         if (this.grappling)
         {
@@ -165,7 +159,7 @@ public class Grapple: MonoBehaviour
         this.drawRope(playerRigidbody.position, this.otherEnd);
         this.otherObject = raycastHitData.rigidbody;
         this.grappling = true;
-        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 4f);
+        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 6.5f);
     }
 
     /// <summary>
@@ -272,7 +266,7 @@ public class Grapple: MonoBehaviour
         //grappleJoint.axis = new Vector3(0, 0, 1);
         this.pulling = true;
         //return grappleJoint;
-        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 4f);
+        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 6.5f);
 
     }
 
@@ -350,7 +344,7 @@ public class Grapple: MonoBehaviour
     /// <returns></returns>
     private IEnumerator retractRope()
     {
-        AudioSource.PlayClipAtPoint(this.grappleRetractNoise, this.transform.position, 4f);
+        AudioSource.PlayClipAtPoint(this.grappleRetractNoise, this.transform.position, 6.5f);
         destroyRopeJoint();
         this.retractingRope = true;
         while (Vector3.Distance(this.otherEnd, this.transform.position) > .3f) {
