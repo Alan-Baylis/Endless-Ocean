@@ -132,7 +132,7 @@ public class ReforgerSlot : Slot
             tempWeapon.itemIcon = tempWeapon.getQualityIcon();
             this.item = tempWeapon;
             player.totalTreasure -= reforgeCost;
-            AudioSource.PlayClipAtPoint(this.reforgeSound, this.transform.position);
+            AudioSource.PlayClipAtPoint(this.reforgeSound, this.transform.position, 3.5f);
         }
         else
         {

@@ -35,7 +35,7 @@ public class elevatorFirstLevel : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.E))
             {
-                AudioSource.PlayClipAtPoint(this.buttonBeepSound, this.transform.position, 2f);
+                AudioSource.PlayClipAtPoint(this.buttonBeepSound, this.transform.position, 3.5f);
                 this.elevatorAudioSource.enabled = true;
                 triggered = true;
                 this.elevatorAC.SetBool("triggered", true);

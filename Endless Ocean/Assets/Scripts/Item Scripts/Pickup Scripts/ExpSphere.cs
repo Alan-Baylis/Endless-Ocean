@@ -30,7 +30,7 @@ public class ExpSphere : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if(Vector3.Distance(this.transform.position, player.gameObject.transform.position) < 5f)
+        if(Vector3.Distance(this.transform.position, player.gameObject.transform.position) < 20f)
         {
             Debug.Log("Close");
             this.gameObject.GetComponent<MoveTowardsObject>().objectToMoveTowards = this.player.gameObject;

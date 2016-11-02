@@ -206,7 +206,7 @@ public abstract class NPCBehaviour : CharacterSuper
         GameObject onDeathSpawner = Instantiate(Resources.Load("Prefabs/Pickups/OnDeathSpawner"), this.transform.position, Quaternion.identity) as GameObject;
         onDeathSpawner.GetComponent<OnDeathSpawner>().startItemSpawningCoroutines(this.maxHealth, this.itemPossibilites, this.itemDrops);
         Instantiate(Resources.Load("Prefabs/Explosions/explosion_enemy"), this.transform.position, Quaternion.identity);
-        AudioSource.PlayClipAtPoint(deathExplosion, this.transform.position);
+        AudioSource.PlayClipAtPoint(deathExplosion, this.transform.position, 2f);
     }
 
 

@@ -164,7 +164,7 @@ public class FloatyAI : EnemyAI
     /// <returns></returns>
     private IEnumerator attackCoroutine(Vector3 target)
     {
-        AudioSource.PlayClipAtPoint(this.floatyAttackNoise, this.transform.position);
+        AudioSource.PlayClipAtPoint(this.floatyAttackNoise, this.transform.position, 2f);
         this.attacking = true;
         float attackStartTime = Time.time;
         Vector3 targetPosition;
@@ -234,23 +234,24 @@ public class FloatyAI : EnemyAI
             this.flashing = true;
             Transform bodyTransform = this.gameObject.transform.Find("Body");
             MeshRenderer body = bodyTransform.gameObject.GetComponent<MeshRenderer>();
+            Material[] colorBackup = body.materials;
             for (int i = 0; i < 5; i++)
             {
                 if (i == 0)
                 {
-                    body.materials = new Material[] { body.materials[1], this.damageMaterial };
+                    body.materials = new Material[] { this.damageMaterial, this.damageMaterial };
                 }
                 else if (i % 2 == 0)
                 {
-                    body.materials = new Material[] { body.materials[1], this.damageMaterial };
+                    body.materials = new Material[] { colorBackup[0], colorBackup[1] };
                 }
                 else
                 {
-                    body.materials = new Material[] { body.materials[1], this.bodyMaterial };
+                    body.materials = new Material[] { this.damageMaterial, this.bodyMaterial };
                 }
                 yield return new WaitForSeconds(.15f);
             }
-            body.materials = new Material[] { body.materials[1], this.bodyMaterial };
+            body.materials = colorBackup;
             this.flashing = false;
         }
     }

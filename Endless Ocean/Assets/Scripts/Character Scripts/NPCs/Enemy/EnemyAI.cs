@@ -101,4 +101,38 @@ public class EnemyAI : NPCBehaviour
     {
         healthBar.fillAmount = (float)this.health / (float)this.maxHealth;
     }
+
+    /// <summary>
+    /// Flashes the character model red over several frames when the ytake damage.
+    /// </summary>
+    /// <returns>Return null. Is a co-routine so returns at the end of each frame.</returns>
+    protected override IEnumerator flashOnDamageTaken()
+    {
+        if (!flashing)
+        {
+            this.flashing = true;
+            //Initializing colors.
+            Transform bodyTransform = this.gameObject.transform.Find("Body");
+            SkinnedMeshRenderer body = bodyTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
+            Material[] colorBackup = body.materials;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 0)
+                {
+                    body.materials = new Material[] { this.damageMaterial };
+                }
+                else if (i % 2 == 0)
+                {
+                    body.materials = new Material[] { this.damageMaterial };
+                }
+                else
+                {
+                    body.materials = colorBackup;
+                }
+                yield return new WaitForSeconds(.15f);
+            }
+            body.materials = colorBackup;
+            this.flashing = false;
+        }
+    }
 }

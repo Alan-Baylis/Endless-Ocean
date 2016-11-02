@@ -310,12 +310,12 @@ public class PlayerController : CharacterSuper
                     if (randomInt == 0)
                     {
                         this.jumpNoiseBlocker = Time.time;
-                        AudioSource.PlayClipAtPoint(this.jumpSound1, this.transform.position);
+                        AudioSource.PlayClipAtPoint(this.jumpSound1, this.transform.position, 2f);
                     }
                     else
                     {
                         this.jumpNoiseBlocker = Time.time;
-                        AudioSource.PlayClipAtPoint(this.jumpSound2, this.transform.position);
+                        AudioSource.PlayClipAtPoint(this.jumpSound2, this.transform.position, 2f);
                     }
                 }
             }

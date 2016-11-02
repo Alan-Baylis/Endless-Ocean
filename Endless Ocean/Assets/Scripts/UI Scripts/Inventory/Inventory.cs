@@ -79,7 +79,7 @@ public class Inventory : PanelSuper {
         {
             for(int i = 0; i < this.items.Count; i++)
             {
-                if(item.itemName == (this.items[i].itemName))
+                if(this.items[i] != null && item.itemName == (this.items[i].itemName))
                 {
                     this.items[i].itemCount++;
                     Destroy(item.gameObject);
@@ -105,7 +105,7 @@ public class Inventory : PanelSuper {
         item.itemIcon = item.getQualityIcon();
         for (int i = 0; i < this.items.Count; i++)
         {
-            if(this.items[i].itemName == null)
+            if(this.items[i] == null || this.items[i].itemName == null)
             {
                 this.items[i] = item;
                 this.slots[i].GetComponent<InventorySlot>().item = item;

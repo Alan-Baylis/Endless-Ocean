@@ -33,7 +33,7 @@ public class Pistol : RangedWeapon  {
         bullet.GetComponent<Bullet>().damage = base.damage;
         bullet.GetComponent<Bullet>().knockBack = this.knockBack;
         bullet.transform.LookAt(target);
-        AudioSource.PlayClipAtPoint(Pistol.shotSound, this.transform.position);
+        AudioSource.PlayClipAtPoint(Pistol.shotSound, this.transform.position, 2f);
     }
 
     override public void reload()

@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "Player" && !col.isTrigger)
         {
             Instantiate(Resources.Load("Prefabs/Explosions/explosion_enemy"), this.transform.position, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(Bullet.impactSound, this.transform.position);
+            AudioSource.PlayClipAtPoint(Bullet.impactSound, this.transform.position, 2.5f);
             Destroy(this.gameObject);
         }
     }

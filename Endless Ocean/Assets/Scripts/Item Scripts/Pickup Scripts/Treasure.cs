@@ -22,7 +22,7 @@ public class Treasure : MonoBehaviour {
     /// </summary>
     void Update()
     {
-        if(Vector3.Distance(player.gameObject.transform.position, this.transform.position) < 6)
+        if(Vector3.Distance(player.gameObject.transform.position, this.transform.position) < 30)
         {
             this.gameObject.GetComponent<MoveTowardsObject>().enabled = true;
         }

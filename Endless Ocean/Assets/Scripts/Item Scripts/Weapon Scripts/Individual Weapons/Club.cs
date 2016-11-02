@@ -38,11 +38,11 @@ public class Club : MeleeWeapon {
         int soundChoice = random.Next(0, 2);
         if(soundChoice == 0)
         {
-            AudioSource.PlayClipAtPoint(meleeAttackSound1, this.transform.position);
+            AudioSource.PlayClipAtPoint(meleeAttackSound1, this.transform.position, 2f);
         }
         else
         {
-            AudioSource.PlayClipAtPoint(meleeAttackSound2, this.transform.position);
+            AudioSource.PlayClipAtPoint(meleeAttackSound2, this.transform.position, 2f);
         }
     }
 
