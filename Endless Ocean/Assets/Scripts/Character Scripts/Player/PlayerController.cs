@@ -408,6 +408,8 @@ public class PlayerController : CharacterSuper
     public override void die()
     {
         GameOver.previousLevel = Application.loadedLevelName;
+        health = maxHealth;
+        updateHealthBar();
         SceneManager.LoadScene("Game Over");
         //transform.position = Vector3.zero;
     }
