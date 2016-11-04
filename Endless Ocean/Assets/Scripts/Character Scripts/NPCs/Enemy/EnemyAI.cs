@@ -65,16 +65,17 @@ public class EnemyAI : NPCBehaviour
         {
             makeActionDecision();
         }
-        else if (!patrolling)
+        else if (!patrolling && !pathing)
         {
             moveCharacter(0);
         }
-        else
+        else if (pathing)
         {
-            if (patrolling)
-            {
-                patrol();
-            }
+            pathToLocation(pathLocationObjective);
+        }
+        else if (patrolling) //MUST BE THE LAST OPTION
+        {
+            patrol();
         }
     }
 

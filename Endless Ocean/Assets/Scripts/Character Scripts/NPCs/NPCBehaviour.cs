@@ -27,6 +27,9 @@ public abstract class NPCBehaviour : CharacterSuper
     protected List<Vector3> patrolLocations = new List<Vector3>();
     private int currentPatrolObjective;
 
+    protected Vector3 pathLocationObjective;
+    protected bool pathing;
+
     //wall and drop avoidance
     [SerializeField]
     protected Transform wallCheck;
@@ -93,11 +96,17 @@ public abstract class NPCBehaviour : CharacterSuper
 
     protected virtual void pathToLocation(Vector3 destination)
     {
+        pathing = true;
+        pathLocationObjective = destination;
         //get direction of travel
         float direction = 0;
-        if (rigidbody.position.x > destination.x)
+        if (Math.Abs(Vector3.Distance(transform.position, pathLocationObjective)) < movementSpeed)
         {
-            direction = -1;
+            pathing = false;
+        }
+        else if (rigidbody.position.x > pathLocationObjective.x)
+        {
+             direction = -1;
         }
         else
         {
@@ -176,7 +185,6 @@ public abstract class NPCBehaviour : CharacterSuper
     protected override void takeDamage(int damage, Vector3 source, int knockBack)
     {
         base.takeDamage(damage, source, knockBack);
-        patrolling = false;
         pathToLocation(source); //only takes a step at the moment
     }
 
