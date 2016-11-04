@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// 
 /// It contains references to the users quick items and has the functionality for using/removing quick items.
 /// </summary>
-public class QuickItemsPanel : MonoBehaviour {
+public class QuickItemsBar : MonoBehaviour {
 
     public Inventory inventory;
 
@@ -39,7 +39,7 @@ public class QuickItemsPanel : MonoBehaviour {
 
             //Making slot child of parent canvas.
             instantiatedSlot.transform.parent = this.gameObject.transform;
-            instantiatedSlot.GetComponent<RectTransform>().localPosition = new Vector3(QuickItemsPanel.X_STARTING_POSITION + (i * QuickItemsPanel.INCREMENT), 0, 0);
+            instantiatedSlot.GetComponent<RectTransform>().localPosition = new Vector3(QuickItemsBar.X_STARTING_POSITION + (i * QuickItemsBar.INCREMENT), 0, 0);
             slots.Add(instantiatedSlot.GetComponent<QuickItemSlot>());
         }
 	}

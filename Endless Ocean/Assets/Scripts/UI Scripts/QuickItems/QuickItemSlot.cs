@@ -11,7 +11,7 @@ public class QuickItemSlot : Slot
 {
 
     private Text itemCount;
-    public QuickItemsPanel quickItemsPanel;
+    public QuickItemsBar quickItemsPanel;
     public int slotNumber;
 
     /// <summary>
@@ -110,7 +110,7 @@ public class QuickItemSlot : Slot
     /// </summary>
     void Start()
     {
-        this.quickItemsPanel = GameObject.FindWithTag("QuickItemsPanel").GetComponent<QuickItemsPanel>();
+        this.quickItemsPanel = GameObject.FindWithTag("QuickItemsPanel").GetComponent<QuickItemsBar>();
         this.itemCount = this.gameObject.transform.GetChild(1).GetComponent<Text>();
         this.itemImage = this.GetComponentsInChildren<Image>()[1];
     }

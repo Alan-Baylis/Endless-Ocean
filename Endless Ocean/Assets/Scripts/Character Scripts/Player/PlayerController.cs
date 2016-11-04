@@ -33,7 +33,7 @@ public class PlayerController : CharacterSuper
     //Reference to the inventory script.
     public Inventory inventory;
     //Reference to the quickItemsPanel.
-    public QuickItemsPanel quickItemsPanel;
+    public QuickItemsBar quickItemsPanel;
 
     // ENERGY RELATED VARIABLES
     public int energy;

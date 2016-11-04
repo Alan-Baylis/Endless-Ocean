@@ -81,8 +81,7 @@ public class Inventory : PanelSuper {
             {
                 if(this.items[i] != null && item.itemName == (this.items[i].itemName))
                 {
-                    this.items[i].itemCount++;
-                    Destroy(item.gameObject);
+                    stackItemInSpecifiedSlot(i, item);
                     return true;
                 }
             }
@@ -107,10 +106,7 @@ public class Inventory : PanelSuper {
         {
             if(this.items[i] == null || this.items[i].itemName == null)
             {
-                this.items[i] = item;
-                this.slots[i].GetComponent<InventorySlot>().item = item;
-                item.gameObject.SetActive(false);
-                item.gameObject.transform.parent = this.gameObject.transform;
+                addItemInSpecifiedSlot(i, item);
                 return true;
             }
         }

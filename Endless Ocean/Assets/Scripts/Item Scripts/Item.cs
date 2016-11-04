@@ -130,14 +130,17 @@ public class Item : MonoBehaviour
 
     protected virtual void Start()
     {
-        this.tooltip = Instantiate(Resources.Load("Prefabs/UI/ItemTooltip"), new Vector3(), Quaternion.identity) as GameObject;
-        this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
-        this.tooltip.transform.GetChild(0).GetComponent<Text>().color = getQualityColour();
-        this.itemIcon = getQualityIcon();
+        if (tooltip == null)
+        {
+            this.tooltip = Instantiate(Resources.Load("Prefabs/UI/ItemTooltip"), new Vector3(), Quaternion.identity) as GameObject;
+            this.tooltip.transform.GetChild(0).GetComponent<Text>().text = this.itemName;
+            this.tooltip.transform.GetChild(0).GetComponent<Text>().color = getQualityColour();
+            this.itemIcon = getQualityIcon();
 
-        this.tooltip.transform.parent = this.gameObject.transform;
-        this.tooltip.SetActive(false);
-        //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+            this.tooltip.transform.parent = this.gameObject.transform;
+            this.tooltip.SetActive(false);
+            //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+        }
     }
 
     protected virtual void Update()
