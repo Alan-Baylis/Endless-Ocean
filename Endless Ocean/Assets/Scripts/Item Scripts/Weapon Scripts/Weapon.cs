@@ -147,7 +147,7 @@ public abstract class Weapon: Item{
 
     public float getStun()
     {
-        return stun + (knockBack * 0.1f);
+        return stun;
     }
 
     public int getKnockBack()

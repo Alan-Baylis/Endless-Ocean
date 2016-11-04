@@ -98,6 +98,12 @@ public class EnemyAI : NPCBehaviour
         }
     }
 
+    protected override void takeDamage(int damage, Vector3 source, int knockBack)
+    {
+        base.takeDamage(damage, source, knockBack);
+        pathToLocation(target.position); //only takes a step at the moment
+    }
+
     protected override void updateHealthBar()
     {
         healthBar.fillAmount = (float)this.health / (float)this.maxHealth;

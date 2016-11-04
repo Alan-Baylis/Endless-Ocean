@@ -185,7 +185,6 @@ public abstract class NPCBehaviour : CharacterSuper
     protected override void takeDamage(int damage, Vector3 source, int knockBack)
     {
         base.takeDamage(damage, source, knockBack);
-        pathToLocation(source); //only takes a step at the moment
     }
 
     protected virtual void attackTarget(Transform target)
