@@ -10,16 +10,15 @@ using System;
 /// 2. it cam be used to pull objects towards the player. This does not affect the players movement all.
 /// 
 /// </summary>
-public class Grapple: MonoBehaviour
+public class Grapple : MonoBehaviour
 {
     public bool isEnabled;
 
     float lastFire;
     float grappleReloadSpeed;
 
-    //Layer masks for the uses of the grappling hook.
+    //Layer mask for the uses of the grappling hook.
     public LayerMask grappleMask;
-    public LayerMask pullMask;
     //Bools indicating what the grapple is doing.
     public bool grappling = false;
     public bool pulling = false;
@@ -29,7 +28,7 @@ public class Grapple: MonoBehaviour
     public Vector3 otherEnd;
     //A reference to the other object the grapple is attatched to.
     private Rigidbody otherObject;
-    
+
 
     //Vars for the grapplong ROPE.
     private ConfigurableJoint grappleJoint;
@@ -84,26 +83,24 @@ public class Grapple: MonoBehaviour
                 //Check if can grapple.
                 RaycastHit grappleRaycastHitData;
                 bool canGrapple = Physics.Raycast(playerRigidbody.position, Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates() - playerRigidbody.position, out grappleRaycastHitData, 15f, grappleMask);
+                if (grappleRaycastHitData.collider == null)
+                {
+                    this.createMissRope(Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates());
+                }
                 //Grapple if possible.
-                if (canGrapple)
+                else if (grappleRaycastHitData.collider.gameObject.layer == LayerMask.NameToLayer("GrappleAllowedTerrain"))
                 {
                     this.createGrapplingRope(grappleRaycastHitData);
                 }
+                //Pull if possible.
+                else if (grappleRaycastHitData.collider.gameObject.layer == LayerMask.NameToLayer("PullableObjects"))
+                {
+                    this.creatingPullingRope(playerRigidbody, grappleRaycastHitData.rigidbody, grappleRaycastHitData.point);
+                }
+                //If hit objects cant grapple with.
                 else
                 {
-                    //Else check if can pull.
-                    RaycastHit pullingRaycastHitData = new RaycastHit();
-                    bool canPull = Physics.Raycast(playerRigidbody.position, Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates() - playerRigidbody.position, out pullingRaycastHitData, 7f, pullMask);
-                    //Pull if possible.
-                    if (canPull)
-                    {
-                        this.creatingPullingRope(playerRigidbody, pullingRaycastHitData.rigidbody, pullingRaycastHitData.point);
-                    }
-                    //Else throw out rope and miss.
-                    else
-                    {
-                        this.createMissRope(Camera.main.GetComponent<CameraController>().getMouseLocationInWorldCoordinates());
-                    }
+                    this.createMissRope(grappleRaycastHitData.point);
                 }
             }
         }
@@ -129,7 +126,7 @@ public class Grapple: MonoBehaviour
     /// </summary>
     void LateUpdate()
     {
-        if (this.grappling )
+        if (this.grappling)
         {
             this.drawRope(this.gameObject.transform.position, this.otherEnd);
         }
@@ -292,8 +289,8 @@ public class Grapple: MonoBehaviour
         //If user clicked further than rope length shrink it.
         if (distance > Grapple.MAX_ROPE_LENGTH)
         {
-            float xGradient = (clickLocation.x - this.transform.position.x)/ distance;
-            float yGradient = (clickLocation.y - this.transform.position.y)/ distance;
+            float xGradient = (clickLocation.x - this.transform.position.x) / distance;
+            float yGradient = (clickLocation.y - this.transform.position.y) / distance;
 
             float xPosition = xGradient * Grapple.MAX_ROPE_LENGTH;
             float yPosition = yGradient * Grapple.MAX_ROPE_LENGTH;
@@ -347,7 +344,8 @@ public class Grapple: MonoBehaviour
         AudioSource.PlayClipAtPoint(this.grappleRetractNoise, this.transform.position, 6.5f);
         destroyRopeJoint();
         this.retractingRope = true;
-        while (Vector3.Distance(this.otherEnd, this.transform.position) > .3f) {
+        while (Vector3.Distance(this.otherEnd, this.transform.position) > .3f)
+        {
             this.otherEnd = Vector3.MoveTowards(this.otherEnd, this.gameObject.transform.position, .5f);
             yield return new WaitForSeconds(.025f);
         }
@@ -358,9 +356,11 @@ public class Grapple: MonoBehaviour
     /// <summary>
     /// Retracts the rope immeditialey when the player wants to fire it while still retracting it from their last fire.
     /// </summary>
-    private void retractRopeImmediately()
+    public void retractRopeImmediately()
     {
         ropeLineRenderer.SetVertexCount(0);
         this.retractingRope = false;
+        this.pulling = false;
+        this.grappling = false;
     }
 }

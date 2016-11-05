@@ -189,6 +189,7 @@ public class PlayerController : CharacterSuper
 
         if (this.health <= 0)
         {
+            grapple.retractRopeImmediately();
             die();
         }
         // dodge
