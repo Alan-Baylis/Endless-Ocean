@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public abstract class NPCBehaviour : CharacterSuper
 {
     public AudioClip deathExplosion;
-
+    
+    //Drops
     [SerializeField]
     private String[] itemDrops = {"Prefabs/Consumables/TestPotion"};
     [SerializeField]
@@ -19,6 +20,9 @@ public abstract class NPCBehaviour : CharacterSuper
     [SerializeField]
     private int maxAmountOfAmmo; //is this required?
 
+    //Pathing and Patrolling
+    [SerializeField]
+    public bool active;
 
     [SerializeField]
     protected bool patrolling;
@@ -94,7 +98,7 @@ public abstract class NPCBehaviour : CharacterSuper
         pathToLocation(locations[currentPatrolObjective]);
     }
 
-    protected virtual void pathToLocation(Vector3 destination)
+    public virtual void pathToLocation(Vector3 destination)
     {
         pathing = true;
         pathLocationObjective = destination;
@@ -218,7 +222,7 @@ public abstract class NPCBehaviour : CharacterSuper
 
 
     //Draws the patrol Path
-    void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if (patrolLocales != null && patrolLocales.Length > 1)
         {
@@ -243,5 +247,15 @@ public abstract class NPCBehaviour : CharacterSuper
             }
 
         }
+    }
+
+    public virtual void activate()
+    {
+        active = true;
+    }
+
+    public virtual void deactivate()
+    {
+        active = false;
     }
 }

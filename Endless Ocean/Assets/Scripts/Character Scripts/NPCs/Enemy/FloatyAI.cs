@@ -130,7 +130,7 @@ public class FloatyAI : EnemyAI
     }
 
     //This is the method used for moving the enemy from current location to a set destination - overrides from NPCBehaviour
-    protected override void pathToLocation(Vector3 destination)
+    public override void pathToLocation(Vector3 destination)
     {
         float horizontalDirection = 0;
         float verticalDirection = 0;

@@ -82,19 +82,22 @@ public class EnemyAI : NPCBehaviour
     protected virtual void makeActionDecision()
     {
         //Decide on an action
-        if (Vector3.Distance(transform.position, target.position) < shortestRange)
+        if (active)
         {
-            swapWeapons(shortRangeWeapon);
-            attackTarget(target);
-        }
-        else if (Vector3.Distance(transform.position, target.position) < longestRange)
-        {
-            swapWeapons(longRangeWeapon);
-            attackTarget(target);
-        }
-        else
-        {
-            pathToLocation(target.position);
+            if (Vector3.Distance(transform.position, target.position) < shortestRange)
+            {
+                swapWeapons(shortRangeWeapon);
+                attackTarget(target);
+            }
+            else if (Vector3.Distance(transform.position, target.position) < longestRange)
+            {
+                swapWeapons(longRangeWeapon);
+                attackTarget(target);
+            }
+            else
+            {
+                pathToLocation(target.position);
+            }
         }
     }
 
@@ -102,6 +105,7 @@ public class EnemyAI : NPCBehaviour
     {
         base.takeDamage(damage, source, knockBack);
         pathToLocation(target.position); //only takes a step at the moment
+        active = true;
     }
 
     protected override void updateHealthBar()
