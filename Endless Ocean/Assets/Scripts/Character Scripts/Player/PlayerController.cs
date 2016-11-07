@@ -355,6 +355,7 @@ public class PlayerController : CharacterSuper
         this.updateHealthBar();
     }
 
+    // Update dimensions of health or energy bars to reflect new changes
     public void expandBar(Image statBar, Image statBarBG, int valueAdded, int maxStat)
     {
 
