@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-public class GameOver : MonoBehaviour {
+public class GameOver : MonoBehaviour{
 
     public static string previousLevel;
 
@@ -9,15 +9,16 @@ public class GameOver : MonoBehaviour {
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().maxHealth;
         GameObject.FindGameObjectWithTag("Player").SetActive(false);
+        PreserveAcrossLevels.playerGuiInstance.transform.GetChild(1).gameObject.SetActive(false);
     }
 
-    public void restartGame ()
+    public void restartGame()
     {
         SceneManager.LoadScene(previousLevel);
         transform.position = Vector3.zero;
     }
 
-    public void quit ()
+    public void quit()
     {
         SceneManager.LoadScene("Menu");
 

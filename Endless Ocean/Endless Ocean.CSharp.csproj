@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\Character Scripts\NPCs\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\NPCs\Enemy\FloatyAI.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\NPCs\NPCBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Character Scripts\NPCs\ScriptedNPCActionCollider.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\NPCs\ShopNPC.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\BarrelSpawner.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Assets\TutorialMovementScript.cs" />
     <Compile Include="Assets\Water Flow FREE\Scripts\WaterFlowFREEDemo.cs" />
     <Compile Include="Assets\activateMovementTutorial.cs" />
+    <Compile Include="Assets\coreRotate.cs" />
     <Compile Include="Assets\elevatorFirstLevel.cs" />
     <Compile Include="Assets\interactablePrompt.cs" />
     <Compile Include="Assets\interactablePromptToggle.cs" />

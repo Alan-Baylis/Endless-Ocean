@@ -66,7 +66,7 @@ public class PlayerController : CharacterSuper
     int dodgeSpeed = 25;
 
     // is the player wearing exo?
-    bool hasExo;
+    public bool hasExo;
 
     public AudioClip jumpSound1;
     public AudioClip jumpSound2;

@@ -9,13 +9,13 @@ public class getExo : MonoBehaviour {
     public string[] dialogueLines;
     public string speakerName;
     bool spokenTo = false;
-    public GameObject player;
-    public Image blackLayer;
+    FadeEffect blackLayer;
 
     // Use this for initialization
     void Start()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
+        blackLayer = FindObjectOfType<FadeEffect>();
     }
 
     // Update is called once per frame
@@ -34,14 +34,14 @@ public class getExo : MonoBehaviour {
                     dialogueManager.showDialogue(this.speakerName, this.dialogueLines,0.0f);
                     spokenTo = true;
 
-                    blackLayer.GetComponent<FadeEffect>().fadeOutBool = true;
+                    blackLayer.fadeOutBool = true;
                 }
 
                 }
 
-            if (spokenTo == true && blackLayer.GetComponent<FadeEffect>().fadeOutBool == false)
+            if (spokenTo == true && blackLayer.fadeOutBool == false)
             {
-                player.GetComponent<PlayerController>().setModel(1);
+                PreserveAcrossLevels.playerInstance.GetComponent<PlayerController>().setModel(1);
                 this.gameObject.SetActive(false);
             }
 
