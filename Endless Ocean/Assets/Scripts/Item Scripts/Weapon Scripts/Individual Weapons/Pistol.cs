@@ -5,15 +5,12 @@ using System.Collections;
 /// </summary>
 public class Pistol : RangedWeapon  {
 
-    static public AudioClip shotSound;
+    public AudioClip shotSound;
 
     static public string modelPathLocal = "Prefabs/Weapons/HandgunFBX";
 
     protected override void Start()
     {
-        if (shotSound == null) {
-            shotSound = Resources.Load("Sounds/Pistol Shot") as AudioClip;
-        }
         base.Start();
         base.weaponAttackSpeed = 0.5f;
         base.projectileSpeed = 30f;
@@ -33,7 +30,7 @@ public class Pistol : RangedWeapon  {
         bullet.GetComponent<Bullet>().damage = base.damage;
         bullet.GetComponent<Bullet>().knockBack = this.knockBack;
         bullet.transform.LookAt(target);
-        AudioSource.PlayClipAtPoint(Pistol.shotSound, this.transform.position, 2f);
+        AudioSource.PlayClipAtPoint(this.shotSound, this.transform.position, 2f);
     }
 
     override public void reload()

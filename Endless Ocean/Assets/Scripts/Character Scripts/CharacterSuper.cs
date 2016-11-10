@@ -327,47 +327,59 @@ public abstract class CharacterSuper : MonoBehaviour
         // If the thing hitting the character is a projectile
         else if (col.gameObject.tag == fears + "Projectile")
         {
-            Bullet collidingBullet = col.gameObject.GetComponent<Bullet>();
-            if (collidingBullet != null)
+            if (!flashing)
             {
-                int damage = collidingBullet.getDamage();
-                int knockBack = collidingBullet.getKnockBack();
-                float stun = collidingBullet.getStun();
+                Bullet collidingBullet = col.gameObject.GetComponent<Bullet>();
+                if (collidingBullet != null)
+                {
+                    int damage = collidingBullet.getDamage();
+                    int knockBack = collidingBullet.getKnockBack();
+                    float stun = collidingBullet.getStun();
 
-                this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
-                recoveryTimer = stun;
-            }
-            if (col.gameObject.GetComponent<Bullet>() != null)
-            {
-                Destroy(col.gameObject.GetComponentInParent<Rigidbody>().gameObject);
-            }
-            else if (col.gameObject.GetComponent<FloatyAI>() != null)
-            {
-                int damage = col.gameObject.GetComponent<FloatyAI>().attack;
-                int knockBack = col.gameObject.GetComponent<FloatyAI>().knockBack;
-                float stun = col.gameObject.GetComponent<FloatyAI>().stun;
+                    this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+                    recoveryTimer = stun;
+                }
+                if (col.gameObject.GetComponent<Bullet>() != null)
+                {
+                    Destroy(col.gameObject.GetComponentInParent<Rigidbody>().gameObject);
+                }
+                else if (col.gameObject.GetComponent<FloatyAI>() != null)
+                {
+                    int damage = col.gameObject.GetComponent<FloatyAI>().attack;
+                    int knockBack = col.gameObject.GetComponent<FloatyAI>().knockBack;
+                    float stun = col.gameObject.GetComponent<FloatyAI>().stun;
 
-                this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
-                recoveryTimer = stun;
+                    this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+                    recoveryTimer = stun;
+                }
+            }
+            if (flashing)
+            {
+                if (col.gameObject.GetComponent<Bullet>() != null)
+                {
+                    Destroy(col.gameObject.GetComponentInParent<Rigidbody>().gameObject);
+                }
             }
         }
         // When character is hit with an enemy weapon
         else if (col.gameObject.tag == fears + "Weapon")
         {
-            int damage = col.transform.parent.gameObject.GetComponent<Weapon>().getDamage() + col.transform.root.GetComponent<CharacterSuper>().attack;
-            float stun = col.transform.parent.gameObject.GetComponent<Weapon>().getStun();
-            int knockBack = col.transform.parent.gameObject.GetComponent<Weapon>().getKnockBack();
-            bool collisionHandled = col.transform.parent.gameObject.GetComponent<Weapon>().collisonHandled;
-
-
-            if (animController.GetCurrentAnimatorStateInfo(1).IsName("Melee Attack") && !collisionHandled)
+            if (!flashing)
             {
-                this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
-                recoveryTimer = stun;
+                int damage = col.transform.parent.gameObject.GetComponent<Weapon>().getDamage() + col.transform.root.GetComponent<CharacterSuper>().attack;
+                float stun = col.transform.parent.gameObject.GetComponent<Weapon>().getStun();
+                int knockBack = col.transform.parent.gameObject.GetComponent<Weapon>().getKnockBack();
+                bool collisionHandled = col.transform.parent.gameObject.GetComponent<Weapon>().collisonHandled;
 
-                col.transform.parent.gameObject.GetComponent<Weapon>().collisonHandled = true;
+
+                if (animController.GetCurrentAnimatorStateInfo(1).IsName("Melee Attack") && !collisionHandled)
+                {
+                    this.takeDamage(damage, col.gameObject.GetComponentInParent<Rigidbody>().position, knockBack);
+                    recoveryTimer = stun;
+
+                    col.transform.parent.gameObject.GetComponent<Weapon>().collisonHandled = true;
+                }
             }
-
         }
         updateHealthBar();
     }

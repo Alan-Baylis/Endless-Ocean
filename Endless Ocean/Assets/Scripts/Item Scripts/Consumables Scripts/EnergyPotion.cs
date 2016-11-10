@@ -14,7 +14,8 @@ public class EnergyPotion : Consumable
     public override void use(PlayerController player)
     {
         player.energy += player.maxEnergy / 3;
-        Mathf.Clamp(player.energy, 0, player.maxEnergy);
+        player.energy = Mathf.Clamp(player.energy, 0, player.maxEnergy);
+        player.updateEnergy();
     }
 
 }

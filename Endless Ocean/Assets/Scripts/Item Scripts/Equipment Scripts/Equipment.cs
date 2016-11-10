@@ -67,7 +67,7 @@ public class Equipment : Item
             quality = ItemQuality.Godly;
         }
         if((quality != ItemQuality.Crude ) && (quality != ItemQuality.Basic)){
-            this.generateBonuses((qualityInt * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel) / 80);
+            this.generateBonuses((qualityInt * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel) / 320);
         }
     }
 

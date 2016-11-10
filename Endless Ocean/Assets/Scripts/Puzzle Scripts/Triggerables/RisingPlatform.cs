@@ -46,7 +46,6 @@ public class RisingPlatform : PuzzleObject  {
     {
         destination = dest;
         direction = (destination.position - platform.position).normalized;
-
         this.risingPlatformAudioSource.enabled = true;
     }
 

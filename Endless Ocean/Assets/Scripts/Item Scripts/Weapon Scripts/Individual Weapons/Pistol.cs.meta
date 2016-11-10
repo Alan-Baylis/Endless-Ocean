@@ -1,11 +1,18 @@
 fileFormatVersion: 2
 guid: 7dc0aa0285bec4a4aad284cfe94169b4
-timeCreated: 1472264698
+timeCreated: 1478734213
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - tooltip: {instanceID: 0}
   - itemIcon: {fileID: 21300000, guid: f68e1384dd8c0f346a42000f471f53b8, type: 3}
+  - itemIconCrude: {instanceID: 0}
+  - itemIconBasic: {instanceID: 0}
+  - itemIconImproved: {instanceID: 0}
+  - itemIconLegendary: {instanceID: 0}
+  - itemIconGodly: {instanceID: 0}
+  - shotSound: {fileID: 8300000, guid: 97af7fb175047784f9e630397e8d3fd1, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -14,7 +14,8 @@ public class HealthPotion : Consumable
     public override void use(PlayerController player)
     {
         player.health += player.maxHealth / 3;
-        Mathf.Clamp(player.health, 0, player.maxHealth);
+        player.health = Mathf.Clamp(player.health, 0, player.maxHealth);
+        player.updateHealth();
     }
 
 }
