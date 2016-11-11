@@ -75,6 +75,10 @@ public class PlayerController : CharacterSuper
 
     private int statIncrement = 10;
 
+    //Backup materials for flashing character;
+    Material[] materialsBackup;
+
+
     // Use this for initialization
     new void Start()
     {
@@ -144,6 +148,12 @@ public class PlayerController : CharacterSuper
 
         // Energy regeneration, invoke repeating method
         InvokeRepeating("RegenEnergy", energyRegenSpeed, energyRegenSpeed);
+
+        //Fixing bug that made player respawn red if they died red.
+        if(materialsBackup != null)
+        {
+            GetComponent<SkinnedMeshRenderer>().materials = materialsBackup;
+        }
 
     }
 
@@ -513,7 +523,7 @@ public class PlayerController : CharacterSuper
             if (this.hasExo)
             {
                 body = this.transform.Find("Exo").GetComponent<SkinnedMeshRenderer>();
-                Material[] materialsBackup = body.materials;
+                materialsBackup = body.materials;
                 for (int i = 0; i < 5; i++)
                 {
                     if (i == 0)

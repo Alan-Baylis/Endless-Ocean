@@ -161,7 +161,7 @@ public class Grapple : MonoBehaviour
         this.drawRope(playerRigidbody.position, this.otherEnd);
         this.otherObject = raycastHitData.rigidbody;
         this.grappling = true;
-        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 6.5f);
+        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 9.5f);
     }
 
     /// <summary>
@@ -245,7 +245,7 @@ public class Grapple : MonoBehaviour
         this.otherObject = secondRigidbody;
         this.otherEnd = secondRigidbody.position;
         this.pulling = true;
-        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 6.5f);
+        AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 9.5f);
     }
 
     /// <summary>
@@ -322,7 +322,7 @@ public class Grapple : MonoBehaviour
     /// <returns></returns>
     private IEnumerator retractRope()
     {
-        AudioSource.PlayClipAtPoint(this.grappleRetractNoise, this.transform.position, 6.5f);
+        AudioSource.PlayClipAtPoint(this.grappleRetractNoise, this.transform.position, 9.5f);
         destroyRopeJoint();
         this.retractingRope = true;
         while (Vector3.Distance(this.otherEnd, this.transform.position) > .3f)
