@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// This class destory's the obejct after the specfied time.
+/// This class destroys the object after the specified time.
 /// </summary>
 public class DestroyAfterSeconds : MonoBehaviour
 {

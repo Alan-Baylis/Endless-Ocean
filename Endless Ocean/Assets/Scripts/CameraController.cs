@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// This class controls the camera in the game. It ensures the camera follows the player.
+/// </summary>
 public class CameraController : MonoBehaviour {
 
     private Transform target;
@@ -9,20 +11,25 @@ public class CameraController : MonoBehaviour {
     public bool followPlayer;
 
 
-	// Use this for initialization
+	/// <summary>
+    /// Runs the first time the camera controller is intialized, before it starts. Initialzes key variables.
+    /// </summary>
 	void Awake () {
         this.target = PreserveAcrossLevels.playerInstance.gameObject.transform;
         this.followPlayer = true;
 	}
-	
-	// Update is called once per frame
+
+
+    /// <summary>
+    /// Runs each fixed update. Makes the camera follow the player.
+    /// </summary>    	
 	void FixedUpdate () {
         if (followPlayer)
         {
             Vector3 targetCameraPosition = target.position + offset;
             this.transform.position = Vector3.Lerp(transform.position, targetCameraPosition, smoothing * Time.deltaTime);
         }
-        }
+    }
 
     //HELPER FUNCTIONS
     /// <summary>
