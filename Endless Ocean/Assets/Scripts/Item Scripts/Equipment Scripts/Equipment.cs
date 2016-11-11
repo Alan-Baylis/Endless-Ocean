@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Super class for equipment. Defines the base functionality and varaibles for pieces of equipment.
+/// </summary>
 public class Equipment : Item
 {
 
     //The body part this equipment is for.
     public Bodypart bodypart;
 
+    //The bonus stats the equipment provides.
     public int vigorBonus;
     public int staminaBonus;
     public int moveSpeedBonus;
@@ -16,7 +20,9 @@ public class Equipment : Item
 
     protected int qualityInt;
 
-    //Changing buy and sell values based off item quality.
+    /// <summary>
+    /// Changing buy value based off item quality.
+    /// </summary>
     public override int buyValue
     {
         get
@@ -25,6 +31,9 @@ public class Equipment : Item
         }
     }
 
+    /// <summary>
+    /// Changing sell value based off item quality
+    /// </summary>
     public override int sellValue
     {
         get
@@ -33,14 +42,14 @@ public class Equipment : Item
         }
     }
 
+    /// <summary>
+    /// Randomly generates the quiclity of the equipment then sets it's stats.
+    /// </summary>
+    /// <param name="luck">The luck modifier of the character getting the equipment.</param>
     public void setQualityAndAttributes(float luck)
     {
         qualityInt = Random.Range(1, 100);
         qualityInt = (int)(qualityInt * luck);
-        //if (quality != ItemQuality.NULL)
-        //{
-        //    qualityInt = (int)quality;
-        //}
         if (qualityInt <= (int)ItemQuality.Crude)
         {
             qualityModifier = 0.5f;
@@ -108,12 +117,6 @@ public class Equipment : Item
     public virtual int getDefense()
     {
         return (qualityInt);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        base.Update();
     }
 }
 

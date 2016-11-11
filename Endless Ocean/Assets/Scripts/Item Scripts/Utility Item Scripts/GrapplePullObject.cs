@@ -11,11 +11,6 @@ public class GrapplePullObject : MonoBehaviour {
     public bool moveInYAxis = false;
     private Rigidbody playerRigidbody;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-
     /// <summary>
     /// Initalizes key varialbes for the class as mono behaviour classes cannot have constructors.
     /// </summary>

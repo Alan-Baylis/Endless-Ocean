@@ -138,7 +138,6 @@
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\Boots.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\ChestPiece.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\Equipment.cs" />
-    <Compile Include="Assets\Scripts\Item Scripts\Equipment Scripts\TestHelmet.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\ItemSpawner.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\Ammo.cs" />
@@ -152,7 +151,6 @@
     <Compile Include="Assets\Scripts\Item Scripts\Pickup Scripts\TreasureTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\Grapple.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\GrapplePullObject.cs" />
-    <Compile Include="Assets\Scripts\Item Scripts\Utility Item Scripts\UtilityItem.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\Individual Weapons\Club.cs" />
     <Compile Include="Assets\Scripts\Item Scripts\Weapon Scripts\Individual Weapons\PeaShooter.cs" />

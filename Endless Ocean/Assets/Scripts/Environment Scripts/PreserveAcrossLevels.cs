@@ -5,7 +5,9 @@ using System.Collections;
 /// </summary>
 public class PreserveAcrossLevels : MonoBehaviour {
 
+    //Reference to the player that is preserved across levels. 
     public static PreserveAcrossLevels playerInstance;
+    //Reference to the GUI that is preserved across levels.
     public static PreserveAcrossLevels playerGuiInstance;
 
     /// <summary>

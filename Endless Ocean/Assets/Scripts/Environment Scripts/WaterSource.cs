@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Class for water source particle systems.
 /// 
-/// All this class does is start the water rising when its particle collide with a body of water.
+/// All this class does is start the water rising when its particles collide with a body of water.
 /// </summary>
 public class WaterSource : MonoBehaviour {
 

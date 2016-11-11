@@ -8,7 +8,7 @@ public class Boots : Equipment
 {
 
     /// <summary>
-    /// Generates bonus stats for chest pieces. Only vigor and stamina.
+    /// Generates bonus stats for boots pieces. Only vigor and speed.
     /// </summary>
     /// <param name="bonusPoints">The number of points to spend on stats.</param>
     protected new void generateBonuses(int bonusPoints)
@@ -30,9 +30,9 @@ public class Boots : Equipment
     }
 
     /// <summary>
-    /// Returns the chest pieces defense.
+    /// Returns the boots defense.
     /// </summary>
-    /// <returns>The chest pieces defense.</returns>
+    /// <returns>The boots pieces defense.</returns>
     public new int getDefense()
     {
         return (((int)this.qualityInt / 24) * GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().currentLevel);

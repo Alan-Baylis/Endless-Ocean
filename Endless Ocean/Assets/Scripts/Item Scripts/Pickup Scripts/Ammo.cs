@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 /// <summary>
-/// The ammo pickups have two colliders to make them collide with everything but they player but still register collisions with the player.
+/// The ammo pickups have two colliders to make them collide with everything but the player but still register collisions with the player.
 /// 
 /// Ths class is for the collider that registers collisions with everything but the player and other ammo functionality.
 /// </summary>

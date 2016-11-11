@@ -20,7 +20,7 @@ public class ShopNPC : MonoBehaviour {
 	}
 	
 	/// <summary>
-    /// Called once  per frame. Lets the user open the vendor windows if they are close enough.
+    /// Called once per frame. Lets the user open the vendor windows if they are close enough.
     /// </summary>
     /// <param name="other">The other collider.</param>
 	void OnTriggerStay (Collider other) {

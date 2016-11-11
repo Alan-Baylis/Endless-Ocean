@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class contains the functionality for the interactable that spawns barrels.
+/// </summary>
 public class BarrelSpawner : MonoBehaviour {
 
     private GameObject player;

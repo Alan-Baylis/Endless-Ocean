@@ -13,6 +13,9 @@ public class OnDeathSpawner : MonoBehaviour
 
     public int callbacksReturned = 0;
 
+    /// <summary>
+    /// A callback used to check how many callbacks have returned.
+    /// </summary>
     public void callbackCountIncrementer()
     {
         this.callbacksReturned++;
@@ -33,9 +36,9 @@ public class OnDeathSpawner : MonoBehaviour
     /// <summary>
     /// Starts the item dropping co routines that spawn pickups from dying NPC's.
     /// </summary>
-    /// <param name="maxHealth"></param>
-    /// <param name="itemPossibilities"></param>
-    /// <param name="itemDrops"></param>
+    /// <param name="maxHealth">The max health of the NPC that died.</param>
+    /// <param name="itemPossibilities">The chances that items might drop.</param>
+    /// <param name="itemDrops">The possible items and NPC might drop.</param>
     public void startItemSpawningCoroutines(int maxHealth, int[] itemPossibilities, string[] itemDrops)
     {
         callbackCountIncrementerHandler = callbackCountIncrementer;

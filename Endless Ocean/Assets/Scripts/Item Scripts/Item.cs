@@ -19,6 +19,9 @@ public class Item : MonoBehaviour
 
     public string itemNameWithoutQuality;
 
+    /// <summary>
+    /// Property that constructs an item's name based off it's stats.
+    /// </summary>
     public virtual string itemName
     {
         get
@@ -62,25 +65,37 @@ public class Item : MonoBehaviour
     [HideInInspector]
     public int itemCount = 1;
 
+    /// <summary>
+    /// Dummy sell value of base class. Will be overriden.
+    /// </summary>
     public virtual int sellValue
     {
         get { return 3; }
     }
+    /// <summary>
+    /// Dummy buy value of base class. Will be overriden.
+    /// </summary>
     public virtual int buyValue
     {
         get { return 5; }
     }
-    //Property indicating if an item is stackable.
+    /// <summary>
+    /// Default item are not stackable.
+    /// </summary>
     public virtual bool stackable
     {
         get { return false; }
     }
-    //Property indicating if an item is reforgable - can it be placed in the reforger?.
+    /// <summary>
+    /// Default items cannot be reforegd.
+    /// </summary>
     public virtual bool reforgable
     {
         get { return false; }
     }
-    //Property indicating if an item can be equipped in the players weapons slots.
+    /// <summary>
+    /// Default items cannot be equipped in the on mouseclick slots.
+    /// </summary>
     public virtual bool mouseClickEquipable
     {
         get { return false; }
@@ -128,6 +143,9 @@ public class Item : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Intializes key variables.
+    /// </summary>
     protected virtual void Start()
     {
         if (tooltip == null)
@@ -143,6 +161,9 @@ public class Item : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Runs each frame meakes the item fly out of a chest if it is opened.
+    /// </summary>
     protected virtual void Update()
     {
         if (flyingOutOfChest)
@@ -160,6 +181,9 @@ public class Item : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Runs after each frame. Updates the positions of the tooltip.
+    /// </summary>
     protected void LateUpdate()
     {
         this.repositionTooltip();
@@ -173,6 +197,11 @@ public class Item : MonoBehaviour
         get { return false; }
     }
 
+    /// <summary>
+    /// Starts an item flying out of a chest.
+    /// </summary>
+    /// <param name="startPosition">The position the item starts at.</param>
+    /// <param name="targetPosition">The position the item has to fly to.</param>
     public void startFlyingOutOfChest(Vector3 startPosition, Vector3 targetPosition)
     {
         this.startPosition = startPosition;

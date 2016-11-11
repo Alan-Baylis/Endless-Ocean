@@ -58,12 +58,17 @@ public class Grapple : MonoBehaviour
     public AudioClip grappleShotNoise;
     public AudioClip grappleRetractNoise;
 
-    // Use this for initialization
+    /// <summary>
+    /// Initializes key variables.
+    /// </summary>
     void Start()
     {
         this.ropeLineRenderer = this.gameObject.GetComponent<LineRenderer>();
     }
 
+    /// <summary>
+    /// Runs every FixedUpdate. Handles player input with the Grapple.
+    /// </summary>
     void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(1) && isEnabled)
@@ -237,34 +242,10 @@ public class Grapple : MonoBehaviour
     {
         this.otherObjectMover = secondRigidbody.gameObject.AddComponent<GrapplePullObject>();
         otherObjectMover.init(firstRigidbody.gameObject, Grapple.OBJECT_PULL_SPEED, false, playerRigidbody);
-        //ConfigurableJoint grappleJoint = firstRigidbody.gameObject.AddComponent<ConfigurableJoint>();
-        ////Setting movement restrictions on joint.
-        //grappleJoint.autoConfigureConnectedAnchor = false;
-        //grappleJoint.xMotion = ConfigurableJointMotion.Limited;
-        //grappleJoint.yMotion = ConfigurableJointMotion.Limited;
-        ////Adding second body.
-        //grappleJoint.connectedBody = secondRigidbody;
         this.otherObject = secondRigidbody;
         this.otherEnd = secondRigidbody.position;
-        //grappleJoint.connectedAnchor = secondRigidbody.gameObject.transform.InverseTransformPoint(point);
-        ////Allow the two objects attatched to each other to collide - prevents them from passing through eachother.
-        //grappleJoint.enableCollision = true;
-        ////Limiting the distance between the objects on the joint.
-        //SoftJointLimit grappleJointLimit = new SoftJointLimit();
-        //this.ropeLength = (point - firstRigidbody.position).magnitude;
-        //grappleJointLimit.limit = ropeLength;
-        //grappleJoint.linearLimit = grappleJointLimit;
-        ////Adding forces that make the rope look natural when pulling the player back into the bounds.
-        //SoftJointLimitSpring grappleJointLimitSpring = new SoftJointLimitSpring();
-        //grappleJointLimitSpring.spring = Grapple.LINEAR_LIMIT_SPRING;
-        //grappleJointLimitSpring.damper = Grapple.LINEAR_LIMIT_DAMPER;
-        //grappleJoint.linearLimitSpring = grappleJointLimitSpring;
-        ////Setting axis for joint.
-        //grappleJoint.axis = new Vector3(0, 0, 1);
         this.pulling = true;
-        //return grappleJoint;
         AudioSource.PlayClipAtPoint(this.grappleShotNoise, this.transform.position, 6.5f);
-
     }
 
     /// <summary>

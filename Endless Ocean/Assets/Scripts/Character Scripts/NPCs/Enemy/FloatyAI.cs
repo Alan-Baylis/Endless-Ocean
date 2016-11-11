@@ -27,7 +27,9 @@ public class FloatyAI : EnemyAI
 
     public AudioClip floatyAttackNoise;
 
-    // Use this for initialization
+    /// <summary>
+    /// Runs when the gameobject starts. Initializes key variables.
+    /// </summary>
     new void Start()
     {
         base.Start();
@@ -39,6 +41,9 @@ public class FloatyAI : EnemyAI
         this.target = PreserveAcrossLevels.playerInstance.gameObject.transform;
     }
 
+    /// <summary>
+    /// Runs each FixedUpdate. Makes the floaty start acting if the player is close enough.
+    /// </summary>
     new void FixedUpdate()
     {
         //check if player is in range
@@ -53,40 +58,18 @@ public class FloatyAI : EnemyAI
         }
     }
 
+    /// <summary>
+    /// Runs after each frame is drawn. Updates the position of the GUI around the Floaty.
+    /// </summary>
     void LateUpdate()
     {
         this.groundCheck.transform.rotation = this.groundCheckLocationRotation;
         this.enemyCanvas.position = this.transform.position + canvasOffset;
     }
 
-
-    //This is the code which manages how the enemy attacks - overrides from NPCBehaviour
-    protected override void attackTarget(Transform target)
-    {
-        //shoot at target, not their feet
-        Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
-
-
-        
-
-
-        //shoot at target, not their feet
-        //Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.5f, target.position.z);
-        //moveCharacter(0);
-
-        //if (weapon != null)
-        //{
-        //    if (nextMelee < Time.time)
-        //    {
-        //        nextMelee = Time.time + weapon.getAttackSpeed();
-        //        this.animator.SetTrigger("MeleeAttackTrigger");
-        //        weapon.attack(attack, targetPosition);
-        //    }
-        //}
-    }
-
-
-    //This is where the enemy decides what to do - called from the fixedUpdate - overrides from enemyAI
+    /// <summary>
+    /// Makes the Floaty change what is plans to do based on how far away it is from the player.
+    /// </summary>
     protected override void makeActionDecision()
     {
         //Decide on an action

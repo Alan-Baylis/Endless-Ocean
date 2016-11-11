@@ -9,7 +9,7 @@ public class TreasureSpawner : MonoBehaviour {
     private static string[] treasurePrefabs = {"Prefabs/Pickups/Treasure/Emerald", "Prefabs/Pickups/Treasure/Gold Coin", "Prefabs/Pickups/Treasure/Gold Goblet", "Prefabs/Pickups/Treasure/Ruby", "Prefabs/Pickups/Treasure/Topaz"};
 
     /// <summary>
-    /// This method spawns treasure. One sphere for each 10 points of exp the player gets.
+    /// This method spawns treasure.
     /// </summary>
     /// <param name="amountOfTreasure">The amount of trasure the player gets.</param>
     /// <param name="positionToSpawnAt">The position to spawn the treasure at.</param>
@@ -24,7 +24,7 @@ public class TreasureSpawner : MonoBehaviour {
     }
 
     /// <summary>
-    /// This method spawns treasure. One sphere for each 10 points of exp the player gets. This co routine spawns the trasure over 10 frames to improve performance.
+    /// This co routine spawns the trasure over 10 frames to improve performance.
     /// </summary>
     /// <param name="amountOfTreasure">The amount of trasure the player gets.</param>
     /// <param name="positionToSpawnAt">The position to spawn the treasure at.</param>
