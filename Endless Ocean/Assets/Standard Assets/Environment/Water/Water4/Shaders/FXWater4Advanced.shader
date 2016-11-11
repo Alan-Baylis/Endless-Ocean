@@ -365,7 +365,7 @@ ENDCG
 
 Subshader
 {
-	Tags {"RenderType"="Transparent" "Queue"="Transparent"}
+	Tags {"RenderType"="Transparent" "Queue"="Transparent-1"}
 	
 	Lod 500
 	ColorMask RGB
