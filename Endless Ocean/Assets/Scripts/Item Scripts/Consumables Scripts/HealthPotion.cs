@@ -15,7 +15,7 @@ public class HealthPotion : Consumable
     {
         player.health += player.maxHealth / 3;
         player.health = Mathf.Clamp(player.health, 0, player.maxHealth);
-        player.updateHealth();
+        player.updateHealthBar();
     }
 
 }

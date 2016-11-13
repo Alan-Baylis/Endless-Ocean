@@ -15,7 +15,7 @@ public class PeaShooter : RangedWeapon
         base.weaponAttackSpeed = 0.5f;
         base.projectileSpeed = 30f;
         this.knockBack = 300;
-        range = 10;
+        range = 20;
     }
 
     /// <summary>

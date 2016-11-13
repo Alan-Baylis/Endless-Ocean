@@ -35,6 +35,14 @@ public class getExo : MonoBehaviour {
                     spokenTo = true;
 
                     blackLayer.fadeOutBool = true;
+
+
+
+                    GameObject pistolTemp = Instantiate(Resources.Load(Pistol.modelPathLocal)) as GameObject;
+                    GameObject clubTemp = Instantiate(Resources.Load(Club.modelPathLocal)) as GameObject;
+
+                    PreserveAcrossLevels.playerInstance.GetComponent<PlayerController>().inventory.addItem(pistolTemp.GetComponent<Pistol>());
+                    PreserveAcrossLevels.playerInstance.GetComponent<PlayerController>().inventory.addItem(clubTemp.GetComponent<Club>());
                 }
 
                 }

@@ -384,7 +384,7 @@ public abstract class CharacterSuper : MonoBehaviour
         updateHealthBar();
     }
 
-    protected abstract void updateHealthBar();
+    public abstract void updateHealthBar();
     public abstract void die();
 
     /// <summary>

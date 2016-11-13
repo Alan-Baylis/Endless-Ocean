@@ -5,9 +5,14 @@ public class DialogueOnTrigger : MonoBehaviour {
 
     private DialogueManager dialogueManager;
 
-    public string[] dialogueLines;
-    public string speakerName;
-    bool beenTriggered;
+    [SerializeField]
+    private string[] dialogueLines;
+    [SerializeField]
+    private string speakerName;
+    [SerializeField]
+    private float timeToDisplay;
+
+    private bool beenTriggered;
 
     // Use this for initialization
     void Start()
@@ -28,7 +33,7 @@ public class DialogueOnTrigger : MonoBehaviour {
             if (!dialogueManager.dialogueActive)
             {
                 beenTriggered = true;
-                dialogueManager.showDialogue(this.speakerName, this.dialogueLines,5.0f);
+                dialogueManager.showDialogue(this.speakerName, this.dialogueLines, this.timeToDisplay);
 
             }
         }

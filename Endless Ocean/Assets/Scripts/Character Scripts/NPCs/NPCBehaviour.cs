@@ -139,6 +139,10 @@ public abstract class NPCBehaviour : CharacterSuper
         checkWeapons();
     }
 
+    /// <summary>
+    /// Checks the current weapons equiped by the AI, deciding which should be used for long and short range
+    /// Also uses these lengths for deciding the distance from their target before attacking
+    /// </summary>
     protected void checkWeapons()
     {
         if (primaryMount.weaponLoaded() && secondaryMount.weaponLoaded())

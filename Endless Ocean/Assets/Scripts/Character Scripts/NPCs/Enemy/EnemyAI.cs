@@ -108,7 +108,7 @@ public class EnemyAI : NPCBehaviour
         active = true;
     }
 
-    protected override void updateHealthBar()
+    public override void updateHealthBar()
     {
         healthBar.fillAmount = (float)this.health / (float)this.maxHealth;
     }

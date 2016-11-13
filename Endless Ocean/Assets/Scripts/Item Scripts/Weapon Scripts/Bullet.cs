@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        this.GetComponent<Rigidbody>().velocity = transform.forward * speed;
     }
 
     public float getStun()

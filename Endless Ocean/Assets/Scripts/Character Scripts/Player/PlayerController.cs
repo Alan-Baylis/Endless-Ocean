@@ -120,10 +120,6 @@ public class PlayerController : CharacterSuper
         experienceToLevel = currentLevel * 20;
 
         this.nextMelee = 0.0f;
-        GameObject pistolTemp = Instantiate(Resources.Load(Pistol.modelPathLocal)) as GameObject;
-        inventory.addItem(pistolTemp.GetComponent<Pistol>());
-        GameObject clubTemp = Instantiate(Resources.Load(Club.modelPathLocal)) as GameObject;
-        inventory.addItem(clubTemp.GetComponent<Club>());
         this.inventory.gameObject.SetActive(false);
 
         // TEMPORARY WEAPON EQUIPMENT/SWAPPING IMPLEMENTATION (Fraser, we'll need to get together and coordinate to get this working with inventory/drop/drag)
@@ -405,13 +401,13 @@ public class PlayerController : CharacterSuper
         }
     }
 
-    protected override void updateHealthBar()
+    public override void updateHealthBar()
     {
         // Update health bar with new health
         playerHealthBar.fillAmount = (float)this.health / (float)this.maxHealth;
     }
 
-    protected void updateEnergyBar()
+    public void updateEnergyBar()
     {
         // Update health bar with new health
         playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;

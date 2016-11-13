@@ -15,7 +15,7 @@ public class EnergyPotion : Consumable
     {
         player.energy += player.maxEnergy / 3;
         player.energy = Mathf.Clamp(player.energy, 0, player.maxEnergy);
-        player.updateEnergy();
+        player.updateEnergyBar();
     }
 
 }
