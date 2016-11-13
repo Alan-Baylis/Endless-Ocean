@@ -60,6 +60,12 @@ public class InteractableSpecialObjectScripter : MonoBehaviour {
     [SerializeField]
     private bool enableFade;
 
+    //trigger puzzle object
+    [SerializeField]
+    private bool enablePuzzleObject;
+    [SerializeField]
+    private PuzzleObject[] puzzleObjectToToggle;
+
 
 
     // Use this for initialization
@@ -124,6 +130,10 @@ public class InteractableSpecialObjectScripter : MonoBehaviour {
                 if (enableItemGifting)
                 {
                     giftItems(ItemsToGift);
+                }
+                if (enablePuzzleObject)
+                {
+                    puzzleObjectToToggle.toggle();
                 }
                 if (enableFade)
                 {

@@ -28,6 +28,21 @@ public abstract class PuzzleObject : MonoBehaviour
         }
     }
 
+    public void toggle()
+    {
+        inverted = !inverted;
+
+
+        if (active ^ inverted)
+        {
+            onActive();
+        }
+        else
+        {
+            onDeactive();
+        }
+    }
+
     // Use this for initialization
     public void Start()
     {
