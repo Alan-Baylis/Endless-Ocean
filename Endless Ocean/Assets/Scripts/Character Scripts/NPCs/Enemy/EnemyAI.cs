@@ -2,6 +2,9 @@
 using System.Collections;
 using System;
 
+/// <summary>
+/// The enemy AI class, which manages how the basic enemy acts and is a base class for the specialised enemy types
+/// </summary>
 public class EnemyAI : NPCBehaviour
 {
 
@@ -9,11 +12,13 @@ public class EnemyAI : NPCBehaviour
     [SerializeField]
     public float detectRange;
 
+    //Enemy Weapons
     [SerializeField]
     public Weapon primaryWeapon;
     [SerializeField]
     public Weapon secondaryWeapon;
 
+    //Enemies target
     [SerializeField]
     public Transform target;
 
@@ -21,7 +26,8 @@ public class EnemyAI : NPCBehaviour
     new void Start () {
         base.Start();
         this.target = PreserveAcrossLevels.playerInstance.transform;
-        // Assign objects that damage this character upon collision
+
+        // Assign objects that damage this character on collision
         base.fears = "Player";
 
         if (primaryWeapon != null)
@@ -56,6 +62,7 @@ public class EnemyAI : NPCBehaviour
         base.Update();
 	}
 
+    // Update is called after a fixed period 
     new void FixedUpdate()
     {
         base.FixedUpdate();
@@ -79,6 +86,9 @@ public class EnemyAI : NPCBehaviour
         }
     }
 
+    /// <summary>
+    /// This is where the enemy decides what actions to perform and when
+    /// </summary>
     protected virtual void makeActionDecision()
     {
         //Decide on an action
@@ -101,6 +111,13 @@ public class EnemyAI : NPCBehaviour
         }
     }
 
+    /// <summary>
+    /// An override of the takeDamage method in CharacterSuper
+    /// The enemy class uses this for activating the pathToLoaction when hit by the player
+    /// </summary>
+    /// <param name="damage">The amount of damage taken</param>
+    /// <param name="source">The vector direction that the damage is taken from</param>
+    /// <param name="knockBack">The knockback on the weapon</param>
     protected override void takeDamage(int damage, Vector3 source, int knockBack)
     {
         base.takeDamage(damage, source, knockBack);
@@ -108,6 +125,9 @@ public class EnemyAI : NPCBehaviour
         active = true;
     }
 
+    /// <summary>
+    /// An update for the healthbar - investigate moving to the CharacterSuper class
+    /// </summary>
     public override void updateHealthBar()
     {
         healthBar.fillAmount = (float)this.health / (float)this.maxHealth;

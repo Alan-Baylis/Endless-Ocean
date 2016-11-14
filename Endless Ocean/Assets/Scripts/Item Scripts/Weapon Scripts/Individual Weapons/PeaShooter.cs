@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 /// <summary>
-/// This is the class for the pistol weapon it contians the damage, projectile speed and range of bullets for the pistol.
+/// This is the class for the enemies weakened pistol weapon, it contians the damage, projectile speed and range of bullets for the pistol.
 /// </summary>
 public class PeaShooter : RangedWeapon
 {

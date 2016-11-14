@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// Script for the special interactive object; Exo in scene one
+/// </summary>
 public class getExo : MonoBehaviour {
 
     private DialogueManager dialogueManager;

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class is an interface for controlling the player and actions on the activation of special in-game objects
+/// </summary>
 public class InteractableSpecialObjectScripter : MonoBehaviour {
 
     // dialogue
@@ -64,7 +67,7 @@ public class InteractableSpecialObjectScripter : MonoBehaviour {
     [SerializeField]
     private bool enablePuzzleObject;
     [SerializeField]
-    private PuzzleObject[] puzzleObjectToToggle;
+    private PuzzleObject[] puzzleObjectsToToggle;
 
 
 
@@ -133,7 +136,7 @@ public class InteractableSpecialObjectScripter : MonoBehaviour {
                 }
                 if (enablePuzzleObject)
                 {
-                    puzzleObjectToToggle.toggle();
+                    togglePuzzleObjects(puzzleObjectsToToggle);
                 }
                 if (enableFade)
                 {
@@ -148,7 +151,10 @@ public class InteractableSpecialObjectScripter : MonoBehaviour {
         }
     }
 
-    // Add items to the player's inventory
+    /// <summary>
+    /// Add items to the player's inventory
+    /// </summary>
+    /// <param name="Items">The items to add</param>
     void giftItems(GameObject[] Items)
     {
         foreach (GameObject item in Items)
@@ -157,12 +163,27 @@ public class InteractableSpecialObjectScripter : MonoBehaviour {
         }
     }
 
-    // Toggle game object visibility
+    /// <summary>
+    ///  Toggle game object visibility
+    /// </summary>
+    /// <param name="objects">objects to toggle visibility for</param>
     void toggleGameObjects (GameObject[] objects)
     {
         foreach (GameObject gameObject in objects)
         {
             gameObject.SetActive(!gameObject.activeSelf);
+        }
+    }
+
+    /// <summary>
+    ///  Toggle puzzleObjects
+    /// </summary>
+    /// <param name="objects">Puzzle Objects to toggle</param>
+    void togglePuzzleObjects(PuzzleObject[] objects)
+    {
+        foreach (PuzzleObject puzzleObject in objects)
+        {
+            puzzleObject.toggle();
         }
     }
 }

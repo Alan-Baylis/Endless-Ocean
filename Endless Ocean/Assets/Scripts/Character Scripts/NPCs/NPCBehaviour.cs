@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 
+/// <summary>
+/// NPC Behaviour class which controls non-character players allowing them to perform actions that would otherwise be performed by the player
+/// </summary>
 public abstract class NPCBehaviour : CharacterSuper
 {
     public AudioClip deathExplosion;
@@ -40,7 +43,7 @@ public abstract class NPCBehaviour : CharacterSuper
     [SerializeField]
     protected Transform dropCheck;
 
-    //Known thine weapons
+    //Know thine weapons
     protected weaponMounts shortRangeWeapon;
     protected int shortestRange;
 
@@ -58,7 +61,9 @@ public abstract class NPCBehaviour : CharacterSuper
         currentPatrolObjective = 0;
     }
 
-    //convert locales into locations
+    /// <summary>
+    /// convert transform locales into 3D point locations
+    /// </summary>
     private void convertLocales()
     {
         foreach (Transform locale in patrolLocales)
@@ -67,7 +72,7 @@ public abstract class NPCBehaviour : CharacterSuper
         }
     }
 	
-	// Update is called once per frame
+	// FixedUpdate is called after a set period
 	new protected void FixedUpdate() {
         base.FixedUpdate();
 
@@ -75,12 +80,20 @@ public abstract class NPCBehaviour : CharacterSuper
         animator.SetBool("grounded", true); //Currently having issues with checkIfOnground and AI
     }
 
+    /// <summary>
+    /// Set the patrol locations
+    /// </summary>
+    /// <param name="locations">The list of partol locations</param>
     public void setPatrol(List<Vector3> locations)
     {
         patrolling = true;
         patrolLocations = locations;
     }
 
+    /// <summary>
+    /// Control the patrol sequence 
+    /// - set the pathToLocation and switching to the next location once the NPC reaches the current location
+    /// </summary>
     protected void patrol()
     {
         convertLocales();
@@ -98,6 +111,10 @@ public abstract class NPCBehaviour : CharacterSuper
         pathToLocation(locations[currentPatrolObjective]);
     }
 
+    /// <summary>
+    /// Calculates the direction to the given destination and calls the CharacterSuper moveCharacter method
+    /// </summary>
+    /// <param name="destination">Where the robot should path to</param>
     public virtual void pathToLocation(Vector3 destination)
     {
         pathing = true;
@@ -131,6 +148,13 @@ public abstract class NPCBehaviour : CharacterSuper
         moveCharacter(direction);
     }
 
+    /// <summary>
+    /// New implementation of the equipWeapon method from CharacterSuper
+    /// Manages the equiping of weapons.
+    /// </summary>
+    /// <param name="weaponGameObject"> The Weapon to equip as a GameObject</param>
+    /// <param name="mount"> The mount point to connect the weapon to</param>
+    /// <param name="tag">The tag representing the user "player" for friendlies and "enemy" for enemies</param>
     new protected void equipWeapon(GameObject weaponGameObject, weaponMounts mount, string tag)
     {
         Weapon weapon = weaponGameObject.GetComponent<Weapon>();
@@ -190,11 +214,10 @@ public abstract class NPCBehaviour : CharacterSuper
         }
     }
 
-    protected override void takeDamage(int damage, Vector3 source, int knockBack)
-    {
-        base.takeDamage(damage, source, knockBack);
-    }
-
+    /// <summary>
+    /// Calls the attack method of the weapon, after aiming at the given target
+    /// </summary>
+    /// <param name="target"> target to aim attack at</param>
     protected virtual void attackTarget(Transform target)
     { 
         //shoot at target, not their feet
@@ -225,7 +248,9 @@ public abstract class NPCBehaviour : CharacterSuper
     }
 
 
-    //Draws the patrol Path
+    /// <summary>
+    /// Unity method for drawing visual aids in the developer screen
+    /// </summary>
     protected virtual void OnDrawGizmos()
     {
         if (patrolLocales != null && patrolLocales.Length > 1)
@@ -253,11 +278,17 @@ public abstract class NPCBehaviour : CharacterSuper
         }
     }
 
+    /// <summary>
+    /// Set the character to active
+    /// </summary>
     public virtual void activate()
     {
         active = true;
     }
 
+    /// <summary>
+    /// Deactivate the character
+    /// </summary>
     public virtual void deactivate()
     {
         active = false;

@@ -2,12 +2,17 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-
+/// <summary>
+/// Weapon mount struct, used for managing weapons
+/// </summary>
 public struct weaponMount
 {
     GameObject mountPoint;
     Weapon weapon;
 
+    /// <summary>
+    /// the physical mount point the mount point refers to
+    /// </summary>
     public GameObject MountPoint
     {
         get
@@ -19,6 +24,10 @@ public struct weaponMount
             mountPoint = value;
         }
     }
+
+    /// <summary>
+    /// currently attached weapon
+    /// </summary>
     public Weapon Weapon
     {
         get
@@ -30,6 +39,10 @@ public struct weaponMount
             weapon = value;
         }
     }
+
+    /// <summary>
+    /// converts a unity gameOject into a mountable / usable weapon
+    /// </summary>
     public GameObject WeaponFromGameObject
     {
         set
@@ -41,6 +54,11 @@ public struct weaponMount
             weapon = value.GetComponent<Weapon>();
         }
     }
+    
+    /// <summary>
+    /// tests if a weapon is currently loaded on the weapon mount
+    /// </summary>
+    /// <returns>boolean, is a weapon loaded</returns>
     public bool weaponLoaded()
     {
         if (weapon == null)
@@ -54,6 +72,9 @@ public struct weaponMount
     }
 }
 
+/// <summary>
+/// Character super class that manages the featues of all characters
+/// </summary>
 public abstract class CharacterSuper : MonoBehaviour
 {
     // Character variables involved in leveling
@@ -199,6 +220,7 @@ public abstract class CharacterSuper : MonoBehaviour
 
     }
 
+    // Update that is called after a fixed time
     protected void FixedUpdate()
     {
         if (recovery == 0)
@@ -227,6 +249,10 @@ public abstract class CharacterSuper : MonoBehaviour
         transform.localScale = reversescale;
     }
 
+    /// <summary>
+    /// Moves the character and activates the character walking animation
+    /// </summary>
+    /// <param name="move">float refering to the level of motion on the X axis (1 being right, -1 being to the left)</param>
     protected virtual void moveCharacter(float move)
     {
         //Stun Timer
@@ -277,6 +303,10 @@ public abstract class CharacterSuper : MonoBehaviour
         this.stopHangingOnWall();
     }
 
+    /// <summary>
+    /// Set the direction the character is currently facing
+    /// </summary>
+    /// <param name="move">float refering to the level of motion on the X axis (1 being right, -1 being to the left)</param>
     protected void setDirection(float move)
     {
         //If the game object starts moving left and is facing right turn the object around.

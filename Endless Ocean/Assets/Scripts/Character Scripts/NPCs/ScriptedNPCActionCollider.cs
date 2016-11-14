@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// An iterface for controlling an NPC to perform actions whent the player enters a collider
+/// </summary>
 public class ScriptedNPCActionCollider : MonoBehaviour
 {
     [SerializeField]
@@ -59,6 +62,10 @@ public class ScriptedNPCActionCollider : MonoBehaviour
         active = false;
     }
 
+    /// <summary>
+    /// When something enters the collider's area
+    /// </summary>
+    /// <param name="col">item which entered the collider</param>
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
