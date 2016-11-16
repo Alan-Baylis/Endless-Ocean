@@ -22,7 +22,8 @@ public class Move : MonoBehaviour
     }
 
 
-
+    //This fixed update takes care of the boat objects movement using the W,A,S,D keys and the spacebar.
+    // The W and S keys have been coded to be decellerate when the W or S key is no longer being pressed
      void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
