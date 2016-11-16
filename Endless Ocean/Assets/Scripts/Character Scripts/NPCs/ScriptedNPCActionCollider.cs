@@ -68,7 +68,7 @@ public class ScriptedNPCActionCollider : MonoBehaviour
     /// <param name="col">item which entered the collider</param>
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Player") && NPC != null)
         {
             active = true;
         }
