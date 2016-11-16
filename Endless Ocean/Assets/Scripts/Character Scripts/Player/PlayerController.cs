@@ -221,7 +221,7 @@ public class PlayerController : CharacterSuper
         {
             this.hideNearbyItemTooltips();
         }
-        if (Input.GetKey(KeyCode.B))
+        if (Input.GetKey(KeyCode.Colon))
         {
             SceneManager.LoadScene("Ship Scene");
         }

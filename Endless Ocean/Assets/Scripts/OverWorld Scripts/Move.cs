@@ -67,10 +67,5 @@ public class Move : MonoBehaviour
         {
             rb.MovePosition(transform.position + transform.forward * boostSpeed * Time.deltaTime);
         }
-
-        if(Input.GetKey(KeyCode.B))
-        {
-            Application.LoadLevel("Ship Scene");
-        }
     }
 }
