@@ -89,14 +89,14 @@ public class CharacterEquipment : PanelSuper
     {
         player.stamina += 1;
         player.statPointsToAllocate -= 1;
-        player.updateHealth();
+        player.updateHealth(1);
     }
 
     public void increasePlayerEnergy()
     {
         player.vigor += 1;
         player.statPointsToAllocate -= 1;
-        player.updateEnergy();
+        player.updateEnergy(1);
     }
 
     public void increasePlayerMovementSpeed()
@@ -158,8 +158,8 @@ public class CharacterEquipment : PanelSuper
         this.player.movementSpeed += equipment.moveSpeedBonus;
         this.player.attack += equipment.damageBonus;
 
-        this.player.updateEnergy();
-        this.player.updateHealth();
+        this.player.updateEnergy(equipment.vigorBonus);
+        this.player.updateHealth(equipment.staminaBonus);
     }
 
     /// <summary>
@@ -172,8 +172,9 @@ public class CharacterEquipment : PanelSuper
         this.player.stamina -= equipment.staminaBonus;
         this.player.movementSpeed -= equipment.moveSpeedBonus;
         this.player.attack -= equipment.damageBonus;
-        this.player.updateEnergy();
-        this.player.updateHealth();
+
+        this.player.updateEnergy(equipment.vigorBonus*-1);
+        this.player.updateHealth(equipment.staminaBonus*-1);
     }
 
 }

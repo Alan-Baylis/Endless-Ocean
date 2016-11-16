@@ -116,6 +116,7 @@ public abstract class CharacterSuper : MonoBehaviour
     protected bool facingRight;
     [HideInInspector]
     public bool enableMove;
+    public bool enableJump;
     [SerializeField]
     public LayerMask groundLayerMask;
     #endregion
@@ -199,6 +200,7 @@ public abstract class CharacterSuper : MonoBehaviour
         this.animator = this.GetComponent<Animator>();
         this.facingRight = true;
         this.enableMove = true;
+        this.enableJump = true;
         //this.replaceMat = this.transform.Find("Body").GetComponent<SkinnedMeshRenderer>().material;
 
         // Get weapon mount location so that we can easily attach weapons to them

@@ -109,11 +109,11 @@ public class PlayerController : CharacterSuper
         // Set health
         this.maxHealth = this.stamina * statIncrement;
         this.health = this.maxHealth;
-        this.expandBar(playerHealthBar, playerHealthBarBG, statIncrement, maxHealth);
+        this.expandBar(playerHealthBar, playerHealthBarBG, 1, maxHealth);
 
         this.maxEnergy = this.vigor * statIncrement;
         this.energy = this.maxEnergy;
-        this.expandBar(playerEnergyBar, playerEnergyBarBG, statIncrement, maxEnergy);
+        this.expandBar(playerEnergyBar, playerEnergyBarBG, 1, maxEnergy);
 
         // Set experience values
         currentExperience = 500;
@@ -174,6 +174,7 @@ public class PlayerController : CharacterSuper
     {
         if (energy >= dodgeCost && onGround)
         {
+            enableJump = false;
             enableMove = false;
             this.animator.SetBool("IsDodging", true);
             this.energy -= dodgeCost;
@@ -186,6 +187,7 @@ public class PlayerController : CharacterSuper
             rigidbody.velocity = new Vector3(0, this.rigidbody.velocity.y, 0);
             this.animator.SetBool("IsDodging", false);
             enableMove = true;
+            enableJump = true;
         }
     }
 
@@ -301,7 +303,7 @@ public class PlayerController : CharacterSuper
 
             //IF NOT USING ITEM
             //CODE FOR JUMPING.
-            if (onGround && (Input.GetAxis("Jump") > 0))
+            if (onGround && (Input.GetAxis("Jump") > 0) && enableJump)
             {
 
                 //this.animator.SetBool("grounded", this.onGround);
@@ -353,31 +355,31 @@ public class PlayerController : CharacterSuper
     /// <summary>
     /// Used to update health with new stamina on levelup
     /// </summary>
-    public void updateHealth()
+    public void updateHealth(int amount)
     {
         this.maxHealth = this.stamina * statIncrement;
         //this.health += statIncrement;
-        expandBar(playerHealthBar, playerHealthBarBG, statIncrement, maxHealth);
+        expandBar(playerHealthBar, playerHealthBarBG, amount, maxHealth);
         this.updateHealthBar();
     }
 
     // Update dimensions of health or energy bars to reflect new changes
     public void expandBar(Image statBar, Image statBarBG, int valueAdded, int maxStat)
     {
-
+        int statIncrease = valueAdded * statIncrement;
         statBar.rectTransform.sizeDelta = new Vector2(maxStat, healthBarHeightSize);
         statBarBG.rectTransform.sizeDelta = new Vector2(maxStat, healthBarHeightSize);
-        statBarBG.transform.position = new Vector2(statBarBG.transform.position.x + valueAdded, statBarBG.transform.position.y);
+        statBarBG.transform.position = new Vector2(statBarBG.transform.position.x + statIncrease, statBarBG.transform.position.y);
     }
 
     /// <summary>
     /// Used to update energy with new vigor on levelup
     /// </summary>
-    public void updateEnergy()
+    public void updateEnergy(int amount)
     {
         this.maxEnergy = this.vigor * statIncrement;
         //this.energy += statIncrement;
-        expandBar(playerEnergyBar, playerEnergyBarBG, statIncrement, maxEnergy);
+        expandBar(playerEnergyBar, playerEnergyBarBG, amount, maxEnergy);
         this.updateEnergyBar();
     }
 
