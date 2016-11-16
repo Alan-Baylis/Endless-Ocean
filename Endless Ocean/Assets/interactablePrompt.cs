@@ -29,7 +29,7 @@ public class interactablePrompt : MonoBehaviour {
 
     public void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" || col.gameObject.CompareTag("PlayerShip"))
         {
             prompt.gameObject.SetActive(false);
         }
