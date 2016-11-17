@@ -170,6 +170,10 @@ public class PlayerController : CharacterSuper
         }
     }
 
+    /// <summary>
+    /// Perform player dodge
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator DoDodge()
     {
         if (energy >= dodgeCost && onGround)
@@ -191,6 +195,9 @@ public class PlayerController : CharacterSuper
         }
     }
 
+    /// <summary>
+    /// main update, check for user input
+    /// </summary>
     new void Update()
     {
         base.Update();
@@ -341,6 +348,9 @@ public class PlayerController : CharacterSuper
         }
     }
 
+    /// <summary>
+    /// Call once player recieves enough experience to level up
+    /// </summary>
     public void levelUp()
     {
         // Level up
@@ -383,6 +393,9 @@ public class PlayerController : CharacterSuper
         this.updateEnergyBar();
     }
 
+    /// <summary>
+    /// Calculate amount of experience to level based on player's current level
+    /// </summary>
     public void calculateExperienceToLevel()
     {
         experienceToLevel = currentLevel * 20;
@@ -403,18 +416,27 @@ public class PlayerController : CharacterSuper
         }
     }
 
+    /// <summary>
+    /// Update healthbar image with new amount
+    /// </summary>
     public override void updateHealthBar()
     {
         // Update health bar with new health
         playerHealthBar.fillAmount = (float)this.health / (float)this.maxHealth;
     }
 
+    /// <summary>
+    /// Update energybar image with new amount
+    /// </summary>
     public void updateEnergyBar()
     {
         // Update health bar with new health
         playerEnergyBar.fillAmount = (float)this.energy / (float)this.maxEnergy;
     }
 
+    /// <summary>
+    /// Called when player dies, load Game Over scene
+    /// </summary>
     public override void die()
     {
         GameOver.previousLevel = Application.loadedLevelName;
@@ -475,6 +497,10 @@ public class PlayerController : CharacterSuper
         }
     }
 
+    /// <summary>
+    /// Switch between exo and human model for player
+    /// </summary>
+    /// <param name="value"> 0 is human, any other number is exo</param>
     public void setModel(int value)
     {
         Transform exo = transform.Find("Exo");
@@ -496,6 +522,10 @@ public class PlayerController : CharacterSuper
         }
     }
 
+    /// <summary>
+    /// Get whether or not player currently has exo
+    /// </summary>
+    /// <returns></returns>
     public bool getExoState()
     {
         if (hasExo)

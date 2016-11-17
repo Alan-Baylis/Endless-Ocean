@@ -6,8 +6,8 @@ public class elevatorFirstLevel : MonoBehaviour
     bool triggered;
     public Animator elevatorAC;
 
-    public string[] dialogueLines;
-    public string speakerName;
+    public string[] dialogueLines; //dialogue lines to send to dialogueManager
+    public string speakerName; // speaker's name
 
     public AudioClip buttonBeepSound;
 
@@ -29,6 +29,10 @@ public class elevatorFirstLevel : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Acitvate elevator if player is colliding and clicks E
+    /// </summary>
+    /// <param name="col">colliding object</param>
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "Player" && !triggered)

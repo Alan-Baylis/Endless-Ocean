@@ -6,11 +6,11 @@ public class DialogueOnTrigger : MonoBehaviour {
     private DialogueManager dialogueManager;
 
     [SerializeField]
-    private string[] dialogueLines;
+    private string[] dialogueLines; // lines to send to dialogueManager
     [SerializeField]
-    private string speakerName;
+    private string speakerName; // name to send to dialogueManager
     [SerializeField]
-    private float timeToDisplay;
+    private float timeToDisplay; // time that each prompt will be displayed for
 
     private bool beenTriggered;
 
@@ -26,6 +26,10 @@ public class DialogueOnTrigger : MonoBehaviour {
     {
     }
 
+    /// <summary>
+    /// Check for collision with player, if so start dialogue
+    /// </summary>
+    /// <param name="col">colliding object</param>
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "Player" && !beenTriggered)

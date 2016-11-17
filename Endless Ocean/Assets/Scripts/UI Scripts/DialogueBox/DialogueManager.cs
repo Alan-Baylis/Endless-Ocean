@@ -9,11 +9,14 @@ public class DialogueManager : MonoBehaviour {
 
     public bool dialogueActive;
 
+    // Lines to print
     public string[] dialogueLines;
     public int currentLine;
 
     public float letterPause = 0.6f;
     public int currentLetter = 0;
+
+    // audio clips to play, currently unused
     public AudioClip typeSound1;
     public AudioClip typeSound2;
 
@@ -30,6 +33,7 @@ public class DialogueManager : MonoBehaviour {
         if (onTimer)
         {
             countDown -= Time.deltaTime;
+            // countDown has not elapsed, continue progressing
             if (countDown <= 0)
             {
                 dialogueBox.SetActive(true);
@@ -68,13 +72,16 @@ public class DialogueManager : MonoBehaviour {
                 Time.timeScale = 1;
             }
         
-
         if (dialogueActive)
         {
             StartCoroutine(TypeText());
         }
     }
 
+    /// <summary>
+    /// Type string out letter by letter
+    /// </summary>
+    /// <returns></returns>
     IEnumerator TypeText()
     {
         foreach (char letter in dialogueLines[currentLine])
@@ -82,9 +89,9 @@ public class DialogueManager : MonoBehaviour {
             if (currentLetter != dialogueLines[currentLine].Length)
             {
                 textBody.text += dialogueLines[currentLine][currentLetter];
+                // space for sound
                 if (typeSound1 && typeSound2)
                 {
-                    //SoundManager.instance.RandomizeSfx(typeSound1, typeSound2);
                     yield return 0;
                 }
                 currentLetter++;
@@ -93,6 +100,12 @@ public class DialogueManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// activate dialogue
+    /// </summary>
+    /// <param name="speakerName">Name of speaker</param>
+    /// <param name="dialogueLines">string array of lines to print out</param>
+    /// <param name="timer">timer, if 0 game pauses, other is time between prompts</param>
     public void showDialogue(string speakerName, string[] dialogueLines, float timer)
     {
 

@@ -5,8 +5,8 @@ public class DialogueHolder : MonoBehaviour {
 
     private DialogueManager dialogueManager;
 
-    public string[] dialogueLines;
-    public string speakerName;
+    public string[] dialogueLines; // lines to send to dialogueManager
+    public string speakerName; // name to send to dialogueManager
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +18,10 @@ public class DialogueHolder : MonoBehaviour {
 	
 	}
 
+    /// <summary>
+    /// Activate chat prompt on clicking E while colliding
+    /// </summary>
+    /// <param name="col">colliding object</param>
     void OnTriggerStay(Collider col)
     {
         if(col.tag == "Player")
