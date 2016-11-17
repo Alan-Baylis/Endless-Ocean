@@ -190,7 +190,7 @@ public abstract class CharacterSuper : MonoBehaviour
     public Material damageMaterial;
     public Material bodyMaterial;
 
-    protected bool flashing = false;
+    public bool flashing = false;
 
     // Use this for initialization
     protected void Start()
