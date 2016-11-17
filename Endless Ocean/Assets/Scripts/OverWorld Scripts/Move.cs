@@ -64,9 +64,9 @@ public class Move : MonoBehaviour
         {
             transform.Rotate(Vector3.up * rotationspeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            rb.MovePosition(transform.position + transform.forward * boostSpeed * Time.deltaTime);
-        }
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    rb.MovePosition(transform.position + transform.forward * boostSpeed * Time.deltaTime);
+       // }
     }
 }
